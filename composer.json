@@ -1,0 +1,46 @@
+{
+    "name": "SuperCMS",
+    "description": "",
+    "minimum-stability": "stable",
+    "license": "Apache 2.0",
+    "autoload": {
+        "psr-4": {
+            "SuperCMS\\": "src/",
+            "SuperCMS\\Tests\\": "tests/unit/"
+        }
+    },
+    "require": {
+        "rhubarbphp/rhubarb": "dev-master as 1.2",
+        "rhubarbphp/module-stem": "^1.0.0",
+        "rhubarbphp/scaffold-authentication": "dev-master",
+        "rhubarbphp/scaffold-authentication-with-roles": "1.0.x-dev@dev",
+        "rhubarbphp/scaffold-navigation-menu": "1.x-dev@dev",
+        "rhubarbphp/module-patterns": "dev-develop@dev",
+        "rhubarbphp/module-leaf": "^1.0.0@dev",
+        "rhubarbphp/module-leaf-common-controls": "1.0.0.x-dev@dev",
+        "rhubarbphp/module-leaf-search-panel": "^1.0.0@dev",
+        "rhubarbphp/module-leaf-tabs": "^1.0.0@dev",
+        "rhubarbphp/module-leaf-table": "dev-master@dev",
+        "rhubarbphp/module-leaf-paging": "dev-master@dev",
+        "rhubarbphp/module-leaf-crud": "dev-master@dev",
+        "rhubarbphp/module-postmark-email": "^1.0.0@dev",
+        "components/jquery": ">=2.2",
+        "components/jqueryui": ">=1.11"
+    },
+    "require-dev": {
+        "rhubarbphp/custard": "^1.0.7",
+        "rhubarbphp/scaffold-saas-landlord": "dev-master",
+        "squizlabs/php_codesniffer": "*",
+        "phploc/phploc": "*",
+        "theseer/phpdox": "*",
+        "phpmd/phpmd": "*",
+        "sebastian/phpcpd": "*",
+        "pdepend/pdepend": "*",
+        "codeception/codeception": "2.1.8",
+        "fzaninotto/faker": "*",
+        "site5/phantoman": "^1.1.0"
+    },
+    "config": {
+        "bin-dir": "bin/"
+    }
+}
