@@ -18,6 +18,7 @@ class SCmsSolutionSchema extends SolutionSchema
         $this->addModel('ProductImage', ProductImage::class);
         $this->addModel('Comment', Comment::class);
         $this->addModel('Category', Category::class);
+        $this->addModel('User', CmsUser::class);
     }
 
     protected function defineRelationships()
