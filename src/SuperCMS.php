@@ -9,11 +9,20 @@ use Rhubarb\Crown\UrlHandlers\ClassMappedUrlHandler;
 use Rhubarb\Leaf\LeafModule;
 use Rhubarb\Scaffolds\AuthenticationWithRoles\AuthenticationWithRolesModule;
 use Rhubarb\Scaffolds\NavigationMenu\NavigationMenuModule;
+use Rhubarb\Stem\Repositories\MySql\MySql;
+use Rhubarb\Stem\Repositories\Repository;
+use Rhubarb\Stem\Schema\SolutionSchema;
 use Rhubarb\Stem\StemModule;
 use SuperCMS\Layouts\DefaultLayout;
 use SuperCMS\Leaves\Index;
 use SuperCMS\LoginProviders\SCmsLoginProvider;
+use SuperCMS\Models\SCmsSolutionSchema;
 
+/**
+ * Class SuperCMS
+ * @package SuperCMS
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class SuperCMS extends Application
 {
     protected function initialise()
@@ -25,6 +34,10 @@ class SuperCMS extends Application
         }
 
         $this->developerMode = true;
+
+        Repository::setDefaultRepositoryClassName(MySql::class);
+
+        SolutionSchema::registerSchema('CmsDatabase', SCmsSolutionSchema::class);
 
         LoginProvider::setProviderClassName(SCmsLoginProvider::class);
     }
