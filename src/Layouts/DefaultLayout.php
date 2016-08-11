@@ -5,10 +5,12 @@ namespace SuperCMS\Layouts;
 use Rhubarb\Crown\Html\ResourceLoader;
 use Rhubarb\Patterns\Layouts\BaseLayout;
 
-class DefaultLayout extends BaseLayout
+class DefaultLayout extends SuperCMSDefaultLayout
 {
     public function __construct()
     {
+        parent::__construct();
+
         ResourceLoader::loadResource("/static/css/base.css");
     }
 

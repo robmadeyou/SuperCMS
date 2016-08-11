@@ -25,7 +25,8 @@
         "rhubarbphp/module-leaf-crud": "dev-master@dev",
         "rhubarbphp/module-postmark-email": "^1.0.0@dev",
         "components/jquery": ">=2.2",
-        "components/jqueryui": ">=1.11"
+        "components/jqueryui": ">=1.11",
+        "twbs/bootstrap": "^3.3"
     },
     "require-dev": {
         "rhubarbphp/custard": "^1.0.7",

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c9b5d07bdf1fd1247ffa60f6531c8d4f",
-    "content-hash": "fe567b8c91c85c0cd43b85ad2ed4c829",
+    "hash": "57b7a6bf566b5ff75014c8f8d404ee9d",
+    "content-hash": "9e485d52988d6685fd7c779fb0796340",
     "packages": [
         {
             "name": "components/jquery",
@@ -456,7 +456,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RhubarbPHP/Module.Leaf/zipball/f99d865f146273063415f62590922b645bfec276",
+                "url": "https://api.github.com/repos/RhubarbPHP/Module.Leaf/zipball/d85db39aff2563713a61f3dd6f6b3ae4d67ea6af",
                 "reference": "f99d865f146273063415f62590922b645bfec276",
                 "shasum": ""
             },
@@ -562,7 +562,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RhubarbPHP/Module.Leaf.Crud/zipball/de376ab13f2762dbd03986f829bf68d3af3dc616",
+                "url": "https://api.github.com/repos/RhubarbPHP/Module.Leaf.Crud/zipball/ca80e4b4ae2d58568eca454619e6f8263d6b2de6",
                 "reference": "de376ab13f2762dbd03986f829bf68d3af3dc616",
                 "shasum": ""
             },
@@ -773,7 +773,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RhubarbPHP/Module.Patterns/zipball/9b9d1d81ce7886bcf436af7195533fdb2d43be15",
+                "url": "https://api.github.com/repos/RhubarbPHP/Module.Patterns/zipball/518d878960609ca9b8ae5d5b0d0714b093484cc6",
                 "reference": "9b9d1d81ce7886bcf436af7195533fdb2d43be15",
                 "shasum": ""
             },
@@ -910,7 +910,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RhubarbPHP/Rhubarb/zipball/183e30bc925e6adbeeec017fcc765320dcb4ed90",
+                "url": "https://api.github.com/repos/RhubarbPHP/Rhubarb/zipball/291d4dc27b3ec2c8c1af6f7353ec68125e082332",
                 "reference": "183e30bc925e6adbeeec017fcc765320dcb4ed90",
                 "shasum": ""
             },
@@ -957,7 +957,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RhubarbPHP/Scaffold.Authentication/zipball/7772c2d4d65b8ac25fb2f321d88f51d7a325fc8f",
+                "url": "https://api.github.com/repos/RhubarbPHP/Scaffold.Authentication/zipball/1f8246c766fd84f3fa1aa453af900d5489270cd9",
                 "reference": "7772c2d4d65b8ac25fb2f321d88f51d7a325fc8f",
                 "shasum": ""
             },
@@ -1199,6 +1199,57 @@
                 "shim"
             ],
             "time": "2016-05-18 14:26:46"
+        },
+        {
+            "name": "twbs/bootstrap",
+            "version": "v3.3.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twbs/bootstrap.git",
+                "reference": "0b9c4a4007c44201dce9a6cc1a38407005c26c86"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/0b9c4a4007c44201dce9a6cc1a38407005c26c86",
+                "reference": "0b9c4a4007c44201dce9a6cc1a38407005c26c86",
+                "shasum": ""
+            },
+            "replace": {
+                "twitter/bootstrap": "self.version"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.3.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jacob Thornton",
+                    "email": "jacobthornton@gmail.com"
+                },
+                {
+                    "name": "Mark Otto",
+                    "email": "markdotto@gmail.com"
+                }
+            ],
+            "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
+            "homepage": "http://getbootstrap.com",
+            "keywords": [
+                "JS",
+                "css",
+                "framework",
+                "front-end",
+                "less",
+                "mobile-first",
+                "responsive",
+                "web"
+            ],
+            "time": "2016-07-25 15:51:55"
         },
         {
             "name": "wildbit/postmark-php",

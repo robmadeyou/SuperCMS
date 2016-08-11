@@ -7,6 +7,7 @@ use SuperCMS\Models\Product\Category;
 use SuperCMS\Models\Product\Comment;
 use SuperCMS\Models\Product\Product;
 use SuperCMS\Models\Product\ProductImage;
+use SuperCMS\Models\User\CmsUser;
 
 class SCmsSolutionSchema extends SolutionSchema
 {
