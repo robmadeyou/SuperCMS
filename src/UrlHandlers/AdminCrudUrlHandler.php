@@ -3,10 +3,10 @@
 namespace SuperCMS\UrlHandlers;
 
 use Rhubarb\Crown\Layout\LayoutModule;
-use Rhubarb\Crown\UrlHandlers\ClassMappedUrlHandler;
+use Rhubarb\Leaf\Crud\UrlHandlers\CrudUrlHandler;
 use SuperCMS\Layouts\AdminLayout;
 
-class AdminClassMappedUrlHandler extends ClassMappedUrlHandler
+class AdminCrudUrlHandler extends CrudUrlHandler
 {
     public function generateResponseForRequest($request = null)
     {

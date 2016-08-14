@@ -3,8 +3,10 @@
 namespace SuperCMS\Models\Product;
 
 use Rhubarb\Stem\Models\Model;
+use Rhubarb\Stem\Repositories\MySql\Schema\Columns\MySqlMediumTextColumn;
 use Rhubarb\Stem\Repositories\MySql\Schema\MySqlModelSchema;
 use Rhubarb\Stem\Schema\Columns\AutoIncrementColumn;
+use Rhubarb\Stem\Schema\Columns\CommaSeparatedListColumn;
 use Rhubarb\Stem\Schema\Columns\ForeignKeyColumn;
 use Rhubarb\Stem\Schema\Columns\IntegerColumn;
 use Rhubarb\Stem\Schema\Columns\MoneyColumn;
@@ -35,6 +37,8 @@ class Product extends Model
             new AutoIncrementColumn('ProductID'),
             new ForeignKeyColumn('ParentProductID'),
             new StringColumn('Name', 140),
+            new MySqlMediumTextColumn('Description'),
+            new CommaSeparatedListColumn('Keywords'),
             new MoneyColumn('Cost'),
             new ForeignKeyColumn('CategoryID'),
             new IntegerColumn('AmountAvailable')

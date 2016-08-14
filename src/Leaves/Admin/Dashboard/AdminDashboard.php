@@ -1,16 +1,15 @@
 <?php
 
-namespace SuperCMS\Leaves\Admin;
+namespace SuperCMS\Leaves\Admin\Dashboard;
 
 use Rhubarb\Leaf\Leaves\Leaf;
 use Rhubarb\Leaf\Leaves\LeafModel;
 
-class AdminIndex extends Leaf
+class AdminDashboard extends Leaf
 {
-
     protected function getViewClass()
     {
-        return AdminIndexView::class;
+        return AdminDashboardView::class;
     }
 
     protected function createModel()

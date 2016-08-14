@@ -7,6 +7,7 @@ use Rhubarb\Crown\Encryption\HashProvider;
 use Rhubarb\Crown\Encryption\Sha512HashProvider;
 use Rhubarb\Crown\Layout\LayoutModule;
 use Rhubarb\Crown\LoginProviders\LoginProvider;
+use Rhubarb\Crown\String\StringTools;
 use Rhubarb\Crown\UrlHandlers\ClassMappedUrlHandler;
 use Rhubarb\Leaf\LeafModule;
 use Rhubarb\Scaffolds\Authentication\Leaves\LoginView;
@@ -20,12 +21,17 @@ use Rhubarb\Stem\StemModule;
 use SuperCMS\Custard\ApplicationDemoDataSeeder;
 use SuperCMS\Layouts\DefaultLayout;
 use SuperCMS\Leaves\Admin\AdminIndex;
-use SuperCMS\Leaves\Admin\AdminIndexView;
+use SuperCMS\Leaves\Admin\Categories\CategoriesCollection;
+use SuperCMS\Leaves\Admin\Dashboard\AdminDashboard;
+use SuperCMS\Leaves\Admin\Products\ProductsCollection;
 use SuperCMS\Leaves\Index;
 use SuperCMS\Leaves\SuperCMSLoginView;
 use SuperCMS\LoginProviders\SCmsLoginProvider;
+use SuperCMS\Models\Product\Category;
+use SuperCMS\Models\Product\Product;
 use SuperCMS\Models\SCmsSolutionSchema;
 use SuperCMS\UrlHandlers\AdminClassMappedUrlHandler;
+use SuperCMS\UrlHandlers\AdminCrudUrlHandler;
 
 /**
  * Class SuperCMS
@@ -62,7 +68,11 @@ class SuperCMS extends Application
         $this->addUrlHandlers(
             [
                 "/" => new ClassMappedUrlHandler(Index::class, [
-                    'admin/' => new AdminClassMappedUrlHandler(AdminIndex::class)
+                    'admin/' => new AdminClassMappedUrlHandler(AdminIndex::class, [
+                        'categories/' => new AdminCrudUrlHandler(Category::class, StringTools::getNamespaceFromClass(CategoriesCollection::class)),
+                        'dashboard/' => new AdminClassMappedUrlHandler(AdminDashboard::class),
+                        'products/' => new AdminCrudUrlHandler(Product::class, StringTools::getNamespaceFromClass(ProductsCollection::class)),
+                    ])
                 ])
             ]
         );
