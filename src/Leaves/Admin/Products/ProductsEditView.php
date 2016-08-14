@@ -2,7 +2,11 @@
 
 namespace SuperCMS\Leaves\Admin\Products;
 
+use Rhubarb\Leaf\Controls\Common\FileUpload\SimpleFileUpload;
+use Rhubarb\Leaf\Controls\Common\Text\TextArea;
 use SuperCMS\Controls\Category\CategoryDropdown;
+use SuperCMS\Models\Product\Product;
+use SuperCMS\Models\Product\ProductImage;
 use SuperCMS\Views\SuperCMSCrudView;
 
 class ProductsEditView extends SuperCMSCrudView
@@ -13,10 +17,17 @@ class ProductsEditView extends SuperCMSCrudView
 
         $this->registerSubLeaf(
             'Name',
+            new TextArea('Description'),
             'Cost',
             'AmountAvailable',
-            new CategoryDropdown('CategoryID')
+            new CategoryDropdown('CategoryID'),
+            $imageUpload = new SimpleFileUpload('ImageUpload')
         );
+
+        $imageUpload->fileUploadedEvent->attachHandler(function($data)
+        {
+            ProductImage::createImageForProduct($this->model->restModel, $data);
+        });
 
         $this->bootstrapInputs();
     }
@@ -26,9 +37,11 @@ class ProductsEditView extends SuperCMSCrudView
         $this->printFieldset('Cool',
             [
                 'Name',
+                'Description',
                 'Cost',
                 'AmountAvailable',
-                'Category' => 'CategoryID'
+                'Category' => 'CategoryID',
+                'ImageUpload'
             ]);
     }
 
