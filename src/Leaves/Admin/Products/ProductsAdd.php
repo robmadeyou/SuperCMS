@@ -2,7 +2,6 @@
 
 namespace SuperCMS\Leaves\Admin\Products;
 
-
 use Rhubarb\Crown\Exceptions\ForceResponseException;
 use Rhubarb\Crown\Response\RedirectResponse;
 

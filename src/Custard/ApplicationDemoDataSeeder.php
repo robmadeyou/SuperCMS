@@ -10,8 +10,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ApplicationDemoDataSeeder implements DemoDataSeederInterface
 {
 
-    protected static $ROLE_USER;
-    protected static $ROLE_ADMIN;
+    protected static $roleUser;
+    protected static $roleAdmin;
 
     public function seedData(OutputInterface $output)
     {
@@ -21,11 +21,11 @@ class ApplicationDemoDataSeeder implements DemoDataSeederInterface
 
     public function createRoles()
     {
-        $role = self::$ROLE_USER = new Role();
+        $role = self::$roleUser = new Role();
         $role->RoleName = 'User';
         $role->save();
 
-        $role = self::$ROLE_ADMIN = new Role();
+        $role = self::$roleAdmin = new Role();
         $role->RoleName = 'Admin';
         $role->save();
     }
@@ -38,7 +38,7 @@ class ApplicationDemoDataSeeder implements DemoDataSeederInterface
         $admin->Username = 'admin@test.com';
         $admin->Enabled = true;
         $admin->setNewPassword('test');
-        $admin->addToRole(self::$ROLE_ADMIN);
+        $admin->addToRole(self::$roleAdmin);
         $admin->save();
     }
 }

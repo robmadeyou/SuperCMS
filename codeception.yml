@@ -27,12 +27,7 @@ coverage:
             - vendor/*
 extensions:
     enabled:
-        - Codeception\Extension\Phantoman
         - Codeception\Extension\RunFailed
-    config:
-          Codeception\Extension\Phantoman:
-              path: 'phantomjs'
-              suites: ['acceptance (staging)','acceptance (test)','acceptance (production)']
 modules:
     config:
         Db:

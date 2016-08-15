@@ -8,7 +8,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\HTMLTest;
 
 class AdminLayout extends SuperCMSDefaultLayout
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
 

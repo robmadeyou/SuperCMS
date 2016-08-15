@@ -51,5 +51,5 @@ abstract class SuperCMSCollectionView extends View
     {
     }
 
-    abstract function printBody();
+    abstract public function printBody();
 }

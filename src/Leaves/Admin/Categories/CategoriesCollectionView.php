@@ -29,7 +29,7 @@ class CategoriesCollectionView extends SuperCMSCollectionView
         print '<a href="add/" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Add a Category</a>';
     }
 
-    function printBody()
+    public function printBody()
     {
         print $this->leaves['Categories'];
     }

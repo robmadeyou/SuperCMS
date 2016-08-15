@@ -28,7 +28,7 @@ class ProductsCollectionView extends SuperCMSCollectionView
         $search->bindEventsWith($table);
     }
 
-    function printBody()
+    public function printBody()
     {
         print $this->leaves['Products'];
     }

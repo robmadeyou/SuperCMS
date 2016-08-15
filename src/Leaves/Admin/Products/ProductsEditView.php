@@ -24,8 +24,7 @@ class ProductsEditView extends SuperCMSCrudView
             $imageUpload = new SimpleFileUpload('ImageUpload')
         );
 
-        $imageUpload->fileUploadedEvent->attachHandler(function($data)
-        {
+        $imageUpload->fileUploadedEvent->attachHandler(function ($data) {
             ProductImage::createImageForProduct($this->model->restModel, $data);
         });
 
@@ -34,7 +33,8 @@ class ProductsEditView extends SuperCMSCrudView
 
     protected function printBody()
     {
-        $this->printFieldset('Cool',
+        $this->printFieldset(
+            'Cool',
             [
                 'Name',
                 'Description',
@@ -42,7 +42,8 @@ class ProductsEditView extends SuperCMSCrudView
                 'AmountAvailable',
                 'Category' => 'CategoryID',
                 'ImageUpload'
-            ]);
+            ]
+        );
     }
 
     protected function printLeftButtons()
