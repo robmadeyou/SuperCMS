@@ -26,7 +26,8 @@ class ProductsEditView extends SuperCMSCrudView
             new CategoryDropdown('CategoryID'),
             $imageUpload = new SimpleFileUpload('ImageUpload'),
             $properties = new KeyValue('Properties'),
-            new ShippingMultiSelection('ShippingTypes')
+            new ShippingMultiSelection('ShippingTypes'),
+            'Live'
         );
 
         $properties->setInputClasses(['form-control']);
@@ -47,6 +48,7 @@ class ProductsEditView extends SuperCMSCrudView
                 'Description',
                 'Price',
                 'AmountAvailable',
+                'Live',
                 'Category' => 'CategoryID',
                 'ImageUpload',
                 'ShippingTypes',

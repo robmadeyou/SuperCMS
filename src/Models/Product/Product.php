@@ -6,11 +6,11 @@ use Rhubarb\Stem\Models\Model;
 use Rhubarb\Stem\Repositories\MySql\Schema\Columns\MySqlMediumTextColumn;
 use Rhubarb\Stem\Repositories\MySql\Schema\MySqlModelSchema;
 use Rhubarb\Stem\Schema\Columns\AutoIncrementColumn;
+use Rhubarb\Stem\Schema\Columns\BooleanColumn;
 use Rhubarb\Stem\Schema\Columns\CommaSeparatedListColumn;
 use Rhubarb\Stem\Schema\Columns\ForeignKeyColumn;
 use Rhubarb\Stem\Schema\Columns\IntegerColumn;
 use Rhubarb\Stem\Schema\Columns\JsonColumn;
-use Rhubarb\Stem\Schema\Columns\MoneyColumn;
 use Rhubarb\Stem\Schema\Columns\StringColumn;
 
 /**
@@ -31,6 +31,7 @@ use Rhubarb\Stem\Schema\Columns\StringColumn;
  * @property-read ProductVariation[]|\Rhubarb\Stem\Collections\Collection $Variations Relationship
  * @property-read mixed $DefaultProductVariation {@link getDefaultProductVariation()}
  * @property string[] $ShippingTypes Repository field
+ * @property bool $Live Repository field
  */
 class Product extends Model
 {
@@ -46,7 +47,8 @@ class Product extends Model
             new ForeignKeyColumn('CategoryID'),
             new IntegerColumn('AmountAvailable'),
             new JsonColumn('Properties'),
-            new CommaSeparatedListColumn('ShippingTypes')
+            new CommaSeparatedListColumn('ShippingTypes'),
+            new BooleanColumn('Live')
         );
 
         return $schema;

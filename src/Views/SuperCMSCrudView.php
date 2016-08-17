@@ -3,6 +3,7 @@
 namespace SuperCMS\Views;
 
 use Rhubarb\Leaf\Controls\Common\Buttons\Button;
+use Rhubarb\Leaf\Controls\Common\Checkbox\Checkbox;
 use Rhubarb\Leaf\Controls\Common\Text\TextBox;
 use Rhubarb\Leaf\Crud\Leaves\CrudView;
 
@@ -24,6 +25,8 @@ abstract class SuperCMSCrudView extends CrudView
                 $leaf->addCssClassNames('btn');
             } else if ($leaf instanceof TextBox) {
                 $leaf->addCssClassNames('form-control');
+            } else if ($leaf instanceof Checkbox) {
+                $leaf->addCssClassNames('checkbox');
             }
         }
     }
