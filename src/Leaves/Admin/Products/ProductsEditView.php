@@ -21,7 +21,7 @@ class ProductsEditView extends SuperCMSCrudView
             'Name',
             new TextArea('Description'),
             new TextBox('Price'),
-            'AmountAvailable',
+            new TextBox('AmountAvailable'),
             new CategoryDropdown('CategoryID'),
             $imageUpload = new SimpleFileUpload('ImageUpload'),
             $properties = new KeyValue('Properties')

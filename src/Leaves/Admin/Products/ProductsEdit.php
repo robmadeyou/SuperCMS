@@ -5,6 +5,7 @@ namespace SuperCMS\Leaves\Admin\Products;
 use Rhubarb\Crown\Exceptions\ForceResponseException;
 use Rhubarb\Crown\Response\RedirectResponse;
 use Rhubarb\Leaf\Crud\Leaves\CrudLeaf;
+use SuperCMS\Models\Product\ProductVariation;
 
 class ProductsEdit extends CrudLeaf
 {
@@ -22,5 +23,23 @@ class ProductsEdit extends CrudLeaf
     protected function redirectAfterCancel()
     {
         throw new ForceResponseException(new RedirectResponse("../../"));
+    }
+
+    protected function saveRestModel()
+    {
+
+        $model = parent::saveRestModel();
+
+        /**
+         * @var ProductVariation $variation;
+         */
+        $variation = $this->model->restModel->getDefaultProductVariation();
+        $variation->Price = $this->model->Price;
+        $variation->AmountAvailable = $this->model->restModel->AmountAvailable;
+        $variation->Description = $this->model->restModel->Description;
+        $variation->Properties = $this->model->restModel->Properties;
+        $variation->save();
+
+        return $model;
     }
 }

@@ -52,5 +52,13 @@ class Product extends Model
 
     public function getDefaultProductVariation()
     {
+        if ($this->Variations->count() == 0) {
+            $v = new ProductVariation();
+            $v->ProductID = $this->UniqueIdentifier;
+            $v->save();
+            return $v;
+        } else {
+            return $this->Variations[0];
+        }
     }
 }
