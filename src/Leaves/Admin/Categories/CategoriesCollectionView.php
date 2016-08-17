@@ -17,6 +17,7 @@ class CategoriesCollectionView extends SuperCMSCollectionView
         );
 
         $table->addCssClassNames('table', 'table-striped');
+
         $table->columns = [
             'Name',
             'Parent Category' => 'ParentCategory.Name',

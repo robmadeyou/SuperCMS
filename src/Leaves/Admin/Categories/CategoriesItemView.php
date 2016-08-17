@@ -2,8 +2,7 @@
 
 namespace SuperCMS\Leaves\Admin\Categories;
 
-use SuperCMS\Controls\Chosen\Dropdown\ChosenDropdown;
-use SuperCMS\Models\Product\Category;
+use SuperCMS\Controls\Category\CategoryDropdown;
 use SuperCMS\Views\SuperCMSCrudView;
 
 class CategoriesItemView extends SuperCMSCrudView
@@ -14,14 +13,8 @@ class CategoriesItemView extends SuperCMSCrudView
 
         $this->registerSubLeaf(
             'Name',
-            $categories = new ChosenDropdown('ParentCategoryID')
+            new CategoryDropdown('ParentCategoryID')
         );
-
-        $categoryArray = [];
-        foreach (Category::find() as $category) {
-            $categoryArray[] = [$category->CategoryID, $category->Name];
-        }
-        $categories->setSelectionItems($categoryArray);
 
         $this->bootstrapInputs();
     }

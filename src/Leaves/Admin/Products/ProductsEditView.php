@@ -7,6 +7,7 @@ use Rhubarb\Leaf\Controls\Common\Text\TextArea;
 use Rhubarb\Leaf\Controls\Common\Text\TextBox;
 use SuperCMS\Controls\Category\CategoryDropdown;
 use SuperCMS\Controls\KeyValue\KeyValue;
+use SuperCMS\Controls\Shipping\ShippingMultiSelection;
 use SuperCMS\Models\Product\Product;
 use SuperCMS\Models\Product\ProductImage;
 use SuperCMS\Views\SuperCMSCrudView;
@@ -24,7 +25,8 @@ class ProductsEditView extends SuperCMSCrudView
             new TextBox('AmountAvailable'),
             new CategoryDropdown('CategoryID'),
             $imageUpload = new SimpleFileUpload('ImageUpload'),
-            $properties = new KeyValue('Properties')
+            $properties = new KeyValue('Properties'),
+            new ShippingMultiSelection('ShippingTypes')
         );
 
         $properties->setInputClasses(['form-control']);
@@ -47,6 +49,7 @@ class ProductsEditView extends SuperCMSCrudView
                 'AmountAvailable',
                 'Category' => 'CategoryID',
                 'ImageUpload',
+                'ShippingTypes',
                 'Properties'
             ]
         );

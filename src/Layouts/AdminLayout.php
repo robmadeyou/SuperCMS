@@ -19,9 +19,10 @@ class AdminLayout extends SuperCMSDefaultLayout
     {
         $sideNavs = [
             [
-                '/admin/dashboard/'  => 'Dashboard',
-                '/admin/products/'   => 'Products',
-                '/admin/categories/' => 'Categories',
+                '/admin/dashboard/'      => 'Dashboard',
+                '/admin/products/'       => 'Products',
+                '/admin/categories/'     => 'Categories',
+                '/admin/shipping-types/' => 'Shipping Types'
             ]
         ];
 

@@ -19,9 +19,4 @@ class CategoryDropdown extends ChosenDropdown
 
         $this->setSelectionItems($categories);
     }
-
-    protected function getViewClass()
-    {
-        return CategoryDropdownView::class;
-    }
 }
