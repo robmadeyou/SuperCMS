@@ -7,6 +7,21 @@ body {
     padding-top: 50px;
 }
 
+.keyValueControl {
+    position: relative;
+    clear: both;
+}
+
+.keyValueControl input {
+    width: 50%;
+    float: left;
+}
+
+.keyValueControl #removeTrigger {
+    position: absolute;
+    right: -60px;
+    top: 30%;
+}
 
 /*
  * Global add-ons
