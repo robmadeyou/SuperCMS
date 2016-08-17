@@ -11,10 +11,11 @@ use Rhubarb\Stem\Schema\Columns\StringColumn;
 /**
  *
  *
- * @property int          $ProductImageID Repository field
- * @property int          $ProductID      Repository field
- * @property string       $ImagePath      Repository field
- * @property-read Product $Product        Relationship
+ * @property int          $ProductImageID          Repository field
+ * @property int          $ProductVariationID      Repository field
+ * @property string       $ImagePath               Repository field
+ * @property-read Product $Product                 Relationship
+ * @property-read ProductVariation $ProductVariation Relationship
  */
 class ProductImage extends Model
 {
@@ -24,17 +25,17 @@ class ProductImage extends Model
 
         $model->addColumn(
             new AutoIncrementColumn('ProductImageID'),
-            new ForeignKeyColumn('ProductID'),
+            new ForeignKeyColumn('ProductVariationID'),
             new StringColumn('ImagePath', 255)
         );
 
         return $model;
     }
 
-    public static function createImageForProduct(Product $product, UploadedFileDetails $uploadData = null)
+    public static function createImageForProduct(ProductVariation $product, UploadedFileDetails $uploadData = null)
     {
         $obj = new self();
-        $obj->ProductID = $product->UniqueIdentifier;
+        $obj->ProductVariationID = $product->UniqueIdentifier;
 
         if ($uploadData) {
             $uploadPath = __DIR__ . '/../../../static/images/products/';
@@ -42,7 +43,7 @@ class ProductImage extends Model
                 mkdir($uploadPath, 777, true);
             }
 
-            $finalLocation = $uploadPath . sha1($product->UniqueIdentifier) . '-'. $uploadData->originalFilename;
+            $finalLocation = $uploadPath . sha1($product->UniqueIdentifier) . '-' . $uploadData->originalFilename;
             rename($uploadData->tempFilename, $finalLocation);
 
             $obj->ImagePath = $finalLocation;

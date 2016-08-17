@@ -7,6 +7,7 @@ use SuperCMS\Models\Product\Category;
 use SuperCMS\Models\Product\Comment;
 use SuperCMS\Models\Product\Product;
 use SuperCMS\Models\Product\ProductImage;
+use SuperCMS\Models\Product\ProductVariation;
 use SuperCMS\Models\User\CmsUser;
 
 class SCmsSolutionSchema extends SolutionSchema
@@ -15,8 +16,9 @@ class SCmsSolutionSchema extends SolutionSchema
     {
         parent::__construct();
 
-        $this->addModel('Product', Product::class, 1.1);
+        $this->addModel('Product', Product::class, 1.21);
         $this->addModel('ProductImage', ProductImage::class);
+        $this->addModel('ProductVariation', ProductVariation::class, 1.01);
         $this->addModel('Comment', Comment::class);
         $this->addModel('Category', Category::class);
         $this->addModel('User', CmsUser::class);
@@ -27,17 +29,20 @@ class SCmsSolutionSchema extends SolutionSchema
         $this->declareOneToManyRelationships(
             [
                 'Product' => [
-                    'Images' => 'ProductImage.ProductID',
                     'ChildProduct' => 'Product.ParentProductID:ParentCategory',
-                    'Comments' => 'Comment.ProductID'
+                    'Comments' => 'Comment.ProductID',
+                    'Variations' => 'ProductVariation.ProductID',
+                ],
+                'ProductVariation' => [
+                    'Images' => 'ProductImage.ProductID',
                 ],
                 'Category' => [
                     'Products' => 'Product.CategoryID',
-                    'ChildCategories' => 'Category.ParentCategoryID:ParentCategory'
+                    'ChildCategories' => 'Category.ParentCategoryID:ParentCategory',
                 ],
                 'Comment' => [
-                    'ChildComments' => 'Comment.ParentCommentID:ParentComment'
-                ]
+                    'ChildComments' => 'Comment.ParentCommentID:ParentComment',
+                ],
             ]
         );
     }
