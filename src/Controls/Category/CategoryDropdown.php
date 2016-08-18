@@ -12,8 +12,14 @@ class CategoryDropdown extends ChosenDropdown
     {
         parent::__construct($name);
 
-        $categories = [];
-        foreach (Category::find($filters) as $category) {
+        if ($filters) {
+            $collection = Category::find($filters);
+        } else {
+            $collection = Category::find();
+        }
+
+        $categories = [[0, 'None']];
+        foreach ($collection as $category) {
             $categories[] = [$category->UniqueIdentifier, $category->Name];
         }
 

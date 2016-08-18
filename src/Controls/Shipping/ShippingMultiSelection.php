@@ -13,7 +13,14 @@ class ShippingMultiSelection extends ChosenMultiSelect
         parent::__construct($name);
 
         $categories = [];
-        foreach (ShippingType::find($filters) as $shippingType) {
+
+        if ($filters) {
+            $collection = ShippingType::find($filters);
+        } else {
+            $collection = ShippingType::find();
+        }
+
+        foreach ($collection as $shippingType) {
             $categories[] = [$shippingType->UniqueIdentifier, $shippingType->ShippingType];
         }
 

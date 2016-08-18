@@ -2,8 +2,8 @@
 
 namespace SuperCMS\Leaves\Admin\Categories;
 
-use Rhubarb\Leaf\Leaves\LeafModel;
+use Rhubarb\Leaf\Crud\Leaves\ModelBoundModel;
 
-class CategoriesCollectionModel extends LeafModel
+class CategoriesCollectionModel extends ModelBoundModel
 {
 }

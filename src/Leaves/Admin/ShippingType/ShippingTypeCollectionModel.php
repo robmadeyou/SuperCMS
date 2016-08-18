@@ -2,9 +2,9 @@
 
 namespace SuperCMS\Leaves\Admin\ShippingType;
 
-use Rhubarb\Leaf\Leaves\LeafModel;
+use Rhubarb\Leaf\Crud\Leaves\ModelBoundModel;
 
-class ShippingTypeCollectionModel extends LeafModel
+class ShippingTypeCollectionModel extends ModelBoundModel
 {
 
 }

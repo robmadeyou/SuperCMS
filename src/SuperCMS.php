@@ -72,9 +72,9 @@ class SuperCMS extends Application
             [
                 "/" => new ClassMappedUrlHandler(Index::class, [
                     'admin/' => new AdminClassMappedUrlHandler(AdminIndex::class, [
-                        'categories/' => new AdminCrudUrlHandler(Category::class, StringTools::getNamespaceFromClass(CategoriesCollection::class)),
                         'dashboard/' => new AdminClassMappedUrlHandler(AdminDashboard::class),
                         'products/' => new AdminCrudUrlHandler(Product::class, StringTools::getNamespaceFromClass(ProductsCollection::class)),
+                        'categories/' => new AdminCrudUrlHandler(Category::class, StringTools::getNamespaceFromClass(CategoriesCollection::class)),
                         'shipping-types/' => new AdminCrudUrlHandler(ShippingType::class, StringTools::getNamespaceFromClass(ShippingTypeCollection::class)),
                     ])
                 ])

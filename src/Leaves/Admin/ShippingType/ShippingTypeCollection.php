@@ -2,10 +2,9 @@
 
 namespace SuperCMS\Leaves\Admin\ShippingType;
 
-use Rhubarb\Leaf\Leaves\Leaf;
-use Rhubarb\Leaf\Leaves\LeafModel;
+use Rhubarb\Leaf\Crud\Leaves\ModelBoundLeaf;
 
-class ShippingTypeCollection extends Leaf
+class ShippingTypeCollection extends ModelBoundLeaf
 {
     protected function getViewClass()
     {

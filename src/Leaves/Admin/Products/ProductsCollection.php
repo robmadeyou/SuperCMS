@@ -2,9 +2,9 @@
 
 namespace SuperCMS\Leaves\Admin\Products;
 
-use Rhubarb\Leaf\Leaves\Leaf;
+use Rhubarb\Leaf\Crud\Leaves\ModelBoundLeaf;
 
-class ProductsCollection extends Leaf
+class ProductsCollection extends ModelBoundLeaf
 {
     protected function getViewClass()
     {

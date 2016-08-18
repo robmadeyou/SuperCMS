@@ -2,9 +2,9 @@
 
 namespace SuperCMS\Leaves\Admin\ShippingType;
 
-use Rhubarb\Leaf\Crud\Leaves\CrudLeaf;
+use SuperCMS\Leaves\Admin\AdminCrudLeaf;
 
-class ShippingTypeItem extends CrudLeaf
+class ShippingTypeItem extends AdminCrudLeaf
 {
     protected function getViewClass()
     {

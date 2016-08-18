@@ -2,9 +2,9 @@
 
 namespace SuperCMS\Leaves\Admin\Categories;
 
-use Rhubarb\Leaf\Leaves\Leaf;
+use Rhubarb\Leaf\Crud\Leaves\ModelBoundLeaf;
 
-class CategoriesCollection extends Leaf
+class CategoriesCollection extends ModelBoundLeaf
 {
     protected function getViewClass()
     {
