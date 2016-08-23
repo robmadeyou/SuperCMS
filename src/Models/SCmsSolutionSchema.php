@@ -23,7 +23,7 @@ class SCmsSolutionSchema extends SolutionSchema
         $this->addModel('ProductImage', ProductImage::class);
         $this->addModel('ProductVariation', ProductVariation::class, 1.01);
         $this->addModel('Comment', Comment::class);
-        $this->addModel('Category', Category::class);
+        $this->addModel('Category', Category::class, 1.01);
         $this->addModel('User', CmsUser::class);
         $this->addModel('ShippingType', ShippingType::class);
         $this->addModel('Coupon', Coupon::class);

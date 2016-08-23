@@ -10,5 +10,6 @@ class SuperCMSDefaultLayout extends BaseLayout
     public function __construct()
     {
         ResourceLoader::loadResource("/static/css/bootstrap.min.css");
+        ResourceLoader::loadResource("/static/css/general.css");
     }
 }
