@@ -2,7 +2,9 @@
 
 namespace SuperCMS\Models;
 
+use GuzzleHttp\Exception\CouldNotRewindStreamException;
 use Rhubarb\Stem\Schema\SolutionSchema;
+use SuperCMS\Models\Coupon\Coupon;
 use SuperCMS\Models\Product\Category;
 use SuperCMS\Models\Product\Comment;
 use SuperCMS\Models\Product\Product;
@@ -24,6 +26,7 @@ class SCmsSolutionSchema extends SolutionSchema
         $this->addModel('Category', Category::class);
         $this->addModel('User', CmsUser::class);
         $this->addModel('ShippingType', ShippingType::class);
+        $this->addModel('Coupon', Coupon::class);
     }
 
     protected function defineRelationships()
