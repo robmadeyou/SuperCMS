@@ -6,8 +6,10 @@ use Rhubarb\Leaf\Controls\Common\FileUpload\SimpleFileUpload;
 use Rhubarb\Leaf\Controls\Common\Text\TextArea;
 use Rhubarb\Leaf\Controls\Common\Text\TextBox;
 use SuperCMS\Controls\Category\CategoryDropdown;
+use SuperCMS\Controls\HtmlEditor\HtmlEditor;
 use SuperCMS\Controls\KeyValue\KeyValue;
 use SuperCMS\Controls\Shipping\ShippingMultiSelection;
+use SuperCMS\Controls\ToggleSwitch\ToggleSwitch;
 use SuperCMS\Models\Product\Product;
 use SuperCMS\Models\Product\ProductImage;
 use SuperCMS\Views\SuperCMSCrudView;
@@ -20,15 +22,17 @@ class ProductsEditView extends SuperCMSCrudView
 
         $this->registerSubLeaf(
             'Name',
-            new TextArea('Description'),
+            new HtmlEditor('Description'),
             new TextBox('Price'),
             new TextBox('AmountAvailable'),
             new CategoryDropdown('CategoryID'),
             $imageUpload = new SimpleFileUpload('ImageUpload'),
             $properties = new KeyValue('Properties'),
             new ShippingMultiSelection('ShippingTypes'),
-            'Live'
+            $toggleSwitch = new ToggleSwitch('Live')
         );
+
+        $toggleSwitch->addHtmlAttribute('tooltip', 'Set the Product live or not');
 
         $properties->setInputClasses(['form-control']);
 
@@ -48,7 +52,6 @@ class ProductsEditView extends SuperCMSCrudView
                 'Description',
                 'Price',
                 'AmountAvailable',
-                'Live',
                 'Category' => 'CategoryID',
                 'ImageUpload',
                 'ShippingTypes',
@@ -61,5 +64,10 @@ class ProductsEditView extends SuperCMSCrudView
     protected function printLeftButtons()
     {
         print '<a href="../../" class="btn btn-default"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back</a>';
+    }
+
+    protected function printRightButtons()
+    {
+        print $this->leaves['Live'];
     }
 }
