@@ -2,10 +2,10 @@
 
 namespace SuperCMS\Models\Coupon;
 
-use Rhubarb\Leaf\Table\Leaves\Columns\DateColumn;
 use Rhubarb\Stem\Models\Model;
 use Rhubarb\Stem\Repositories\MySql\Schema\MySqlModelSchema;
 use Rhubarb\Stem\Schema\Columns\AutoIncrementColumn;
+use Rhubarb\Stem\Schema\Columns\DateColumn;
 use Rhubarb\Stem\Schema\Columns\StringColumn;
 
 class Coupon extends Model

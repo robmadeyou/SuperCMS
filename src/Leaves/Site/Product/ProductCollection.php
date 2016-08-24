@@ -3,6 +3,7 @@
 namespace SuperCMS\Leaves\Site\Product;
 
 use Rhubarb\Leaf\Crud\Leaves\ModelBoundLeaf;
+use Rhubarb\Leaf\Crud\Leaves\ModelBoundModel;
 use Rhubarb\Leaf\Leaves\LeafModel;
 
 class ProductCollection extends ModelBoundLeaf
@@ -14,6 +15,6 @@ class ProductCollection extends ModelBoundLeaf
 
     protected function createModel()
     {
-        return new LeafModel();
+        return new ModelBoundModel();
     }
 }
