@@ -44,7 +44,7 @@ class AdminLayout extends SuperCMSDefaultLayout
                         <li><a href="#">Dashboard</a></li>
                         <li><a href="#">Settings</a></li>
                         <li><a href="#">Profile</a></li>
-                        <li><a href="#">Help</a></li>
+                        <li><a href="/logout/">Logout</a></li>
                     </ul>
                     <form class="navbar-form navbar-right">
                         <input type="text" class="form-control" placeholder="Search...">

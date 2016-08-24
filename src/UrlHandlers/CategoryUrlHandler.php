@@ -22,11 +22,15 @@ class CategoryUrlHandler extends CrudUrlHandler
 
         $parts = explode('/', $trimmedFragment);
 
-        if (isset($parts[0]) && $parts[0] == 'category') {
+        if (isset($parts[1]) && $parts[1] != '') {
+            $this->urlAction = $parts[1];
+        } else if (isset($parts[0]) && $parts[0] != '') {
             try {
-                $this->category = Category::findFirst(new Equals('SeoSafeName', $parts[1]));
+                $this->category = Category::findFirst(new Equals('SeoSafeName', $parts[0]));
             } catch (RecordNotFoundException $ex) {
             }
+        } else {
+            $this->isCollection = true;
         }
 
         return $matchingUrlFragment;

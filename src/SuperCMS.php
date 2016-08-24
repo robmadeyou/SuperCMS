@@ -27,6 +27,8 @@ use SuperCMS\Leaves\Admin\Products\ProductsCollection;
 use SuperCMS\Leaves\Admin\ShippingType\ShippingTypeCollection;
 use SuperCMS\Leaves\Admin\ShippingType\ShippingTypeCollectionView;
 use SuperCMS\Leaves\Index;
+use SuperCMS\Leaves\Site\Category\CategoryCollection;
+use SuperCMS\Leaves\Site\Product\ProductCollection;
 use SuperCMS\Leaves\SuperCMSLoginView;
 use SuperCMS\LoginProviders\SCmsLoginProvider;
 use SuperCMS\Models\Product\Category;
@@ -35,6 +37,8 @@ use SuperCMS\Models\SCmsSolutionSchema;
 use SuperCMS\Models\Shipping\ShippingType;
 use SuperCMS\UrlHandlers\AdminClassMappedUrlHandler;
 use SuperCMS\UrlHandlers\AdminCrudUrlHandler;
+use SuperCMS\UrlHandlers\CategoryUrlHandler;
+use SuperCMS\UrlHandlers\ProductUrlHandler;
 
 /**
  * Class SuperCMS
@@ -76,7 +80,10 @@ class SuperCMS extends Application
                         'products/' => new AdminCrudUrlHandler(Product::class, StringTools::getNamespaceFromClass(ProductsCollection::class)),
                         'categories/' => new AdminCrudUrlHandler(Category::class, StringTools::getNamespaceFromClass(CategoriesCollection::class)),
                         'shipping-types/' => new AdminCrudUrlHandler(ShippingType::class, StringTools::getNamespaceFromClass(ShippingTypeCollection::class)),
-                    ])
+                    ]),
+                    'category/' => new CategoryUrlHandler(Category::class, StringTools::getNamespaceFromClass(CategoryCollection::class), [], [
+                        'product/' => new ProductUrlHandler(Product::class, StringTools::getNamespaceFromClass(ProductCollection::class))
+                    ]),
                 ])
             ]
         );
