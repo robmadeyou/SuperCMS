@@ -19,7 +19,7 @@ class SuperCMSLoginView extends LoginView
     {
         print <<<HTML
         <div id="login-container" class=" row">
-            <div class="col-md-3 col-md-offset-5">
+            <div class="col-md-4 col-md-offset-4">
                 <form class="form-horizontal">
                   <div class="form-group">
                     <label for="inputEmail3" class="col-sm-4 control-label">Email</label>
