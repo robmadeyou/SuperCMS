@@ -22,17 +22,17 @@ use SuperCMS\Custard\ApplicationDemoDataSeeder;
 use SuperCMS\Layouts\DefaultLayout;
 use SuperCMS\Leaves\Admin\AdminIndex;
 use SuperCMS\Leaves\Admin\Categories\CategoriesCollection;
+use SuperCMS\Leaves\Admin\Coupons\CouponsCollection;
 use SuperCMS\Leaves\Admin\Dashboard\AdminDashboard;
 use SuperCMS\Leaves\Admin\Products\ProductsCollection;
 use SuperCMS\Leaves\Admin\ShippingType\ShippingTypeCollection;
-use SuperCMS\Leaves\Admin\ShippingType\ShippingTypeCollectionView;
 use SuperCMS\Leaves\Errors\Error404;
-use SuperCMS\Leaves\Errors\Error404View;
 use SuperCMS\Leaves\Index;
 use SuperCMS\Leaves\Site\Category\CategoryCollection;
 use SuperCMS\Leaves\Site\Product\ProductCollection;
 use SuperCMS\Leaves\SuperCMSLoginView;
 use SuperCMS\LoginProviders\SCmsLoginProvider;
+use SuperCMS\Models\Coupon\Coupon;
 use SuperCMS\Models\Product\Category;
 use SuperCMS\Models\Product\Product;
 use SuperCMS\Models\SCmsSolutionSchema;
@@ -82,6 +82,7 @@ class SuperCMS extends Application
                         'products/' => new AdminCrudUrlHandler(Product::class, StringTools::getNamespaceFromClass(ProductsCollection::class)),
                         'categories/' => new AdminCrudUrlHandler(Category::class, StringTools::getNamespaceFromClass(CategoriesCollection::class)),
                         'shipping-types/' => new AdminCrudUrlHandler(ShippingType::class, StringTools::getNamespaceFromClass(ShippingTypeCollection::class)),
+                        'coupons/' => new AdminCrudUrlHandler(Coupon::class, StringTools::getNamespaceFromClass(CouponsCollection::class))
                     ]),
                     'category/' => new CategoryUrlHandler(Category::class, StringTools::getNamespaceFromClass(CategoryCollection::class), [], [
                         'product/' => new ProductUrlHandler(Product::class, StringTools::getNamespaceFromClass(ProductCollection::class))

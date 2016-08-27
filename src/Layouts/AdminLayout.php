@@ -22,7 +22,8 @@ class AdminLayout extends SuperCMSDefaultLayout
                 '/admin/dashboard/'      => 'Dashboard',
                 '/admin/products/'       => 'Products',
                 '/admin/categories/'     => 'Categories',
-                '/admin/shipping-types/' => 'Shipping Types'
+                '/admin/shipping-types/' => 'Shipping Types',
+                '/admin/coupons/'        => 'Coupons',
             ]
         ];
 

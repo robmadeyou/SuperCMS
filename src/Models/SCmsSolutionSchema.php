@@ -26,7 +26,7 @@ class SCmsSolutionSchema extends SolutionSchema
         $this->addModel('Category', Category::class, 1.01);
         $this->addModel('User', CmsUser::class);
         $this->addModel('ShippingType', ShippingType::class);
-        $this->addModel('Coupon', Coupon::class);
+        $this->addModel('Coupon', Coupon::class, 1.01);
     }
 
     protected function defineRelationships()
