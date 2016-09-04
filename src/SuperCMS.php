@@ -26,6 +26,7 @@ use SuperCMS\Leaves\Admin\Coupons\CouponsCollection;
 use SuperCMS\Leaves\Admin\Dashboard\AdminDashboard;
 use SuperCMS\Leaves\Admin\Products\ProductsCollection;
 use SuperCMS\Leaves\Admin\ShippingType\ShippingTypeCollection;
+use SuperCMS\Leaves\Errors\Error403;
 use SuperCMS\Leaves\Errors\Error404;
 use SuperCMS\Leaves\Index;
 use SuperCMS\Leaves\Site\Category\CategoryCollection;
@@ -87,7 +88,8 @@ class SuperCMS extends Application
                     'category/' => new CategoryUrlHandler(Category::class, StringTools::getNamespaceFromClass(CategoryCollection::class), [], [
                         'product/' => new ProductUrlHandler(Product::class, StringTools::getNamespaceFromClass(ProductCollection::class))
                     ]),
-                    '404/' => new ClassMappedUrlHandler(Error404::class)
+                    '404/' => new ClassMappedUrlHandler(Error404::class),
+                    '403/' => new ClassMappedUrlHandler(Error403::class)
                 ])
             ]
         );

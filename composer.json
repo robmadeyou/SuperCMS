@@ -31,7 +31,6 @@
     },
     "require-dev": {
         "rhubarbphp/custard": "^1.0.7",
-        "rhubarbphp/scaffold-saas-landlord": "dev-master",
         "squizlabs/php_codesniffer": "*",
         "phploc/phploc": "*",
         "theseer/phpdox": "*",

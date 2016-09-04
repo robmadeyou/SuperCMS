@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4399eef8e5c2d53b636666dfb1244243",
-    "content-hash": "53b445dcc4f755d048cf3727f7334659",
+    "hash": "b6cbfde5b5592e563bb4af98b11afbab",
+    "content-hash": "567b459923949faccb0e9cbb60e71c6e",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -453,16 +453,16 @@
         },
         {
             "name": "rhubarbphp/module-leaf-paging",
-            "version": "1.0.0",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/RhubarbPHP/Module.Leaf.Paging.git",
-                "reference": "5ba325cb13c702bf6dd2ecb1e6bea50080bd1a0b"
+                "reference": "50de7199314a117b3668effdf58eba8b06fe59de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RhubarbPHP/Module.Leaf.Paging/zipball/5ba325cb13c702bf6dd2ecb1e6bea50080bd1a0b",
-                "reference": "5ba325cb13c702bf6dd2ecb1e6bea50080bd1a0b",
+                "url": "https://api.github.com/repos/RhubarbPHP/Module.Leaf.Paging/zipball/50de7199314a117b3668effdf58eba8b06fe59de",
+                "reference": "50de7199314a117b3668effdf58eba8b06fe59de",
                 "shasum": ""
             },
             "require": {
@@ -487,7 +487,7 @@
                 "php",
                 "rhubarb"
             ],
-            "time": "2016-08-04 22:19:51"
+            "time": "2016-08-23 09:29:04"
         },
         {
             "name": "rhubarbphp/module-leaf-search-panel",
@@ -2111,16 +2111,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.5.2",
+            "version": "5.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "46ec2d1522ae8c9a12aca6b7650e0be78bbb0502"
+                "reference": "3e6e88e56c912133de6e99b87728cca7ed70c5f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/46ec2d1522ae8c9a12aca6b7650e0be78bbb0502",
-                "reference": "46ec2d1522ae8c9a12aca6b7650e0be78bbb0502",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/3e6e88e56c912133de6e99b87728cca7ed70c5f5",
+                "reference": "3e6e88e56c912133de6e99b87728cca7ed70c5f5",
                 "shasum": ""
             },
             "require": {
@@ -2185,20 +2185,20 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-08-18 11:10:44"
+            "time": "2016-08-26 07:11:44"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
-            "version": "3.2.4",
+            "version": "3.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "4e83390f64e7ce04fcaec2ce95cd72823b431d19"
+                "reference": "46b249b43fd2ed8e127aa0fdb3cbcf56e9bc0e49"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/4e83390f64e7ce04fcaec2ce95cd72823b431d19",
-                "reference": "4e83390f64e7ce04fcaec2ce95cd72823b431d19",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/46b249b43fd2ed8e127aa0fdb3cbcf56e9bc0e49",
+                "reference": "46b249b43fd2ed8e127aa0fdb3cbcf56e9bc0e49",
                 "shasum": ""
             },
             "require": {
@@ -2244,7 +2244,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2016-08-17 09:33:51"
+            "time": "2016-08-26 05:51:59"
         },
         {
             "name": "psr/http-message",
@@ -2295,133 +2295,6 @@
                 "response"
             ],
             "time": "2016-08-06 14:39:51"
-        },
-        {
-            "name": "rhubarbphp/module-restapi",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/RhubarbPHP/Module.RestApi.git",
-                "reference": "25abf9124711d04e328147bb0bfa56387e941b6c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/RhubarbPHP/Module.RestApi/zipball/25abf9124711d04e328147bb0bfa56387e941b6c",
-                "reference": "25abf9124711d04e328147bb0bfa56387e941b6c",
-                "shasum": ""
-            },
-            "require": {
-                "rhubarbphp/module-leaf": "*",
-                "rhubarbphp/module-stem": "^1.0.0",
-                "rhubarbphp/rhubarb": "^1.1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Rhubarb\\RestApi\\": "src/",
-                    "Rhubarb\\RestApi\\Tests\\": "tests/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache 2.0"
-            ],
-            "description": "An module for building ReSTful API services",
-            "time": "2016-08-17 08:47:48"
-        },
-        {
-            "name": "rhubarbphp/scaffold-saas-landlord",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/RhubarbPHP/Scaffold.Saas.Landlord.git",
-                "reference": "64b28f6a05735d894b467511e66a26fc93db34ed"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/RhubarbPHP/Scaffold.Saas.Landlord/zipball/64b28f6a05735d894b467511e66a26fc93db34ed",
-                "reference": "64b28f6a05735d894b467511e66a26fc93db34ed",
-                "shasum": ""
-            },
-            "require": {
-                "rhubarbphp/module-leaf": "*",
-                "rhubarbphp/module-leaf-table": "^1.0.0",
-                "rhubarbphp/module-patterns": "*",
-                "rhubarbphp/module-restapi": "*",
-                "rhubarbphp/module-stem": "*",
-                "rhubarbphp/rhubarb": "*",
-                "rhubarbphp/scaffold-authentication-with-roles": "*",
-                "rhubarbphp/scaffold-navigation-menu": "*",
-                "rhubarbphp/scaffold-token-based-restapi": "*"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "3.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Rhubarb\\Scaffolds\\Saas\\Landlord\\": "src/",
-                    "Rhubarb\\Scaffolds\\Saas\\Landlord\\Tests\\": "tests/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "description": "Provides landlord services for software as a service platforms.",
-            "homepage": "http://www.rhubarbphp.com/",
-            "keywords": [
-                "Authentication",
-                "framework",
-                "php",
-                "rhubarb"
-            ],
-            "time": "2016-05-30 14:58:02"
-        },
-        {
-            "name": "rhubarbphp/scaffold-token-based-restapi",
-            "version": "v1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/RhubarbPHP/Scaffold.TokenBasedRestApi.git",
-                "reference": "b84fd82142b159f19a880b638188247fb1ae7e5f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/RhubarbPHP/Scaffold.TokenBasedRestApi/zipball/b84fd82142b159f19a880b638188247fb1ae7e5f",
-                "reference": "b84fd82142b159f19a880b638188247fb1ae7e5f",
-                "shasum": ""
-            },
-            "require": {
-                "rhubarbphp/module-restapi": "*",
-                "rhubarbphp/module-stem": "*",
-                "rhubarbphp/rhubarb": "*"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "3.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Rhubarb\\Scaffolds\\TokenBasedRestApi\\": "src/",
-                    "Rhubarb\\Scaffolds\\TokenBasedRestApi\\Tests\\": "tests/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "description": "Provides a support for doing token based authentication for a ReST API",
-            "homepage": "http://www.rhubarbphp.com/",
-            "keywords": [
-                "api",
-                "framework",
-                "php",
-                "rest",
-                "rhubarb",
-                "token"
-            ],
-            "time": "2015-02-23 21:32:22"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -3120,16 +2993,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "2.6.2",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "4edb770cb853def6e60c93abb088ad5ac2010c83"
+                "reference": "571e27b6348e5b3a637b2abc82ac0d01e6d7bbed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/4edb770cb853def6e60c93abb088ad5ac2010c83",
-                "reference": "4edb770cb853def6e60c93abb088ad5ac2010c83",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/571e27b6348e5b3a637b2abc82ac0d01e6d7bbed",
+                "reference": "571e27b6348e5b3a637b2abc82ac0d01e6d7bbed",
                 "shasum": ""
             },
             "require": {
@@ -3194,7 +3067,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2016-07-13 23:29:13"
+            "time": "2016-09-01 23:53:02"
         },
         {
             "name": "symfony/browser-kit",
@@ -3255,16 +3128,16 @@
         },
         {
             "name": "symfony/config",
-            "version": "v3.1.3",
+            "version": "v3.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "a7630397b91be09cdd2fe57fd13612e258700598"
+                "reference": "431d28df9c7bb6e77f8f6289d8670b044fabb9e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/a7630397b91be09cdd2fe57fd13612e258700598",
-                "reference": "a7630397b91be09cdd2fe57fd13612e258700598",
+                "url": "https://api.github.com/repos/symfony/config/zipball/431d28df9c7bb6e77f8f6289d8670b044fabb9e8",
+                "reference": "431d28df9c7bb6e77f8f6289d8670b044fabb9e8",
                 "shasum": ""
             },
             "require": {
@@ -3304,7 +3177,7 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2016-07-26 08:04:17"
+            "time": "2016-08-27 18:50:07"
         },
         {
             "name": "symfony/css-selector",
@@ -3361,16 +3234,16 @@
         },
         {
             "name": "symfony/dependency-injection",
-            "version": "v3.1.3",
+            "version": "v3.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "6abd4952d07042d11bbb8122f3b57469691acdb5"
+                "reference": "6e4f3316afdc9783d7b48a136db89bd791b55698"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/6abd4952d07042d11bbb8122f3b57469691acdb5",
-                "reference": "6abd4952d07042d11bbb8122f3b57469691acdb5",
+                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/6e4f3316afdc9783d7b48a136db89bd791b55698",
+                "reference": "6e4f3316afdc9783d7b48a136db89bd791b55698",
                 "shasum": ""
             },
             "require": {
@@ -3417,7 +3290,7 @@
             ],
             "description": "Symfony DependencyInjection Component",
             "homepage": "https://symfony.com",
-            "time": "2016-07-28 11:13:48"
+            "time": "2016-08-23 13:39:15"
         },
         {
             "name": "symfony/dom-crawler",
@@ -3537,7 +3410,7 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v3.1.3",
+            "version": "v3.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
@@ -3891,8 +3764,7 @@
         "rhubarbphp/module-leaf-common-controls": 20,
         "rhubarbphp/module-leaf-table": 20,
         "rhubarbphp/rhubarb": 20,
-        "rhubarbphp/scaffold-repository-log": 20,
-        "rhubarbphp/scaffold-saas-landlord": 20
+        "rhubarbphp/scaffold-repository-log": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
