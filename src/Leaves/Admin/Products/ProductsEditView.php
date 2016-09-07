@@ -5,6 +5,7 @@ namespace SuperCMS\Leaves\Admin\Products;
 use Rhubarb\Leaf\Controls\Common\FileUpload\SimpleFileUpload;
 use Rhubarb\Leaf\Controls\Common\Text\TextArea;
 use Rhubarb\Leaf\Controls\Common\Text\TextBox;
+use Rhubarb\Leaf\Leaves\LeafDeploymentPackage;
 use SuperCMS\Controls\Category\CategoryDropdown;
 use SuperCMS\Controls\Dropzone\Dropzone;
 use SuperCMS\Controls\HtmlEditor\HtmlEditor;
@@ -37,9 +38,9 @@ class ProductsEditView extends SuperCMSCrudView
 
         $properties->setInputClasses(['form-control']);
 
-//        $imageUpload->fileUploadedEvent->attachHandler(function ($data) {
-//            ProductImage::createImageForProduct($this->model->restModel, $data);
-//        });
+        $imageUpload->fileUploadedEvent->attachHandler(function ($data) {
+            ProductImage::createImageForProduct($this->model->restModel->getDefaultProductVariation(), $data);
+        });
 
         $this->bootstrapInputs();
     }
@@ -53,13 +54,24 @@ class ProductsEditView extends SuperCMSCrudView
                 'Description',
                 'Price',
                 'AmountAvailable',
-                'Category' => 'CategoryID',
-                'ImageUpload',
+                'Category'      => 'CategoryID',
+                'Upload Images' => 'ImageUpload',
                 'ShippingTypes',
                 'Properties'
             ]
         );
 
+        ?>
+        <ul class="nav nav-tabs">
+            <?php
+            $first = true;
+            foreach ($this->model->restModel->Variations as $variation) {
+                print '<li role="presentation" ' . ( $first ? 'class="active"' : '' ) . ' ><a href="#" class="product-variation-tab" data-id="' . $variation->UniqueIdentifier . '">' . $variation->Name . '</a></li>';
+                $first = false;
+            }
+            ?>
+        </ul>
+        <?php
     }
 
     protected function printLeftButtons()
@@ -69,6 +81,18 @@ class ProductsEditView extends SuperCMSCrudView
 
     protected function printRightButtons()
     {
-        print $this->leaves['Live'];
+        print $this->leaves[ 'Live' ];
+    }
+
+    public function getDeploymentPackage()
+    {
+        $package = new LeafDeploymentPackage();
+        $package->resourcesToDeploy[] = __DIR__ . '/' . $this->getViewBridgeName() . '.js';
+        return $package;
+    }
+
+    protected function getViewBridgeName()
+    {
+        return 'ProductsEditViewBridge';
     }
 }

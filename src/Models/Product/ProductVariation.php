@@ -10,6 +10,7 @@ use Rhubarb\Stem\Schema\Columns\ForeignKeyColumn;
 use Rhubarb\Stem\Schema\Columns\IntegerColumn;
 use Rhubarb\Stem\Schema\Columns\JsonColumn;
 use Rhubarb\Stem\Schema\Columns\MoneyColumn;
+use Rhubarb\Stem\Schema\Columns\StringColumn;
 
 /**
  *
@@ -22,6 +23,7 @@ use Rhubarb\Stem\Schema\Columns\MoneyColumn;
  * @property-read Product $Product Relationship
  * @property float $Price Repository field
  * @property-read ProductImage[]|\Rhubarb\Stem\Collections\Collection $Images Relationship
+ * @property string $Name Repository field
  */
 class ProductVariation extends Model
 {
@@ -31,6 +33,7 @@ class ProductVariation extends Model
 
         $model->addColumn(
             new AutoIncrementColumn('ProductVariationID'),
+            new StringColumn('Name', 50),
             new ForeignKeyColumn('ProductID'),
             new IntegerColumn('AmountAvailable'),
             new MySqlMediumTextColumn('Description'),

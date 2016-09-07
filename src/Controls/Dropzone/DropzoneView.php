@@ -25,9 +25,8 @@ class DropzoneView extends SimpleFileUploadView
 
     protected function printViewContent()
     {
-        $req = Request::current();
         ?>
-        <div action="<?=$req->uriPath?>" class="dropzone">
+        <div class="file-input">
             <div class="fallback">
                 <input name="file" type="file" multiple />
             </div>

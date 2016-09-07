@@ -9,6 +9,16 @@ use Rhubarb\Stem\Schema\Columns\DateColumn;
 use Rhubarb\Stem\Schema\Columns\DecimalColumn;
 use Rhubarb\Stem\Schema\Columns\StringColumn;
 
+/**
+ *
+ *
+ * @property int $CouponID Repository field
+ * @property string $Code Repository field
+ * @property float $Discount Repository field
+ * @property \Rhubarb\Crown\DateTime\RhubarbDate $ValidFrom Repository field
+ * @property \Rhubarb\Crown\DateTime\RhubarbDate $ValidTo Repository field
+ * @property-read mixed $FormattedDiscount {@link getFormattedDiscount()}
+ */
 class Coupon extends Model
 {
     protected function createSchema()

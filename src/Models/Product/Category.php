@@ -17,6 +17,7 @@ use Rhubarb\Stem\Schema\Columns\StringColumn;
  * @property-read Product[]|\Rhubarb\Stem\Collections\Collection $Products Relationship
  * @property-read Category[]|\Rhubarb\Stem\Collections\Collection $ChildCategories Relationship
  * @property-read Category $ParentCategory Relationship
+ * @property string $SeoSafeName Repository field
  */
 class Category extends Model
 {

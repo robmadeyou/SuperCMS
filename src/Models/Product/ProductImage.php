@@ -11,11 +11,11 @@ use Rhubarb\Stem\Schema\Columns\StringColumn;
 /**
  *
  *
- * @property int          $ProductImageID          Repository field
- * @property int          $ProductVariationID      Repository field
- * @property string       $ImagePath               Repository field
- * @property-read Product $Product                 Relationship
- * @property-read ProductVariation $ProductVariation Relationship
+ * @property int                   $ProductImageID          Repository field
+ * @property int                   $ProductVariationID      Repository field
+ * @property string                $ImagePath               Repository field
+ * @property-read Product          $Product                 Relationship
+ * @property-read ProductVariation $ProductVariation        Relationship
  */
 class ProductImage extends Model
 {
@@ -38,7 +38,7 @@ class ProductImage extends Model
         $obj->ProductVariationID = $product->UniqueIdentifier;
 
         if ($uploadData) {
-            $uploadPath = __DIR__ . '/../../../static/images/products/';
+            $uploadPath = __DIR__ . '/../../../static/images/products/' . $product->ProductID . '/' . $product->UniqueIdentifier . '/';
             if (!is_dir($uploadPath)) {
                 mkdir($uploadPath, 777, true);
             }

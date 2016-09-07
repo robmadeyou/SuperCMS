@@ -32,6 +32,7 @@ use Rhubarb\Stem\Schema\Columns\StringColumn;
  * @property-read mixed $DefaultProductVariation {@link getDefaultProductVariation()}
  * @property string[] $ShippingTypes Repository field
  * @property bool $Live Repository field
+ * @property string $SeoSafeName Repository field
  */
 class Product extends Model
 {
@@ -57,6 +58,10 @@ class Product extends Model
 
     public function getDefaultProductVariation()
     {
+        if ($this->isNewRecord()) {
+            $this->save();
+        }
+
         if ($this->Variations->count() == 0) {
             $v = new ProductVariation();
             $v->ProductID = $this->UniqueIdentifier;
