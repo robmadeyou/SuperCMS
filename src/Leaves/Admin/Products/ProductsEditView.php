@@ -6,6 +6,7 @@ use Rhubarb\Leaf\Controls\Common\FileUpload\SimpleFileUpload;
 use Rhubarb\Leaf\Controls\Common\Text\TextArea;
 use Rhubarb\Leaf\Controls\Common\Text\TextBox;
 use SuperCMS\Controls\Category\CategoryDropdown;
+use SuperCMS\Controls\Dropzone\Dropzone;
 use SuperCMS\Controls\HtmlEditor\HtmlEditor;
 use SuperCMS\Controls\KeyValue\KeyValue;
 use SuperCMS\Controls\Shipping\ShippingMultiSelection;
@@ -26,7 +27,7 @@ class ProductsEditView extends SuperCMSCrudView
             new TextBox('Price'),
             new TextBox('AmountAvailable'),
             new CategoryDropdown('CategoryID'),
-            $imageUpload = new SimpleFileUpload('ImageUpload'),
+            $imageUpload = new Dropzone('ImageUpload'),
             $properties = new KeyValue('Properties'),
             new ShippingMultiSelection('ShippingTypes'),
             $toggleSwitch = new ToggleSwitch('Live')
@@ -36,9 +37,9 @@ class ProductsEditView extends SuperCMSCrudView
 
         $properties->setInputClasses(['form-control']);
 
-        $imageUpload->fileUploadedEvent->attachHandler(function ($data) {
-            ProductImage::createImageForProduct($this->model->restModel, $data);
-        });
+//        $imageUpload->fileUploadedEvent->attachHandler(function ($data) {
+//            ProductImage::createImageForProduct($this->model->restModel, $data);
+//        });
 
         $this->bootstrapInputs();
     }

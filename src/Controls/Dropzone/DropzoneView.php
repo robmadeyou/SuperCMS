@@ -7,6 +7,7 @@ use Rhubarb\Leaf\Controls\Common\FileUpload\SimpleFileUploadView;
 
 class DropzoneView extends SimpleFileUploadView
 {
+    public $requiresContainerDiv = true;
     public function getDeploymentPackage()
     {
         $package = parent::getDeploymentPackage();
@@ -26,11 +27,11 @@ class DropzoneView extends SimpleFileUploadView
     {
         $req = Request::current();
         ?>
-        <form action="<?=$req->uriPath?>" class="dropzone">
+        <div action="<?=$req->uriPath?>" class="dropzone">
             <div class="fallback">
                 <input name="file" type="file" multiple />
             </div>
-        </form>
+        </div>
         <?php
     }
 }
