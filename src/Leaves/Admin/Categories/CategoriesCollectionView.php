@@ -3,6 +3,7 @@
 namespace SuperCMS\Leaves\Admin\Categories;
 
 use Rhubarb\Leaf\Table\Leaves\Table;
+use Rhubarb\Stem\Filters\Equals;
 use SuperCMS\Models\Product\Category;
 use SuperCMS\Views\SuperCMSCollectionView;
 
@@ -19,6 +20,7 @@ class CategoriesCollectionView extends SuperCMSCollectionView
         $table->addCssClassNames('table', 'table-striped');
 
         $table->columns = [
+            ' ' => '<img width="64" height="64" src="{Image}">',
             'Name',
             'Parent Category' => 'ParentCategory.Name',
             '' => '<a href="{CategoryID}/edit/" class="btn btn-default">Edit</a>'

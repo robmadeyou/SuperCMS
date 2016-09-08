@@ -27,6 +27,9 @@ class ProductsEdit extends CrudLeaf
 
     protected function saveRestModel()
     {
+        if (!$this->model->restModel->Visible) {
+            $this->model->restModel->Visible = true;
+        }
 
         $model = parent::saveRestModel();
 
@@ -38,6 +41,7 @@ class ProductsEdit extends CrudLeaf
         $variation->AmountAvailable = $this->model->restModel->AmountAvailable;
         $variation->Description = $this->model->restModel->Description;
         $variation->Properties = $this->model->restModel->Properties;
+        $variation->Name = $this->model->restModel->Name;
         $variation->save();
 
         return $model;

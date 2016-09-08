@@ -2,9 +2,14 @@
 
 namespace SuperCMS\Models\Product;
 
+use Rhubarb\Leaf\Controls\Common\FileUpload\UploadedFileDetails;
+use Rhubarb\Stem\Filters\AndGroup;
+use Rhubarb\Stem\Filters\Equals;
+use Rhubarb\Stem\Filters\Filter;
 use Rhubarb\Stem\Models\Model;
 use Rhubarb\Stem\Repositories\MySql\Schema\MySqlModelSchema;
 use Rhubarb\Stem\Schema\Columns\AutoIncrementColumn;
+use Rhubarb\Stem\Schema\Columns\BooleanColumn;
 use Rhubarb\Stem\Schema\Columns\ForeignKeyColumn;
 use Rhubarb\Stem\Schema\Columns\StringColumn;
 
@@ -18,6 +23,8 @@ use Rhubarb\Stem\Schema\Columns\StringColumn;
  * @property-read Category[]|\Rhubarb\Stem\Collections\Collection $ChildCategories Relationship
  * @property-read Category $ParentCategory Relationship
  * @property string $SeoSafeName Repository field
+ * @property string $Image Repository field
+ * @property bool $Visible Repository field
  */
 class Category extends Model
 {
@@ -29,10 +36,30 @@ class Category extends Model
             new AutoIncrementColumn('CategoryID'),
             new ForeignKeyColumn('ParentCategoryID'),
             new StringColumn('Name', 50),
-            new StringColumn('SeoSafeName', 100)
+            new StringColumn('SeoSafeName', 100),
+            new StringColumn('Image', 300),
+            new BooleanColumn('Visible', false)
         );
 
         return $model;
+    }
+
+    public function uploadImage(UploadedFileDetails $uploadData, $save = true)
+    {
+        if ($uploadData) {
+            $uploadPath = __DIR__ . '/../../../static/images/category/' . $this->CategoryID . '/';
+            if (!is_dir($uploadPath)) {
+                mkdir($uploadPath, 777, true);
+            }
+
+            $finalLocation = $uploadPath . sha1($this->UniqueIdentifier) . '-' . $uploadData->originalFilename;
+            rename($uploadData->tempFilename, $finalLocation);
+
+            $this->Image = str_replace(APPLICATION_ROOT_DIR, '',realpath($finalLocation));
+            if ($save) {
+                $this->save();
+            }
+        }
     }
 
     public function setName($name)
@@ -105,5 +132,10 @@ class Category extends Model
         $clean_name = preg_replace(['/\s/', '/\.[\.]+/', '/[^\w_\.\-]/'], ['-', '-', '-'], $clean_name);
         $clean_name = preg_replace('/\-+/', '-', $clean_name);
         $this->SeoSafeName = $clean_name;
+    }
+
+    public static function find(Filter ...$filters)
+    {
+        return parent::find(new AndGroup([new Equals('Visible', true), new AndGroup($filters)]));
     }
 }

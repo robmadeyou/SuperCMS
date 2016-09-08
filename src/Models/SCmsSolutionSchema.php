@@ -19,11 +19,11 @@ class SCmsSolutionSchema extends SolutionSchema
     {
         parent::__construct();
 
-        $this->addModel('Product', Product::class, 1.24);
+        $this->addModel('Product', Product::class, 1.25);
         $this->addModel('ProductImage', ProductImage::class);
         $this->addModel('ProductVariation', ProductVariation::class, 1.01);
         $this->addModel('Comment', Comment::class);
-        $this->addModel('Category', Category::class, 1.01);
+        $this->addModel('Category', Category::class, 1.03);
         $this->addModel('User', CmsUser::class);
         $this->addModel('ShippingType', ShippingType::class);
         $this->addModel('Coupon', Coupon::class, 1.01);

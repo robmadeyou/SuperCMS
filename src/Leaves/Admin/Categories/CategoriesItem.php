@@ -11,4 +11,12 @@ class CategoriesItem extends AdminCrudLeaf
     {
         return CategoriesItemView::class;
     }
+
+    protected function saveRestModel()
+    {
+        if (!$this->model->restModel->Visible) {
+            $this->model->restModel->Visible = true;
+        }
+        return parent::saveRestModel();
+    }
 }

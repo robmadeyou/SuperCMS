@@ -46,7 +46,7 @@ class ProductImage extends Model
             $finalLocation = $uploadPath . sha1($product->UniqueIdentifier) . '-' . $uploadData->originalFilename;
             rename($uploadData->tempFilename, $finalLocation);
 
-            $obj->ImagePath = $finalLocation;
+            $obj->ImagePath = str_replace(APPLICATION_ROOT_DIR, '',realpath($finalLocation));
         }
 
         $obj->save();
