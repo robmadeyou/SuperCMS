@@ -6,6 +6,9 @@ bridge.prototype = new window.rhubarb.viewBridgeClasses.ViewBridge();
 bridge.prototype.constructor = bridge;
 
 bridge.prototype.attachEvents = function () {
+
+	var firstTab = $('.nav-bar-tabs-first');
+
 	$('.product-variation-tab').click(function(event) {
 
 		changeTab($(this).parent());
@@ -19,6 +22,10 @@ bridge.prototype.attachEvents = function () {
 
 		tab.addClass('active');
 	}
+
+	$('#' + this.leafPath + '_Name').keyup(function(){
+		firstTab.find('a').html($(this).val());
+	});
 };
 
 window.rhubarb.viewBridgeClasses.ProductsEditViewBridge = bridge;

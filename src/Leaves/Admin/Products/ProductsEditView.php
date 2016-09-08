@@ -2,6 +2,7 @@
 
 namespace SuperCMS\Leaves\Admin\Products;
 
+use Rhubarb\Crown\Settings\HtmlPageSettings;
 use Rhubarb\Leaf\Controls\Common\FileUpload\SimpleFileUpload;
 use Rhubarb\Leaf\Controls\Common\Text\TextArea;
 use Rhubarb\Leaf\Controls\Common\Text\TextBox;
@@ -47,6 +48,23 @@ class ProductsEditView extends SuperCMSCrudView
 
     protected function printBody()
     {
+        $settings = HtmlPageSettings::singleton();
+        $settings->pageTitle = 'Editing Product';
+
+        ?>
+        <ul class="nav nav-tabs">
+            <?php
+            $first = true;
+            foreach ($this->model->restModel->Variations as $variation) {
+                $class = ( $first ? 'active nav-bar-tabs-first' : '' );
+                print '<li role="presentation" class="' . $class . ' product-list-tabs" ><a href="#" class="product-variation-tab" data-id="' . $variation->UniqueIdentifier . '">' . $variation->Name . '</a></li>';
+                $first = false;
+            }
+            ?>
+            <li role="presentation" class="product-list-tabs"><p>&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span></p></li>
+        </ul>
+        <?php
+
         $this->printFieldset(
             '',
             [
@@ -60,18 +78,6 @@ class ProductsEditView extends SuperCMSCrudView
                 'Properties'
             ]
         );
-
-        ?>
-        <ul class="nav nav-tabs">
-            <?php
-            $first = true;
-            foreach ($this->model->restModel->Variations as $variation) {
-                print '<li role="presentation" ' . ( $first ? 'class="active"' : '' ) . ' ><a href="#" class="product-variation-tab" data-id="' . $variation->UniqueIdentifier . '">' . $variation->Name . '</a></li>';
-                $first = false;
-            }
-            ?>
-        </ul>
-        <?php
     }
 
     protected function printLeftButtons()

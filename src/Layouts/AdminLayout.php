@@ -74,9 +74,6 @@ HTML;
                     ?>
                 </div>
                 <?php
-
-                parent::printPageHeading();
-
                 ?>
             </div>
         </div>

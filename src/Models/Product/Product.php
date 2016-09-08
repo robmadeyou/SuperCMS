@@ -77,6 +77,15 @@ class Product extends Model
         }
     }
 
+    protected function afterSave()
+    {
+        parent::afterSave();
+
+        if (!$this->Variations->count()) {
+            $this->getDefaultProductVariation();
+        }
+    }
+
     public function setName($name)
     {
         $this->modelData['Name'] = $name;

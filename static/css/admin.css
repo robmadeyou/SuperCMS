@@ -129,3 +129,7 @@ body.event-processing .loading-overlay {
     opacity: 0.4;
     z-index: 999;
 }
+
+.product-list-tabs {
+    cursor: pointer;
+}
