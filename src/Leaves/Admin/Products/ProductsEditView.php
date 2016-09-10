@@ -19,13 +19,19 @@ use SuperCMS\Views\SuperCMSCrudView;
 
 class ProductsEditView extends SuperCMSCrudView
 {
+    /**
+     * @var ProductsEditModel $model
+     */
+    protected $model;
+
     protected function createSubLeaves()
     {
         parent::createSubLeaves();
 
         $this->registerSubLeaf(
-            'Name',
+            new TextBox('Name'),
             new HtmlEditor('Description'),
+            new HtmlEditor('VariationDescription'),
             new TextBox('Price'),
             new TextBox('AmountAvailable'),
             new CategoryDropdown('CategoryID'),
@@ -54,14 +60,12 @@ class ProductsEditView extends SuperCMSCrudView
         ?>
         <ul class="nav nav-tabs">
             <?php
-            $first = true;
             foreach ($this->model->restModel->Variations as $variation) {
-                $class = ( $first ? 'active nav-bar-tabs-first' : '' );
+                $class = ( $variation->UniqueIdentifier == $this->model->selectedVariation->UniqueIdentifier ? 'active nav-bar-tabs-first' : '' );
                 print '<li role="presentation" class="' . $class . ' product-list-tabs" ><a href="#" class="product-variation-tab" data-id="' . $variation->UniqueIdentifier . '">' . $variation->Name . '</a></li>';
-                $first = false;
             }
             ?>
-            <li role="presentation" class="product-list-tabs"><p>&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span></p></li>
+            <li role="presentation" class="product-list-tabs" id="tab-add-button"><p>&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span></p></li>
         </ul>
         <?php
 
@@ -70,6 +74,7 @@ class ProductsEditView extends SuperCMSCrudView
             [
                 'Name',
                 'Description',
+                'VariationDescription',
                 'Price',
                 'AmountAvailable',
                 'Category'      => 'CategoryID',

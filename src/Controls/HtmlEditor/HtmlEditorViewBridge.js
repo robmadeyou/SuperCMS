@@ -6,6 +6,9 @@ bridge.prototype = new window.rhubarb.viewBridgeClasses.TextBoxViewBridge();
 bridge.prototype.constructor = bridge;
 
 bridge.prototype.attachEvents = function () {
+
+    var self = this;
+
     tinymce.baseURL = '/static/js/tinymce';
     tinymce.init(
         {

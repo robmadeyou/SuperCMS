@@ -8,14 +8,14 @@ use Rhubarb\Stem\Schema\Columns\AutoIncrementColumn;
 use Rhubarb\Stem\Schema\Columns\ForeignKeyColumn;
 use Rhubarb\Stem\Schema\Columns\StringColumn;
 
+
 /**
  *
  *
- * @property int                   $ProductImageID          Repository field
- * @property int                   $ProductVariationID      Repository field
- * @property string                $ImagePath               Repository field
- * @property-read Product          $Product                 Relationship
- * @property-read ProductVariation $ProductVariation        Relationship
+ * @property int $ProductImageID Repository field
+ * @property int $ProductVariationID Repository field
+ * @property string $ImagePath Repository field
+ * @property-read ProductVariation $ProductVariation Relationship
  */
 class ProductImage extends Model
 {

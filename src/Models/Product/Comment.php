@@ -8,6 +8,7 @@ use Rhubarb\Stem\Repositories\MySql\Schema\MySqlModelSchema;
 use Rhubarb\Stem\Schema\Columns\AutoIncrementColumn;
 use Rhubarb\Stem\Schema\Columns\ForeignKeyColumn;
 
+
 /**
  *
  *
@@ -17,7 +18,7 @@ use Rhubarb\Stem\Schema\Columns\ForeignKeyColumn;
  * @property string $Text Repository field
  * @property int $ParentCommentID Repository field
  * @property-read Product $Product Relationship
- * @property-read Comment[]|\Rhubarb\Stem\Collections\Collection $ChildComments Relationship
+ * @property-read Comment[]|\Rhubarb\Stem\Collections\RepositoryCollection $ChildComments Relationship
  * @property-read Comment $ParentComment Relationship
  */
 class Comment extends Model

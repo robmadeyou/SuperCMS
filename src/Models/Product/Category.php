@@ -13,18 +13,19 @@ use Rhubarb\Stem\Schema\Columns\BooleanColumn;
 use Rhubarb\Stem\Schema\Columns\ForeignKeyColumn;
 use Rhubarb\Stem\Schema\Columns\StringColumn;
 
+
 /**
  *
  *
  * @property int $CategoryID Repository field
  * @property int $ParentCategoryID Repository field
  * @property string $Name Repository field
- * @property-read Product[]|\Rhubarb\Stem\Collections\Collection $Products Relationship
- * @property-read Category[]|\Rhubarb\Stem\Collections\Collection $ChildCategories Relationship
- * @property-read Category $ParentCategory Relationship
  * @property string $SeoSafeName Repository field
  * @property string $Image Repository field
  * @property bool $Visible Repository field
+ * @property-read Product[]|\Rhubarb\Stem\Collections\RepositoryCollection $Products Relationship
+ * @property-read Category[]|\Rhubarb\Stem\Collections\RepositoryCollection $ChildCategories Relationship
+ * @property-read Category $ParentCategory Relationship
  */
 class Category extends Model
 {
