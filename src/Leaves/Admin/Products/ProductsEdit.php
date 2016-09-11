@@ -28,14 +28,17 @@ class ProductsEdit extends CrudLeaf
 
         $model->ChangeProductVariationEvent->attachHandler(function($id) {
             try {
+                $this->saveVariation(new ProductVariation($this->model->selectedVariation['ProductVariationID']));
                 $this->setSelectedVariation(new ProductVariation($id));
                 $this->reRender();
-            } catch (RecordNotFoundException $ex) {
-
-            }
+            } catch (RecordNotFoundException $ex) {}
         });
 
         $model->AddNewProductEvent->attachHandler(function() {
+            try
+            {
+                $this->saveVariation(new ProductVariation($this->model->selectedVariation['ProductVariationID']));
+            } catch (RecordNotFoundException $ex) {}
             $variation = new ProductVariation();
             $variation->ProductID = $this->model->restModel->ProductID;
             $variation->save();
@@ -80,10 +83,19 @@ class ProductsEdit extends CrudLeaf
 
         $model = parent::saveRestModel();
 
-        /**
-         * @var ProductVariation $variation;
-         */
-        $variation = new ProductVariation($this->model->selectedVariation['ProductVariationID']);
+        $this->saveVariation(new ProductVariation($this->model->selectedVariation['ProductVariationID']));
+
+        return $model;
+    }
+
+    /**
+     * @param ProductVariation $variation
+     * @return ProductVariation
+     * @throws \Exception
+     * @throws \Rhubarb\Stem\Exceptions\ModelConsistencyValidationException
+     */
+    private function saveVariation(ProductVariation $variation)
+    {
         $variation->Name = $this->model->Name;
         $variation->Price = $this->model->Price;
         $variation->AmountAvailable = $this->model->AmountAvailable;
@@ -91,6 +103,6 @@ class ProductsEdit extends CrudLeaf
         $variation->Properties = $this->model->Properties;
         $variation->save();
 
-        return $model;
+        return $variation;
     }
 }
