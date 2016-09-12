@@ -45,17 +45,19 @@ abstract class SuperCMSCrudView extends CrudView
                         <?php $this->printLeftButtons() ?>
                 </div>
                 <div class="col-md-8">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <?= $this->getTitle() ?>
-                        </div>
-                        <div class="panel-body">
-                            <?php $this->printBody() ?>
-                        </div>
-                    </div>
                 </div>
                 <div class="col-md-2">
-                    <?php $this->printRightButtons() ?>
+                    <div class="pull-right">
+                        <?php $this->printRightButtons() ?>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <?= $this->getTitle() ?>
+                </div>
+                <div class="panel-body">
+                    <?php $this->printBody() ?>
                 </div>
             </div>
             <div class="row">

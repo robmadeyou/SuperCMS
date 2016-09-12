@@ -58,7 +58,7 @@ class ProductsEditView extends SuperCMSCrudView
         $settings->pageTitle = 'Editing Product';
 
         ?>
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-pills nav-justified">
             <?php
             foreach ($this->model->restModel->Variations as $variation) {
                 $class = ( $variation->UniqueIdentifier == $this->model->selectedVariation->UniqueIdentifier ? 'active nav-bar-tabs-first' : '' );
@@ -67,18 +67,44 @@ class ProductsEditView extends SuperCMSCrudView
             ?>
             <li role="presentation" class="product-list-tabs" id="tab-add-button"><p>&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span></p></li>
         </ul>
+        <form>
+            <div class="form-group">
+                <label>Name</label>
+                <?=$this->leaves['Name']?>
+            </div>
+            <div class="form-group">
+                <label>Category</label>
+                <?=$this->leaves['CategoryID']?>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Price</label>
+                        <?=$this->leaves['Price']?>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Amount Available</label>
+                        <?=$this->leaves['AmountAvailable']?>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Short</label>
+                <?=$this->leaves['VariationDescription']?>
+            </div>
+            <div class="form-group">
+                <label>Images</label>
+                <?=$this->leaves['ImageUpload']?>
+            </div>
+        </form>
         <?php
 
         $this->printFieldset(
             '',
             [
-                'Name',
                 'Description',
-                'VariationDescription',
-                'Price',
-                'AmountAvailable',
-                'Category'      => 'CategoryID',
-                'Upload Images' => 'ImageUpload',
                 'ShippingTypes',
                 'Properties'
             ]

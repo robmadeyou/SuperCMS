@@ -26,18 +26,18 @@ class ProductsEdit extends CrudLeaf
     {
         $model = new ProductsEditModel();
 
-        $model->ChangeProductVariationEvent->attachHandler(function($id) {
+        $model->ChangeProductVariationEvent->attachHandler(function($lastId, $id) {
             try {
-                $this->saveVariation(new ProductVariation($this->model->selectedVariation['ProductVariationID']));
+                $this->saveVariation(new ProductVariation($lastId));
                 $this->setSelectedVariation(new ProductVariation($id));
                 $this->reRender();
             } catch (RecordNotFoundException $ex) {}
         });
 
-        $model->AddNewProductEvent->attachHandler(function() {
+        $model->AddNewProductEvent->attachHandler(function($lastId) {
             try
             {
-                $this->saveVariation(new ProductVariation($this->model->selectedVariation['ProductVariationID']));
+                $this->saveVariation(new ProductVariation($lastId));
             } catch (RecordNotFoundException $ex) {}
             $variation = new ProductVariation();
             $variation->ProductID = $this->model->restModel->ProductID;
@@ -68,6 +68,7 @@ class ProductsEdit extends CrudLeaf
 
     public function setSelectedVariation(ProductVariation $variation) {
         $this->model->selectedVariation = $variation;
+        $this->model->selectedVariationId = $variation->UniqueIdentifier;
         $this->model->Name = $variation->Name;
         $this->model->Price = $variation->Price;
         $this->model->AmountAvailable = $variation->AmountAvailable;

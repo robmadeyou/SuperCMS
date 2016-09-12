@@ -1,4 +1,4 @@
-var dropDown = function (leafPath) {
+var bridge = function (leafPath) {
 	window.rhubarb.viewBridgeClasses.ViewBridge.apply(this, arguments);
 };
 
@@ -10,23 +10,19 @@ bridge.prototype.attachEvents = function () {
 	var firstTab = $('.nav-bar-tabs-first');
 	var self = this;
 
-	var priceInput = $('#' + this.leafPath + '_Price');
-	var amountAvaiable = $('#' + this.leafPath + '_AmountAvailable');
-	var description = $('#' + this.leafPath + '_Description');
-	var properties = $('#' + this.leafPath );
-
 	$('.product-variation-tab').click(function(event) {
-
+		var lastSelected = $('.product-list-tabs.active a').data('id');
 		changeTab($(this).parent());
 
-		self.raiseServerEvent('ChangeProductVariation', $(this).data('id'));
-
+		self.raiseServerEvent('ChangeProductVariation', lastSelected, $(this).data('id'));
 		event.preventDefault();
 		return false;
 	});
 
 	$('#tab-add-button').click(function(){
-		self.raiseServerEvent('AddNewProduct');
+		var lastSelected = $('.product-list-tabs.active a').data('id');
+
+		self.raiseServerEvent('AddNewProduct', lastSelected);
 	});
 
 	function changeTab(tab) {
