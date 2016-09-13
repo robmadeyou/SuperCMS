@@ -37,6 +37,7 @@ class ApplicationDemoDataSeeder implements DemoDataSeederInterface
         $admin->Email = 'admin@test.com';
         $admin->Username = 'admin@test.com';
         $admin->Enabled = true;
+        $admin->RoleID = 2;
         $admin->setNewPassword('test');
         $admin->addToRole(self::$roleAdmin);
         $admin->save();
