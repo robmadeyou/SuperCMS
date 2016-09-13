@@ -2,17 +2,20 @@
 
 namespace SuperCMS\Controls\Dropzone;
 
-use Rhubarb\Crown\Exceptions\ForceResponseException;
 use Rhubarb\Crown\Request\Request;
 use Rhubarb\Crown\Request\WebRequest;
-use Rhubarb\Crown\Response\FileResponse;
-use Rhubarb\Crown\Response\NotAuthorisedResponse;
 use Rhubarb\Leaf\Controls\Common\FileUpload\SimpleFileUpload;
 use Rhubarb\Leaf\Controls\Common\FileUpload\UploadedFileDetails;
-use SuperCMS\Response\ImageErrorResponse;
+use Rhubarb\Stem\Filters\Equals;
+use SuperCMS\Models\Product\ProductImage;
 
 class Dropzone extends SimpleFileUpload
 {
+    /**
+     * @var DropzoneModel $model
+     */
+    protected $model;
+
     protected function getViewClass()
     {
         return DropzoneView::class;
@@ -46,8 +49,14 @@ class Dropzone extends SimpleFileUpload
             }
         }
 
+        if ($request->post('_leafEventName') == 'FilesUploaded') {
+            $this->model->FilesUploadedEvent->raise(json_decode($request->post('_leafEventArguments')[ 0 ]));
+        }
+
         return $response;
     }
+
+    public $FilesUploadedEvent = null;
 
     protected function createModel()
     {
@@ -59,6 +68,35 @@ class Dropzone extends SimpleFileUpload
             $model->postUrl = $req->urlPath;
         }
 
+        $model->FilesUploadedEvent->attachHandler(function ($path) {
+            preg_match('/variation=[0-9]+/', $path, $matches);
+            if (isset($matches[0])) {
+                $id = str_replace('variation=', '', $matches[0]);
+                $images = [];
+                foreach (ProductImage::find(new Equals('ProductVariationID', $id)) as $image) {
+                    $images[] = new UploadedFileDetails($image->ProductImageID, $image->ImagePath);
+                }
+                $this->setUploadedFiles($images);
+                $this->reRender();
+            }
+        });
+
         return $model;
+    }
+
+    /**
+     * @param UploadedFileDetails[] $files
+     */
+    public function setUploadedFiles($files)
+    {
+        $this->model->uploadedFiles = $files;
+    }
+
+    public function setPostParams($param)
+    {
+        $req = Request::current();
+        if (isset( $req->urlPath )) {
+            $this->model->postUrl = $req->urlPath . $param;
+        }
     }
 }

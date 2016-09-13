@@ -287,7 +287,9 @@ input:checked + .slider:before {
 	display: inline-block;
 	vertical-align: top;
 	margin: 16px;
-	min-height: 100px; }
+	min-height: 100px;
+	border: 1px solid blue;
+}
 .file-input .dz-preview:hover {
 	z-index: 1000; }
 .file-input .dz-preview:hover .dz-details {
@@ -478,4 +480,15 @@ input:checked + .slider:before {
 
 .chosen-container {
 	width: 100%;!important;
+}
+
+.input-group-breaker {
+	height: 1px;
+	border-top: 1px solid #337ab7;
+	width: 100%;
+	margin-bottom: 16px;
+}
+
+.panel-primary {
+	position: relative;
 }

@@ -7,6 +7,15 @@ dropDown.prototype.constructor = dropDown;
 
 dropDown.prototype.attachEvents = function () {
 	$('#' + this.leafPath).chosen();
+
+	resizeChosen();
+	jQuery(window).on('resize', resizeChosen);
+
+	function resizeChosen() {
+		$(".chosen-container").each(function() {
+			$(this).attr('style', 'width: 100%');
+		});
+	}
 };
 
 selectionControl.prototype.getValue = function () {

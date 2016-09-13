@@ -4,9 +4,11 @@ namespace SuperCMS\Leaves\Admin\Products;
 
 use Rhubarb\Crown\Settings\HtmlPageSettings;
 use Rhubarb\Leaf\Controls\Common\FileUpload\SimpleFileUpload;
+use Rhubarb\Leaf\Controls\Common\FileUpload\UploadedFileDetails;
 use Rhubarb\Leaf\Controls\Common\Text\TextArea;
 use Rhubarb\Leaf\Controls\Common\Text\TextBox;
 use Rhubarb\Leaf\Leaves\LeafDeploymentPackage;
+use Rhubarb\Stem\Filters\Equals;
 use SuperCMS\Controls\Category\CategoryDropdown;
 use SuperCMS\Controls\Dropzone\Dropzone;
 use SuperCMS\Controls\HtmlEditor\HtmlEditor;
@@ -15,6 +17,7 @@ use SuperCMS\Controls\Shipping\ShippingMultiSelection;
 use SuperCMS\Controls\ToggleSwitch\ToggleSwitch;
 use SuperCMS\Models\Product\Product;
 use SuperCMS\Models\Product\ProductImage;
+use SuperCMS\Models\Product\ProductVariation;
 use SuperCMS\Views\SuperCMSCrudView;
 
 class ProductsEditView extends SuperCMSCrudView
@@ -46,7 +49,7 @@ class ProductsEditView extends SuperCMSCrudView
         $properties->setInputClasses(['form-control']);
 
         $imageUpload->fileUploadedEvent->attachHandler(function ($data) {
-            ProductImage::createImageForProduct($this->model->restModel->getDefaultProductVariation(), $data);
+            ProductImage::createImageForProduct(new ProductVariation($_GET['variation']), $data);
         });
 
         $this->bootstrapInputs();
@@ -57,49 +60,12 @@ class ProductsEditView extends SuperCMSCrudView
         $settings = HtmlPageSettings::singleton();
         $settings->pageTitle = 'Editing Product';
 
-        ?>
-        <ul class="nav nav-pills nav-justified">
-            <?php
-            foreach ($this->model->restModel->Variations as $variation) {
-                $class = ( $variation->UniqueIdentifier == $this->model->selectedVariation->UniqueIdentifier ? 'active nav-bar-tabs-first' : '' );
-                print '<li role="presentation" class="' . $class . ' product-list-tabs" ><a href="#" class="product-variation-tab" data-id="' . $variation->UniqueIdentifier . '">' . $variation->Name . '</a></li>';
-            }
-            ?>
-            <li role="presentation" class="product-list-tabs" id="tab-add-button"><p>&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span></p></li>
-        </ul>
-        <form>
-            <div class="form-group">
-                <label>Name</label>
-                <?=$this->leaves['Name']?>
-            </div>
-            <div class="form-group">
-                <label>Category</label>
-                <?=$this->leaves['CategoryID']?>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Price</label>
-                        <?=$this->leaves['Price']?>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Amount Available</label>
-                        <?=$this->leaves['AmountAvailable']?>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Short</label>
-                <?=$this->leaves['VariationDescription']?>
-            </div>
-            <div class="form-group">
-                <label>Images</label>
-                <?=$this->leaves['ImageUpload']?>
-            </div>
-        </form>
-        <?php
+        $images = [];
+        foreach (ProductImage::find(new Equals('ProductVariationID', $this->model->selectedVariation->UniqueIdentifier)) as $image) {
+            $images[] = new UploadedFileDetails($image->ProductImageID, $image->ImagePath);
+        }
+        $this->leaves['ImageUpload']->setUploadedFiles($images);
+        $this->leaves['ImageUpload']->setPostParams('?variation=' . $this->model->selectedVariation->UniqueIdentifier);
 
         $this->printFieldset(
             '',
@@ -109,6 +75,51 @@ class ProductsEditView extends SuperCMSCrudView
                 'Properties'
             ]
         );
+        ?>
+        <div class="input-group-breaker"></div>
+        <ul class="nav nav-pills">
+            <?php
+            foreach ($this->model->restModel->Variations as $variation) {
+                $class = ( $variation->UniqueIdentifier == $this->model->selectedVariation->UniqueIdentifier ? 'active nav-bar-tabs-first' : '' );
+                print '<li role="presentation" class="' . $class . ' product-list-tabs" ><a href="#" class="product-variation-tab" data-id="' . $variation->UniqueIdentifier . '">' . $variation->Name . '</a></li>';
+            }
+            ?>
+            <li role="presentation" class="product-list-tabs" id="tab-add-button"><p>&nbsp;&nbsp;<span
+                        class="glyphicon glyphicon-plus"></span></p></li>
+        </ul>
+        <form>
+            <div class="form-group">
+                <label>Name</label>
+                <?= $this->leaves[ 'Name' ] ?>
+            </div>
+            <div class="form-group">
+                <label>Category</label>
+                <?= $this->leaves[ 'CategoryID' ] ?>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Price</label>
+                        <?= $this->leaves[ 'Price' ] ?>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Amount Available</label>
+                        <?= $this->leaves[ 'AmountAvailable' ] ?>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Short Description</label>
+                <?= $this->leaves[ 'VariationDescription' ] ?>
+            </div>
+            <div class="form-group">
+                <label>Images</label>
+                <?= $this->leaves[ 'ImageUpload' ] ?>
+            </div>
+        </form>
+        <?php
     }
 
     protected function printLeftButtons()
@@ -125,6 +136,7 @@ class ProductsEditView extends SuperCMSCrudView
     {
         $package = new LeafDeploymentPackage();
         $package->resourcesToDeploy[] = __DIR__ . '/' . $this->getViewBridgeName() . '.js';
+
         return $package;
     }
 
