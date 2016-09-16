@@ -12,9 +12,6 @@ use Rhubarb\Stem\Schema\Columns\AutoIncrementColumn;
 use Rhubarb\Stem\Schema\Columns\BooleanColumn;
 use Rhubarb\Stem\Schema\Columns\CommaSeparatedListColumn;
 use Rhubarb\Stem\Schema\Columns\ForeignKeyColumn;
-use Rhubarb\Stem\Schema\Columns\IntegerColumn;
-use Rhubarb\Stem\Schema\Columns\JsonColumn;
-use Rhubarb\Stem\Schema\Columns\StringColumn;
 
 /**
  *

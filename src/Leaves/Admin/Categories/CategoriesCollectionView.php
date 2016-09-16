@@ -3,7 +3,6 @@
 namespace SuperCMS\Leaves\Admin\Categories;
 
 use Rhubarb\Leaf\Table\Leaves\Table;
-use Rhubarb\Stem\Filters\Equals;
 use SuperCMS\Models\Product\Category;
 use SuperCMS\Views\SuperCMSCollectionView;
 
