@@ -33,8 +33,9 @@ body .body #top-banner
 
 body .body #top-banner
 {
-    background-image: url('http://placekitten.com/1300/300');
+    background-image: url('/static/images/title.png');
     background-position: center;
+    background-size:cover;
 }
 
 body .body #top-banner .top-banner-bottom-buttons
@@ -61,8 +62,8 @@ body .body #top-banner .top-banner-bottom-buttons div .btn
 body .body #top-banner .top-banner-bottom-buttons div .btn:hover
 {
     color: #ffffff;
-    background-color: #FF47BB;
-    border-color: #FF47BB;
+    background-color: #feb1e4;
+    border-color: #feb1e4;
 }
 
 body .body #top-banner .top-banner-bottom-buttons div .btn:first-child
@@ -96,7 +97,7 @@ body .body #top-banner .banner-border
     left: 6px;
     right: 6px;
     bottom: 6px;
-    border: dashed 1px #FF47BB;
+    border: dashed 1px #feb1e4;
     pointer-events: none;
 }
 

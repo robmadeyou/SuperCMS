@@ -13,6 +13,7 @@ class AdminLayout extends SuperCMSDefaultLayout
         parent::__construct();
 
         ResourceLoader::loadResource('/static/css/admin.css');
+        ResourceLoader::loadResource('/static/js/bootstrap.min.js');
     }
 
     protected function printPageHeading()
