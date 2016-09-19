@@ -25,6 +25,7 @@ use Rhubarb\Stem\Schema\Columns\StringColumn;
  * @property float $Price Repository field
  * @property-read Product $Product Relationship
  * @property-read ProductImage[]|\Rhubarb\Stem\Collections\RepositoryCollection $Images Relationship
+ * @property int $Quantity Repository field
  */
 class ProductVariation extends Model
 {
@@ -37,9 +38,11 @@ class ProductVariation extends Model
             new StringColumn('Name', 50),
             new ForeignKeyColumn('ProductID'),
             new IntegerColumn('AmountAvailable'),
+            new IntegerColumn('Quantity'),
             new MySqlMediumTextColumn('Description'),
             new JsonColumn('Properties'),
-            new MoneyColumn('Price')
+            new MoneyColumn('Price'),
+            new IntegerColumn('Quantity')
         );
 
         return $model;

@@ -69,7 +69,7 @@ class ProductsEdit extends CrudLeaf
     public function setSelectedVariation(ProductVariation $variation) {
         $this->model->selectedVariation = $variation;
         $this->model->selectedVariationId = $variation->UniqueIdentifier;
-        $this->model->Name = $variation->Name;
+        $this->model->VariationName = $variation->Name;
         $this->model->Price = $variation->Price;
         $this->model->AmountAvailable = $variation->AmountAvailable;
         $this->model->VariationDescription = $variation->Description;
@@ -97,7 +97,7 @@ class ProductsEdit extends CrudLeaf
      */
     private function saveVariation(ProductVariation $variation)
     {
-        $variation->Name = $this->model->Name;
+        $variation->Name = $this->model->VariationName;
         $variation->Price = $this->model->Price;
         $variation->AmountAvailable = $this->model->AmountAvailable;
         $variation->Description = $this->model->VariationDescription;

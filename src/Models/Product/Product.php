@@ -12,6 +12,7 @@ use Rhubarb\Stem\Schema\Columns\AutoIncrementColumn;
 use Rhubarb\Stem\Schema\Columns\BooleanColumn;
 use Rhubarb\Stem\Schema\Columns\CommaSeparatedListColumn;
 use Rhubarb\Stem\Schema\Columns\ForeignKeyColumn;
+use Rhubarb\Stem\Schema\Columns\StringColumn;
 
 /**
  *
@@ -28,6 +29,7 @@ use Rhubarb\Stem\Schema\Columns\ForeignKeyColumn;
  * @property-read ProductVariation[]|\Rhubarb\Stem\Collections\RepositoryCollection $Variations Relationship
  * @property-read Category $Category Relationship
  * @property-read mixed $DefaultProductVariation {@link getDefaultProductVariation()}
+ * @property string $Name Repository field
  */
 class Product extends Model
 {
@@ -37,6 +39,7 @@ class Product extends Model
 
         $schema->addColumn(
             new AutoIncrementColumn('ProductID'),
+            new StringColumn('Name', 255),
             new MySqlMediumTextColumn('Description'),
             new ForeignKeyColumn('CategoryID'),
             new CommaSeparatedListColumn('ShippingTypes'),

@@ -32,7 +32,7 @@ class ProductsEditView extends SuperCMSCrudView
         parent::createSubLeaves();
 
         $this->registerSubLeaf(
-            new TextBox('Name'),
+            new TextBox('VariationName'),
             new HtmlEditor('Description'),
             new HtmlEditor('VariationDescription'),
             new TextBox('Price'),
@@ -90,7 +90,7 @@ class ProductsEditView extends SuperCMSCrudView
         <form>
             <div class="form-group">
                 <label>Name</label>
-                <?= $this->leaves[ 'Name' ] ?>
+                <?= $this->leaves[ 'VariationName' ] ?>
             </div>
             <div class="form-group">
                 <label>Category</label>
