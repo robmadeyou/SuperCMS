@@ -32,6 +32,7 @@ class ProductsEditView extends SuperCMSCrudView
         parent::createSubLeaves();
 
         $this->registerSubLeaf(
+            new TextBox('Name'),
             new TextBox('VariationName'),
             new HtmlEditor('Description'),
             new HtmlEditor('VariationDescription'),
@@ -70,6 +71,7 @@ class ProductsEditView extends SuperCMSCrudView
         $this->printFieldset(
             '',
             [
+                'Name',
                 'Description',
                 'ShippingTypes',
                 'Properties'
