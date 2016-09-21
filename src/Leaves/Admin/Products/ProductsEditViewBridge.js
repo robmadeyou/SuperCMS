@@ -31,7 +31,7 @@ bridge.prototype.attachEvents = function () {
 		tab.addClass('active');
 	}
 
-	$('#' + this.leafPath + '_Name').keyup(function(){
+	$('#' + this.leafPath + '_VariationName').keyup(function(){
 		firstTab.find('a').html($(this).val());
 	});
 };
