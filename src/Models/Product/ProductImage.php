@@ -41,6 +41,7 @@ class ProductImage extends Model
             $uploadPath = __DIR__ . '/../../../static/images/products/' . $product->ProductID . '/' . $product->UniqueIdentifier . '/';
             if (!is_dir($uploadPath)) {
                 mkdir($uploadPath, 777, true);
+                chmod($uploadPath, 0777);
             }
 
             $finalLocation = $uploadPath . sha1($product->UniqueIdentifier) . '-' . $uploadData->originalFilename;
