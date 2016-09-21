@@ -56,13 +56,14 @@ class Product extends Model
             $this->save();
         }
 
-        if ($this->Variations->count() == 0) {
+        $variations = ProductVariation::find(new Equals('ProductID', $this->UniqueIdentifier));
+        if ($variations->count() == 0) {
             $v = new ProductVariation();
             $v->ProductID = $this->UniqueIdentifier;
             $v->save();
             return $v;
         } else {
-            return $this->Variations[0];
+            return $variations[0];
         }
     }
 
@@ -70,7 +71,7 @@ class Product extends Model
     {
         parent::afterSave();
 
-        if (!$this->Variations->count()) {
+        if (!$this->Variations->count() && !isset($this->Importing)) {
             $this->getDefaultProductVariation();
         }
     }

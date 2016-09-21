@@ -11,6 +11,7 @@ foreach($products as $product) {
     $pObj->Live = $product->Live;
     $pObj->CategoryID = getCategory($product->Category);
     $pObj->Description = $product->Description;
+    $pObj->Importing = true;
     $pObj->save();
 
     foreach($product->Variations as $variation) {
