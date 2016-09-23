@@ -44,6 +44,7 @@ class DropzoneView extends SimpleFileUploadView
 
     private function printUploadedImage(UploadedFileDetails $image)
     {
+        $imgName = pathinfo($image->tempFilename, PATHINFO_FILENAME);
         print <<<HTML
             <div class="dz-preview dz-processing dz-image-preview"">
                 <div class="dz-image">
@@ -54,7 +55,7 @@ class DropzoneView extends SimpleFileUploadView
                             <strong>0.5</strong> MB</span>
                     </div>
                     <div class="dz-filename">
-                        <span data-dz-name="">{Name}</span>
+                        <span data-dz-name="">{$imgName}</span>
                     </div>
                 </div>
                 <div class="dz-success-mark">

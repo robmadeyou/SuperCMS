@@ -16,8 +16,8 @@ class SuperCMSEventPagerView extends EventPagerView
     /**
      * CSS Classes for pager HTML elements
      */
-    public $firstPageCssClass = 'first';
-    public $selectedPageCssClass = 'selected';
+    public $firstPageCssClass = '';
+    public $selectedPageCssClass = 'active';
     public $pageCssClass = 'pager-item';
     public $pagerBufferCssClass = 'pager-buffer';
     public $containerCssClass = '';

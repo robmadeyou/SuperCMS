@@ -26,7 +26,7 @@ bridge.prototype.attachEvents = function () {
 	});
 
 	function changeTab(tab) {
-		$('.active').removeClass('active');
+		$('#' + this.leaftPath + ' .active').removeClass('active');
 
 		tab.addClass('active');
 	}
