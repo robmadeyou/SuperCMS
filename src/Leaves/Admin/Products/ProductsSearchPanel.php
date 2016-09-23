@@ -7,9 +7,15 @@ use Rhubarb\Leaf\Controls\Common\Text\TextBox;
 use Rhubarb\Leaf\SearchPanel\Leaves\SearchPanel;
 use Rhubarb\Stem\Filters\Contains;
 use Rhubarb\Stem\Filters\Group;
+use SuperCMS\Views\SuperCMSSearchPanelView;
 
 class ProductsSearchPanel extends SearchPanel
 {
+    protected function getViewClass()
+    {
+        return SuperCMSSearchPanelView::class;
+    }
+
     protected function createSearchControls()
     {
         $name = new TextBox('Name');

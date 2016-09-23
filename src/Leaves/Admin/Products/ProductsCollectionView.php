@@ -21,9 +21,9 @@ class ProductsCollectionView extends SuperCMSCollectionView
         $table->addCssClassNames('table', 'table-striped');
         $table->columns = [
             'Name',
-            'Cost',
-            'AmountAvailable',
-            '' => '<a href="{ProductID}/edit/" class="btn btn-default">Edit</a>',
+            'Live',
+            'Category.Name',
+            '' => '<a href="{ProductID}/edit/" class="btn btn-default"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>',
         ];
 
         $search->bindEventsWith($table);

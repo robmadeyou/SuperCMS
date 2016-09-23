@@ -12,27 +12,14 @@ use Rhubarb\Leaf\Crud\Leaves\CrudView;
 abstract class SuperCMSCrudView extends CrudView
 {
 
+    use BootstrapViewTrait;
+
     protected function createSubLeaves()
     {
         parent::createSubLeaves();
 
         $this->leaves[ 'Save' ]->addCssClassNames('btn-success');
         $this->leaves[ 'Cancel' ]->addCssClassNames('btn-default');
-    }
-
-    protected function bootstrapInputs()
-    {
-        foreach ($this->leaves as $leaf) {
-            if ($leaf instanceof Button) {
-                $leaf->addCssClassNames('btn');
-            } else if ($leaf instanceof TextBox) {
-                $leaf->addCssClassNames('form-control');
-            } else if ($leaf instanceof Checkbox) {
-                $leaf->addCssClassNames('checkbox');
-            } else if ($leaf instanceof DropDown) {
-                $leaf->addCssClassNames('form-control');
-            }
-        }
     }
 
     protected function printViewContent()

@@ -6,18 +6,14 @@ use Rhubarb\Leaf\Views\View;
 
 abstract class SuperCMSCollectionView extends View
 {
+    use BootstrapViewTrait;
+
     protected function printViewContent()
     {
         ?>
         <div>
             <?php $this->getTopFunctionBar() ?>
-            <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
-                    <?php $this->printBody() ?>
-                </div>
-                <div class="col-md-2"></div>
-            </div>
+            <?php $this->printBody() ?>
         </div>
         <?php
     }

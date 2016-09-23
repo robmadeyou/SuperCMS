@@ -10,6 +10,7 @@ use Rhubarb\Crown\LoginProviders\LoginProvider;
 use Rhubarb\Crown\String\StringTools;
 use Rhubarb\Crown\UrlHandlers\ClassMappedUrlHandler;
 use Rhubarb\Leaf\LeafModule;
+use Rhubarb\Leaf\Paging\Leaves\EventPagerView;
 use Rhubarb\Scaffolds\Authentication\Leaves\LoginView;
 use Rhubarb\Scaffolds\AuthenticationWithRoles\AuthenticationWithRolesModule;
 use Rhubarb\Scaffolds\NavigationMenu\NavigationMenuModule;
@@ -42,6 +43,7 @@ use SuperCMS\UrlHandlers\AdminClassMappedUrlHandler;
 use SuperCMS\UrlHandlers\AdminCrudUrlHandler;
 use SuperCMS\UrlHandlers\CategoryUrlHandler;
 use SuperCMS\UrlHandlers\ProductUrlHandler;
+use SuperCMS\Views\SuperCMSEventPagerView;
 
 /**
  * Class SuperCMS
@@ -69,6 +71,7 @@ class SuperCMS extends Application
         HashProvider::setProviderClassName(Sha512HashProvider::class);
 
         $this->container()->registerClass(LoginView::class, SuperCMSLoginView::class);
+        $this->container()->registerClass(EventPagerView::class, SuperCMSEventPagerView::class);
     }
 
     protected function registerUrlHandlers()
