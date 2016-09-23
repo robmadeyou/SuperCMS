@@ -58,7 +58,7 @@ class ProductsEditView extends SuperCMSCrudView
 
         $products = [];
         foreach(Product::find(new Not(new Equals('tblProductID', $this->model->restModel->UniqueIdentifier))) as $product) {
-            $products = [$product->UniqueIdentifier, $product->Name];
+            $products[] = [$product->UniqueIdentifier, $product->Name];
         }
         $relatedProducts->setSelectionItems($products);
 
