@@ -30,6 +30,7 @@ use Rhubarb\Stem\Schema\Columns\StringColumn;
  * @property-read Category $Category Relationship
  * @property-read mixed $DefaultProductVariation {@link getDefaultProductVariation()}
  * @property string $Name Repository field
+ * @property string[] $RelatedProductIDs Repository field
  */
 class Product extends Model
 {
@@ -44,7 +45,8 @@ class Product extends Model
             new ForeignKeyColumn('CategoryID'),
             new CommaSeparatedListColumn('ShippingTypes'),
             new BooleanColumn('Live'),
-            new BooleanColumn('Visible', false)
+            new BooleanColumn('Visible', false),
+            new CommaSeparatedListColumn('RelatedProductIDs', 500, [], true)
         );
 
         return $schema;

@@ -19,7 +19,7 @@ class SCmsSolutionSchema extends SolutionSchema
     {
         parent::__construct();
 
-        $this->addModel('Product', Product::class, 1.26);
+        $this->addModel('Product', Product::class, 1.27);
         $this->addModel('ProductImage', ProductImage::class);
         $this->addModel('ProductVariation', ProductVariation::class, 1.02);
         $this->addModel('Comment', Comment::class);

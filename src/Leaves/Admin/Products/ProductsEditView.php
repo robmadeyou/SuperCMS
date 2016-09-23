@@ -9,7 +9,9 @@ use Rhubarb\Leaf\Controls\Common\Text\TextArea;
 use Rhubarb\Leaf\Controls\Common\Text\TextBox;
 use Rhubarb\Leaf\Leaves\LeafDeploymentPackage;
 use Rhubarb\Stem\Filters\Equals;
+use Rhubarb\Stem\Filters\Not;
 use SuperCMS\Controls\Category\CategoryDropdown;
+use SuperCMS\Controls\Chosen\MultiSelect\ChosenMultiSelect;
 use SuperCMS\Controls\Dropzone\Dropzone;
 use SuperCMS\Controls\HtmlEditor\HtmlEditor;
 use SuperCMS\Controls\KeyValue\KeyValue;
@@ -39,6 +41,7 @@ class ProductsEditView extends SuperCMSCrudView
             new TextBox('Price'),
             new TextBox('AmountAvailable'),
             new CategoryDropdown('CategoryID'),
+            $relatedProducts = new ChosenMultiSelect('RelatedProductIDs'),
             $imageUpload = new Dropzone('ImageUpload'),
             $properties = new KeyValue('Properties'),
             new ShippingMultiSelection('ShippingTypes'),
@@ -52,6 +55,12 @@ class ProductsEditView extends SuperCMSCrudView
         $imageUpload->fileUploadedEvent->attachHandler(function ($data) {
             ProductImage::createImageForProduct(new ProductVariation($_GET['variation']), $data);
         });
+
+        $products = [];
+        foreach(Product::find(new Not(new Equals('tblProductID', $this->model->restModel->UniqueIdentifier))) as $product) {
+            $products = [$product->UniqueIdentifier, $product->Name];
+        }
+        $relatedProducts->setSelectionItems($products);
 
         $this->bootstrapInputs();
     }
@@ -74,7 +83,8 @@ class ProductsEditView extends SuperCMSCrudView
                 'Name',
                 'Description',
                 'ShippingTypes',
-                'Properties'
+                'RelatedProductIDs',
+                'Properties',
             ]
         );
         ?>
