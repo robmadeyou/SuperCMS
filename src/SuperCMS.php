@@ -3,10 +3,12 @@
 namespace SuperCMS;
 
 use Rhubarb\Crown\Application;
+use Rhubarb\Crown\DependencyInjection\Container;
 use Rhubarb\Crown\Encryption\HashProvider;
 use Rhubarb\Crown\Encryption\Sha512HashProvider;
 use Rhubarb\Crown\Layout\LayoutModule;
 use Rhubarb\Crown\LoginProviders\LoginProvider;
+use Rhubarb\Crown\Module;
 use Rhubarb\Crown\String\StringTools;
 use Rhubarb\Crown\UrlHandlers\ClassMappedUrlHandler;
 use Rhubarb\Leaf\LeafModule;
@@ -50,17 +52,26 @@ use SuperCMS\Views\SuperCMSEventPagerView;
  * @package SuperCMS
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-class SuperCMS extends Application
+class SuperCMS extends Module
 {
+    /**
+     * @var Container
+     */
+    protected $container;
+
+    /**
+     * @param Container $container
+     */
+    public function __construct(Container $container)
+    {
+        parent::__construct();
+
+        $this->container = $container;
+    }
+
     protected function initialise()
     {
         parent::initialise();
-
-        if (file_exists(APPLICATION_ROOT_DIR . "/settings/site.config.php")) {
-            include_once(APPLICATION_ROOT_DIR . "/settings/site.config.php");
-        }
-
-        $this->developerMode = true;
 
         Repository::setDefaultRepositoryClassName(MySql::class);
 
@@ -70,8 +81,8 @@ class SuperCMS extends Application
 
         HashProvider::setProviderClassName(Sha512HashProvider::class);
 
-        $this->container()->registerClass(LoginView::class, SuperCMSLoginView::class);
-        $this->container()->registerClass(EventPagerView::class, SuperCMSEventPagerView::class);
+        $this->container->registerClass(LoginView::class, SuperCMSLoginView::class);
+        $this->container->registerClass(EventPagerView::class, SuperCMSEventPagerView::class);
     }
 
     protected function registerUrlHandlers()

@@ -18,28 +18,17 @@
         "rhubarbphp/module-patterns": "dev-develop",
         "rhubarbphp/module-stem": "1.2.2",
         "rhubarbphp/module-leaf": "*",
-        "rhubarbphp/module-jsvalidation": "dev-master as 1.0.0",
         "rhubarbphp/module-leaf-common-controls": "dev-master as 1.0.x-dev",
         "rhubarbphp/module-leaf-search-panel": "^1.0.0",
         "rhubarbphp/module-leaf-tabs": "^1.0.0",
         "rhubarbphp/module-leaf-table": "dev-master",
         "rhubarbphp/module-leaf-crud": "^1.0.0",
         "rhubarbphp/rhubarb": "dev-master as 1.1.3",
-        "rhubarbphp/module-postmark-email": "^1.0.0",
         "rhubarbphp/scaffold-repository-log": "dev-master",
         "twbs/bootstrap": "^3.3"
     },
     "require-dev": {
-        "rhubarbphp/custard": "^1.0.7",
-        "squizlabs/php_codesniffer": "*",
-        "phploc/phploc": "*",
-        "theseer/phpdox": "*",
-        "phpmd/phpmd": "*",
-        "sebastian/phpcpd": "*",
-        "pdepend/pdepend": "*",
-        "codeception/codeception": "2.1.8",
-        "fzaninotto/faker": "*",
-        "site5/phantoman": "^1.1.0"
+        "rhubarbphp/custard": "^1.0.7"
     },
     "config": {
         "bin-dir": "bin/"
