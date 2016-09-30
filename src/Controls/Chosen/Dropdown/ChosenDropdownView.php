@@ -23,7 +23,7 @@ class ChosenDropdownView extends DropDownView
     protected function getAdditionalResourceUrls()
     {
         return [
-            '/static/chosen/chosen.min.css'
+            '/files/css/chosen/chosen.min.css'
         ];
     }
 }

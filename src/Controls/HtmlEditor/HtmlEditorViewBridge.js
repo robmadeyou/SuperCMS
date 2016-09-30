@@ -9,7 +9,7 @@ bridge.prototype.attachEvents = function () {
 
     var self = this;
 
-    tinymce.baseURL = '/static/js/tinymce';
+    tinymce.baseURL = '/files/js/tinymce';
     tinymce.init(
         {
             selector: '#' + this.leafPath,

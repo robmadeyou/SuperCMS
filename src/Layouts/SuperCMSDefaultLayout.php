@@ -9,9 +9,9 @@ class SuperCMSDefaultLayout extends BaseLayout
 {
     public function __construct()
     {
-        ResourceLoader::loadResource("/static/css/bootstrap.min.css");
-        ResourceLoader::loadResource("/static/css/general.css");
-        ResourceLoader::loadResource("/static/css/daterangepicker.min.css");
-        ResourceLoader::loadResource("/static/css/font-awesome.min.css");
+        ResourceLoader::loadResource("/files/css/?p=bootstrap.min.css");
+        ResourceLoader::loadResource("/files/css/?p=general.css");
+        ResourceLoader::loadResource("/files/css/?p=daterangepicker.min.css");
+        ResourceLoader::loadResource("/files/css/?p=font-awesome.min.css");
     }
 }

@@ -31,6 +31,9 @@ use SuperCMS\Leaves\Admin\Products\ProductsCollection;
 use SuperCMS\Leaves\Admin\ShippingType\ShippingTypeCollection;
 use SuperCMS\Leaves\Errors\Error403;
 use SuperCMS\Leaves\Errors\Error404;
+use SuperCMS\Leaves\Files\CssResponse;
+use SuperCMS\Leaves\Files\FontsResource;
+use SuperCMS\Leaves\Files\JsResource;
 use SuperCMS\Leaves\Index;
 use SuperCMS\Leaves\Site\Category\CategoryCollection;
 use SuperCMS\Leaves\Site\Product\ProductCollection;
@@ -102,6 +105,9 @@ class SuperCMS extends Module
                     'category/' => new CategoryUrlHandler(Category::class, StringTools::getNamespaceFromClass(CategoryCollection::class), [], [
                         'product/' => new ProductUrlHandler(Product::class, StringTools::getNamespaceFromClass(ProductCollection::class))
                     ]),
+                    'files/css/' => new ClassMappedUrlHandler(CssResponse::class),
+                    'files/js/' => new ClassMappedUrlHandler(JsResource::class),
+                    'files/fonts/' => new ClassMappedUrlHandler(FontsResource::class),
                     '404/' => new ClassMappedUrlHandler(Error404::class),
                     '403/' => new ClassMappedUrlHandler(Error403::class)
                 ])
