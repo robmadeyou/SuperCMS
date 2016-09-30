@@ -38,7 +38,7 @@ class ProductImage extends Model
         $obj->ProductVariationID = $product->UniqueIdentifier;
 
         if ($uploadData) {
-            $uploadPath = __DIR__ . '/../../../static/images/products/' . $product->ProductID . '/' . $product->UniqueIdentifier . '/';
+            $uploadPath = APPLICATION_ROOT_DIR . '/static/images/products/' . $product->ProductID . '/' . $product->UniqueIdentifier . '/';
             if (!is_dir($uploadPath)) {
                 mkdir($uploadPath, 777, true);
                 chmod($uploadPath, 0777);
