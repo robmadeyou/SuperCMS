@@ -39,22 +39,6 @@ class DefaultLayout extends SuperCMSDefaultLayout
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <?php
-                    foreach (Category::find(new Equals('ParentCategoryID', 0)) as $category) {
-                        $children = '';
-                        foreach ($category->ChildCategories as $childCategory) {
-
-                        }
-
-                        if ($children) {
-                            $category .= <<<HTML
-                            <div class="dropdown-menu">{$children}</div>
-HTML;
-                        }
-    
-                        print <<<HTML
-                        <li class="dropdown"><a href="/category/{$category->SeoSafeName}/">{$category->Name}</a></li>
-HTML;
-                    }
                 ?>
             </ul>
         </div>

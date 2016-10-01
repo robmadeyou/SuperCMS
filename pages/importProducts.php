@@ -1,7 +1,7 @@
 <?php
 
-include_once(__DIR__ . '/../vendor/rhubarbphp/rhubarb/platform/execute-cli.php');
-$products = json_decode(file_get_contents('./exportedProducts.json'));
+include_once(__DIR__ . '/../../../../vendor/rhubarbphp/rhubarb/platform/execute-cli.php');
+$products = json_decode(file_get_contents( __DIR__ . '/exportedProducts.json'));
 
 $categories = [];
 

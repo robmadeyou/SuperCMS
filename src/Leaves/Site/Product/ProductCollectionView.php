@@ -22,7 +22,6 @@ class ProductCollectionView extends View
         $table->addCssClassNames('table');
         $table->columns = [
             'Name',
-
         ];
     }
 
