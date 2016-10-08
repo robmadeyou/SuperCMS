@@ -59,7 +59,7 @@ class Product extends Model
             $this->save();
         }
 
-        $variations = ProductVariation::find(new Equals('ProductID', $this->UniqueIdentifier));
+        $variations = $this->Variations;
         if ($variations->count() == 0) {
             $v = new ProductVariation();
             $v->ProductID = $this->UniqueIdentifier;
@@ -68,6 +68,15 @@ class Product extends Model
         } else {
             return $variations[0];
         }
+    }
+
+    public function getDefaultImage()
+    {
+        $variation = $this->getDefaultProductVariation();
+        if(isset($variation->Images[0])) {
+            return $variation->Images[0]->ImagePath;
+        }
+        return '/static/images/noimage.png';
     }
 
     public function setName($name)

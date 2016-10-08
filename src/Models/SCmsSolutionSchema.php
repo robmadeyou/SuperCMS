@@ -39,7 +39,7 @@ class SCmsSolutionSchema extends SolutionSchema
                     'Variations' => 'ProductVariation.ProductID',
                 ],
                 'ProductVariation' => [
-                    'Images' => 'ProductImage.ProductID',
+                    'Images' => 'ProductImage.ProductVariationID',
                 ],
                 'Category' => [
                     'Products' => 'Product.CategoryID',
