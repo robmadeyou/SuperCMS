@@ -93,7 +93,7 @@ class ProductsEditView extends SuperCMSCrudView
             <?php
             foreach ($this->model->restModel->Variations as $variation) {
                 $class = ( $variation->UniqueIdentifier == $this->model->selectedVariation->UniqueIdentifier ? 'active nav-bar-tabs-first' : '' );
-                print '<li role="presentation" class="' . $class . ' product-list-tabs" ><a href="#" class="product-variation-tab" data-id="' . $variation->UniqueIdentifier . '">' . $variation->Name . '</a></li>';
+                print '<li role="presentation" class="' . $class . ' product-list-tabs" ><a href="#" class="product-variation-tab" data-id="' . $variation->UniqueIdentifier . '">' . $variation->Name . '  <span class="delete-variation"><i class="fa fa-times fa-1x" aria-hidden="true"></i></span></a></li>';
             }
             ?>
             <li role="presentation" class="product-list-tabs" id="tab-add-button"><p>&nbsp;&nbsp;<span

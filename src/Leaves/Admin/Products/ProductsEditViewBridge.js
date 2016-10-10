@@ -25,6 +25,15 @@ bridge.prototype.attachEvents = function () {
 		self.raiseServerEvent('AddNewProduct', lastSelected);
 	});
 
+	$('#' + this.leafPath + ' .delete-variation').click(function(event){
+		if (confirm('Are you sure you want to remove this variation?')) {
+
+		};
+		event.preventDefault();
+		event.stopPropagation();
+		return false;
+	});
+
 	function changeTab(tab) {
 		$('#' + this.leaftPath + ' .active').removeClass('active');
 

@@ -133,3 +133,7 @@ body.event-processing .loading-overlay {
 .product-list-tabs {
     cursor: pointer;
 }
+
+.fa {
+    vertical-align: middle;
+}

@@ -11,6 +11,7 @@ use SuperCMS\Models\Product\Product;
 use SuperCMS\Models\Product\ProductImage;
 use SuperCMS\Models\Product\ProductVariation;
 use SuperCMS\Models\Shipping\ShippingType;
+use SuperCMS\Models\Shopping\Basket;
 use SuperCMS\Models\User\CmsUser;
 
 class SCmsSolutionSchema extends SolutionSchema
@@ -27,6 +28,7 @@ class SCmsSolutionSchema extends SolutionSchema
         $this->addModel('User', CmsUser::class);
         $this->addModel('ShippingType', ShippingType::class);
         $this->addModel('Coupon', Coupon::class, 1.01);
+        $this->addModel('Basket', Basket::class, 1);
     }
 
     protected function defineRelationships()
@@ -47,6 +49,9 @@ class SCmsSolutionSchema extends SolutionSchema
                 ],
                 'Comment' => [
                     'ChildComments' => 'Comment.ParentCommentID:ParentComment',
+                ],
+                'User' => [
+                    'Baskets' => 'Basket.UserID'
                 ],
             ]
         );
