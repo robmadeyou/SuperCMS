@@ -42,8 +42,17 @@ class ProductsEdit extends CrudLeaf
             $variation = new ProductVariation();
             $variation->ProductID = $this->model->restModel->ProductID;
             $variation->save();
+
             $this->setSelectedVariation($variation);
             $this->reRender();
+        });
+
+        $model->VariationDeleteEvent->attachHandler(function($id) {
+            $variation = new ProductVariation($id);
+            $variation->delete();
+
+            $this->setSelectedVariation($this->model->restModel->getDefaultProductVariation());
+            $this->model->reRenderEvent->raise();
         });
 
         return $model;

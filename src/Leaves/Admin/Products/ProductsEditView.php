@@ -56,6 +56,11 @@ class ProductsEditView extends SuperCMSCrudView
             ProductImage::createImageForProduct(new ProductVariation($_GET['variation']), $data);
         });
 
+        $imageUpload->deleteImageEvent->attachHandler(function ($url) {
+            $image = ProductImage::findFirst(new Equals('ImagePath', $url));
+            $image->delete();
+        });
+
         $products = [];
         foreach(Product::find(new Not(new Equals('tblProductID', $this->model->restModel->UniqueIdentifier))) as $product) {
             $products[] = [$product->UniqueIdentifier, $product->Name];

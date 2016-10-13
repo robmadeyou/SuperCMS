@@ -2,6 +2,7 @@
 
 namespace SuperCMS\Controls\Dropzone;
 
+use Rhubarb\Crown\Events\Event;
 use Rhubarb\Crown\Request\Request;
 use Rhubarb\Crown\Request\WebRequest;
 use Rhubarb\Leaf\Controls\Common\FileUpload\SimpleFileUpload;
@@ -15,6 +16,16 @@ class Dropzone extends SimpleFileUpload
      * @var DropzoneModel $model
      */
     protected $model;
+
+    /** @var Event */
+    public $deleteImageEvent;
+
+    public function __construct($name)
+    {
+        parent::__construct($name);
+
+        $this->deleteImageEvent = new Event();
+    }
 
     protected function getViewClass()
     {
@@ -51,6 +62,11 @@ class Dropzone extends SimpleFileUpload
 
         if ($request->post('_leafEventName') == 'FilesUploaded') {
             $this->model->FilesUploadedEvent->raise(json_decode($request->post('_leafEventArguments')[ 0 ]));
+        }
+
+        if ($request->post('_leafEventName') == 'deleteImage') {
+            $data = json_decode($request->post('_leafEventArguments')[0]);
+            $this->deleteImageEvent->raise($data);
         }
 
         return $response;

@@ -27,8 +27,8 @@ bridge.prototype.attachEvents = function () {
 
 	$('#' + this.leafPath + ' .delete-variation').click(function(event){
 		if (confirm('Are you sure you want to remove this variation?')) {
-
-		};
+			self.raiseServerEvent('VariationDelete', $(this).parent().data('id'));
+		}
 		event.preventDefault();
 		event.stopPropagation();
 		return false;

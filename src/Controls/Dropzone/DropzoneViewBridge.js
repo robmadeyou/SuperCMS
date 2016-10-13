@@ -21,9 +21,17 @@ bridge.prototype.attachEvents = function () {
 			})
 		}
 	});
+
+	$('.dz-close-button').click(function() {
+		var image = $(this).parent().find('.dz-image img').attr('src');
+		var element = $(this);
+		self.raiseServerEvent('deleteImage', image, function() {
+			element.parent().remove();
+		});
+	});
 };
 
-ViewBridge.prototype.findEventHost = function () {
+bridge.prototype.findEventHost = function () {
 	var selfNode = document.getElementById(this.leafPath);
 
 	while (selfNode) {

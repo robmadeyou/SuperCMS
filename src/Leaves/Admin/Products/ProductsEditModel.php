@@ -23,12 +23,20 @@ class ProductsEditModel extends CrudModel
      */
     public $AddNewProductEvent;
 
+    /** @var Event */
+    public $VariationDeleteEvent;
+
+    /** @var Event */
+    public $reRenderEvent;
+
     public function __construct()
     {
         parent::__construct();
 
         $this->ChangeProductVariationEvent = new Event();
         $this->AddNewProductEvent = new Event();
+        $this->VariationDeleteEvent = new Event();
+        $this->reRenderEvent = new Event();
     }
 
     protected function getExposableModelProperties()

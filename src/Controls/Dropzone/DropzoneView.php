@@ -46,7 +46,7 @@ class DropzoneView extends SimpleFileUploadView
     {
         $imgName = pathinfo($image->tempFilename, PATHINFO_FILENAME);
         print <<<HTML
-            <div class="dz-preview dz-processing dz-image-preview"">
+            <div class="dz-preview dz-processing dz-image-preview">
                 <div class="dz-image">
                     <img data-dz-thumbnail="" src="{$image->tempFilename}" style="width: 100%;"></div>
                 <div class="dz-details">
@@ -73,6 +73,7 @@ class DropzoneView extends SimpleFileUploadView
                         </g>
                     </svg>
                 </div>
+                <div class="dz-close-button"><i class="fa fa-times fa-4x" aria-hidden="true"></i></div>
             </div>
 HTML;
 
