@@ -14,4 +14,11 @@ class SuperCMSDefaultLayout extends BaseLayout
         ResourceLoader::loadResource("/files/css/?p=daterangepicker.min.css");
         ResourceLoader::loadResource("/files/css/?p=font-awesome.min.css");
     }
+    
+    protected function printHead()
+    {
+        ?>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <?php
+    }
 }
