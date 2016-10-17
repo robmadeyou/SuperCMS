@@ -1,5 +1,5 @@
 {
-    "name": "SuperCMS",
+    "name": "rojr/SuperCMS",
     "license": "Apache 2.0",
     "autoload": {
         "psr-4": {
