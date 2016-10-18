@@ -8,11 +8,11 @@
     },
     "require": {
         "rhubarbphp/scaffold-authentication": "dev-master",
-        "rhubarbphp/scaffold-authentication-with-roles": "1.0.x-dev",
+        "rhubarbphp/scaffold-authentication-with-roles": "*",
         "rhubarbphp/scaffold-navigation-menu": "1.x-dev",
         "rhubarbphp/scaffold-communications": "^1.0.0",
         "rhubarbphp/module-patterns": "dev-develop",
-        "rhubarbphp/module-stem": "1.2.2",
+        "rhubarbphp/module-stem": "*",
         "rhubarbphp/module-leaf": "*",
         "rhubarbphp/module-leaf-common-controls": "dev-master as 1.0.x-dev",
         "rhubarbphp/module-leaf-search-panel": "^1.0.0",
