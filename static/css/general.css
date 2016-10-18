@@ -503,3 +503,60 @@ input:checked + .slider:before {
 .panel-primary {
 	position: relative;
 }
+
+.alert-outer {
+	opacity:0;
+	position: fixed;
+	top: 40px;
+	width: 50%;
+	left: 25%;
+	z-index:999999;
+	animation-name: notificationFadeIn;
+	animation-duration: 0.5s;
+	animation-iteration-count: 1;
+	animation-fill-mode: forwards;
+}
+
+.alert {
+	animation-name: notificationFadeOut;
+	animation-delay: 5s;
+	animation-duration: 1s;
+	animation-iteration-count: 1;
+	animation-fill-mode: forwards;
+}
+
+@keyframes notificationFadeOut {
+	from {
+		opacity:1;
+	}
+	to {
+		opacity:0;
+	}
+}
+
+@-webkit-keyframes notificationFadeOut {
+	from {
+		opacity:1;
+	}
+	to {
+		opacity:0;
+	}
+}
+
+@keyframes notificationFadeIn {
+	from {
+		opacity:0;
+	}
+	to {
+		opacity:1;
+	}
+}
+
+@-webkit-keyframes notificationFadeIn {
+	from {
+		opacity:0;
+	}
+	to {
+		opacity:1;
+	}
+}

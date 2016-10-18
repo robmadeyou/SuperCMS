@@ -12,6 +12,7 @@ use SuperCMS\Models\Product\ProductImage;
 use SuperCMS\Models\Product\ProductVariation;
 use SuperCMS\Models\Shipping\ShippingType;
 use SuperCMS\Models\Shopping\Basket;
+use SuperCMS\Models\Shopping\BasketItem;
 use SuperCMS\Models\User\CmsUser;
 
 class SCmsSolutionSchema extends SolutionSchema
@@ -29,6 +30,7 @@ class SCmsSolutionSchema extends SolutionSchema
         $this->addModel('ShippingType', ShippingType::class);
         $this->addModel('Coupon', Coupon::class, 1.01);
         $this->addModel('Basket', Basket::class, 1);
+        $this->addModel('BasketItem', BasketItem::class, 1);
     }
 
     protected function defineRelationships()
@@ -42,6 +44,7 @@ class SCmsSolutionSchema extends SolutionSchema
                 ],
                 'ProductVariation' => [
                     'Images' => 'ProductImage.ProductVariationID',
+                    'BasketItems' => 'BasketItem.ProductVariationID'
                 ],
                 'Category' => [
                     'Products' => 'Product.CategoryID',
@@ -51,7 +54,10 @@ class SCmsSolutionSchema extends SolutionSchema
                     'ChildComments' => 'Comment.ParentCommentID:ParentComment',
                 ],
                 'User' => [
-                    'Baskets' => 'Basket.UserID'
+                    'Baskets' => 'Basket.UserID',
+                ],
+                'Basket' => [
+                    'BasketItems' => 'BasketItem.BasketID',
                 ],
             ]
         );

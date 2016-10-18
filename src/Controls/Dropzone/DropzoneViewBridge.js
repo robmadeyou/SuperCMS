@@ -43,7 +43,6 @@ bridge.prototype.findEventHost = function () {
 
 		if (className.indexOf("event-host") == 0 || className.indexOf("event-host") > 0) {
 			if (!testNode.viewBridge) {
-				debugger;
 				if (!testNode.id) {
 					testNode.id = "event-host";
 				}

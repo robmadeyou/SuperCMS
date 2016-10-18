@@ -24,6 +24,7 @@ use Rhubarb\Stem\Schema\ModelSchema;
  * @property-read \Rhubarb\Scaffolds\AuthenticationWithRoles\PermissionAssignment[]|\Rhubarb\Stem\Collections\Collection $Permissions Relationship
  * @property-read \Rhubarb\Scaffolds\AuthenticationWithRoles\UserRole[]|\Rhubarb\Stem\Collections\Collection $RolesRaw Relationship
  * @property-read \Rhubarb\Scaffolds\AuthenticationWithRoles\Role[]|\Rhubarb\Stem\Collections\Collection $Roles Relationship
+ * @property-read \SuperCMS\Models\Shopping\Basket[]|\Rhubarb\Stem\Collections\RepositoryCollection $Baskets Relationship
  */
 class CmsUser extends User
 {

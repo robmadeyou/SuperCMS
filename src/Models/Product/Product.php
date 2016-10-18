@@ -31,6 +31,9 @@ use Rhubarb\Stem\Schema\Columns\StringColumn;
  * @property-read mixed $DefaultProductVariation {@link getDefaultProductVariation()}
  * @property string $Name Repository field
  * @property string[] $RelatedProductIDs Repository field
+ * @property string $SeoSafeName Repository field
+ * @property-read mixed $DefaultImage {@link getDefaultImage()}
+ * @property-read mixed $PublicUrl {@link getPublicUrl()}
  */
 class Product extends Model
 {

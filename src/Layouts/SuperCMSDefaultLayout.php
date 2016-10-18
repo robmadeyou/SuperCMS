@@ -9,6 +9,7 @@ class SuperCMSDefaultLayout extends BaseLayout
 {
     public function __construct()
     {
+        ResourceLoader::loadResource("/files/js/rogueJs.js");
         ResourceLoader::loadResource("/files/css/?p=bootstrap.min.css");
         ResourceLoader::loadResource("/files/css/?p=general.css");
         ResourceLoader::loadResource("/files/css/?p=daterangepicker.min.css");

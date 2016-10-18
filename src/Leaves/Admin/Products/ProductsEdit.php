@@ -7,6 +7,7 @@ use Rhubarb\Crown\Response\RedirectResponse;
 use Rhubarb\Leaf\Crud\Leaves\CrudLeaf;
 use Rhubarb\Stem\Exceptions\RecordNotFoundException;
 use Rhubarb\Stem\Models\Model;
+use SuperCMS\Controls\Notification\NotificationPrint;
 use SuperCMS\Models\Product\Product;
 use SuperCMS\Models\Product\ProductVariation;
 
@@ -106,6 +107,8 @@ class ProductsEdit extends CrudLeaf
      */
     private function saveVariation(ProductVariation $variation)
     {
+        print new NotificationPrint('Testing!');
+
         $variation->Name = $this->model->VariationName;
         $variation->Price = $this->model->Price;
         $variation->AmountAvailable = $this->model->AmountAvailable;
