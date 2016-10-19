@@ -58,7 +58,7 @@ HTML;
     public function getDeploymentPackage()
     {
         $package = new LeafDeploymentPackage();
-        $package->resourcesToDeploy[] = VENDOR_DIR . '/rojr/SuperCMS/static/js/jquery.js';
+        $package->resourcesToDeploy[] = VENDOR_DIR . '/rojr/super-cms/static/js/jquery.js';
         $package->resourcesToDeploy[] = VENDOR_DIR . '/twbs/bootstrap/dist/js/bootstrap.min.js';
         $package->resourcesToDeploy[] = __DIR__ . '/CarouselViewBridge.js';
         return $package;
