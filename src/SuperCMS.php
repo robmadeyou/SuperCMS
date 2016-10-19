@@ -91,6 +91,9 @@ class SuperCMS extends Module
     {
         parent::registerUrlHandlers();
 
+        $staticResources = new StaticResourceUrlHandler(__DIR__ . '/../static/');
+        $staticResources->setPriority('100');
+
         $this->addUrlHandlers(
             [
                 "/" => new ClassMappedUrlHandler(Index::class, [
@@ -104,10 +107,10 @@ class SuperCMS extends Module
                     'category/' => new CategoryUrlHandler(Category::class, StringTools::getNamespaceFromClass(CategoryCollection::class), [], [
                         'product/' => new ProductUrlHandler(Product::class, StringTools::getNamespaceFromClass(ProductCollection::class))
                     ]),
-                    'files/' => new StaticResourceUrlHandler(__DIR__ . '../static/'),
                     '404/' => new ClassMappedUrlHandler(Error404::class),
                     '403/' => new ClassMappedUrlHandler(Error403::class)
-                ])
+                ]),
+                '/files/' => $staticResources,
             ]
         );
     }

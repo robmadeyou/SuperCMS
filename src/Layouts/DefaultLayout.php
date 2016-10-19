@@ -12,7 +12,7 @@ class DefaultLayout extends SuperCMSDefaultLayout
     {
         parent::__construct();
 
-        ResourceLoader::loadResource("/files/css/?p=base.css");
+        ResourceLoader::loadResource("/files/css/base.css");
     }
 
     protected function printPageHeading()
