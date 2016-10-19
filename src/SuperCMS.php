@@ -2,7 +2,6 @@
 
 namespace SuperCMS;
 
-use Rhubarb\Crown\Application;
 use Rhubarb\Crown\DependencyInjection\Container;
 use Rhubarb\Crown\Encryption\HashProvider;
 use Rhubarb\Crown\Encryption\Sha512HashProvider;
@@ -15,7 +14,6 @@ use Rhubarb\Leaf\LeafModule;
 use Rhubarb\Leaf\Paging\Leaves\EventPagerView;
 use Rhubarb\Scaffolds\Authentication\Leaves\LoginView;
 use Rhubarb\Scaffolds\AuthenticationWithRoles\AuthenticationWithRolesModule;
-use Rhubarb\Scaffolds\NavigationMenu\NavigationMenuModule;
 use Rhubarb\Stem\Custard\SeedDemoDataCommand;
 use Rhubarb\Stem\Repositories\MySql\MySql;
 use Rhubarb\Stem\Repositories\Repository;
@@ -122,7 +120,6 @@ class SuperCMS extends Module
             new StemModule(),
             new AuthenticationWithRolesModule(SCmsLoginProvider::class, '/admin/'),
             new LeafModule(),
-            new NavigationMenuModule()
         ];
     }
 
