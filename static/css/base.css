@@ -101,4 +101,9 @@ body .body #top-banner .banner-border
     pointer-events: none;
 }
 
+.c-product-image-section .main-image
+{
+    width:100%;
+}
+
 
