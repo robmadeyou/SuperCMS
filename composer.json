@@ -17,7 +17,7 @@
         "rhubarbphp/module-leaf-tabs": "^1.0.0",
         "rhubarbphp/module-leaf-table": "*",
         "rhubarbphp/module-leaf-crud": "^1.0.0",
-        "rhubarbphp/rhubarb": "dev-master as 1.1.9",
+        "rhubarbphp/rhubarb": "^1.1.9",
         "rhubarbphp/scaffold-repository-log": "dev-master",
         "twbs/bootstrap": "^3.3"
     }
