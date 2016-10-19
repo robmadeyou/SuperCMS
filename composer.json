@@ -15,9 +15,9 @@
         "rhubarbphp/module-leaf-common-controls": "dev-master as 1.0.x-dev",
         "rhubarbphp/module-leaf-search-panel": "^1.0.0",
         "rhubarbphp/module-leaf-tabs": "^1.0.0",
-        "rhubarbphp/module-leaf-table": "dev-master",
+        "rhubarbphp/module-leaf-table": "*",
         "rhubarbphp/module-leaf-crud": "^1.0.0",
-        "rhubarbphp/rhubarb": "dev-master",
+        "rhubarbphp/rhubarb": "dev-master as 1.1.9",
         "rhubarbphp/scaffold-repository-log": "dev-master",
         "twbs/bootstrap": "^3.3"
     }
