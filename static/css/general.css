@@ -27,7 +27,7 @@
 
 .slider:before {
 	position: absolute;
-	content: '\e014';
+	content: '';
 	height: 26px;
 	width: 26px;
 	left: 4px;
@@ -37,15 +37,6 @@
 	transition: .4s;
 	text-align: center;
 	box-sizing: border-box;
-
-	display: inline-block;
-	font-family: 'Glyphicons Halflings';
-	font-style: normal;
-	font-weight: 400;
-	line-height: 1;
-	padding-top: 5px;
-	-webkit-font-smoothing: antialiased;
-	color: red;
 }
 
 input:checked + .slider {
@@ -53,8 +44,7 @@ input:checked + .slider {
 }
 
 input:checked + .slider:before{
-	content: '\e013';
-	color: #5cb85c;
+	content: '';
 }
 
 input:focus + .slider {
