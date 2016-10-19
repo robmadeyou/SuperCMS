@@ -10,6 +10,7 @@ use Rhubarb\Crown\LoginProviders\LoginProvider;
 use Rhubarb\Crown\Module;
 use Rhubarb\Crown\String\StringTools;
 use Rhubarb\Crown\UrlHandlers\ClassMappedUrlHandler;
+use Rhubarb\Crown\UrlHandlers\StaticResourceUrlHandler;
 use Rhubarb\Leaf\LeafModule;
 use Rhubarb\Leaf\Paging\Leaves\EventPagerView;
 use Rhubarb\Scaffolds\Authentication\Leaves\LoginView;
@@ -103,9 +104,7 @@ class SuperCMS extends Module
                     'category/' => new CategoryUrlHandler(Category::class, StringTools::getNamespaceFromClass(CategoryCollection::class), [], [
                         'product/' => new ProductUrlHandler(Product::class, StringTools::getNamespaceFromClass(ProductCollection::class))
                     ]),
-                    'files/css/' => new ClassMappedUrlHandler(CssResponse::class),
-                    'files/js/' => new ClassMappedUrlHandler(JsResource::class),
-                    'files/fonts/' => new ClassMappedUrlHandler(FontsResource::class),
+                    'files/' => new StaticResourceUrlHandler(__DIR__ . '../static/'),
                     '404/' => new ClassMappedUrlHandler(Error404::class),
                     '403/' => new ClassMappedUrlHandler(Error403::class)
                 ])
