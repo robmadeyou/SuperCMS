@@ -3,6 +3,7 @@
 namespace SuperCMS\Leaves\Site\Product;
 
 use Rhubarb\Leaf\Controls\Common\Buttons\Button;
+use Rhubarb\Leaf\Leaves\LeafDeploymentPackage;
 use Rhubarb\Leaf\Views\View;
 use SuperCMS\Models\Product\Product;
 
@@ -21,7 +22,6 @@ class ProductItemView extends View
     protected function printViewContent()
     {
         $product = $this->model->restModel;
-        print $this->leaves['AddToBasket'];
 
         $this->printProductTitle($product);
         ?>
@@ -38,7 +38,8 @@ class ProductItemView extends View
 
     protected function printProductTitle(Product $product)
     {
-        print $product->Name;
+        print '<h1>' . $product->Name . '</h1>'
+        ;
     }
 
     protected function printProductImages(Product $product)
@@ -52,4 +53,15 @@ class ProductItemView extends View
     {
         print $product->Description;
     }
+
+    public function getDeploymentPackage()
+    {
+        $package = new LeafDeploymentPackage();
+
+        $package[] = __DIR__ . '/../../../../static/js/jquery.js';
+
+        return $package;
+    }
+
+
 }
