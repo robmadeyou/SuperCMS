@@ -2,6 +2,7 @@
 
 namespace SuperCMS\Models\Product;
 
+use Rhubarb\Stem\Exceptions\RecordNotFoundException;
 use Rhubarb\Stem\Models\Model;
 use Rhubarb\Stem\Repositories\MySql\Schema\Columns\MySqlMediumTextColumn;
 use Rhubarb\Stem\Repositories\MySql\Schema\MySqlModelSchema;
@@ -27,6 +28,7 @@ use Rhubarb\Stem\Schema\Columns\StringColumn;
  * @property-read ProductImage[]|\Rhubarb\Stem\Collections\RepositoryCollection $Images Relationship
  * @property int $Quantity Repository field
  * @property-read \SuperCMS\Models\Shopping\BasketItem[]|\Rhubarb\Stem\Collections\RepositoryCollection $BasketItems Relationship
+ * @property-read mixed $PrimaryImage {@link getPrimaryImage()}
  */
 class ProductVariation extends Model
 {
@@ -47,5 +49,14 @@ class ProductVariation extends Model
         );
 
         return $model;
+    }
+
+    public function getPrimaryImage()
+    {
+        $image = $this->Images->addSort('Priority');
+        if(sizeof($image)) {
+            return $image[0]->ImagePath;
+        }
+        return '';
     }
 }

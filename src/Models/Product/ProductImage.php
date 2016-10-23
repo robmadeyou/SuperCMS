@@ -6,6 +6,7 @@ use Rhubarb\Stem\Models\Model;
 use Rhubarb\Stem\Repositories\MySql\Schema\MySqlModelSchema;
 use Rhubarb\Stem\Schema\Columns\AutoIncrementColumn;
 use Rhubarb\Stem\Schema\Columns\ForeignKeyColumn;
+use Rhubarb\Stem\Schema\Columns\IntegerColumn;
 use Rhubarb\Stem\Schema\Columns\StringColumn;
 
 /**
@@ -15,6 +16,7 @@ use Rhubarb\Stem\Schema\Columns\StringColumn;
  * @property int $ProductVariationID Repository field
  * @property string $ImagePath Repository field
  * @property-read ProductVariation $ProductVariation Relationship
+ * @property int $Priority Repository field
  */
 class ProductImage extends Model
 {
@@ -25,7 +27,8 @@ class ProductImage extends Model
         $model->addColumn(
             new AutoIncrementColumn('ProductImageID'),
             new ForeignKeyColumn('ProductVariationID'),
-            new StringColumn('ImagePath', 255)
+            new StringColumn('ImagePath', 255),
+            new IntegerColumn('Priority')
         );
 
         return $model;

@@ -47,16 +47,6 @@ class DefaultLayout extends SuperCMSDefaultLayout
 
     protected function printBannerButtons()
     {
-        ?>
-        <div class="pull-left btn-group">
-            <a href="/" class="btn btn-default">Home</a>
-            <a href="/about-us/" class="btn btn-default round-right">About us</a>
-        </div>
-        <div class="pull-right btn-group">
-            <a href="/news/" class="btn btn-default round-left">Latest News</a>
-            <a href="/contact/" class="btn btn-default">Contact Us</a>
-        </div>
-        <?php
     }
 
     protected function printTail()
