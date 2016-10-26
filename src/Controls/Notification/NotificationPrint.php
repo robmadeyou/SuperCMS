@@ -29,7 +29,6 @@ class NotificationPrint
         $id = uniqid('alert-');
 
         return <<<HTML
-        <div>
             <script type="application/javascript">
                 var outer = document.createElement('div');
                 outer.classList.add('alert-outer');
@@ -48,8 +47,6 @@ class NotificationPrint
                     outer.remove();
                 }, 6000);
             </script>        
-        </div>
-        
 HTML;
     }
 }

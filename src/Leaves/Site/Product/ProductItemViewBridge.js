@@ -30,9 +30,11 @@ bridge.prototype.changeVariation = function(selectedObject) {
 	this.raiseServerEvent('changeSelectedVariation', id, function(values) {
 		var image = $('.c-main-product-image');
 		var imageLink = image.closest('a');
+		var name = $('.c-product-variation-title');
 
 		image.attr('src', values.MainImage);
 		imageLink.attr('href', values.LargeImage);
+		name.html(values.Name);
 	});
 };
 

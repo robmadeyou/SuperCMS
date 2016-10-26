@@ -9,6 +9,7 @@ use Rhubarb\Stem\Schema\Columns\AutoIncrementColumn;
 use Rhubarb\Stem\Schema\Columns\ForeignKeyColumn;
 use Rhubarb\Stem\Schema\Columns\StringColumn;
 use Rhubarb\Stem\Schema\ModelSchema;
+use SuperCMS\Controls\GlobalBasket\GlobalBasket;
 use SuperCMS\Models\Product\ProductVariation;
 use SuperCMS\Session\SuperCMSSession;
 
@@ -56,10 +57,12 @@ class Basket extends Model
         } else {
             $basketItem = new BasketItem();
             $basketItem->BasketID = $basket->UniqueIdentifier;
-            $basketItem->ProductVariationID = $variation;
+            $basketItem->ProductVariationID = $variation->UniqueIdentifier;
             $basketItem->Quantity = $quantity;
             $basketItem->save();
         }
+
+        GlobalBasket::getInstance()->replace();
     }
 
     /**

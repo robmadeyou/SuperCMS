@@ -2,19 +2,60 @@
 
 namespace SuperCMS\Controls\GlobalBasket;
 
-use Rhubarb\Leaf\Leaves\Leaf;
+use Rhubarb\Stem\Aggregates\Sum;
+use Rhubarb\Stem\Exceptions\RecordNotFoundException;
+use SuperCMS\Models\Shopping\Basket;
+use SuperCMS\Session\SuperCMSSession;
 
-class GlobalBasket extends Leaf
+class GlobalBasket
 {
-    protected function getViewClass()
+    private static $instance;
+
+    /**
+     * @var Basket
+     */
+    protected $basket;
+
+    public function __construct()
     {
-        return GlobalBasketView::class;
+        $session = SuperCMSSession::singleton();
+        try {
+            $this->basket = new Basket($session->basketId);
+        } catch (RecordNotFoundException $ex) {
+            $this->basket = new Basket();
+        }
+
+        self::$instance = $this;
     }
 
-    protected function createModel()
+    public function getOnlyHTML()
     {
-        $model = new GlobalBasketModel();
+        list($itemAmount) = $this->basket->BasketItems->calculateAggregates(new Sum('Quantity'));
+        $itemAmount = intval($itemAmount);
+        $itemItems = $itemAmount === 1 ? 'item' : 'items';
+        return <<<HTML
+        <div id="global-basket">
+            <a href="/basket/">You have <i class="fa fa-shopping-cart" aria-hidden="true"></i> <span class="c-basket-count">{$itemAmount}</span> {$itemItems}</a>
+        </div>
+HTML;
+    }
 
-        return $model;
+    public function __toString()
+    {
+        return <<<HTML
+        <htmlupdate id="global-basket">
+            <![CDATA[{$this->getOnlyHTML()}]]>
+        </htmlupdate>
+HTML;
+    }
+
+    public function replace()
+    {
+        print $this;
+    }
+
+    public static function getInstance()
+    {
+        return self::$instance;
     }
 }

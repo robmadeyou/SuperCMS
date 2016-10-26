@@ -20,6 +20,7 @@ use Rhubarb\Stem\Repositories\MySql\MySql;
 use Rhubarb\Stem\Repositories\Repository;
 use Rhubarb\Stem\Schema\SolutionSchema;
 use Rhubarb\Stem\StemModule;
+use SuperCMS\Controls\GlobalBasket\GlobalBasket;
 use SuperCMS\Custard\ApplicationDemoDataSeeder;
 use SuperCMS\Layouts\DefaultLayout;
 use SuperCMS\Leaves\Admin\AdminIndex;
@@ -30,9 +31,6 @@ use SuperCMS\Leaves\Admin\Products\ProductsCollection;
 use SuperCMS\Leaves\Admin\ShippingType\ShippingTypeCollection;
 use SuperCMS\Leaves\Errors\Error403;
 use SuperCMS\Leaves\Errors\Error404;
-use SuperCMS\Leaves\Files\CssResponse;
-use SuperCMS\Leaves\Files\FontsResource;
-use SuperCMS\Leaves\Files\JsResource;
 use SuperCMS\Leaves\Index;
 use SuperCMS\Leaves\Site\Category\CategoryCollection;
 use SuperCMS\Leaves\Site\Product\ProductCollection;
@@ -60,6 +58,7 @@ class SuperCMS extends Module
      * @var Container
      */
     protected $container;
+    protected $basketClass = GlobalBasket::class;
 
     /**
      * @param Container $container
@@ -89,7 +88,10 @@ class SuperCMS extends Module
 
     protected function registerUrlHandlers()
     {
+
         parent::registerUrlHandlers();
+
+        new $this->basketClass();
 
         $staticResources = new StaticResourceUrlHandler(__DIR__ . '/../static/');
         $staticResources->setPriority('100');

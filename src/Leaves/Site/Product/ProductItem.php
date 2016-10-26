@@ -24,8 +24,8 @@ class ProductItem extends ModelBoundLeaf
         $model = new ProductItemModel();
 
         $model->addToCartEvent->attachHandler(function() {
-            Basket::addVariationToBasket($this->model->selectedVariation);
-            print new NotificationPrint('Item: <strong>' . $this->model->selectedVariation->Name . '</strong> successfully added to basket <a href="google.com">Click here to view your basket</a>');
+            Basket::addVariationToBasket($this->getSelectedVariation());
+            print new NotificationPrint('Item: <strong>' . $this->getSelectedVariation()->Name . '</strong> successfully added to basket <a href="google.com">Click here to view your basket</a>');
         });
 
         $model->changeSelectedVariationEvent->attachHandler(function($id) {
@@ -35,9 +35,9 @@ class ProductItem extends ModelBoundLeaf
             $class = new \stdClass();
             $class->MainImage = $variation->getPrimaryImage();
             $class->LargeImage = $variation->getPrimaryImage();
+            $class->Name = $variation->Name;
             $class->Cost = $variation->Price;
             $class->AmountAvailable = $variation->AmountAvailable;
-
 
             return $class;
         });
@@ -51,9 +51,9 @@ class ProductItem extends ModelBoundLeaf
 
         if (!$this->model->selectedVariation && $this->model->selectedVariationId) {
             $this->model->selectedVariation = new ProductVariation($this->model->selectedVariationId);
+        } else {
+            $this->model->selectedVariation = $this->model->restModel->getDefaultProductVariation();
         }
-
-        $this->model->selectedVariation = $this->model->restModel->getDefaultProductVariation();
 
         return $model;
     }
@@ -64,5 +64,15 @@ class ProductItem extends ModelBoundLeaf
         $this->model->selectedVariation = $variation;
     }
 
-
+    /**
+     * @return ProductVariation
+     */
+    protected function getSelectedVariation()
+    {
+        if ($this->model->selectedVariationId != $this->model->selectedVariation->UniqueIdentifier) {
+            return new ProductVariation($this->model->selectedVariationId);
+        } else {
+            return $this->model->selectedVariation;
+        }
+    }
 }

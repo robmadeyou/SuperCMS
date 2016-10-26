@@ -5,6 +5,7 @@ namespace SuperCMS\Leaves\Site\Product;
 use Rhubarb\Leaf\Controls\Common\Buttons\Button;
 use Rhubarb\Leaf\Leaves\LeafDeploymentPackage;
 use Rhubarb\Leaf\Views\View;
+use SuperCMS\Controls\GlobalBasket\GlobalBasket;
 use SuperCMS\Models\Product\Product;
 use SuperCMS\Models\Product\ProductVariation;
 
@@ -52,6 +53,7 @@ class ProductItemView extends View
     protected function printProductTitle(Product $product)
     {
         print '<h1>' . $product->Name . '</h1>';
+        print '<h3 class="c-product-variation-title">' . $this->model->selectedVariation->Name . '</h3>';
     }
 
     protected function printProductImages(Product $product)

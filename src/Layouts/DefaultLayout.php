@@ -4,6 +4,7 @@ namespace SuperCMS\Layouts;
 
 use Rhubarb\Crown\Html\ResourceLoader;
 use Rhubarb\Stem\Filters\Equals;
+use SuperCMS\Controls\GlobalBasket\GlobalBasket;
 use SuperCMS\Models\Product\Category;
 
 class DefaultLayout extends SuperCMSDefaultLayout
@@ -16,20 +17,42 @@ class DefaultLayout extends SuperCMSDefaultLayout
     }
 
     protected function printPageHeading()
-    {
+    {;
+        ?>
+        <?php
         ?>
         <div class="row body">
-            <div class="col-md-10 col-md-offset-1 content">
-                <div id="top-banner">
-                    <div class="top-banner-bottom-buttons">
-                        <? $this->printBannerButtons() ?>
+            <div class="col-md-10 col-md-offset-1">
+                <div class="c-supertop">
+                    <? $this->printNavigationItems() ?>
+                    <? $this->printBasket(); ?>
+                </div>
+                <div class="content">
+                    <div id="top-banner">
+                        <div class="top-banner-bottom-buttons">
+                            <? $this->printBannerButtons() ?>
+                        </div>
                     </div>
-                    <div class="banner-border"></div>
-                </div>
-                <div class="category-list">
-                    <? $this->printCategoryMenu() ?>
-                </div>
-                <div id="content">
+                    <div class="category-list">
+                        <? $this->printCategoryMenu() ?>
+                    </div>
+                    <div id="content">
+        <?php
+    }
+
+    protected function printNavigationItems()
+    {
+        ?>
+        <?php
+    }
+
+    protected function printBasket()
+    {
+        ?>
+        <div id="c-global-basket">
+            <?= GlobalBasket::getInstance()->getOnlyHTML() ?>
+        </div>
+        <div class="clearfix"></div>
         <?php
     }
 
@@ -54,6 +77,7 @@ class DefaultLayout extends SuperCMSDefaultLayout
         parent::printTail();
 
         ?>
+                    </div>
                 </div>
             </div>
         </div>
