@@ -7,6 +7,7 @@ use Rhubarb\Crown\Request\Request;
 use Rhubarb\Crown\Request\WebRequest;
 use Rhubarb\Leaf\Controls\Common\FileUpload\SimpleFileUpload;
 use Rhubarb\Leaf\Controls\Common\FileUpload\UploadedFileDetails;
+use Rhubarb\Stem\Exceptions\RecordNotFoundException;
 use Rhubarb\Stem\Filters\Equals;
 use SuperCMS\Models\Product\ProductImage;
 
@@ -45,7 +46,7 @@ class Dropzone extends SimpleFileUpload
                     if ($fileData[ "error" ][ $index ] == UPLOAD_ERR_OK) {
                         $realIndex = str_replace("_", "", $index);
                         $response = $this->fileUploadedEvent->raise(
-                            new UploadedFileDetails($name, $fileData[ "tmp_name" ][ $index ]),
+                            new DropzoneUploadedFileDetails($name, $fileData[ "tmp_name" ][ $index ]),
                             $realIndex
                         );
                     }
@@ -53,7 +54,7 @@ class Dropzone extends SimpleFileUpload
             } else {
                 if ($fileData[ "error" ] == UPLOAD_ERR_OK) {
                     $response = $this->fileUploadedEvent->raise(
-                        new UploadedFileDetails($fileData[ "name" ], $fileData[ "tmp_name" ]),
+                        new DropzoneUploadedFileDetails($fileData[ "name" ], $fileData[ "tmp_name" ]),
                         $this->model->leafIndex
                     );
                 }
@@ -67,6 +68,11 @@ class Dropzone extends SimpleFileUpload
         if ($request->post('_leafEventName') == 'deleteImage') {
             $data = json_decode($request->post('_leafEventArguments')[0]);
             $this->deleteImageEvent->raise($data);
+        }
+
+        if ($request->post('_leafEventName') == 'imageReorder') {
+            $data = json_decode($request->post('_leafEventArguments')[0]);
+            $this->model->imageReorderEvent->raise($data);
         }
 
         return $response;
@@ -89,11 +95,23 @@ class Dropzone extends SimpleFileUpload
             if (isset($matches[0])) {
                 $id = str_replace('variation=', '', $matches[0]);
                 $images = [];
-                foreach (ProductImage::find(new Equals('ProductVariationID', $id)) as $image) {
-                    $images[] = new UploadedFileDetails($image->ProductImageID, $image->ImagePath);
+                foreach (ProductImage::find(new Equals('ProductVariationID', $id))->addSort('Priority') as $image) {
+                    $images[] = new DropzoneUploadedFileDetails($image->ProductImageID, $image->ImagePath, $image->UniqueIdentifier);
                 }
                 $this->setUploadedFiles($images);
                 $this->reRender();
+            }
+        });
+
+        $model->imageReorderEvent->attachHandler(function ($images) {
+            $i = 0;
+            foreach($images as $image) {
+                try {
+                    $imageObj = new ProductImage($image);
+                    $imageObj->Priority = $i++;
+                    $imageObj->save();
+                } catch (RecordNotFoundException $ex) {
+                }
             }
         });
 

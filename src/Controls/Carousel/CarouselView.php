@@ -17,15 +17,20 @@ class CarouselView extends View
         ?>
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <?php
+                $i = 0;
+                for ($end = count($this->model->sliderImages); $i < $end; $i++) {
+                    $active = $i == 0 ? 'active' : '';
+                    print '<li data-target="#myCarousel" data-slide-to="' . $i . '" class="' . $active . '"></li>';
+                }
+                ?>
             </ol>
 
             <div class="carousel-inner" role="listbox">
 
                 <?php
                 $i = 0;
-                foreach($this->model->sliderImages as $image) {
+                foreach ($this->model->sliderImages as $image) {
                     $this->printImage($image, $i == 0);
                     $i++;
                 }

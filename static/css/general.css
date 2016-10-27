@@ -303,7 +303,9 @@ input:checked + .slider:before {
 	text-align: center;
 	display: block;
 	cursor: pointer;
-	border: none; }
+	border: none;
+}
+
 .file-input .dz-preview .dz-remove:hover {
 	text-decoration: underline; }
 .file-input .dz-preview:hover .dz-details {
@@ -477,6 +479,16 @@ input:checked + .slider:before {
 	top: -31px;
 	right: -24px;
 	z-index: 999;
+	opacity: 0;
+	-webkit-transition: opacity 0.2s;
+	-moz-transition: opacity 0.2s;
+	-ms-transition: opacity 0.2s;
+	-o-transition: opacity 0.2s;
+	transition: opacity 0.2s;
+}
+
+.file-input .dz-preview:hover .dz-close-button {
+	opacity:1;
 }
 
 .file-input .dz-preview .dz-close-button i {
@@ -550,3 +562,15 @@ input:checked + .slider:before {
 		opacity:1;
 	}
 }
+
+/* jQuery Gridly
+ * Copyright 2015 Kevin Sylvestre
+ * 1.2.9
+ */
+.gridly, .gridly > :not(.dragging) {
+	position: relative;
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out; }
+.gridly .dragging {
+	z-index: 800; }

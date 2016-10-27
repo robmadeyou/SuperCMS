@@ -6,7 +6,6 @@ bridge.prototype = new window.rhubarb.viewBridgeClasses.ViewBridge();
 bridge.prototype.constructor = bridge;
 
 bridge.prototype.attachEvents = function () {
-
 	var firstTab = $('.nav-bar-tabs-first');
 	var self = this;
 

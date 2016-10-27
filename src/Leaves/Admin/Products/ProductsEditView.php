@@ -13,6 +13,7 @@ use Rhubarb\Stem\Filters\Not;
 use SuperCMS\Controls\Category\CategoryDropdown;
 use SuperCMS\Controls\Chosen\MultiSelect\ChosenMultiSelect;
 use SuperCMS\Controls\Dropzone\Dropzone;
+use SuperCMS\Controls\Dropzone\DropzoneUploadedFileDetails;
 use SuperCMS\Controls\HtmlEditor\HtmlEditor;
 use SuperCMS\Controls\KeyValue\KeyValue;
 use SuperCMS\Controls\Shipping\ShippingMultiSelection;
@@ -76,8 +77,8 @@ class ProductsEditView extends SuperCMSCrudView
         $settings->pageTitle = 'Editing Product';
 
         $images = [];
-        foreach (ProductImage::find(new Equals('ProductVariationID', $this->model->selectedVariation->UniqueIdentifier)) as $image) {
-            $images[] = new UploadedFileDetails($image->ProductImageID, $image->ImagePath);
+        foreach (ProductImage::find(new Equals('ProductVariationID', $this->model->selectedVariation->UniqueIdentifier))->addSort('Priority') as $image) {
+            $images[] = new DropzoneUploadedFileDetails($image->ProductImageID, $image->ImagePath, $image->UniqueIdentifier);
         }
         $this->leaves['ImageUpload']->setUploadedFiles($images);
         $this->leaves['ImageUpload']->setPostParams('?variation=' . $this->model->selectedVariation->UniqueIdentifier);

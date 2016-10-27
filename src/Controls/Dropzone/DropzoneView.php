@@ -2,34 +2,20 @@
 
 namespace SuperCMS\Controls\Dropzone;
 
-use Rhubarb\Crown\Request\Request;
 use Rhubarb\Leaf\Controls\Common\FileUpload\SimpleFileUploadView;
-use Rhubarb\Leaf\Controls\Common\FileUpload\UploadedFileDetails;
 
 class DropzoneView extends SimpleFileUploadView
 {
     public $requiresContainerDiv = true;
 
-    public function getDeploymentPackage()
-    {
-        $package = parent::getDeploymentPackage();
-
-        $package->resourcesToDeploy[] = __DIR__ . '/../../../static/js/dropzone.min.js';
-        $package->resourcesToDeploy[] = __DIR__ . '/' . $this->getViewBridgeName() . '.js';
-
-        return $package;
-    }
-
-    protected function getViewBridgeName()
-    {
-        return 'DropzoneViewBridge';
-    }
+    /** @var DropzoneModel */
+    protected $model;
 
     protected function printViewContent()
     {
         ?>
         <input type="hidden" class="dropzone-post-url" value="<?=$this->model->postUrl?>">
-        <div class="file-input">
+        <div class="file-input gridly">
             <?php
             foreach($this->model->uploadedFiles as $file) {
                 $this->printUploadedImage($file);
@@ -42,11 +28,11 @@ class DropzoneView extends SimpleFileUploadView
         <?php
     }
 
-    private function printUploadedImage(UploadedFileDetails $image)
+    private function printUploadedImage(DropzoneUploadedFileDetails $image)
     {
         $imgName = pathinfo($image->tempFilename, PATHINFO_FILENAME);
         print <<<HTML
-            <div class="dz-preview dz-processing dz-image-preview">
+            <div class="dz-preview dz-processing dz-image-preview brick" data-id="{$image->id}">
                 <div class="dz-image">
                     <img data-dz-thumbnail="" src="{$image->tempFilename}" style="width: 100%;"></div>
                 <div class="dz-details">
@@ -77,5 +63,21 @@ class DropzoneView extends SimpleFileUploadView
             </div>
 HTML;
 
+    }
+
+    public function getDeploymentPackage()
+    {
+        $package = parent::getDeploymentPackage();
+
+        $package->resourcesToDeploy[] = __DIR__ . '/../../../static/js/dropzone.min.js';
+        $package->resourcesToDeploy[] = __DIR__ . '/../../../static/js/gridly/jquery.gridly.js';
+        $package->resourcesToDeploy[] = __DIR__ . '/' . $this->getViewBridgeName() . '.js';
+
+        return $package;
+    }
+
+    protected function getViewBridgeName()
+    {
+        return 'DropzoneViewBridge';
     }
 }

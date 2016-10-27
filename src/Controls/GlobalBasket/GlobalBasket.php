@@ -49,6 +49,16 @@ HTML;
 HTML;
     }
 
+    public function reLoadBasket()
+    {
+        $session = SuperCMSSession::singleton();
+        try {
+            $this->basket = new Basket($session->basketId);
+        } catch (RecordNotFoundException $ex) {
+            $this->basket = new Basket();
+        }
+    }
+
     public function replace()
     {
         print $this;

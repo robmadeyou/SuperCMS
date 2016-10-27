@@ -2,10 +2,11 @@
 
 namespace SuperCMS\Leaves\Site\Product;
 
+use Rhubarb\Crown\Settings\HtmlPageSettings;
 use Rhubarb\Leaf\Controls\Common\Buttons\Button;
+use Rhubarb\Leaf\Controls\Common\SelectionControls\DropDown\DropDown;
 use Rhubarb\Leaf\Leaves\LeafDeploymentPackage;
 use Rhubarb\Leaf\Views\View;
-use SuperCMS\Controls\GlobalBasket\GlobalBasket;
 use SuperCMS\Models\Product\Product;
 use SuperCMS\Models\Product\ProductVariation;
 
@@ -19,7 +20,8 @@ class ProductItemView extends View
         $this->registerSubLeaf(
             $addToBasket = new Button('AddToBasket', 'Add To Basket', function () {
                 $this->model->addToCartEvent->raise();
-            }, true)
+            }, true),
+            new DropDown()
         );
 
         $addToBasket->addCssClassNames('c-add-to-basket', 'button');
@@ -28,7 +30,8 @@ class ProductItemView extends View
     protected function printViewContent()
     {
         $product = $this->model->restModel;
-
+        $settings = HtmlPageSettings::singleton();
+        $settings->pageTitle = $product->Name . ' - ' . $this->model->selectedVariation->Name;
         ?>
         <div class="row product-page">
             <div class="col-sm-5 c-product-image-section">

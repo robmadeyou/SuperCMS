@@ -39,16 +39,7 @@ class Basket extends Model
 
     public static function addVariationToBasket(ProductVariation $variation, $quantity = 1)
     {
-        $settings = SuperCMSSession::singleton();
-        try {
-            $basket = new Basket($settings->basketId);
-        } catch (RecordNotFoundException $ex) {
-            $basket = new Basket();
-            $basket->save();
-
-            $settings->basketId = $basket->UniqueIdentifier;
-            $settings->storeSession();
-        }
+        $basket = self::getCurrentBasket();
 
         $basketItem = self::hasBasketGotSimilarItem($basket, $variation);
         if ($basketItem) {
@@ -63,6 +54,27 @@ class Basket extends Model
         }
 
         GlobalBasket::getInstance()->replace();
+    }
+
+    /**
+     * Creates an instance of the basket, and reloads the object.
+     * @return Basket
+     */
+    public static function getCurrentBasket()
+    {
+        $settings = SuperCMSSession::singleton();
+        try {
+            $basket = new Basket($settings->basketId);
+        } catch (RecordNotFoundException $ex) {
+            $basket = new Basket();
+            $basket->save();
+
+            $settings->basketId = $basket->UniqueIdentifier;
+            $settings->storeSession();
+            GlobalBasket::getInstance()->reLoadBasket();
+        }
+
+        return $basket;
     }
 
     /**

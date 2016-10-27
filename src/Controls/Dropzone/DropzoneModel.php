@@ -19,12 +19,16 @@ class DropzoneModel extends ControlModel
     /** @var Event */
     public $deleteImageEvent = null;
 
+    /** @var Event */
+    public $imageReorderEvent = null;
+
     public function __construct()
     {
         parent::__construct();
 
         $this->FilesUploadedEvent = new Event();
         $this->deleteImageEvent = new Event();
+        $this->imageReorderEvent = new Event();
         $this->uploadedFiles = [];
     }
 
