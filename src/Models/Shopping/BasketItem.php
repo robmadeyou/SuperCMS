@@ -7,6 +7,7 @@ use Rhubarb\Stem\Schema\Columns\AutoIncrementColumn;
 use Rhubarb\Stem\Schema\Columns\ForeignKeyColumn;
 use Rhubarb\Stem\Schema\Columns\IntegerColumn;
 use Rhubarb\Stem\Schema\ModelSchema;
+use SuperCMS\SuperCMS;
 
 /**
  *
@@ -32,5 +33,10 @@ class BasketItem extends Model
         );
 
         return $schema;
+    }
+
+    public function getTotalCost()
+    {
+        return SuperCMS::$currencySymbol . $this->Quantity * $this->ProductVariation->Price;
     }
 }

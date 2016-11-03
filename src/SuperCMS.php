@@ -32,6 +32,7 @@ use SuperCMS\Leaves\Admin\ShippingType\ShippingTypeCollection;
 use SuperCMS\Leaves\Errors\Error403;
 use SuperCMS\Leaves\Errors\Error404;
 use SuperCMS\Leaves\Index;
+use SuperCMS\Leaves\Site\Basket\BasketPage;
 use SuperCMS\Leaves\Site\Category\CategoryCollection;
 use SuperCMS\Leaves\Site\Product\ProductCollection;
 use SuperCMS\Leaves\SuperCMSLoginView;
@@ -59,6 +60,8 @@ class SuperCMS extends Module
      */
     protected $container;
     protected $basketClass = GlobalBasket::class;
+
+    public static $currencySymbol = '&pound;';
 
     /**
      * @param Container $container
@@ -109,6 +112,7 @@ class SuperCMS extends Module
                     'category/' => new CategoryUrlHandler(Category::class, StringTools::getNamespaceFromClass(CategoryCollection::class), [], [
                         'product/' => new ProductUrlHandler(Product::class, StringTools::getNamespaceFromClass(ProductCollection::class))
                     ]),
+                    'basket' => new ClassMappedUrlHandler(BasketPage::class),
                     '404/' => new ClassMappedUrlHandler(Error404::class),
                     '403/' => new ClassMappedUrlHandler(Error403::class)
                 ]),

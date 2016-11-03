@@ -49,11 +49,7 @@ class ProductItem extends ModelBoundLeaf
     {
         $model = parent::onModelCreated();
 
-        if (!$this->model->selectedVariation && $this->model->selectedVariationId) {
-            $this->model->selectedVariation = new ProductVariation($this->model->selectedVariationId);
-        } else {
-            $this->model->selectedVariation = $this->model->restModel->getDefaultProductVariation();
-        }
+        $this->model->selectedVariation = $this->model->restModel->getDefaultProductVariation();
 
         return $model;
     }
@@ -69,7 +65,7 @@ class ProductItem extends ModelBoundLeaf
      */
     protected function getSelectedVariation()
     {
-        if ($this->model->selectedVariationId != $this->model->selectedVariation->UniqueIdentifier) {
+        if ($this->model->selectedVariationId&& $this->model->selectedVariationId != $this->model->selectedVariation->UniqueIdentifier) {
             return new ProductVariation($this->model->selectedVariationId);
         } else {
             return $this->model->selectedVariation;
