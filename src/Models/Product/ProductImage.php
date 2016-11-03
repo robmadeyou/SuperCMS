@@ -42,7 +42,7 @@ class ProductImage extends Model
         if ($uploadData) {
             $uploadPath = APPLICATION_ROOT_DIR . '/static/images/products/' . $product->ProductID . '/' . $product->UniqueIdentifier . '/';
             if (!is_dir($uploadPath)) {
-                mkdir($uploadPath, 777, true);
+                mkdir($uploadPath, 0777, true);
                 chmod($uploadPath, 0777);
             }
 
