@@ -2,9 +2,9 @@
 
 namespace SuperCMS\Leaves\Site\Category;
 
-use Rhubarb\Leaf\Crud\Leaves\ModelBoundLeaf;
+use SuperCMS\Leaves\Site\Search\SearchLeaf;
 
-class CategoryItem extends ModelBoundLeaf
+class CategoryItem extends SearchLeaf
 {
     protected function getViewClass()
     {

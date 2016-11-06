@@ -2,11 +2,11 @@
 
 namespace SuperCMS\Leaves\Site\Basket;
 
+use Rhubarb\Crown\Settings\HtmlPageSettings;
 use Rhubarb\Leaf\Controls\Common\Buttons\Button;
-use Rhubarb\Leaf\Table\Leaves\Columns\LeafColumn;
-use Rhubarb\Leaf\Table\Leaves\Table;
 use Rhubarb\Leaf\Views\View;
 use Rhubarb\Stem\Exceptions\RecordNotFoundException;
+use SuperCMS\Models\Shopping\Basket;
 use SuperCMS\Models\Shopping\BasketItem;
 
 class BasketPageView extends View
@@ -16,8 +16,11 @@ class BasketPageView extends View
 
     protected function createSubLeaves()
     {
+        $settings = HtmlPageSettings::singleton();
+        $settings->pageTitle = 'Your basket';
+
         $this->registerSubLeaf(
-            $table = new Table($this->model->basket->BasketItems, '10', 'Table'),
+            $table = new BasketTable($this->model->basket->BasketItems, '10', 'Table'),
             $removeItemButton = new Button('RemoveItem', 'Remove', function ($id) {
                 try {
                     $basketItem = new BasketItem($id);
@@ -30,16 +33,6 @@ class BasketPageView extends View
             })
         );
 
-        $removeItemButton->setConfirmMessage('Are you sure you want to remove these item(s) from your basket?');
-        $removeItemButton->addCssClassNames('btn btn-link');
-
-        $table->columns = [
-            'Name' => '{ProductVariation.Name}',
-            'Quantity',
-            'Cost' => '{TotalCost}',
-            $removeItemButtonColumn = new LeafColumn($removeItemButton),
-        ];
-
         $table->setNoDataHtml('Your basket seems to be empty, why not <a href="/">add some items?</a>');
 
         $table->addCssClassNames('table');
@@ -49,10 +42,16 @@ class BasketPageView extends View
     {
         ?>
         <div class="c-basket-outer">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h1>Your Basket</h1>
+            <h1>Your Basket</h1>
+            <div class="row marginless c-basket-outer">
+                <div class="col-sm-9">
                     <?php $this->printBasketControl(); ?>
+                </div>
+                <div class="col-sm-3 c-basket-summary">
+                    <div class="c-basket-summary--inner">
+                        <h3>Summary</h3>
+                        <h4>Total: <span class="c-basket-total">&pound;<?= number_format(Basket::getCurrentBasket()->getTotalCost(), 2) ?></span></h4>
+                    </div>
                 </div>
             </div>
         </div>

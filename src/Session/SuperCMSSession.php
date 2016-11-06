@@ -7,4 +7,5 @@ use Rhubarb\Crown\Sessions\Session;
 class SuperCMSSession extends Session
 {
     public $basketId = 0;
+    public $searchQuery = '';
 }

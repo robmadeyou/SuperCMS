@@ -37,6 +37,15 @@ class Basket extends Model
         return $schema;
     }
 
+    public function getTotalCost()
+    {
+        $total = 0;
+        foreach($this->BasketItems as $basketItem) {
+            $total += $basketItem->ProductVariation->Price;
+        }
+        return $total;
+    }
+
     public static function addVariationToBasket(ProductVariation $variation, $quantity = 1)
     {
         $basket = self::getCurrentBasket();

@@ -35,6 +35,7 @@ use SuperCMS\Leaves\Index;
 use SuperCMS\Leaves\Site\Basket\BasketPage;
 use SuperCMS\Leaves\Site\Category\CategoryCollection;
 use SuperCMS\Leaves\Site\Product\ProductCollection;
+use SuperCMS\Leaves\Site\Search\SearchLeaf;
 use SuperCMS\Leaves\SuperCMSLoginView;
 use SuperCMS\LoginProviders\SCmsLoginProvider;
 use SuperCMS\Models\Coupon\Coupon;
@@ -112,6 +113,7 @@ class SuperCMS extends Module
                     'category/' => new CategoryUrlHandler(Category::class, StringTools::getNamespaceFromClass(CategoryCollection::class), [], [
                         'product/' => new ProductUrlHandler(Product::class, StringTools::getNamespaceFromClass(ProductCollection::class))
                     ]),
+                    'search/' => new ClassMappedUrlHandler(SearchLeaf::class),
                     'basket' => new ClassMappedUrlHandler(BasketPage::class),
                     '404/' => new ClassMappedUrlHandler(Error404::class),
                     '403/' => new ClassMappedUrlHandler(Error403::class)

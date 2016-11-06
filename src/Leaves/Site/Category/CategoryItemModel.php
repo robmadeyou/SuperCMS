@@ -2,9 +2,12 @@
 
 namespace SuperCMS\Leaves\Site\Category;
 
-use Rhubarb\Leaf\Crud\Leaves\ModelBoundModel;
+use SuperCMS\Leaves\Site\Search\SearchModel;
 
-class CategoryItemModel extends ModelBoundModel
+class CategoryItemModel extends SearchModel
 {
-
+    public function getProductCollection()
+    {
+        return $this->restModel->Products;
+    }
 }

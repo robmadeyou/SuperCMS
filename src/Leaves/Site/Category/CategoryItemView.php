@@ -2,12 +2,8 @@
 
 namespace SuperCMS\Leaves\Site\Category;
 
-use Rhubarb\Leaf\Views\View;
+use SuperCMS\Leaves\Site\Search\SearchView;
 
-class CategoryItemView extends View
+class CategoryItemView extends SearchView
 {
-    protected function printViewContent()
-    {
-        print $this->model->restModel->Name;
-    }
 }

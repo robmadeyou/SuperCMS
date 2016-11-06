@@ -2,11 +2,10 @@
 
 namespace SuperCMS\Leaves\Site\Product;
 
-use Rhubarb\Leaf\Crud\Leaves\ModelBoundLeaf;
 use Rhubarb\Leaf\Crud\Leaves\ModelBoundModel;
-use Rhubarb\Leaf\Leaves\LeafModel;
+use SuperCMS\Leaves\Site\Search\SearchLeaf;
 
-class ProductCollection extends ModelBoundLeaf
+class ProductCollection extends SearchLeaf
 {
     protected function getViewClass()
     {
