@@ -14,22 +14,6 @@ body .body
     margin-right: auto
 }
 
-.body .content {
-    background-color: #ffffff;
-    -webkit-box-shadow: 10px 10px 22px -9px rgba(158,158,158,1);
-    -moz-box-shadow: 10px 10px 22px -9px rgba(158,158,158,1);
-    box-shadow: 10px 10px 22px -9px rgba(158,158,158,1);
-}
-
-body .body #top-banner
-{
-    position: relative;
-    height: 300px;
-    width: 100%;
-    overflow: hidden;
-    margin-top: 14px;
-}
-
 body .body #top-banner
 {
     background-image: url('/static/images/title.png');

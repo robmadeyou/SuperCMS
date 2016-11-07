@@ -23,7 +23,9 @@ class SearchView extends DaisyDefaultView
     {
         parent::printViewContent();
 
+        $amount = $this->model->getProductCollection()->count();
         ?>
+        <h3>Found <strong><?=$amount?> </strong> <?= $amount == 1 ? 'item' : 'items' ?>.</h3>
         <div class="row">
             <div class="col-sm-2">
                 <?php $this->printFilters() ?>

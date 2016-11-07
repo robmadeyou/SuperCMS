@@ -41,9 +41,15 @@ class BasketTableView extends TableView
             </div>
             <div class="col-sm-3 product-price">
                 <div class="pull-right">
-                    <a href="#">Remove</a><br>
-                    <input size="5" type="text" value="{$basketProduct->Quantity}"><br>
-                    <p class="product-cost pull-right">&pound{$basketProduct->ProductVariation->Price}</p>
+                    <span class="c-product-action-element">
+                        <a href="#">Remove</a><br>
+                    </span>
+                    <span class="c-product-action-element">
+                        <label for="quantity">Quantity: </label><input id="quantity" name="quantity" size="5" type="text" value="{$basketProduct->Quantity}"><br>
+                    </span>
+                    <span class="c-product-action-element">
+                        <p class="product-cost">&pound{$basketProduct->ProductVariation->Price}</p>
+                    </span>
                 </div>
             </div>
         </div>
