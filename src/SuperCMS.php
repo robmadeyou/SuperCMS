@@ -95,7 +95,10 @@ class SuperCMS extends Module
 
         parent::registerUrlHandlers();
 
-        new $this->basketClass();
+        try {
+            new $this->basketClass();
+        } catch (\Exception $ex) {
+        }
 
         $staticResources = new StaticResourceUrlHandler(__DIR__ . '/../static/');
         $staticResources->setPriority('100');
