@@ -34,6 +34,7 @@ use SuperCMS\Leaves\Errors\Error404;
 use SuperCMS\Leaves\Index;
 use SuperCMS\Leaves\Site\Basket\BasketPage;
 use SuperCMS\Leaves\Site\Category\CategoryCollection;
+use SuperCMS\Leaves\Site\Checkout\Checkout;
 use SuperCMS\Leaves\Site\Product\ProductCollection;
 use SuperCMS\Leaves\Site\Search\SearchLeaf;
 use SuperCMS\Leaves\SuperCMSLoginView;
@@ -117,7 +118,8 @@ class SuperCMS extends Module
                         'product/' => new ProductUrlHandler(Product::class, StringTools::getNamespaceFromClass(ProductCollection::class))
                     ]),
                     'search/' => new ClassMappedUrlHandler(SearchLeaf::class),
-                    'basket' => new ClassMappedUrlHandler(BasketPage::class),
+                    'basket/' => new ClassMappedUrlHandler(BasketPage::class),
+                    'checkout/' => new ClassMappedUrlHandler(Checkout::class),
                     '404/' => new ClassMappedUrlHandler(Error404::class),
                     '403/' => new ClassMappedUrlHandler(Error403::class)
                 ]),
@@ -128,6 +130,12 @@ class SuperCMS extends Module
 
     protected function getModules()
     {
+        $auth = new AuthenticationWithRolesModule();
+
+        $adminUrl = new ProtectedUrl(self::URL_ADMIN_BASE, AdminLoginProvider::class, self::URL_ADMIN_BASE . self::URL_LOGIN);
+        $adminUrl->loginLeafClassName = AdminLogin::class;
+        $auth->registerProtectedUrl($adminUrl);
+
         return [
             new LayoutModule(DefaultLayout::class),
             new StemModule(),

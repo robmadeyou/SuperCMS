@@ -4,19 +4,25 @@ namespace SuperCMS\Views;
 
 trait BreadcrumbTrait
 {
-    abstract function getBreadcrumbItems():Array;
+    abstract function getBreadcrumbItems():array;
 
     public function printBreadcrumbs()
     {
         print '<ul class="c-breadcrumb">';
-        foreach ($this->getBreadcrumbItems() as $item) {
-            $this->printBreadcrumbItem($item);
+        foreach ($this->getBreadcrumbItems() as $item => $link) {
+            $this->printBreadcrumbItem($item, $link);
         }
-        print '</ul>';
+        print '<div class="clearfix"></div></ul>';
     }
 
-    protected function printBreadcrumbItem($name)
+    protected function printBreadcrumbItem($name, $link = '')
     {
-        print '<li class="c-breadcrumb--item">{$name}</li>';
+        $list = '<li class="c-breadcrumb--item"><span>' . $name . '</span></li>';
+
+        if ($link) {
+            $list = '<a href="' . $link . '">' . $list . '</a>';
+        }
+
+        print $list;
     }
 }

@@ -139,4 +139,9 @@ class Category extends Model
     {
         return parent::find(new AndGroup([new Equals('Visible', true), new AndGroup($filters)]));
     }
+
+    public function getPublicUrl()
+    {
+        return '/category/' . $this->SeoSafeName . '/';
+    }
 }

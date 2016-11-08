@@ -7,7 +7,7 @@
         }
     },
     "require": {
-        "rhubarbphp/scaffold-authentication": "dev-master",
+        "rhubarbphp/scaffold-authentication": "feature/ProtectedUrls-dev as 1.0.2",
         "rhubarbphp/scaffold-authentication-with-roles": "*",
         "rhubarbphp/module-patterns": "dev-develop",
         "rhubarbphp/module-stem": "*",

@@ -574,3 +574,12 @@ input:checked + .slider:before {
 	transition: all 0.4s ease-in-out; }
 .gridly .dragging {
 	z-index: 800; }
+
+.c-breadcrumb {
+	list-style: none;
+	padding-left:0;
+}
+
+.c-breadcrumb .c-breadcrumb--item {
+	float: left;
+}

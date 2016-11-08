@@ -9,9 +9,12 @@ use Rhubarb\Leaf\Leaves\LeafDeploymentPackage;
 use Rhubarb\Leaf\Views\View;
 use SuperCMS\Models\Product\Product;
 use SuperCMS\Models\Product\ProductVariation;
+use SuperCMS\Views\BreadcrumbTrait;
 
 class ProductItemView extends View
 {
+    use BreadcrumbTrait;
+
     /** @var ProductItemModel */
     protected $model;
 
@@ -32,6 +35,8 @@ class ProductItemView extends View
         $product = $this->model->restModel;
         $settings = HtmlPageSettings::singleton();
         $settings->pageTitle = $product->Name . ' - ' . $this->model->selectedVariation->Name;
+
+        $this->printBreadcrumbs();
         ?>
         <div class="row product-page">
             <div class="col-sm-5 c-product-image-section">
@@ -107,6 +112,16 @@ HTML;
     protected function printProductDescription(Product $product)
     {
         print $product->Description;
+    }
+
+    public function getBreadcrumbItems():array
+    {
+        $category = $this->model->restModel->Category;
+        return [
+            'Home' => '/',
+            $category->Name => $category->getPublicUrl(),
+            $this->model->restModel->Name => '',
+        ];
     }
 
     public function getDeploymentPackage()

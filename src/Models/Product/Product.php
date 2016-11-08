@@ -165,7 +165,7 @@ class Product extends Model
 
     public function getPublicUrl()
     {
-        return '/category/' . $this->Category->SeoSafeName . '/product/' . $this->SeoSafeName . '/';
+        return $this->Category->getPublicUrl() . 'product/' . $this->SeoSafeName . '/';
     }
 
     public static function find(Filter ...$filters)
