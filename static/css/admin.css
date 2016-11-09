@@ -3,7 +3,7 @@
  */
 
 /* Move down content because we have a fixed navbar that is 50px tall */
-body {
+.admin-page {
     padding-top: 50px;
 }
 
@@ -136,4 +136,10 @@ body.event-processing .loading-overlay {
 
 .fa {
     vertical-align: middle;
+}
+
+.login-page {
+    background-color: #428bca;
+    height:100%;
+    width:100%;
 }

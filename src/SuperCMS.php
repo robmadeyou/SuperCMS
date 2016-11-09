@@ -13,7 +13,9 @@ use Rhubarb\Crown\UrlHandlers\ClassMappedUrlHandler;
 use Rhubarb\Crown\UrlHandlers\StaticResourceUrlHandler;
 use Rhubarb\Leaf\LeafModule;
 use Rhubarb\Leaf\Paging\Leaves\EventPagerView;
+use Rhubarb\Scaffolds\Authentication\Leaves\Login;
 use Rhubarb\Scaffolds\Authentication\Leaves\LoginView;
+use Rhubarb\Scaffolds\Authentication\Settings\ProtectedUrl;
 use Rhubarb\Scaffolds\AuthenticationWithRoles\AuthenticationWithRolesModule;
 use Rhubarb\Stem\Custard\SeedDemoDataCommand;
 use Rhubarb\Stem\Repositories\MySql\MySql;
@@ -27,6 +29,7 @@ use SuperCMS\Leaves\Admin\AdminIndex;
 use SuperCMS\Leaves\Admin\Categories\CategoriesCollection;
 use SuperCMS\Leaves\Admin\Coupons\CouponsCollection;
 use SuperCMS\Leaves\Admin\Dashboard\AdminDashboard;
+use SuperCMS\Leaves\Admin\Login\AdminLogin;
 use SuperCMS\Leaves\Admin\Products\ProductsCollection;
 use SuperCMS\Leaves\Admin\ShippingType\ShippingTypeCollection;
 use SuperCMS\Leaves\Errors\Error403;
@@ -38,6 +41,7 @@ use SuperCMS\Leaves\Site\Checkout\Checkout;
 use SuperCMS\Leaves\Site\Product\ProductCollection;
 use SuperCMS\Leaves\Site\Search\SearchLeaf;
 use SuperCMS\Leaves\SuperCMSLoginView;
+use SuperCMS\LoginProviders\AdminLoginProvider;
 use SuperCMS\LoginProviders\SCmsLoginProvider;
 use SuperCMS\Models\Coupon\Coupon;
 use SuperCMS\Models\Product\Category;
@@ -132,14 +136,18 @@ class SuperCMS extends Module
     {
         $auth = new AuthenticationWithRolesModule();
 
-        $adminUrl = new ProtectedUrl(self::URL_ADMIN_BASE, AdminLoginProvider::class, self::URL_ADMIN_BASE . self::URL_LOGIN);
+        $adminUrl = new ProtectedUrl('/admin/', AdminLoginProvider::class, '/admin/login/');
         $adminUrl->loginLeafClassName = AdminLogin::class;
         $auth->registerProtectedUrl($adminUrl);
+
+        $userUrl = new ProtectedUrl('/checkout/', SCmsLoginProvider::class, '/login/');
+        $userUrl->loginLeafClassName = Login::class;
+        $auth->registerProtectedUrl($userUrl);
 
         return [
             new LayoutModule(DefaultLayout::class),
             new StemModule(),
-            new AuthenticationWithRolesModule(SCmsLoginProvider::class, '/admin/'),
+            $auth,
             new LeafModule(),
         ];
     }
