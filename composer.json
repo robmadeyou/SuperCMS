@@ -7,19 +7,25 @@
         }
     },
     "require": {
-
-        "rhubarbphp/module-patterns": "dev-develop",
+        "rhubarbphp/rhubarb": "^1.1",
         "rhubarbphp/module-stem": "^1.3.14",
         "rhubarbphp/module-leaf": "^1.1.10",
-        "rhubarbphp/module-leaf-common-controls": "1.0.9",
-        "rhubarbphp/module-leaf-search-panel": "1.0.0",
-        "rhubarbphp/module-leaf-tabs": "^1.0.0",
-        "rhubarbphp/module-leaf-table": "*",
-        "rhubarbphp/module-leaf-crud": "^1.0.0",
-        "rhubarbphp/rhubarb": "^1.1.9",
-        "rhubarbphp/scaffold-repository-log": "dev-master",
+        "rhubarbphp/module-leaf-common-controls": "^1.0.14",
+        "rhubarbphp/module-leaf-search-panel": "^1.0.0",
+        "rhubarbphp/module-leaf-tabs": "^1.0.0@dev",
+        "rhubarbphp/module-leaf-table": "^1.0.3",
+        "rhubarbphp/module-leaf-paging": "^1.0.3",
+        "rhubarbphp/module-leaf-crud": "^1.0.3",
+        "rhubarbphp/module-patterns": "1.0.x-dev",
         "rhubarbphp/scaffold-authentication": "feature/ProtectedUrls-dev as 1.0.2",
         "rhubarbphp/scaffold-authentication-with-roles": "^1.2.1",
+        "rhubarbphp/scaffold-navigation-menu": "^1.0.0",
+        "rhubarbphp/scaffold-communications":"dev-master",
+        "erusev/parsedown-extra" : "*",
+        "components/jquery": "^2.2",
+        "rhubarbphp/module-leaf-html5upload": "^1.0.0",
+        "drmonty/chosen": "^1.6.1",
+        "rhubarbphp/custard-sassc": "^1.0.0",
         "twbs/bootstrap": "^3.3"
     }
 }
