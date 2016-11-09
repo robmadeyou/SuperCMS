@@ -26,6 +26,7 @@ use Rhubarb\Stem\Schema\Columns\StringColumn;
  * @property-read Product[]|\Rhubarb\Stem\Collections\RepositoryCollection $Products Relationship
  * @property-read Category[]|\Rhubarb\Stem\Collections\RepositoryCollection $ChildCategories Relationship
  * @property-read Category $ParentCategory Relationship
+ * @property-read mixed $PublicUrl {@link getPublicUrl()}
  */
 class Category extends Model
 {
