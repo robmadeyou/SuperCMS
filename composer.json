@@ -18,8 +18,8 @@
         "rhubarbphp/module-leaf-crud": "^1.0.0",
         "rhubarbphp/rhubarb": "^1.1.9",
         "rhubarbphp/scaffold-repository-log": "dev-master",
-        "rhubarbphp/scaffold-authentication": "feature/ProtectedUrls-dev as 1.0.1",
-        "rhubarbphp/scaffold-authentication-with-roles": "^1.2.0",
+        "rhubarbphp/scaffold-authentication": "feature/ProtectedUrls-dev as *",
+        "rhubarbphp/scaffold-authentication-with-roles": "^1.2",
         "twbs/bootstrap": "^3.3"
     }
 }
