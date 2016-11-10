@@ -2,7 +2,8 @@
 
 namespace SuperCMS\Models\User;
 
-use Rhubarb\Scaffolds\AuthenticationWithRoles\User;
+use Rhubarb\Scaffolds\Authentication\User;
+use Rhubarb\Stem\Schema\Columns\IntegerColumn;
 use Rhubarb\Stem\Schema\ModelSchema;
 
 /**
@@ -20,12 +21,14 @@ use Rhubarb\Stem\Schema\ModelSchema;
  * @property string $PasswordResetHash Repository field
  * @property \Rhubarb\Crown\DateTime\RhubarbDateTime $PasswordResetDate Repository field
  * @property int $RoleID Repository field
- * @property-read \Rhubarb\Scaffolds\AuthenticationWithRoles\Role $Role Relationship
- * @property-read \Rhubarb\Scaffolds\AuthenticationWithRoles\PermissionAssignment[]|\Rhubarb\Stem\Collections\Collection $Permissions Relationship
- * @property-read \Rhubarb\Scaffolds\AuthenticationWithRoles\UserRole[]|\Rhubarb\Stem\Collections\Collection $RolesRaw Relationship
- * @property-read \Rhubarb\Scaffolds\AuthenticationWithRoles\Role[]|\Rhubarb\Stem\Collections\Collection $Roles Relationship
  * @property-read \SuperCMS\Models\Shopping\Basket[]|\Rhubarb\Stem\Collections\RepositoryCollection $Baskets Relationship
  */
 class CmsUser extends User
 {
+    protected function extendSchema(ModelSchema $schema)
+    {
+        $schema->addColumn(
+            new IntegerColumn('RoleID')
+        );
+    }
 }

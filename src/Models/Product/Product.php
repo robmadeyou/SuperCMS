@@ -77,7 +77,7 @@ class Product extends Model
     {
         $variation = $this->getDefaultProductVariation();
         if(isset($variation->Images[0])) {
-            return $variation->Images[0]->ImagePath;
+            return $variation->getPrimaryImage();
         }
         return '/static/images/noimage.png';
     }

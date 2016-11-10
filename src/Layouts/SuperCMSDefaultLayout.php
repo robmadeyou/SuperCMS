@@ -21,4 +21,19 @@ class SuperCMSDefaultLayout extends BaseLayout
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <?php
     }
+
+    protected function printTail()
+    {
+        parent::printTail();
+
+        ?>
+
+
+        <script type="text/javascript">
+
+            !window.jQuery && document.write('<script src="/files/js/jquery.js"><\/script>');
+            document.write('<script src="/files/js/bootstrap.min.js"><\/script>');
+        </script>
+        <?php
+    }
 }

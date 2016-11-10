@@ -23,6 +23,14 @@ class SuperCMSEventPagerView extends EventPagerView
     public $containerCssClass = '';
     public $innerContainerCssClass = 'pagination';
 
+    protected function createSubLeaves()
+    {
+        parent::createSubLeaves();
+
+        $this->model->addCssClassNames('dataTables_paginate', 'paging_simple_numbers');
+    }
+
+
     public function printViewContent()
     {
         // Don't show any pages if there only is one page.

@@ -26,7 +26,7 @@ class SCmsSolutionSchema extends SolutionSchema
         $this->addModel('ProductVariation', ProductVariation::class, 1.02);
         $this->addModel('Comment', Comment::class);
         $this->addModel('Category', Category::class, 1.03);
-        $this->addModel('User', CmsUser::class);
+        $this->addModel('User', CmsUser::class, 2);
         $this->addModel('ShippingType', ShippingType::class);
         $this->addModel('Coupon', Coupon::class, 1.01);
         $this->addModel('Basket', Basket::class, 1);

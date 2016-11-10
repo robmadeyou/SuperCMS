@@ -16,6 +16,7 @@ class CategoriesCollectionView extends SuperCMSCollectionView
             $table = new Table(Category::find(), 50, 'Categories')
         );
 
+        $table->addCssClassNames('table', 'table-striped', 'table-bordered', 'table-hover');
         $table->addCssClassNames('table', 'table-striped');
 
         $table->columns = [

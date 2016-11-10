@@ -7,13 +7,14 @@ use Rhubarb\Crown\Layout\LayoutModule;
 use Rhubarb\Crown\Response\RedirectResponse;
 use Rhubarb\Crown\UrlHandlers\ClassMappedUrlHandler;
 use SuperCMS\Layouts\AdminLayout;
+use SuperCMS\LoginProviders\AdminLoginProvider;
 use SuperCMS\LoginProviders\SCmsLoginProvider;
 
 class AdminClassMappedUrlHandler extends ClassMappedUrlHandler
 {
     public function generateResponseForRequest($request = null)
     {
-        $loggedIn = SCmsLoginProvider::getLoggedInUser();
+        $loggedIn = AdminLoginProvider::getLoggedInUser();
         if ($loggedIn->RoleID != 2) {
             throw new ForceResponseException(new RedirectResponse('/403/'));
         }

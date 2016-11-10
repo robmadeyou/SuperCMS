@@ -14,6 +14,7 @@ class CouponsCollectionView extends SuperCMSCollectionView
             $table = new Table(Coupon::find(), 20, 'CouponTable')
         );
 
+        $table->addCssClassNames('table', 'table-striped', 'table-bordered', 'table-hover');
         $table->addCssClassNames('table table-striped');
         $table->columns = [
             'Code',

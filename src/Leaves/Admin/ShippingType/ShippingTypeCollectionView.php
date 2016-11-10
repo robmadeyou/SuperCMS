@@ -14,6 +14,7 @@ class ShippingTypeCollectionView extends SuperCMSCollectionView
             $table = new Table(ShippingType::find(), 50, 'Table')
         );
 
+        $table->addCssClassNames('table', 'table-striped', 'table-bordered', 'table-hover');
         $table->columns = [
             'ShippingType',
             'United Kingdom' => 'UK',
@@ -25,6 +26,7 @@ class ShippingTypeCollectionView extends SuperCMSCollectionView
             '' => '<a href="{ShippingTypeID}/edit/" class="btn btn-default">Edit</a>'
         ];
 
+        $table->setNoDataHtml('No shipping types to show. Please add them');
         $table->addCssClassNames('table', 'table-striped');
     }
 

@@ -18,7 +18,7 @@ class ProductsCollectionView extends SuperCMSCollectionView
             $search = new ProductsSearchPanel('SearchPanel')
         );
 
-        $table->addCssClassNames('table', 'table-striped');
+        $table->addCssClassNames('table', 'table-striped', 'table-bordered', 'table-hover');
         $table->columns = [
             'Name',
             'Live',

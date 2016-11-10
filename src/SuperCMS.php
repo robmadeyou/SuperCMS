@@ -13,10 +13,10 @@ use Rhubarb\Crown\UrlHandlers\ClassMappedUrlHandler;
 use Rhubarb\Crown\UrlHandlers\StaticResourceUrlHandler;
 use Rhubarb\Leaf\LeafModule;
 use Rhubarb\Leaf\Paging\Leaves\EventPagerView;
+use Rhubarb\Scaffolds\Authentication\AuthenticationModule;
 use Rhubarb\Scaffolds\Authentication\Leaves\Login;
 use Rhubarb\Scaffolds\Authentication\Leaves\LoginView;
 use Rhubarb\Scaffolds\Authentication\Settings\ProtectedUrl;
-use Rhubarb\Scaffolds\AuthenticationWithRoles\AuthenticationWithRolesModule;
 use Rhubarb\Stem\Custard\SeedDemoDataCommand;
 use Rhubarb\Stem\Repositories\MySql\MySql;
 use Rhubarb\Stem\Repositories\Repository;
@@ -134,7 +134,7 @@ class SuperCMS extends Module
 
     protected function getModules()
     {
-        $auth = new AuthenticationWithRolesModule();
+        $auth = new AuthenticationModule();
 
         $adminUrl = new ProtectedUrl('/admin/', AdminLoginProvider::class, '/admin/login/');
         $adminUrl->loginLeafClassName = AdminLogin::class;

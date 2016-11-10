@@ -2,7 +2,6 @@
 
 namespace SuperCMS\Custard;
 
-use Rhubarb\Scaffolds\AuthenticationWithRoles\Role;
 use Rhubarb\Stem\Custard\DemoDataSeederInterface;
 use SuperCMS\Models\User\CmsUser;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -21,13 +20,6 @@ class ApplicationDemoDataSeeder implements DemoDataSeederInterface
 
     public function createRoles()
     {
-        $role = self::$roleUser = new Role();
-        $role->RoleName = 'User';
-        $role->save();
-
-        $role = self::$roleAdmin = new Role();
-        $role->RoleName = 'Admin';
-        $role->save();
     }
 
     public function createUsers()
@@ -39,7 +31,6 @@ class ApplicationDemoDataSeeder implements DemoDataSeederInterface
         $admin->Enabled = true;
         $admin->RoleID = 2;
         $admin->setNewPassword('test');
-        $admin->addToRole(self::$roleAdmin);
         $admin->save();
     }
 }
