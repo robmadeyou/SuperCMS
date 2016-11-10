@@ -29,9 +29,11 @@ class BasketPageView extends View
                 }
             }),
             $toCheckoutButton = new Button('ToCheckout', 'To Checkout', function () {
-
+                $this->model->toCheckoutEvent->raise();
             })
         );
+
+        $toCheckoutButton->addCssClassNames('button', 'button-full-width');
 
         $table->setNoDataHtml('Your basket seems to be empty, why not <a href="/">add some items?</a>');
 
@@ -51,6 +53,9 @@ class BasketPageView extends View
                     <div class="c-basket-summary--inner">
                         <h3>Summary</h3>
                         <h4>Total: <span class="c-basket-total">&pound;<?= number_format(Basket::getCurrentBasket()->getTotalCost(), 2) ?></span></h4>
+                    </div>
+                    <div class="c-to-checkout">
+                        <?= $this->leaves['ToCheckout'] ?>
                     </div>
                 </div>
             </div>

@@ -25,6 +25,7 @@
         "rhubarbphp/module-leaf-html5upload": "^1.0.0",
         "drmonty/chosen": "^1.6.1",
         "rhubarbphp/custard-sassc": "^1.0.0",
-        "twbs/bootstrap": "^3.3"
+        "twbs/bootstrap": "^3.3",
+        "stripe/stripe-php": "*"
     }
 }

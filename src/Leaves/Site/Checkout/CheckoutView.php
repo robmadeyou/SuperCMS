@@ -6,5 +6,11 @@ use Rhubarb\Leaf\Views\View;
 
 class CheckoutView extends View
 {
+    protected function printViewContent()
+    {
+        ?>
+
+        <?php
+    }
 
 }

@@ -41,7 +41,7 @@ class Basket extends Model
     {
         $total = 0;
         foreach($this->BasketItems as $basketItem) {
-            $total += $basketItem->ProductVariation->Price;
+            $total += $basketItem->ProductVariation->Price * $basketItem->Quantity;
         }
         return $total;
     }

@@ -37,6 +37,6 @@ class BasketItem extends Model
 
     public function getTotalCost()
     {
-        return SuperCMS::$currencySymbol . $this->Quantity * $this->ProductVariation->Price;
+        return SuperCMS::$currencySymbol . number_format($this->Quantity * $this->ProductVariation->Price, 2);
     }
 }
