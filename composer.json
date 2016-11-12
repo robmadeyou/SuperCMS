@@ -20,6 +20,7 @@
         "rhubarbphp/scaffold-authentication": "feature/ProtectedUrls-dev as 1.0.2",
         "rhubarbphp/scaffold-navigation-menu": "^1.0.0",
         "rhubarbphp/scaffold-communications":"dev-master",
+        "rhubarbphp/scaffold-application-settings":"^1.0.0",
         "erusev/parsedown-extra" : "*",
         "components/jquery": "^2.2",
         "rhubarbphp/module-leaf-html5upload": "^1.0.0",
