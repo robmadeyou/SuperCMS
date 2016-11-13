@@ -23,4 +23,25 @@ trait BootstrapViewTrait
             }
         }
     }
+
+    protected function printFieldset($title, $items)
+    {
+        ?>
+        <form>
+            <?php
+            print $title;
+            foreach ($items as $label => $item) {
+                $label = !is_numeric($label) ? $label : $item;
+                $itemObject = $this->leaves[ $item ];
+                print <<<HTML
+                    <div class="form-group">
+                        <label>{$label}</label>
+                        {$itemObject}
+                    </div>
+HTML;
+            }
+            ?>
+        </form>
+        <?php
+    }
 }

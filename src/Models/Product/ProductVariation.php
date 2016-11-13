@@ -59,4 +59,9 @@ class ProductVariation extends Model
         }
         return '';
     }
+
+    public function getPublicUrl()
+    {
+        return $this->Product->getPublicUrl() . '?v=' . $this->UniqueIdentifier;
+    }
 }

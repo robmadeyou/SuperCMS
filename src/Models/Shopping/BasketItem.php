@@ -18,6 +18,7 @@ use SuperCMS\SuperCMS;
  * @property int $Quantity Repository field
  * @property-read \SuperCMS\Models\Product\ProductVariation $ProductVariation Relationship
  * @property-read Basket $Basket Relationship
+ * @property-read mixed $TotalCost {@link getTotalCost()}
  */
 class BasketItem extends Model
 {

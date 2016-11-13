@@ -15,7 +15,7 @@ use SuperCMS\Models\Shopping\Basket;
 use SuperCMS\Models\Shopping\BasketItem;
 use SuperCMS\Models\User\CmsUser;
 
-class SCmsSolutionSchema extends SolutionSchema
+class SuperCMSSolutionSchema extends SolutionSchema
 {
     public function __construct()
     {
@@ -29,7 +29,7 @@ class SCmsSolutionSchema extends SolutionSchema
         $this->addModel('User', CmsUser::class, 2);
         $this->addModel('ShippingType', ShippingType::class);
         $this->addModel('Coupon', Coupon::class, 1.01);
-        $this->addModel('Basket', Basket::class, 1);
+        $this->addModel('Basket', Basket::class, 2);
         $this->addModel('BasketItem', BasketItem::class, 1);
     }
 

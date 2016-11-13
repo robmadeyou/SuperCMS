@@ -11,7 +11,6 @@ use Rhubarb\Leaf\Crud\Leaves\CrudView;
 
 abstract class SuperCMSCrudView extends CrudView
 {
-
     use BootstrapViewTrait;
 
     protected function createSubLeaves()
@@ -71,27 +70,6 @@ abstract class SuperCMSCrudView extends CrudView
     protected function printFormButtons()
     {
         print $this->leaves[ 'Save' ] . $this->leaves[ 'Cancel' ];
-    }
-
-    protected function printFieldset($title, $items)
-    {
-        ?>
-        <form>
-            <?php
-            print $title;
-            foreach ($items as $label => $item) {
-                $label = !is_numeric($label) ? $label : $item;
-                $itemObject = $this->leaves[ $item ];
-                print <<<HTML
-                    <div class="form-group">
-                        <label>{$label}</label>
-                        {$itemObject}
-                    </div>
-HTML;
-            }
-            ?>
-        </form>
-        <?php
     }
 
     abstract protected function printBody();

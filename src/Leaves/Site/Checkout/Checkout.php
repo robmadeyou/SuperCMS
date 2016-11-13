@@ -2,20 +2,31 @@
 
 namespace SuperCMS\Leaves\Site\Checkout;
 
+use Rhubarb\Crown\Exceptions\ForceResponseException;
+use Rhubarb\Crown\Response\RedirectResponse;
 use Rhubarb\Leaf\Leaves\Leaf;
-use Rhubarb\Leaf\Leaves\LeafModel;
+use SuperCMS\Models\Shopping\Basket;
 
 class Checkout extends Leaf
 {
+    /** @var CheckoutModel */
+    protected $model;
+
     protected function getViewClass()
     {
-        return CheckoutView::class;
+        throw new ForceResponseException(new RedirectResponse('/checkout/summary/'));
     }
 
     protected function createModel()
     {
-        $model = new LeafModel();
-
+        $model = new CheckoutModel();
         return $model;
+    }
+
+    protected function onModelCreated()
+    {
+        parent::onModelCreated();
+
+        $this->model->basket = Basket::getCurrentBasket();
     }
 }

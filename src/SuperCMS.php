@@ -13,6 +13,9 @@ use Rhubarb\Crown\UrlHandlers\ClassMappedUrlHandler;
 use Rhubarb\Crown\UrlHandlers\StaticResourceUrlHandler;
 use Rhubarb\Leaf\LeafModule;
 use Rhubarb\Leaf\Paging\Leaves\EventPagerView;
+use Rhubarb\Leaf\Table\Leaves\TableView;
+use Rhubarb\Scaffolds\ApplicationSettings\ApplicationSettingModule;
+use Rhubarb\Scaffolds\ApplicationSettings\Settings\ApplicationSettings;
 use Rhubarb\Scaffolds\Authentication\AuthenticationModule;
 use Rhubarb\Scaffolds\Authentication\Leaves\Login;
 use Rhubarb\Scaffolds\Authentication\Leaves\LoginView;
@@ -31,13 +34,16 @@ use SuperCMS\Leaves\Admin\Coupons\CouponsCollection;
 use SuperCMS\Leaves\Admin\Dashboard\AdminDashboard;
 use SuperCMS\Leaves\Admin\Login\AdminLogin;
 use SuperCMS\Leaves\Admin\Products\ProductsCollection;
+use SuperCMS\Leaves\Admin\Settings\SettingsLeaf;
 use SuperCMS\Leaves\Admin\ShippingType\ShippingTypeCollection;
 use SuperCMS\Leaves\Errors\Error403;
 use SuperCMS\Leaves\Errors\Error404;
 use SuperCMS\Leaves\Index;
 use SuperCMS\Leaves\Site\Basket\BasketPage;
 use SuperCMS\Leaves\Site\Category\CategoryCollection;
+use SuperCMS\Leaves\Site\Checkout\Address\CheckoutAddress;
 use SuperCMS\Leaves\Site\Checkout\Checkout;
+use SuperCMS\Leaves\Site\Checkout\Summary\CheckoutSummary;
 use SuperCMS\Leaves\Site\Product\ProductCollection;
 use SuperCMS\Leaves\Site\Search\SearchLeaf;
 use SuperCMS\Leaves\SuperCMSLoginView;
@@ -46,13 +52,14 @@ use SuperCMS\LoginProviders\SCmsLoginProvider;
 use SuperCMS\Models\Coupon\Coupon;
 use SuperCMS\Models\Product\Category;
 use SuperCMS\Models\Product\Product;
-use SuperCMS\Models\SCmsSolutionSchema;
+use SuperCMS\Models\SuperCMSSolutionSchema;
 use SuperCMS\Models\Shipping\ShippingType;
 use SuperCMS\UrlHandlers\AdminClassMappedUrlHandler;
 use SuperCMS\UrlHandlers\AdminCrudUrlHandler;
 use SuperCMS\UrlHandlers\CategoryUrlHandler;
 use SuperCMS\UrlHandlers\ProductUrlHandler;
 use SuperCMS\Views\SuperCMSEventPagerView;
+use SuperCMS\Views\SuperCMSTable;
 
 /**
  * Class SuperCMS
@@ -85,7 +92,7 @@ class SuperCMS extends Module
 
         Repository::setDefaultRepositoryClassName(MySql::class);
 
-        SolutionSchema::registerSchema('CmsDatabase', SCmsSolutionSchema::class);
+        SolutionSchema::registerSchema('CmsDatabase', SuperCMSSolutionSchema::class);
 
         LoginProvider::setProviderClassName(SCmsLoginProvider::class);
 
@@ -93,6 +100,7 @@ class SuperCMS extends Module
 
         $this->container->registerClass(LoginView::class, SuperCMSLoginView::class);
         $this->container->registerClass(EventPagerView::class, SuperCMSEventPagerView::class);
+        $this->container->registerClass(TableView::class, SuperCMSTable::class);
     }
 
     protected function registerUrlHandlers()
@@ -116,14 +124,18 @@ class SuperCMS extends Module
                         'products/' => new AdminCrudUrlHandler(Product::class, StringTools::getNamespaceFromClass(ProductsCollection::class)),
                         'categories/' => new AdminCrudUrlHandler(Category::class, StringTools::getNamespaceFromClass(CategoriesCollection::class)),
                         'shipping-types/' => new AdminCrudUrlHandler(ShippingType::class, StringTools::getNamespaceFromClass(ShippingTypeCollection::class)),
-                        'coupons/' => new AdminCrudUrlHandler(Coupon::class, StringTools::getNamespaceFromClass(CouponsCollection::class))
+                        'coupons/' => new AdminCrudUrlHandler(Coupon::class, StringTools::getNamespaceFromClass(CouponsCollection::class)),
+                        'settings/' => new AdminClassMappedUrlHandler(SettingsLeaf::class),
                     ]),
                     'category/' => new CategoryUrlHandler(Category::class, StringTools::getNamespaceFromClass(CategoryCollection::class), [], [
                         'product/' => new ProductUrlHandler(Product::class, StringTools::getNamespaceFromClass(ProductCollection::class))
                     ]),
                     'search/' => new ClassMappedUrlHandler(SearchLeaf::class),
                     'basket/' => new ClassMappedUrlHandler(BasketPage::class),
-                    'checkout/' => new ClassMappedUrlHandler(Checkout::class),
+                    'checkout/' => new ClassMappedUrlHandler(Checkout::class, [
+                        'summary/' => new ClassMappedUrlHandler(CheckoutSummary::class),
+                        'address/' => new ClassMappedUrlHandler(CheckoutAddress::class),
+                    ]),
                     '404/' => new ClassMappedUrlHandler(Error404::class),
                     '403/' => new ClassMappedUrlHandler(Error403::class)
                 ]),
@@ -144,11 +156,14 @@ class SuperCMS extends Module
         $userUrl->loginLeafClassName = Login::class;
         $auth->registerProtectedUrl($userUrl);
 
+        ApplicationSettings::singleton();
+
         return [
             new LayoutModule(DefaultLayout::class),
             new StemModule(),
             $auth,
             new LeafModule(),
+            new ApplicationSettingModule()
         ];
     }
 

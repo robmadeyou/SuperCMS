@@ -6,6 +6,7 @@ use Rhubarb\Crown\Settings\HtmlPageSettings;
 use Rhubarb\Leaf\Controls\Common\Buttons\Button;
 use Rhubarb\Leaf\Views\View;
 use Rhubarb\Stem\Exceptions\RecordNotFoundException;
+use SuperCMS\Controls\HtmlButton\HtmlButton;
 use SuperCMS\Models\Shopping\Basket;
 use SuperCMS\Models\Shopping\BasketItem;
 
@@ -28,7 +29,7 @@ class BasketPageView extends View
                 } catch (RecordNotFoundException $ex) {
                 }
             }),
-            $toCheckoutButton = new Button('ToCheckout', 'To Checkout', function () {
+            $toCheckoutButton = new HtmlButton('ToCheckout', 'To Checkout <i class="fa fa-shopping-cart" aria-hidden="true"></i>', function () {
                 $this->model->toCheckoutEvent->raise();
             })
         );

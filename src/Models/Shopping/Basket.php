@@ -2,14 +2,19 @@
 
 namespace SuperCMS\Models\Shopping;
 
+use Rhubarb\Crown\LoginProviders\Exceptions\NotLoggedInException;
 use Rhubarb\Stem\Exceptions\RecordNotFoundException;
+use Rhubarb\Stem\Filters\AndGroup;
 use Rhubarb\Stem\Filters\Equals;
+use Rhubarb\Stem\Filters\Not;
 use Rhubarb\Stem\Models\Model;
+use Rhubarb\Stem\Repositories\MySql\Schema\Columns\MySqlEnumColumn;
 use Rhubarb\Stem\Schema\Columns\AutoIncrementColumn;
 use Rhubarb\Stem\Schema\Columns\ForeignKeyColumn;
 use Rhubarb\Stem\Schema\Columns\StringColumn;
 use Rhubarb\Stem\Schema\ModelSchema;
 use SuperCMS\Controls\GlobalBasket\GlobalBasket;
+use SuperCMS\LoginProviders\SCmsLoginProvider;
 use SuperCMS\Models\Product\ProductVariation;
 use SuperCMS\Session\SuperCMSSession;
 
@@ -21,9 +26,15 @@ use SuperCMS\Session\SuperCMSSession;
  * @property int $UserID Repository field
  * @property-read \SuperCMS\Models\User\CmsUser $User Relationship
  * @property-read BasketItem[]|\Rhubarb\Stem\Collections\RepositoryCollection $BasketItems Relationship
+ * @property string $Status Repository field
+ * @property-read mixed $TotalCost {@link getTotalCost()}
  */
 class Basket extends Model
 {
+
+    const STATUS_NEW = 'New';
+    const STATUS_COMPLETED = 'Completed';
+
     protected function createSchema()
     {
         $schema = new ModelSchema('tblBasket');
@@ -31,7 +42,8 @@ class Basket extends Model
         $schema->addColumn(
             new AutoIncrementColumn('BasketID'),
             new StringColumn('Session', 100),
-            new ForeignKeyColumn('UserID')
+            new ForeignKeyColumn('UserID'),
+            new MySqlEnumColumn('Status', self::STATUS_NEW, [self::STATUS_NEW, self::STATUS_COMPLETED])
         );
 
         return $schema;
@@ -72,18 +84,74 @@ class Basket extends Model
     public static function getCurrentBasket()
     {
         $settings = SuperCMSSession::singleton();
-        try {
-            $basket = new Basket($settings->basketId);
-        } catch (RecordNotFoundException $ex) {
-            $basket = new Basket();
-            $basket->save();
 
-            $settings->basketId = $basket->UniqueIdentifier;
-            $settings->storeSession();
-            GlobalBasket::getInstance()->reLoadBasket();
+        try {
+            $user = SCmsLoginProvider::getLoggedInUser();
+            try {
+                $basket = Basket::findLast(new AndGroup(
+                    [
+                        new Equals('UserID', $user->UniqueIdentifier),
+                        new Not(new Equals('Status', self::STATUS_COMPLETED))
+                    ]
+                ));
+            } catch (RecordNotFoundException $ex) {
+                $basket = new Basket();
+                $basket->UserID = $user->UniqueIdentifier;
+                $basket->save();
+            }
+
+            if ($settings->basketId != $basket->UniqueIdentifier) {
+                self::joinAnonymousBasketItemsToUserBasket($basket);
+                self::updateSession($basket);
+            }
+        } catch (NotLoggedInException $ex) {
+            try {
+                $basket = new Basket($settings->basketId);
+            } catch (RecordNotFoundException $ex) {
+                $basket = new Basket();
+                $basket->save();
+                self::updateSession($basket);
+            }
         }
 
         return $basket;
+    }
+
+    private static function updateSession(Basket $basket)
+    {
+        $settings = SuperCMSSession::singleton();
+        $settings->basketId = $basket->UniqueIdentifier;
+        $settings->storeSession();
+        GlobalBasket::getInstance()->reLoadBasket();
+    }
+
+    private static function joinAnonymousBasketItemsToUserBasket(Basket $userBasket)
+    {
+        $settings = SuperCMSSession::singleton();
+        try {
+            $sessionBasket = new Basket($settings->basketId);
+            foreach ($sessionBasket->BasketItems as $basketItem) {
+                if (!self::hasBasketGotSimilarItem($userBasket, $basketItem->ProductVariation)) {
+                    $basketItem->BasketID = $userBasket->UniqueIdentifier;
+                    $basketItem->save();
+                }
+            }
+        } catch (RecordNotFoundException $ex)
+        {}
+    }
+
+    /**
+     * Marks existing basket as paid and reloads all the settings
+     * for a new basket
+     * @param Basket $basket
+     */
+    public static function markPaid(Basket $basket)
+    {
+        $basket->Status = Basket::STATUS_COMPLETED;
+        $basket->save();
+        $session = SuperCMSSession::singleton();
+        $session->basketId = 0;
+        $session->storeSession();
     }
 
     /**
