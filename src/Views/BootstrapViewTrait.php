@@ -6,6 +6,7 @@ use Rhubarb\Leaf\Controls\Common\Buttons\Button;
 use Rhubarb\Leaf\Controls\Common\Checkbox\Checkbox;
 use Rhubarb\Leaf\Controls\Common\SelectionControls\DropDown\DropDown;
 use Rhubarb\Leaf\Controls\Common\Text\TextBox;
+use Rhubarb\Leaf\Leaves\Leaf;
 
 trait BootstrapViewTrait
 {
@@ -33,12 +34,16 @@ trait BootstrapViewTrait
             foreach ($items as $label => $item) {
                 $label = !is_numeric($label) ? $label : $item;
                 $itemObject = $this->leaves[ $item ];
-                print <<<HTML
+                $form = <<<HTML
                     <div class="form-group">
                         <label>{$label}</label>
                         {$itemObject}
                     </div>
 HTML;
+                if (isset($itemObject->error) && $itemObject->error == true) {
+                    $form = '<div class="has-error">' . $form . '</div>';
+                }
+                print $form;
             }
             ?>
         </form>

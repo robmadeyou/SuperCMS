@@ -14,11 +14,23 @@ class CheckoutModel extends LeafModel
     public $previousEvent;
     public $nextEvent;
 
+    public $requiredFields;
+
     public function __construct()
     {
         parent::__construct();
 
         $this->previousEvent = new Event();
         $this->nextEvent = new Event();
+    }
+
+    protected function getExposableModelProperties()
+    {
+        return array_merge(
+            parent::getExposableModelProperties(),
+            [
+                'requiredFields'
+            ]
+        );
     }
 }

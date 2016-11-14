@@ -3,6 +3,7 @@
 namespace SuperCMS\Leaves\Site\Checkout\Address;
 
 use Rhubarb\Leaf\Controls\Common\Text\TextBox;
+use SuperCMS\Controls\HtmlButton\HtmlButton;
 use SuperCMS\Leaves\Site\Checkout\CheckoutView;
 
 class CheckoutAddressView extends CheckoutView
@@ -19,8 +20,14 @@ class CheckoutAddressView extends CheckoutView
         $this->registerSubLeaf(
             new TextBox('Address1'),
             new TextBox('Address2'),
-            new TextBox('Address3')
+            new TextBox('Address3'),
+            $nextButton = new HtmlButton('Next', 'Next: Payment', function() {
+                $this->model->nextEvent->raise();
+            })
         );
+
+        $nextButton->addCssClassNames('button', 'button-checkout');
+
     }
 
     protected function printBody()
@@ -47,5 +54,6 @@ class CheckoutAddressView extends CheckoutView
 
     protected function printStepButtons()
     {
+        print '<a href="/" class="btn btn-default">Cancel</a>' . $this->leaves['Next'];
     }
 }

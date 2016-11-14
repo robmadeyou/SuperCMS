@@ -21,9 +21,7 @@ class ProductItemView extends View
     protected function createSubLeaves()
     {
         $this->registerSubLeaf(
-            $addToBasket = new Button('AddToBasket', 'Add To Basket', function () {
-                $this->model->addToCartEvent->raise();
-            }, true),
+            $addToBasket = new Button('AddToBasket', 'Add To Basket'),
             new DropDown()
         );
 

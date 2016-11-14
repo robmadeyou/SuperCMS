@@ -17,6 +17,16 @@ bridge.prototype.attachEvents = function () {
 		event.preventDefault();
 		return false;
 	});
+
+	var addToBasket = this.findChildViewBridge('AddToBasket');
+
+	$(addToBasket.viewNode).click(function(event) {
+		addToBasket.viewNode.classList.add('ajax-progress');
+		self.raiseServerEvent('addToCart', function(){
+			addToBasket.viewNode.classList.remove('ajax-progress');
+		});
+		event.preventDefault();
+	});
 };
 
 bridge.prototype.changeVariation = function(selectedObject) {

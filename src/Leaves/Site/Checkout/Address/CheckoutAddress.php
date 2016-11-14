@@ -10,4 +10,15 @@ class CheckoutAddress extends Checkout
     {
         return CheckoutAddressView::class;
     }
+
+    protected function onModelCreated()
+    {
+        parent::onModelCreated();
+
+        $this->model->requiredFields = [
+            'Address1',
+            'Address2',
+            'Address3'
+        ];
+    }
 }
