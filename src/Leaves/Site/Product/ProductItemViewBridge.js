@@ -21,9 +21,10 @@ bridge.prototype.attachEvents = function () {
 	var addToBasket = this.findChildViewBridge('AddToBasket');
 
 	$(addToBasket.viewNode).click(function(event) {
-		addToBasket.viewNode.classList.add('ajax-progress');
+		var parent = $(this).closest('div');
+		parent.addClass('ajax-progress');
 		self.raiseServerEvent('addToCart', function(){
-			addToBasket.viewNode.classList.remove('ajax-progress');
+			parent.removeClass('ajax-progress');
 		});
 		event.preventDefault();
 	});
