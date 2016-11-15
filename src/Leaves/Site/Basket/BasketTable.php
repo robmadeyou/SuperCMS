@@ -6,6 +6,7 @@ use Rhubarb\Crown\Exceptions\ForceResponseException;
 use Rhubarb\Crown\Response\RedirectResponse;
 use Rhubarb\Leaf\Table\Leaves\Table;
 use Rhubarb\Stem\Exceptions\RecordNotFoundException;
+use SuperCMS\Controls\GlobalBasket\GlobalBasket;
 use SuperCMS\Models\Shopping\Basket;
 use SuperCMS\Models\Shopping\BasketItem;
 
@@ -38,6 +39,21 @@ class BasketTable extends Table
                 $basketItem = new BasketItem($id);
                 if ($basketItem->BasketID == Basket::getCurrentBasket()->UniqueIdentifier) {
                     $basketItem->delete();
+                } else {
+                    throw new ForceResponseException(new RedirectResponse('/403/'));
+                }
+            } catch (RecordNotFoundException $ex) {
+            }
+        });
+
+        $this->model->updateQuantityEvent->attachHandler(function($id, $amount) {
+            try {
+                $basketItem = new BasketItem($id);
+                if ($basketItem->BasketID == Basket::getCurrentBasket()->UniqueIdentifier) {
+                    $basketItem->Quantity = $amount;
+                    $basketItem->save();
+                    GlobalBasket::getInstance()->replace();
+                    return $basketItem->getTotalCost();
                 } else {
                     throw new ForceResponseException(new RedirectResponse('/403/'));
                 }

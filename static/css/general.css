@@ -583,3 +583,37 @@ input:checked + .slider:before {
 .c-breadcrumb .c-breadcrumb--item {
 	float: left;
 }
+
+.ajax-progress {
+	position: relative;
+}
+
+.ajax-progress::after {
+	position: absolute!important;
+	z-index: 999999!important;
+	background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Vector_Loading.svg/1024px-Vector_Loading.svg.png)!important;
+	background-position: center!important;
+	background-size: contain!important;
+	background-repeat: no-repeat!important;
+	margin: auto!important;
+	top: 0!important;
+	bottom: 0!important;
+	left: 0!important;
+	right: 0!important;
+	content: ''!important;
+	max-width: 32px!important;
+	width: 100%!important;
+	animation: fa-spin 1s infinite!important;
+}
+
+.ajax-progress::before {
+	top:0!important;
+	right: 0!important;
+	left:0!important;
+	bottom:0!important;
+	position: absolute!important;
+	opacity: 0.5!important;
+	z-index: 999997!important;
+	background-color: #611d41!important;
+	content:''!important;
+}

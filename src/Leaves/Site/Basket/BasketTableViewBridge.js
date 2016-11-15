@@ -17,17 +17,27 @@ bridge.prototype.attachEvents = function () {
         }
     });
 
-    $('.js-quantitypicker').change(function(){
-        var update = $('<a href="" class="c-quantity-update">Update</a>');
-        var amount = $(this).val();
-        var id = $(this).data('id');
-        update.click(function(event){
-            event.preventDefault();
-            self.raiseServerEvent('updateQuantity', id, amount, function() {
-                update.remove();
+    var updateTriggered = false;
+    $('.js-quantitypicker').keyup(function(){
+        if (!updateTriggered) {
+            updateTriggered = true;
+            var obj = $(this);
+            var update = $('<a href="" class="c-quantity-update">Update</a>');
+            update.click(function(event){
+                var amount = obj.val();
+                var id = obj.data('id');
+                event.preventDefault();
+                var costSide = $(this).closest('.product-price');
+                costSide.addClass('ajax-progress');
+                self.raiseServerEvent('updateQuantity', id, amount, function(amount) {
+                    costSide.find('.product-cost').html(amount);
+                    update.remove();
+                    costSide.removeClass('ajax-progress');
+                    updateTriggered = false;
+                }.bind(this));
             });
-        });
-        $(this).after(update);
+            $(this).after(update);
+        }
     })
 };
 

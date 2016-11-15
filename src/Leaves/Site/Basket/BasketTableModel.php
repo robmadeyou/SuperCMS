@@ -9,11 +9,15 @@ class BasketTableModel extends TableModel
 {
     /** @var Event */
     public $removeItemEvent;
+    
+    /** @var Event */
+    public $updateQuantityEvent;
 
     public function __construct()
     {
         parent::__construct();
 
         $this->removeItemEvent = new Event();
+        $this->updateQuantityEvent = new Event();
     }
 }

@@ -52,6 +52,7 @@ class BasketTableView extends TableView
                     </span>
                 </div>
             </div>
+            <div class="clearfix"></div>
         </div>
 HTML;
 
