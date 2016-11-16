@@ -37,6 +37,8 @@ class ShippingType extends Model
             new MoneyColumn('W2')
         );
 
+        $schema->labelColumnName = 'ShippingType';
+
         return $schema;
     }
 }

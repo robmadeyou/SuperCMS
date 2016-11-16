@@ -43,6 +43,8 @@ class Category extends Model
             new BooleanColumn('Visible', false)
         );
 
+        $model->labelColumnName = 'Name';
+
         return $model;
     }
 

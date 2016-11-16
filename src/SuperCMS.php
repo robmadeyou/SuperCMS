@@ -45,6 +45,7 @@ use SuperCMS\Leaves\Site\Checkout\Address\CheckoutAddress;
 use SuperCMS\Leaves\Site\Checkout\Checkout;
 use SuperCMS\Leaves\Site\Checkout\Summary\CheckoutSummary;
 use SuperCMS\Leaves\Site\Product\ProductCollection;
+use SuperCMS\Leaves\Site\Register\Register;
 use SuperCMS\Leaves\Site\Search\SearchLeaf;
 use SuperCMS\Leaves\SuperCMSLoginView;
 use SuperCMS\LoginProviders\AdminLoginProvider;
@@ -116,6 +117,9 @@ class SuperCMS extends Module
         $staticResources = new StaticResourceUrlHandler(__DIR__ . '/../static/');
         $staticResources->setPriority('100');
 
+        $register = new ClassMappedUrlHandler(Register::class);
+        $register->setPriority(1301);
+
         $this->addUrlHandlers(
             [
                 "/" => new ClassMappedUrlHandler(Index::class, [
@@ -140,8 +144,10 @@ class SuperCMS extends Module
                     '403/' => new ClassMappedUrlHandler(Error403::class)
                 ]),
                 '/files/' => $staticResources,
+                '/login/register/' => $register,
             ]
         );
+
     }
 
     protected function getModules()

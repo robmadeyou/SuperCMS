@@ -1,15 +1,15 @@
 <?php
 
-namespace SuperCMS\Leaves\Errors;
+namespace SuperCMS\Leaves\Site\Register;
 
 use Rhubarb\Leaf\Leaves\Leaf;
 use Rhubarb\Leaf\Leaves\LeafModel;
 
-class Error404 extends Leaf
+class Register extends Leaf
 {
     protected function getViewClass()
     {
-        return Error404View::class;
+        return RegisterView::class;
     }
 
     protected function createModel()

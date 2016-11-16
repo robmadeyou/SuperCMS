@@ -53,6 +53,8 @@ class Product extends Model
             new StringColumn('SeoSafeName', 255)
         );
 
+        $schema->labelColumnName = 'Name';
+
         return $schema;
     }
 
