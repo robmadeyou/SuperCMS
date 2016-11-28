@@ -20,6 +20,8 @@ class CheckoutModel extends LeafModel
     {
         parent::__construct();
 
+        $this->requiredFields = [];
+
         $this->previousEvent = new Event();
         $this->nextEvent = new Event();
     }

@@ -17,7 +17,15 @@ class RegisterView extends View
 
         $this->registerSubLeaf(
             new TextBox('Username'),
-            new TextBox('Email')
+            new TextBox('Email'),
+            new TextBox('Address1'),
+            new TextBox('Address2'),
+            new TextBox('Address3')
         );
+    }
+
+    protected function printViewContent()
+    {
+
     }
 }

@@ -3,6 +3,7 @@
 namespace SuperCMS\Leaves\Site\Checkout\Address;
 
 use Rhubarb\Leaf\Controls\Common\Text\TextBox;
+use Rhubarb\Leaf\Leaves\LeafDeploymentPackage;
 use SuperCMS\Controls\HtmlButton\HtmlButton;
 use SuperCMS\Leaves\Site\Checkout\CheckoutView;
 
@@ -55,5 +56,17 @@ class CheckoutAddressView extends CheckoutView
     protected function printStepButtons()
     {
         print '<a href="/" class="btn btn-default">Cancel</a>' . $this->leaves['Next'];
+    }
+
+    public function getDeploymentPackage()
+    {
+        return new LeafDeploymentPackage(
+            __DIR__ . '/' . $this->getViewBridgeName() . '.js'
+        );
+    }
+
+    protected function getViewBridgeName()
+    {
+        return 'CheckoutPaymentsViewBridge';
     }
 }

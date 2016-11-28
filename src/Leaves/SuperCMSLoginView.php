@@ -13,6 +13,8 @@ class SuperCMSLoginView extends LoginView
         $this->leaves['username']->addCssClassNames('form-control');
         $this->leaves['password']->addCssClassNames('form-control');
         $this->leaves['Login']->addCssClassNames('btn btn-default');
+
+        $this->leaves['username']->addHtmlAttribute('placeholder', 'Username');
     }
 
     public function printViewContent()
@@ -20,34 +22,24 @@ class SuperCMSLoginView extends LoginView
         print <<<HTML
         <div id="login-container" class=" row">
             <div class="col-md-4 col-md-offset-4">
-                <form class="form-horizontal">
-                  <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-4 control-label">Email</label>
-                    <div class="col-sm-8">
-                      {$this->leaves['username']}
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputPassword3" class="col-sm-4 control-label">Password</label>
-                    <div class="col-sm-8">
-                      {$this->leaves['password']}
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-sm-offset-4 col-sm-10">
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox"> Remember me
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-sm-offset-4 col-sm-10">
-                      {$this->leaves['Login']}
-                    </div>
-                  </div>
-                </form>
+                <div class="panel-body">
+                    <form role="form">
+                        <fieldset>
+                            <div class="form-group">
+                                {$this->leaves['username']}
+                            </div>
+                            <div class="form-group">
+                                {$this->leaves['password']}
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                </label>
+                            </div>
+                            {$this->leaves['Login']}
+                        </fieldset>
+                    </form>
+                </div>
             </div>
         </div>
 HTML;
