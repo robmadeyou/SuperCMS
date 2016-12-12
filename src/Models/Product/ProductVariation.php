@@ -29,6 +29,7 @@ use Rhubarb\Stem\Schema\Columns\StringColumn;
  * @property int $Quantity Repository field
  * @property-read \SuperCMS\Models\Shopping\BasketItem[]|\Rhubarb\Stem\Collections\RepositoryCollection $BasketItems Relationship
  * @property-read mixed $PrimaryImage {@link getPrimaryImage()}
+ * @property-read mixed $PublicUrl {@link getPublicUrl()}
  */
 class ProductVariation extends Model
 {

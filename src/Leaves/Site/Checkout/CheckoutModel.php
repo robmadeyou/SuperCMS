@@ -3,6 +3,7 @@
 namespace SuperCMS\Leaves\Site\Checkout;
 
 use Rhubarb\Crown\Events\Event;
+use Rhubarb\Crown\Settings\HtmlPageSettings;
 use Rhubarb\Leaf\Leaves\LeafModel;
 use SuperCMS\Models\Shopping\Basket;
 
@@ -24,6 +25,9 @@ class CheckoutModel extends LeafModel
 
         $this->previousEvent = new Event();
         $this->nextEvent = new Event();
+
+        $htmlSettings = HtmlPageSettings::singleton();
+        $htmlSettings->pageTitle = 'Checkout';
     }
 
     protected function getExposableModelProperties()

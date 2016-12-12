@@ -3,6 +3,7 @@
 namespace SuperCMS\Models\Shopping;
 
 use Rhubarb\Crown\LoginProviders\Exceptions\NotLoggedInException;
+use Rhubarb\Stem\Aggregates\Sum;
 use Rhubarb\Stem\Exceptions\RecordNotFoundException;
 use Rhubarb\Stem\Filters\AndGroup;
 use Rhubarb\Stem\Filters\Equals;
@@ -28,6 +29,8 @@ use SuperCMS\Session\SuperCMSSession;
  * @property-read BasketItem[]|\Rhubarb\Stem\Collections\RepositoryCollection $BasketItems Relationship
  * @property string $Status Repository field
  * @property-read mixed $TotalCost {@link getTotalCost()}
+ * @property-read Order $Order Relationship
+ * @property-read mixed $TotalQuantity {@link getTotalQuantity()}
  */
 class Basket extends Model
 {
@@ -56,6 +59,12 @@ class Basket extends Model
             $total += $basketItem->ProductVariation->Price * $basketItem->Quantity;
         }
         return $total;
+    }
+
+    public function getTotalQuantity()
+    {
+        list($quantity) = $this->BasketItems->calculateAggregates(new Sum('Quantity'));
+        return $quantity;
     }
 
     public static function addVariationToBasket(ProductVariation $variation, $quantity = 1)

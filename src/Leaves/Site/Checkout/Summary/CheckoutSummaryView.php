@@ -40,7 +40,8 @@ class CheckoutSummaryView extends CheckoutView
         $footer = new FooterColumnsFooterProvider();
         $footer->setColumns(
             [
-                new LabelFooterColumn('', 2),
+                new LabelFooterColumn('Total:', 1),
+                new LabelFooterColumn('x ' . $this->model->basket->getTotalQuantity(), 1),
                 new LabelFooterColumn(SuperCMS::$currencySymbol . number_format($this->model->basket->getTotalCost(), 2), 1)
             ]
         );

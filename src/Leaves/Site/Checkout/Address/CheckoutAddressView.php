@@ -2,6 +2,7 @@
 
 namespace SuperCMS\Leaves\Site\Checkout\Address;
 
+use Rhubarb\Leaf\Controls\Common\SelectionControls\RadioButtons\RadioButtons;
 use Rhubarb\Leaf\Controls\Common\Text\TextBox;
 use Rhubarb\Leaf\Leaves\LeafDeploymentPackage;
 use SuperCMS\Controls\HtmlButton\HtmlButton;
@@ -19,9 +20,11 @@ class CheckoutAddressView extends CheckoutView
         parent::createSubLeaves();
 
         $this->registerSubLeaf(
-            new TextBox('Address1'),
+            new TextBox('Address'),
             new TextBox('Address2'),
-            new TextBox('Address3'),
+            new TextBox('Town'),
+            new TextBox('PostCode'),
+            new RadioButtons('ShippingAddress'),
             $nextButton = new HtmlButton('Next', 'Next: Payment', function() {
                 $this->model->nextEvent->raise();
             })
@@ -39,15 +42,13 @@ class CheckoutAddressView extends CheckoutView
                 <?php
                 $this->printFieldset('',
                     [
-                        'Address 1' => 'Address1',
-                        'Address 2' => 'Address2',
-                        'Address 3' => 'Address3'
+                        'Address Line 1' => 'Address',
+                        'Address Line 2' => 'Address2',
+                        'Town' => 'Town',
+                        'Post Code' => 'PostCode',
                     ]
                 );
                 ?>
-            </div>
-            <div class="col-sm-6">
-
             </div>
         </div>
         <?php
@@ -67,6 +68,6 @@ class CheckoutAddressView extends CheckoutView
 
     protected function getViewBridgeName()
     {
-        return 'CheckoutPaymentsViewBridge';
+        return 'CheckoutAddressViewBridge';
     }
 }

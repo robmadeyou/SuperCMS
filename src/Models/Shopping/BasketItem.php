@@ -19,6 +19,7 @@ use SuperCMS\SuperCMS;
  * @property-read \SuperCMS\Models\Product\ProductVariation $ProductVariation Relationship
  * @property-read Basket $Basket Relationship
  * @property-read mixed $TotalCost {@link getTotalCost()}
+ * @property-read OrderItem $OrderItem Relationship
  */
 class BasketItem extends Model
 {

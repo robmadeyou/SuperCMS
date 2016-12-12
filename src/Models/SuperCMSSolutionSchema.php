@@ -13,6 +13,8 @@ use SuperCMS\Models\Product\ProductVariation;
 use SuperCMS\Models\Shipping\ShippingType;
 use SuperCMS\Models\Shopping\Basket;
 use SuperCMS\Models\Shopping\BasketItem;
+use SuperCMS\Models\Shopping\Order;
+use SuperCMS\Models\Shopping\OrderItem;
 use SuperCMS\Models\User\CmsUser;
 
 class SuperCMSSolutionSchema extends SolutionSchema
@@ -31,6 +33,8 @@ class SuperCMSSolutionSchema extends SolutionSchema
         $this->addModel('Coupon', Coupon::class, 1.01);
         $this->addModel('Basket', Basket::class, 2);
         $this->addModel('BasketItem', BasketItem::class, 1);
+        $this->addModel('Order', Order::class, 1);
+        $this->addModel('OrderItem', OrderItem::class, 1);
     }
 
     protected function defineRelationships()
@@ -44,7 +48,7 @@ class SuperCMSSolutionSchema extends SolutionSchema
                 ],
                 'ProductVariation' => [
                     'Images' => 'ProductImage.ProductVariationID',
-                    'BasketItems' => 'BasketItem.ProductVariationID'
+                    'BasketItems' => 'BasketItem.ProductVariationID',
                 ],
                 'Category' => [
                     'Products' => 'Product.CategoryID',
@@ -58,6 +62,20 @@ class SuperCMSSolutionSchema extends SolutionSchema
                 ],
                 'Basket' => [
                     'BasketItems' => 'BasketItem.BasketID',
+                ],
+                'Order' => [
+                    'OrderItems' => 'OrderItem.OrderID',
+                ],
+            ]
+        );
+
+        $this->declareOneToOneRelationships(
+            [
+                'Basket' => [
+                    'Order' => 'Order.BookingID'
+                ],
+                'BasketItem' => [
+                    'OrderItem' => 'OrderItem.BasketID',
                 ],
             ]
         );
