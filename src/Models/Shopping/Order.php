@@ -5,6 +5,7 @@ namespace SuperCMS\Models\Shopping;
 use Rhubarb\Stem\Models\Model;
 use Rhubarb\Stem\Schema\Columns\AutoIncrementColumn;
 use Rhubarb\Stem\Schema\Columns\ForeignKeyColumn;
+use Rhubarb\Stem\Schema\Columns\StringColumn;
 use Rhubarb\Stem\Schema\ModelSchema;
 
 /**
@@ -23,7 +24,9 @@ class Order extends Model
 
         $schema->addColumn(
             new AutoIncrementColumn('OrderID'),
-            new ForeignKeyColumn('BasketID')
+            new ForeignKeyColumn('BasketID'),
+            new StringColumn('StripeToken', 150),
+            new StringColumn('ClientIP', '16')
         );
 
         return $schema;

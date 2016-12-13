@@ -30,8 +30,12 @@ class SettingsLeaf extends Leaf
         $settings = SuperCMSSettings::singleton();
 
         $this->model->savePressedEvent->attachHandler(function () use ($settings) {
-            $settings->stripeLiveToken = $this->model->StripeLiveToken;
-            $settings->stripeTestToken = $this->model->StripeTestToken;
+            $settings->stripeLiveSecret = $this->model->StripeLiveSecret;
+            $settings->stripeTestSecret = $this->model->StripeTestSecret;
+            $settings->stripeLivePublish = $this->model->StripeLivePublish;
+            $settings->stripeTestPublish = $this->model->StripeTestPublish;
+            $settings->websiteName = $this->model->WebsiteName;
+            $settings->developmentMode = $this->model->DeveloperMode;
             $settings->enableStripePayment = $this->model->EnableStripePayment;
         });
 
@@ -39,8 +43,12 @@ class SettingsLeaf extends Leaf
             throw new ForceResponseException(new RedirectResponse('/admin/dashboard/'));
         });
 
-        $this->model->StripeLiveToken = $settings->stripeLiveToken;
-        $this->model->StripeTestToken = $settings->stripeTestToken;
+        $this->model->StripeLiveSecret = $settings->stripeLiveSecret;
+        $this->model->StripeTestSecret = $settings->stripeTestSecret;
+        $this->model->StripeLivePublish = $settings->stripeLivePublish;
+        $this->model->StripeTestPublish = $settings->stripeTestPublish;
+        $this->model->DeveloperMode = $settings->developmentMode;
+        $this->model->WebsiteName = $settings->websiteName;
         $this->model->EnableStripePayment = $settings->enableStripePayment;
     }
 }

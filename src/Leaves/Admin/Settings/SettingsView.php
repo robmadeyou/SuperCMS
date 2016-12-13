@@ -4,6 +4,7 @@ namespace SuperCMS\Leaves\Admin\Settings;
 
 use Rhubarb\Leaf\Controls\Common\Checkbox\Checkbox;
 use Rhubarb\Leaf\Controls\Common\Text\TextBox;
+use SuperCMS\Controls\ToggleSwitch\ToggleSwitch;
 use SuperCMS\Views\SuperCMSCrudView;
 
 class SettingsView extends SuperCMSCrudView
@@ -14,8 +15,12 @@ class SettingsView extends SuperCMSCrudView
 
         $this->registerSubLeaf(
             new Checkbox('EnableStripePayment'),
-            new TextBox('StripeTestToken'),
-            new TextBox('StripeLiveToken')
+            new TextBox('StripeTestSecret'),
+            new TextBox('StripeTestPublish'),
+            new TextBox('StripeLiveSecret'),
+            new TextBox('StripeLivePublish'),
+            new ToggleSwitch('DeveloperMode'),
+            new TextBox('WebsiteName')
         );
 
         $this->bootstrapInputs();
@@ -25,9 +30,13 @@ class SettingsView extends SuperCMSCrudView
     {
         $this->printFieldset('',
             [
+                'Developer Mode' => 'DeveloperMode',
+                'Website Name' => 'WebsiteName',
                 'Enable Stripe Payment' => 'EnableStripePayment',
-                'Stripe Test Token' => 'StripeTestToken',
-                'Stripe Live Token' => 'StripeLiveToken',
+                'Stripe Test Secret' => 'StripeTestSecret',
+                'Stripe Test Publishable Key' => 'StripeTestPublish',
+                'Stripe Live Secret' => 'StripeLiveSecret',
+                'Stripe Live Publishable Key' => 'StripeLivePublish'
             ]);
     }
 

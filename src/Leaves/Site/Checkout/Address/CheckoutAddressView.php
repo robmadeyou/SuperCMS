@@ -31,12 +31,13 @@ class CheckoutAddressView extends CheckoutView
         );
 
         $nextButton->addCssClassNames('button', 'button-checkout');
-
+        $nextButton->addHtmlAttribute('style', 'display:none;');
     }
 
     protected function printBody()
     {
         ?>
+        <script src="https://checkout.stripe.com/checkout.js"></script>
         <div class="row">
             <div class="col-sm-6">
                 <?php
@@ -56,7 +57,7 @@ class CheckoutAddressView extends CheckoutView
 
     protected function printStepButtons()
     {
-        print '<a href="/" class="btn btn-default">Cancel</a>' . $this->leaves['Next'];
+        print '<a href="/" class="btn btn-default">Cancel</a> <input type="button" class=" btn button button-checkout" id="stripe-payment" value="Next: Payment">' . $this->leaves['Next'];
     }
 
     public function getDeploymentPackage()

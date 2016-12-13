@@ -7,6 +7,11 @@ use Rhubarb\Leaf\Crud\Leaves\CrudModel;
 class SettingsModel extends CrudModel
 {
     public $EnableStripePayment;
-    public $StripeTestToken;
-    public $StripeLiveToken;
+
+    public $DeveloperMode;
+    public $WebsiteName;
+    public $StripeTestSecret;
+    public $StripeTestPublish;
+    public $StripeLiveSecret;
+    public $StripeLivePublish;
 }

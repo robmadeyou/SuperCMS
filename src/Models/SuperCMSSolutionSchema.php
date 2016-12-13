@@ -33,7 +33,7 @@ class SuperCMSSolutionSchema extends SolutionSchema
         $this->addModel('Coupon', Coupon::class, 1.01);
         $this->addModel('Basket', Basket::class, 2);
         $this->addModel('BasketItem', BasketItem::class, 1);
-        $this->addModel('Order', Order::class, 1);
+        $this->addModel('Order', Order::class, 2);
         $this->addModel('OrderItem', OrderItem::class, 1);
     }
 
