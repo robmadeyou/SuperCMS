@@ -3,9 +3,8 @@
 namespace SuperCMS\Layouts;
 
 use Rhubarb\Crown\Html\ResourceLoader;
-use Rhubarb\Stem\Filters\Equals;
 use SuperCMS\Controls\GlobalBasket\GlobalBasket;
-use SuperCMS\Models\Product\Category;
+use SuperCMS\Settings\SuperCmsPageSettings;
 
 class DefaultLayout extends SuperCMSDefaultLayout
 {
@@ -24,15 +23,13 @@ class DefaultLayout extends SuperCMSDefaultLayout
         <div class="row body">
             <div class="col-md-10 col-md-offset-1">
                 <div class="c-supertop">
-                    <? $this->printNavigationItems() ?>
-                    <? $this->printBasket(); ?>
+                    <?php $this->printNavigationItems() ?>
+                    <?php $this->printBasket(); ?>
                 </div>
                 <div class="content">
-                    <div id="top-banner">
-                        <div class="top-banner-bottom-buttons">
-                            <? $this->printBannerButtons() ?>
-                        </div>
-                    </div>
+                    <?php
+                        $this->printTopBanner();
+                    ?>
                     <div class="category-list">
                         <? $this->printCategoryMenu() ?>
                     </div>
@@ -44,6 +41,20 @@ class DefaultLayout extends SuperCMSDefaultLayout
     {
         ?>
         <?php
+    }
+
+    protected function printTopBanner()
+    {
+        $settings = SuperCmsPageSettings::singleton();
+        if (!$settings->hideBanner) {
+            ?>
+            <div id="top-banner">
+                <div class="top-banner-bottom-buttons">
+                    <? $this->printBannerButtons() ?>
+                </div>
+            </div>
+            <?php
+        }
     }
 
     protected function printBasket()

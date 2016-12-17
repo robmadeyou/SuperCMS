@@ -2,7 +2,9 @@
 
 namespace SuperCMS\Leaves;
 
+use Rhubarb\Crown\Request\Request;
 use Rhubarb\Scaffolds\Authentication\Leaves\LoginView;
+use SuperCMS\Settings\SuperCmsPageSettings;
 
 class SuperCMSLoginView extends LoginView
 {
@@ -15,33 +17,44 @@ class SuperCMSLoginView extends LoginView
         $this->leaves['Login']->addCssClassNames('btn btn-default');
 
         $this->leaves['username']->addHtmlAttribute('placeholder', 'Username');
+
+        $settings = SuperCmsPageSettings::singleton();
+        $settings->hideBanner = true;
     }
 
     public function printViewContent()
     {
+        $redirect = '';
+        $request = Request::current();
+        if ($request->get('rd')) {
+            $redirect = '?rd=' . $request->get('rd');
+        }
+
         print <<<HTML
-        <div id="login-container" class=" row">
-            <div class="col-md-4 col-md-offset-4">
-                <div class="panel-body">
-                    <form role="form">
-                        <fieldset>
+            <div class="row" id="pwd-container">
+                <div class="col-md-4 col-md-offset-4">
+                    <section class="login-form">
+                        <form method="post" action="#" role="login">
+                            <img src="/static/favicon/favicon-128.png" class="img-responsive" alt="" />
                             <div class="form-group">
                                 {$this->leaves['username']}
                             </div>
                             <div class="form-group">
                                 {$this->leaves['password']}
                             </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input name="remember" type="checkbox" value="Remember Me">Remember Me
-                                </label>
+                            <label>
+                                {$this->leaves['rememberMe']}Remember Me
+                            </label>
+                            <div>
+                                {$this->leaves['Login']}
                             </div>
-                            {$this->leaves['Login']}
-                        </fieldset>
-                    </form>
+                            <div>
+                              <a href="/login/register/{$redirect}">Create account</a> or <a href="#">reset password</a>
+                            </div>
+                        </form>
+                    </section>  
                 </div>
             </div>
-        </div>
 HTML;
     }
 }
