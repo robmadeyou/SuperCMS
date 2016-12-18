@@ -22,15 +22,15 @@ use SuperCMS\Session\SuperCMSSession;
 /**
  *
  *
- * @property int $BasketID Repository field
- * @property string $Session Repository field
- * @property int $UserID Repository field
- * @property-read \SuperCMS\Models\User\CmsUser $User Relationship
+ * @property int                                                              $BasketID Repository field
+ * @property string                                                           $Session Repository field
+ * @property int                                                              $UserID Repository field
+ * @property-read \SuperCMS\Models\User\SuperCMSUser                          $User Relationship
  * @property-read BasketItem[]|\Rhubarb\Stem\Collections\RepositoryCollection $BasketItems Relationship
- * @property string $Status Repository field
- * @property-read mixed $TotalCost {@link getTotalCost()}
- * @property-read Order $Order Relationship
- * @property-read mixed $TotalQuantity {@link getTotalQuantity()}
+ * @property string                                                           $Status Repository field
+ * @property-read mixed                                                       $TotalCost {@link getTotalCost()}
+ * @property-read Order                                                       $Order Relationship
+ * @property-read mixed                                                       $TotalQuantity {@link getTotalQuantity()}
  */
 class Basket extends Model
 {
@@ -149,12 +149,17 @@ class Basket extends Model
         {}
     }
 
+    public function markPaid()
+    {
+        self::markBasketPaid($this);
+    }
+
     /**
      * Marks existing basket as paid and reloads all the settings
      * for a new basket
      * @param Basket $basket
      */
-    public static function markPaid(Basket $basket)
+    public static function markBasketPaid(Basket $basket)
     {
         $basket->Status = Basket::STATUS_COMPLETED;
         $basket->save();

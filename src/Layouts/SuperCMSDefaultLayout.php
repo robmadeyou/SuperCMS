@@ -27,8 +27,6 @@ class SuperCMSDefaultLayout extends BaseLayout
         parent::printTail();
 
         ?>
-
-
         <script type="text/javascript">
 
             !window.jQuery && document.write('<script src="/files/js/jquery.js"><\/script>');

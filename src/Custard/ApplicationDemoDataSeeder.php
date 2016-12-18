@@ -3,7 +3,7 @@
 namespace SuperCMS\Custard;
 
 use Rhubarb\Stem\Custard\DemoDataSeederInterface;
-use SuperCMS\Models\User\CmsUser;
+use SuperCMS\Models\User\SuperCMSUser;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class ApplicationDemoDataSeeder implements DemoDataSeederInterface
@@ -24,7 +24,7 @@ class ApplicationDemoDataSeeder implements DemoDataSeederInterface
 
     public function createUsers()
     {
-        $admin = new CmsUser();
+        $admin = new SuperCMSUser();
         $admin->Forename = 'admin';
         $admin->Email = 'admin@test.com';
         $admin->Username = 'admin@test.com';

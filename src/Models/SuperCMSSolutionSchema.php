@@ -2,7 +2,6 @@
 
 namespace SuperCMS\Models;
 
-use GuzzleHttp\Exception\CouldNotRewindStreamException;
 use Rhubarb\Stem\Schema\SolutionSchema;
 use SuperCMS\Models\Coupon\Coupon;
 use SuperCMS\Models\Product\Category;
@@ -15,7 +14,7 @@ use SuperCMS\Models\Shopping\Basket;
 use SuperCMS\Models\Shopping\BasketItem;
 use SuperCMS\Models\Shopping\Order;
 use SuperCMS\Models\Shopping\OrderItem;
-use SuperCMS\Models\User\CmsUser;
+use SuperCMS\Models\User\SuperCMSUser;
 
 class SuperCMSSolutionSchema extends SolutionSchema
 {
@@ -28,7 +27,7 @@ class SuperCMSSolutionSchema extends SolutionSchema
         $this->addModel('ProductVariation', ProductVariation::class, 1.02);
         $this->addModel('Comment', Comment::class);
         $this->addModel('Category', Category::class, 1.03);
-        $this->addModel('User', CmsUser::class, 2);
+        $this->addModel('User', SuperCMSUser::class, 3);
         $this->addModel('ShippingType', ShippingType::class);
         $this->addModel('Coupon', Coupon::class, 1.01);
         $this->addModel('Basket', Basket::class, 2);

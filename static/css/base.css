@@ -98,15 +98,9 @@ http://www.bootstrapzen.com/item/135/simple-login-form-logo/
     outline: none;
 }
 
-.form-control {
-    position: relative;
-    font-size: 16px;
-    height: auto;
-    padding: 10px;
-}
-
 .login-form {
     margin-top: 60px;
+    margin-bottom:60px;
 }
 
 .login-form {
@@ -116,13 +110,11 @@ http://www.bootstrapzen.com/item/135/simple-login-form-logo/
     border-radius: 10px;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
-    margin-bottom: 60px;
 }
 .login-form img {
     display: block;
     margin: 0 auto;
     margin-bottom: 35px;
-    max-height:64px;
 }
 .login-form input,
 .login-form button {

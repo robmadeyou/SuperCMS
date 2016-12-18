@@ -4,6 +4,7 @@ namespace SuperCMS\Models\User;
 
 use Rhubarb\Scaffolds\Authentication\User;
 use Rhubarb\Stem\Schema\Columns\IntegerColumn;
+use Rhubarb\Stem\Schema\Columns\StringColumn;
 use Rhubarb\Stem\Schema\ModelSchema;
 
 /**
@@ -22,13 +23,29 @@ use Rhubarb\Stem\Schema\ModelSchema;
  * @property \Rhubarb\Crown\DateTime\RhubarbDateTime $PasswordResetDate Repository field
  * @property int $RoleID Repository field
  * @property-read \SuperCMS\Models\Shopping\Basket[]|\Rhubarb\Stem\Collections\RepositoryCollection $Baskets Relationship
+ * @property string $MiddleName Repository field
+ * @property string $Address Repository field
+ * @property string $Address2 Repository field
+ * @property string $PostCode Repository field
  */
-class CmsUser extends User
+class SuperCMSUser extends User
 {
     protected function extendSchema(ModelSchema $schema)
     {
         $schema->addColumn(
-            new IntegerColumn('RoleID')
+            new IntegerColumn('RoleID'),
+            new StringColumn('MiddleName', 50),
+            new StringColumn('Address', 250),
+            new StringColumn('Address2', 250),
+            new StringColumn('PostCode', 10)
         );
+    }
+
+    /**
+     * @return SuperCMSUser
+     */
+    public static function getLoggedInUser()
+    {
+        return parent::getLoggedInUser();
     }
 }

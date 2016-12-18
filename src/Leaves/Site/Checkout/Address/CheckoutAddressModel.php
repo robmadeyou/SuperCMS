@@ -12,6 +12,7 @@ class CheckoutAddressModel extends LeafModel
     public $paymentMadeEvent;
 
     public $basketAmount;
+    public $email;
 
     public function __construct()
     {
@@ -26,6 +27,7 @@ class CheckoutAddressModel extends LeafModel
 
         $properties[] = 'stripePubKey';
         $properties[] = 'basketAmount';
+        $properties[] = 'email';
 
         return $properties;
     }

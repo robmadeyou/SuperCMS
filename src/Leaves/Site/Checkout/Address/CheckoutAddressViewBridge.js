@@ -25,7 +25,8 @@ bridge.prototype.attachEvents = function () {
 			name: '',
 			description: '',
 			currency:'gbp',
-			amount: self.model.basketAmount
+			amount: self.model.basketAmount,
+			email: self.model.email
 		});
 		e.preventDefault();
 	});

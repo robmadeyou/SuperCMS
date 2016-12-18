@@ -4,14 +4,12 @@ namespace SuperCMS\Layouts;
 
 use Rhubarb\Crown\Html\ResourceLoader;
 use Rhubarb\Crown\Request\Request;
-use SebastianBergmann\CodeCoverage\Report\Html\HTMLTest;
 
 class AdminLayout extends SuperCMSDefaultLayout
 {
     public function __construct()
     {
         parent::__construct();
-
         ResourceLoader::loadResource('/files/css/admin.css');
         ResourceLoader::loadResource('/files/css/admin-strapped.css');
 

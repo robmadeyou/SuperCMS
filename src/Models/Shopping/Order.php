@@ -15,6 +15,8 @@ use Rhubarb\Stem\Schema\ModelSchema;
  * @property int $BasketID Repository field
  * @property-read OrderItem[]|\Rhubarb\Stem\Collections\RepositoryCollection $OrderItems Relationship
  * @property-read Basket $Basket Relationship
+ * @property string $StripeToken Repository field
+ * @property string $ClientIP Repository field
  */
 class Order extends Model
 {

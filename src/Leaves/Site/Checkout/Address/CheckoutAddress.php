@@ -8,6 +8,7 @@ use Stripe\Stripe;
 use SuperCMS\Leaves\Site\Checkout\Checkout;
 use SuperCMS\Models\Shopping\Basket;
 use SuperCMS\Models\Shopping\Order;
+use SuperCMS\Models\User\SuperCMSUser;
 use SuperCMS\Settings\SuperCMSSettings;
 
 class CheckoutAddress extends Checkout
@@ -28,6 +29,14 @@ class CheckoutAddress extends Checkout
     protected function onModelCreated()
     {
         parent::onModelCreated();
+
+        $loggedIn = SuperCMSUser::getLoggedInUser();
+
+        $this->model->Address = $loggedIn->Address;
+        $this->model->Address2 = $loggedIn->Address2;
+        $this->model->PostCode = $loggedIn->PostCode;
+
+        $this->model->email = $loggedIn->Email;
 
         $this->model->requiredFields = [
             'Address',
@@ -58,8 +67,9 @@ class CheckoutAddress extends Checkout
                 $order = new  Order();
                 $order->BasketID = $basket->UniqueIdentifier;
                 $order->save();
+
+                $basket->markPaid();
             } catch (Card $e) {
-                $aj = true;
             }
         } );
     }
