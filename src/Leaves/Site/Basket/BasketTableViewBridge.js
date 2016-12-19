@@ -18,7 +18,9 @@ bridge.prototype.attachEvents = function () {
     });
 
     var updateTriggered = false;
-    $('.js-quantitypicker').keyup(function(){
+
+    var quantityPicker = $('.js-quantitypicker');
+    quantityPicker.keyup(function(event){
         if (!updateTriggered) {
             updateTriggered = true;
             var obj = $(this);
@@ -37,6 +39,13 @@ bridge.prototype.attachEvents = function () {
                 }.bind(this));
             });
             $(this).after(update);
+        }
+    });
+
+    quantityPicker.keydown(function(event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+            return false;
         }
     })
 };

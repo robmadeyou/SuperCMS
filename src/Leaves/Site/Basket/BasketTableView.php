@@ -45,7 +45,7 @@ class BasketTableView extends TableView
                         <a href="#" class="js-remove-product" data-id="{$basketProduct->UniqueIdentifier}">Remove</a><br>
                     </span>
                     <span class="c-product-action-element">
-                        <label for="quantity">Quantity: </label><input data-id="{$basketProduct->UniqueIdentifier}" id="quantity" name="quantity" size="5" type="text" value="{$basketProduct->Quantity}" class="js-quantitypicker"><br>
+                        <label for="quantity">Quantity: </label><input data-id="{$basketProduct->UniqueIdentifier}" id="quantity" name="quantity" size="5" type="text" value="{$basketProduct->Quantity}" class="js-quantitypicker c-input-center"><br>
                     </span>
                     <span class="c-product-action-element">
                         <p class="product-cost">{$basketProduct->getTotalCost()}</p>
