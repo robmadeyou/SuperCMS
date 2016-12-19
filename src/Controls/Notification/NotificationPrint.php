@@ -36,7 +36,7 @@ class NotificationPrint
                 var element = document.createElement('div');
                 element.classList.add('alert');
                 element.classList.add('{$this->alertType}');
-                element.innerHTML = '{$this->text}';
+                element.innerHTML = '<div>{$this->text}</div>';
                 element.setAttribute('role', 'alert');
                 outer.appendChild(element);
                 document.querySelector('body').appendChild(outer);
