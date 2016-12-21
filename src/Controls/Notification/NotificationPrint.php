@@ -20,7 +20,7 @@ class NotificationPrint
      */
     public function __construct($text = '', $alertType = self::SUCCESS)
     {
-        $this->text = str_replace("\n", '', nl2br($text));
+        $this->text = base64_encode(nl2br($text));
         $this->alertType = $alertType;
     }
 
@@ -36,8 +36,8 @@ class NotificationPrint
                 var element = document.createElement('div');
                 element.classList.add('alert');
                 element.classList.add('{$this->alertType}');
-                element.innerHTML = '<div>{$this->text}</div>';
                 element.setAttribute('role', 'alert');
+                element.innerHTML = atob('{$this->text}');
                 outer.appendChild(element);
                 document.querySelector('body').appendChild(outer);
                 outer.onclick = function() {
@@ -46,7 +46,7 @@ class NotificationPrint
                 setTimeout(function(){
                     outer.remove();
                 }, 6000);
-            </script>        
+            </script>
 HTML;
     }
 }

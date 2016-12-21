@@ -25,7 +25,7 @@ class ProductItem extends ModelBoundLeaf
 
         $model->addToCartEvent->attachHandler(function() {
             Basket::addVariationToBasket($this->getSelectedVariation());
-            print new NotificationPrint('Item: <strong>' . $this->getSelectedVariation()->Name . '</strong> successfully added to basket <a href="google.com">Click here to view your basket</a>');
+            print new NotificationPrint('Item: <strong>' . $this->getSelectedVariation()->Name . '</strong> successfully added to basket <a href="/basket/">Click here to view your basket</a>');
         });
 
         $model->changeSelectedVariationEvent->attachHandler(function($id) {
