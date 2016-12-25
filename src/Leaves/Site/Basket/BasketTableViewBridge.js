@@ -17,13 +17,14 @@ bridge.prototype.attachEvents = function () {
         }
     });
 
-    var updateTriggered = false;
 
     var quantityPicker = $('.js-quantitypicker');
     quantityPicker.keyup(function(event){
+        var obj = $(this);
+        var updateTriggered = $(this).hasClass('changed');
+
         if (!updateTriggered) {
-            updateTriggered = true;
-            var obj = $(this);
+            obj.addClass('changed');
             var update = $('<a href="" class="c-quantity-update">Update</a>');
             update.click(function(event){
                 var amount = obj.val();
@@ -35,7 +36,7 @@ bridge.prototype.attachEvents = function () {
                     costSide.find('.product-cost').html(amount);
                     update.remove();
                     costSide.removeClass('ajax-progress');
-                    updateTriggered = false;
+                    obj.removeClass('changed');
                 }.bind(this));
             });
             $(this).after(update);

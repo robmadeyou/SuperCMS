@@ -20,7 +20,12 @@ bridge.prototype.attachEvents = function () {
 				}
 				self.raiseServerEvent('FilesUploaded', path);
 			})
-		}
+		},
+		previewTemplate: self.viewNode.querySelector('.dz-template').innerHTML
+	});
+
+	dz.on("addedfile", function(file) {
+		refreshGridly();
 	});
 
 	$('.dz-close-button').click(function() {
