@@ -14,12 +14,14 @@ class SuperCMSLoginView extends LoginView
 
         $this->leaves['username']->addCssClassNames('form-control');
         $this->leaves['password']->addCssClassNames('form-control');
-        $this->leaves['Login']->addCssClassNames('btn btn-default');
+        $this->leaves['Login']->addCssClassNames('btn btn-default button');
 
-        $this->leaves['username']->addHtmlAttribute('placeholder', 'Username');
+        $this->leaves['username']->addHtmlAttribute('placeholder', 'Email Address');
+        $this->leaves['password']->addHtmlAttribute('placeholder', 'Password');
 
         $settings = SuperCmsPageSettings::singleton();
         $settings->hideBanner = true;
+        $settings->pageTitle = 'Login now';
     }
 
     public function printViewContent()
@@ -36,20 +38,22 @@ class SuperCMSLoginView extends LoginView
                     <section class="login-form">
                         <form method="post" action="#" role="login">
                             <img src="/static/favicon/favicon-128.png" class="img-responsive" alt="" />
+                            <div>
+                              <a href="/login/register/{$redirect}">Create account</a> or <a href="#">reset password</a>
+                            </div>
                             <div class="form-group">
                                 {$this->leaves['username']}
                             </div>
                             <div class="form-group">
                                 {$this->leaves['password']}
                             </div>
-                            <label>
-                                {$this->leaves['rememberMe']}Remember Me
-                            </label>
-                            <div>
-                                {$this->leaves['Login']}
+                            <div class="form-group">
+                                <label>
+                                    {$this->leaves['rememberMe']}&nbsp;Remember Me
+                                </label>
                             </div>
                             <div>
-                              <a href="/login/register/{$redirect}">Create account</a> or <a href="#">reset password</a>
+                                {$this->leaves['Login']}
                             </div>
                         </form>
                     </section>  
