@@ -21,24 +21,23 @@ class BasketPageView extends View
         $settings->pageTitle = 'Your basket';
 
         $this->registerSubLeaf(
-            $table = new BasketTable($this->model->basket->BasketItems, '10', 'Table'),
-            $removeItemButton = new Button('RemoveItem', 'Remove', function ($id) {
+            $table = new BasketTable( $this->model->basket->BasketItems, '10', 'Table' ),
+            $removeItemButton = new Button( 'RemoveItem', 'Remove', function ( $id ) {
                 try {
-                    $basketItem = new BasketItem($id);
+                    $basketItem = new BasketItem( $id );
                     $basketItem->delete();
-                } catch (RecordNotFoundException $ex) {
+                } catch ( RecordNotFoundException $ex ) {
                 }
-            }),
-            $toCheckoutButton = new HtmlButton('ToCheckout', 'To Checkout <i class="fa fa-shopping-cart" aria-hidden="true"></i>', function () {
-                $this->model->toCheckoutEvent->raise();
-            })
+            } ),
+            $toCheckoutButton = new HtmlButton( 'ToCheckout',
+                'To Checkout <i class="fa fa-shopping-cart" aria-hidden="true"></i>', function () {
+                    $this->model->toCheckoutEvent->raise();
+                } )
         );
 
-        $toCheckoutButton->addCssClassNames('button', 'button-full-width');
+        $toCheckoutButton->addCssClassNames( 'button', 'button-full-width' );
 
-        $table->setNoDataHtml('Your basket seems to be empty, why not <a href="/">add some items?</a>');
-
-        $table->addCssClassNames('table');
+        $table->addCssClassNames( 'table' );
     }
 
     protected function printViewContent()
@@ -46,26 +45,37 @@ class BasketPageView extends View
         ?>
         <div class="c-basket-outer">
             <h1>Your Basket</h1>
-            <div class="row marginless c-basket-outer">
-                <div class="col-sm-9">
-                    <?php $this->printBasketControl(); ?>
-                </div>
-                <div class="col-sm-3 c-basket-summary">
-                    <div class="c-basket-summary--inner">
-                        <h3>Summary</h3>
-                        <h4>Total: <span class="c-basket-total">&pound;<?= number_format(Basket::getCurrentBasket()->getTotalCost(), 2) ?></span></h4>
+            <?php
+            if ($this->model->basket->BasketItems->count()) {
+                ?>
+                <div class="row marginless c-basket-outer">
+                    <div class="col-sm-9">
+                        <?php $this->printBasketControl(); ?>
                     </div>
-                    <div class="c-to-checkout">
-                        <?= $this->leaves['ToCheckout'] ?>
+                    <div class="col-sm-3 c-basket-summary">
+                        <div class="c-basket-summary--inner">
+                            <h3>Summary</h3>
+                            <h4>Total: <span
+                                    class="c-basket-total">&pound;<?= number_format( Basket::getCurrentBasket()->getTotalCost(),
+                                        2 ) ?></span></h4>
+                        </div>
+                        <div class="c-to-checkout">
+                            <?= $this->leaves[ 'ToCheckout' ] ?>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <?php
+            } else {
+                print '<div class="c-basket-empty">Your basket seems to be empty, why not <a href="/">add some items?</a></div>';
+            }
+            ?>
+            <div class="clearfix"></div>
         </div>
         <?php
     }
 
     protected function printBasketControl()
     {
-        print $this->leaves['Table'];
+        print $this->leaves[ 'Table' ];
     }
 }

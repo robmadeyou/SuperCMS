@@ -106,6 +106,7 @@ HTML;
     {
         $package = parent::getDeploymentPackage();
 
+        $package->resourcesToDeploy[] = __DIR__ . '/../../../static/js/jquery.js';
         $package->resourcesToDeploy[] = __DIR__ . '/../../../static/js/dropzone.min.js';
         $package->resourcesToDeploy[] = __DIR__ . '/../../../static/js/gridly/jquery.gridly.js';
         $package->resourcesToDeploy[] = __DIR__ . '/' . $this->getViewBridgeName() . '.js';

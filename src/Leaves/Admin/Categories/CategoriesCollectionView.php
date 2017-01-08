@@ -29,7 +29,8 @@ class CategoriesCollectionView extends SuperCMSCollectionView
 
     protected function printRightButtons()
     {
-        print '<a href="add/" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Add a Category</a>';
+        print '<a href="add/" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Add a Category</a>
+<a href="hierarchy/" class="btn btn-primary"><i class="fa fa-cog" aria-hidden="true"></i> Edit hierarchy</a>';
     }
 
     public function printBody()

@@ -6,6 +6,7 @@ use Rhubarb\Crown\Exceptions\ForceResponseException;
 use Rhubarb\Crown\Response\RedirectResponse;
 use SuperCMS\Controls\Category\CategoryDropdown;
 use SuperCMS\Controls\Dropzone\Dropzone;
+use SuperCMS\Controls\Dropzone\DropzoneUploadedFileDetails;
 use SuperCMS\Views\SuperCMSCrudView;
 
 class CategoriesItemView extends SuperCMSCrudView
@@ -23,6 +24,10 @@ class CategoriesItemView extends SuperCMSCrudView
         $dropzone->fileUploadedEvent->attachHandler(function($fileDetails) {
             $this->model->restModel->uploadImage($fileDetails);
         });
+
+        if ($this->model->restModel->Image) {
+            $dropzone->setUploadedFiles([new DropzoneUploadedFileDetails($this->model->restModel->Name, $this->model->restModel->Image)]);
+        }
 
         $this->bootstrapInputs();
     }

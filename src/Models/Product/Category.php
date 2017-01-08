@@ -51,7 +51,7 @@ class Category extends Model
     public function uploadImage(UploadedFileDetails $uploadData, $save = true)
     {
         if ($uploadData) {
-            $uploadPath = __DIR__ . '/../../../static/images/category/' . $this->CategoryID . '/';
+            $uploadPath = APPLICATION_ROOT_DIR . '/static/images/category/' . $this->CategoryID . '/';
             if (!is_dir($uploadPath)) {
                 mkdir($uploadPath, 777, true);
             }

@@ -25,10 +25,10 @@ abstract class SuperCMSCollectionView extends View
             <div class="col-md-2">
                 <?php $this->printLeftButtons() ?>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-7">
                 <?php $this->printSearchPanel() ?>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3 c-admin-right-buttons">
                 <?php $this->printRightButtons() ?>
             </div>
         </div>

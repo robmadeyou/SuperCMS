@@ -20,6 +20,7 @@ class AdminLayout extends SuperCMSDefaultLayout
         $sideNavs = [
             [
                 '/admin/dashboard/' => '<i class="fa fa-dashboard fa-fw"></i> Dashboard',
+                '/admin/orders/' => '<i class="fa fa-flag" aria-hidden="true"></i> Orders',
                 '/admin/products/' => '<i class="fa fa-shopping-basket" aria-hidden="true"></i> Products',
                 '/admin/categories/' => '<i class="fa fa-folder-open-o" aria-hidden="true"></i> Categories',
                 '/admin/shipping-types/' => '<i class="fa fa-truck" aria-hidden="true"></i> Shipping Types',

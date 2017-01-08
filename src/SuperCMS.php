@@ -33,6 +33,7 @@ use SuperCMS\Leaves\Admin\Categories\CategoriesCollection;
 use SuperCMS\Leaves\Admin\Coupons\CouponsCollection;
 use SuperCMS\Leaves\Admin\Dashboard\AdminDashboard;
 use SuperCMS\Leaves\Admin\Login\AdminLogin;
+use SuperCMS\Leaves\Admin\Orders\OrdersCollection;
 use SuperCMS\Leaves\Admin\Products\ProductsCollection;
 use SuperCMS\Leaves\Admin\Settings\SettingsLeaf;
 use SuperCMS\Leaves\Admin\ShippingType\ShippingTypeCollection;
@@ -53,6 +54,7 @@ use SuperCMS\LoginProviders\SCmsLoginProvider;
 use SuperCMS\Models\Coupon\Coupon;
 use SuperCMS\Models\Product\Category;
 use SuperCMS\Models\Product\Product;
+use SuperCMS\Models\Shopping\Order;
 use SuperCMS\Models\SuperCMSSolutionSchema;
 use SuperCMS\Models\Shipping\ShippingType;
 use SuperCMS\UrlHandlers\AdminClassMappedUrlHandler;
@@ -126,10 +128,13 @@ class SuperCMS extends Module
                     'admin/' => new AdminClassMappedUrlHandler(AdminIndex::class, [
                         'dashboard/' => new AdminClassMappedUrlHandler(AdminDashboard::class),
                         'products/' => new AdminCrudUrlHandler(Product::class, StringTools::getNamespaceFromClass(ProductsCollection::class)),
-                        'categories/' => new AdminCrudUrlHandler(Category::class, StringTools::getNamespaceFromClass(CategoriesCollection::class)),
+                        'categories/' => new AdminCrudUrlHandler(Category::class, StringTools::getNamespaceFromClass(CategoriesCollection::class), [], [
+                            'hierarchy/' => new ClassMappedUrlHandler(),
+                        ]),
                         'shipping-types/' => new AdminCrudUrlHandler(ShippingType::class, StringTools::getNamespaceFromClass(ShippingTypeCollection::class)),
                         'coupons/' => new AdminCrudUrlHandler(Coupon::class, StringTools::getNamespaceFromClass(CouponsCollection::class)),
                         'settings/' => new AdminClassMappedUrlHandler(SettingsLeaf::class),
+                        'orders/' => new AdminCrudUrlHandler(Order::class, StringTools::getNamespaceFromClass(OrdersCollection::class)),
                     ]),
                     'category/' => new CategoryUrlHandler(Category::class, StringTools::getNamespaceFromClass(CategoryCollection::class), [], [
                         'product/' => new ProductUrlHandler(Product::class, StringTools::getNamespaceFromClass(ProductCollection::class))

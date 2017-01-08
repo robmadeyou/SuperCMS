@@ -4,6 +4,7 @@ namespace SuperCMS\Models;
 
 use Rhubarb\Stem\Schema\SolutionSchema;
 use SuperCMS\Models\Coupon\Coupon;
+use SuperCMS\Models\Notification\Notification;
 use SuperCMS\Models\Product\Category;
 use SuperCMS\Models\Product\Comment;
 use SuperCMS\Models\Product\Product;
@@ -32,8 +33,9 @@ class SuperCMSSolutionSchema extends SolutionSchema
         $this->addModel('Coupon', Coupon::class, 1.01);
         $this->addModel('Basket', Basket::class, 2);
         $this->addModel('BasketItem', BasketItem::class, 1);
-        $this->addModel('Order', Order::class, 2);
-        $this->addModel('OrderItem', OrderItem::class, 1);
+        $this->addModel('Order', Order::class, 3);
+        $this->addModel('OrderItem', OrderItem::class, 2);
+        $this->addModel('Notification', Notification::class, 2);
     }
 
     protected function defineRelationships()
@@ -71,10 +73,10 @@ class SuperCMSSolutionSchema extends SolutionSchema
         $this->declareOneToOneRelationships(
             [
                 'Basket' => [
-                    'Order' => 'Order.BookingID'
+                    'Order' => 'Order.BasketID'
                 ],
                 'BasketItem' => [
-                    'OrderItem' => 'OrderItem.BasketID',
+                    'OrderItem' => 'OrderItem.BasketItemID',
                 ],
             ]
         );

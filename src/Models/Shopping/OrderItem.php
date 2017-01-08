@@ -13,7 +13,7 @@ use Rhubarb\Stem\Schema\ModelSchema;
  *
  * @property int $OrderItemID Repository field
  * @property int $OrderID Repository field
- * @property int $BookingItemID Repository field
+ * @property int $BasketItemID Repository field
  * @property string $Status Repository field
  * @property-read Order $Order Relationship
  * @property-read BasketItem $BasketItem Relationship
@@ -31,7 +31,7 @@ class OrderItem extends Model
         $schema->addColumn(
             new AutoIncrementColumn('OrderItemID'),
             new ForeignKeyColumn('OrderID'),
-            new ForeignKeyColumn('BookingItemID'),
+            new ForeignKeyColumn('BasketItemID'),
             new MySqlEnumColumn('Status', self::STATUS_PENDING, [self::STATUS_PENDING, self::STATUS_IN_PROGRESS, self::STATUS_DISPATCHED])
         );
 

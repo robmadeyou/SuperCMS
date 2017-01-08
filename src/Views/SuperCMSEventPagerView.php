@@ -20,7 +20,7 @@ class SuperCMSEventPagerView extends EventPagerView
     public $selectedPageCssClass = 'active';
     public $pageCssClass = 'pager-item';
     public $pagerBufferCssClass = 'pager-buffer';
-    public $containerCssClass = '';
+    public $containerCssClass = 'super-pager';
     public $innerContainerCssClass = 'pagination';
 
     protected function createSubLeaves()

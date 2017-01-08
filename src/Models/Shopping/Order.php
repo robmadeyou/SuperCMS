@@ -2,8 +2,13 @@
 
 namespace SuperCMS\Models\Shopping;
 
+use Rhubarb\Crown\DateTime\RhubarbDateTime;
+use Rhubarb\Stem\Filters\Equals;
+use Rhubarb\Stem\Filters\Not;
 use Rhubarb\Stem\Models\Model;
+use Rhubarb\Stem\Repositories\MySql\Schema\Columns\MySqlEnumColumn;
 use Rhubarb\Stem\Schema\Columns\AutoIncrementColumn;
+use Rhubarb\Stem\Schema\Columns\DateTimeColumn;
 use Rhubarb\Stem\Schema\Columns\ForeignKeyColumn;
 use Rhubarb\Stem\Schema\Columns\StringColumn;
 use Rhubarb\Stem\Schema\ModelSchema;
@@ -17,9 +22,16 @@ use Rhubarb\Stem\Schema\ModelSchema;
  * @property-read Basket $Basket Relationship
  * @property string $StripeToken Repository field
  * @property string $ClientIP Repository field
+ * @property RhubarbDateTime $DateOrdered Repository field
+ * @property string $Status Repository field
+ * @property-read mixed $OrderItemStatus {@link getOrderItemStatus()}
  */
 class Order extends Model
 {
+    const STATUS_PENDING = 'Pending';
+    const STATUS_IN_PROGRESS = 'In Progress';
+    const STATUS_DISPATCHED = 'Dispatched';
+
     protected function createSchema()
     {
         $schema = new ModelSchema('tblOrder');
@@ -28,9 +40,27 @@ class Order extends Model
             new AutoIncrementColumn('OrderID'),
             new ForeignKeyColumn('BasketID'),
             new StringColumn('StripeToken', 150),
-            new StringColumn('ClientIP', '16')
+            new StringColumn('ClientIP', '16'),
+            new DateTimeColumn('DateOrdered'),
+            new MySqlEnumColumn('Status', self::STATUS_PENDING, [self::STATUS_PENDING, self::STATUS_IN_PROGRESS, self::STATUS_DISPATCHED])
         );
 
+        $schema->labelColumnName = 'OrderID';
+
         return $schema;
+    }
+
+    protected function beforeSave()
+    {
+        if ($this->isNewRecord()) {
+            $this->DateOrdered = new RhubarbDateTime('now');
+        }
+    }
+
+    public function getOrderItemStatus()
+    {
+        $total = $this->OrderItems->count();
+        $left = $this->OrderItems->filter(new Not(new Equals('Status', OrderItem::STATUS_DISPATCHED)))->count();
+        return $total - $left . '/' . $total;
     }
 }

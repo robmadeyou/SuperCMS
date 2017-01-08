@@ -8,6 +8,7 @@ use Stripe\Stripe;
 use SuperCMS\Leaves\Site\Checkout\Checkout;
 use SuperCMS\Models\Shopping\Basket;
 use SuperCMS\Models\Shopping\Order;
+use SuperCMS\Models\Shopping\OrderItem;
 use SuperCMS\Models\User\SuperCMSUser;
 use SuperCMS\Settings\SuperCMSSettings;
 
@@ -64,9 +65,16 @@ class CheckoutAddress extends Checkout
                     'description' => $settings->websiteName . ' shop',
                 ]);
 
-                $order = new  Order();
+                $order = new Order();
                 $order->BasketID = $basket->UniqueIdentifier;
                 $order->save();
+
+                foreach ($basket->BasketItems as $item) {
+                    $orderItem = new OrderItem();
+                    $orderItem->OrderID = $order->UniqueIdentifier;
+                    $orderItem->BasketItemID = $item->UniqueIdentifier;
+                    $orderItem->save();
+                }
 
                 $basket->markPaid();
             } catch (Card $e) {
