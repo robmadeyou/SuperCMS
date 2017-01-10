@@ -15,6 +15,12 @@ class AdminLayout extends SuperCMSDefaultLayout
 
     }
 
+    protected function printHead()
+    {
+        parent::printHead();
+        print '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />';
+    }
+
     protected function printPageHeading()
     {
         $sideNavs = [
@@ -31,7 +37,6 @@ class AdminLayout extends SuperCMSDefaultLayout
 
         ?>
         <div id="wrapper">
-
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
