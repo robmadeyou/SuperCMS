@@ -30,6 +30,7 @@ use SuperCMS\Custard\ApplicationDemoDataSeeder;
 use SuperCMS\Layouts\DefaultLayout;
 use SuperCMS\Leaves\Admin\AdminIndex;
 use SuperCMS\Leaves\Admin\Categories\CategoriesCollection;
+use SuperCMS\Leaves\Admin\Categories\Hierarchy\Hierarchy;
 use SuperCMS\Leaves\Admin\Coupons\CouponsCollection;
 use SuperCMS\Leaves\Admin\Dashboard\AdminDashboard;
 use SuperCMS\Leaves\Admin\Login\AdminLogin;
@@ -129,7 +130,7 @@ class SuperCMS extends Module
                         'dashboard/' => new AdminClassMappedUrlHandler(AdminDashboard::class),
                         'products/' => new AdminCrudUrlHandler(Product::class, StringTools::getNamespaceFromClass(ProductsCollection::class)),
                         'categories/' => new AdminCrudUrlHandler(Category::class, StringTools::getNamespaceFromClass(CategoriesCollection::class), [], [
-                            'hierarchy/' => new ClassMappedUrlHandler(),
+                            'hierarchy/' => new AdminClassMappedUrlHandler(Hierarchy::class),
                         ]),
                         'shipping-types/' => new AdminCrudUrlHandler(ShippingType::class, StringTools::getNamespaceFromClass(ShippingTypeCollection::class)),
                         'coupons/' => new AdminCrudUrlHandler(Coupon::class, StringTools::getNamespaceFromClass(CouponsCollection::class)),
