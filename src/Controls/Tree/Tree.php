@@ -13,4 +13,12 @@ class Tree extends Control
     {
         return TreeView::class;
     }
+
+    /**
+     * @param TreeSchema[] $data
+     */
+    public function setData(array $data)
+    {
+        $this->model->data = $data;
+    }
 }

@@ -9,6 +9,7 @@ class HierarchyModel extends LeafModel
 {
     public $savePressedEvent;
     public $cancelPressedEvent;
+    public $saveHierarchyEvent;
 
     public function __construct()
     {
@@ -16,5 +17,6 @@ class HierarchyModel extends LeafModel
 
         $this->savePressedEvent = new Event();
         $this->cancelPressedEvent = new Event();
+        $this->saveHierarchyEvent = new Event();
     }
 }

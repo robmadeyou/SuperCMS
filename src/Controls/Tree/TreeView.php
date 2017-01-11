@@ -7,17 +7,39 @@ use Rhubarb\Leaf\Views\View;
 
 class TreeView extends View
 {
+    /** @var TreeModel $model */
+    protected $model;
+
     protected function printViewContent()
     {
+        $schemaHtml = '';
+
+        foreach ($this->model->data as $treeSchema) {
+            $schemaHtml .= $this->getHTMLFromSchema($treeSchema);
+        }
+
+        print <<<HTML
+        <ul>
+                {$schemaHtml}
+        </ul>
+HTML;
 
     }
 
-    protected function getDataGroup($data)
+    protected function getHTMLFromSchema(TreeSchema $data)
     {
         $html = '';
-        foreach ($data as $item) {
-
+        $childrenHtml = '';
+        if ($data->children) {
+            foreach($data->children as $child) {
+                $childrenHtml .= $this->getHTMLFromSchema($child);
+            }
+            $childrenHtml = "<ul>{$childrenHtml}</ul>";
         }
+        $html .= <<<HTML
+        <li data-jstree='{$data->getDataJsonString()}'><input type="hidden" value="{$data->uniqueID}" class="tree-id"><span class="name">{$data->name}</span> {$childrenHtml}</li>
+HTML;
+
         return $html;
     }
 
@@ -29,6 +51,7 @@ class TreeView extends View
     public function getDeploymentPackage()
     {
         return new LeafDeploymentPackage(
+            __DIR__ . '/../../../static/js/jquery.js',
             VENDOR_DIR . '/vakata/jstree/dist/jstree.min.js',
             __DIR__ . '/' . $this->getViewBridgeName() . '.js'
         );

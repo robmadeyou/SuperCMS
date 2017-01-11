@@ -4,6 +4,8 @@ namespace SuperCMS\Leaves\Admin\Categories\Hierarchy;
 
 use Rhubarb\Leaf\Leaves\LeafDeploymentPackage;
 use Rhubarb\Stem\Filters\Equals;
+use SuperCMS\Controls\Tree\Tree;
+use SuperCMS\Controls\Tree\TreeSchema;
 use SuperCMS\Models\Product\Category;
 use SuperCMS\Views\SuperCMSCrudView;
 
@@ -16,35 +18,41 @@ class HierarchyView extends SuperCMSCrudView
     {
         parent::createSubLeaves();
 
+        $this->registerSubLeaf(
+            $tree = new Tree('CategoryTree')
+        );
+
+        $tree->setData($this->convertToTree());
+
         $this->bootstrapInputs();
+    }
+
+    private function convertToTree($collection = null)
+    {
+        $treeObjects = [];
+
+        if (!$collection) {
+            $collection = Category::find(new Equals('ParentCategoryID', 0));
+        }
+
+        foreach ($collection as $category) {
+            $object = new TreeSchema();
+            $children = [];
+            /** @var Category $category */
+            if ($category->ChildCategories->count()) {
+                $children = $this->convertToTree($category->ChildCategories);
+            }
+
+            $object->setData($category->Name, $category->UniqueIdentifier, $category->Image, false, false, true, $children);
+            $treeObjects[] = $object;
+        }
+
+        return $treeObjects;
     }
 
     protected function printBody()
     {
-        $this->printBaseCategories();
-    }
-
-    protected function printBaseCategories()
-    {
-        print '<div class="gridly">';
-        foreach(Category::find(new Equals('ParentCategoryID', 0)) as $baseCategory) {
-            print $this->getCategoryHTML($baseCategory);
-        }
-        print '</div>';
-    }
-
-    /**
-     * @param Category $category
-     *
-     * @return string
-     */
-    protected function getCategoryHTML(Category $category)
-    {
-        $htmlString = '<div class="brick">' . $category->Name . '</div>';
-        foreach($category->ChildCategories as $childCategory) {
-
-        }
-        return $htmlString;
+        print $this->leaves['CategoryTree'];
     }
 
     protected function getTitle()
