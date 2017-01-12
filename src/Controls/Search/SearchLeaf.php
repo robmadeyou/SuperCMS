@@ -6,6 +6,7 @@ use Rhubarb\Leaf\Leaves\Leaf;
 use Rhubarb\Stem\Filters\AndGroup;
 use Rhubarb\Stem\Filters\Contains;
 use Rhubarb\Stem\Filters\Equals;
+use SuperCMS\Models\Product\Category;
 use SuperCMS\Models\Product\Product;
 use SuperCMS\Session\SuperCMSSession;
 
@@ -24,14 +25,14 @@ class SearchLeaf extends Leaf
         $model->Query = $session->searchQuery;
 
         $model->searchEvent->attachHandler(function($query) {
-            $products = Product::find(
-                new AndGroup(
-                    [
-                        new Contains('Name', $query),
-                        new Equals('Live', true),
-                    ]
-                )
+            $filters = new AndGroup(
+                [
+                    new Contains('Name', $query),
+                    new Equals('Live', true),
+                ]
             );
+
+            $products = Product::find($filters);
             $productsReturn = [];
             foreach($products as $product) {
                 $p = new \stdClass();

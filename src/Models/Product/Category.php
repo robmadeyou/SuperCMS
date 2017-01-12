@@ -2,10 +2,15 @@
 
 namespace SuperCMS\Models\Product;
 
+use Rhubarb\Crown\Exceptions\ForceResponseException;
+use Rhubarb\Crown\Request\Request;
+use Rhubarb\Crown\Response\RedirectResponse;
 use Rhubarb\Leaf\Controls\Common\FileUpload\UploadedFileDetails;
+use Rhubarb\Stem\Exceptions\RecordNotFoundException;
 use Rhubarb\Stem\Filters\AndGroup;
 use Rhubarb\Stem\Filters\Equals;
 use Rhubarb\Stem\Filters\Filter;
+use Rhubarb\Stem\Filters\OneOf;
 use Rhubarb\Stem\Models\Model;
 use Rhubarb\Stem\Repositories\MySql\Schema\MySqlModelSchema;
 use Rhubarb\Stem\Schema\Columns\AutoIncrementColumn;
@@ -143,8 +148,44 @@ class Category extends Model
         return parent::find(new AndGroup([new Equals('Visible', true), new AndGroup($filters)]));
     }
 
+    public function getProducts()
+    {
+        $categoryIds = [];
+
+        $getChildIds = function(Category $category) use (&$categoryIds, &$getChildIds) {
+            $children = $category->ChildCategories;
+            if ($children->count()) {
+                foreach ($children as $child) {
+                    if ($child->ChildCategories->count()) {
+                        $getChildIds($child);
+                    }
+                    $categoryIds[] = $child->UniqueIdentifier;
+                }
+            }
+            $categoryIds[] = $category->UniqueIdentifier;
+        };
+        $getChildIds($this);
+
+        return Product::find(new OneOf('CategoryID', $categoryIds));
+    }
+
     public function getPublicUrl()
     {
         return '/category/' . $this->SeoSafeName . '/';
+    }
+
+    public static function getCategoryFromUrl()
+    {
+        $request = Request::current();
+        $parts = explode('/', $request->uri);
+
+        if (isset( $parts[ 1 ] ) && $parts[ 1 ] == 'category' && isset( $parts[ 2 ] ) && is_string($parts[ 2 ])) {
+            try {
+                return Category::findFirst(new Equals('SeoSafeName', $parts[2]));
+            } catch (RecordNotFoundException $ex) {
+                return false;
+            }
+        }
+        return false;
     }
 }

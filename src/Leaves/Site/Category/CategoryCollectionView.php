@@ -8,6 +8,6 @@ class CategoryCollectionView extends View
 {
     protected function printViewContent()
     {
-        print 'yay';
+        print '';
     }
 }

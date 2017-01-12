@@ -41,17 +41,12 @@ class CategoryUrlHandler extends CrudUrlHandler
 
     protected function getCategoryFromUrl():Category
     {
-        $request = Request::current();
-        $parts = explode('/', $request->uri);
-
-        if (isset( $parts[ 1 ] ) && $parts[ 1 ] == 'category' && isset( $parts[ 2 ] ) && is_string($parts[ 2 ])) {
-            try {
-                return Category::findFirst(new Equals('SeoSafeName', $parts[2]));
-            } catch (RecordNotFoundException $ex) {
-                throw new ForceResponseException(new RedirectResponse('/404/'));
-            }
+        $category = Category::getCategoryFromUrl();
+        if ($category) {
+            return $category;
+        } else {
+            throw new ForceResponseException(new RedirectResponse('/404/'));
         }
-        return new Category();
     }
 
     public function getModelObject()

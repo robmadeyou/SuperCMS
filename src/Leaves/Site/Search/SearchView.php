@@ -52,8 +52,21 @@ class SearchView extends DaisyDefaultView
             'Home' => '/'
         ];
 
+        $categories = [];
         if ($this->model->restModel && $this->model->restModel instanceof Category) {
-            $breadCrumbs[$this->model->restModel->Name] = $this->model->restModel->getPublicUrl();
+            $currentCategory = $this->model->restModel;
+
+            $categories[$currentCategory->Name] = $currentCategory->getPublicUrl();
+            while ($currentCategory->ParentCategoryID) {
+                $currentCategory = $currentCategory->ParentCategory;
+                $categories[$currentCategory->Name] = $currentCategory->getPublicUrl();
+            }
+        }
+
+        if (!empty($categories)) {
+            foreach(array_reverse($categories, true) as $key => $value) {
+                $breadCrumbs[$key] = $value;
+            }
         }
 
         if ($session->searchQuery) {

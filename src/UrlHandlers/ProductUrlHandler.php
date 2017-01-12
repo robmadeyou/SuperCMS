@@ -15,7 +15,6 @@ class ProductUrlHandler extends CategoryUrlHandler
 
     public function generateResponse($request = null, $currentUrlFragment = false)
     {
-
         $parts = explode('/', $currentUrlFragment);
         if (isset($parts[1]) && $parts[1] == 'product') {
             if (isset($parts[2]) && $parts[2] != '') {
@@ -40,6 +39,6 @@ class ProductUrlHandler extends CategoryUrlHandler
 
     public function getModelCollection()
     {
-        return $this->getCategoryFromUrl()->Products;
+        return $this->getCategoryFromUrl()->getProducts();
     }
 }

@@ -7,6 +7,7 @@ use Rhubarb\Leaf\Controls\Common\Buttons\Button;
 use Rhubarb\Leaf\Controls\Common\SelectionControls\DropDown\DropDown;
 use Rhubarb\Leaf\Leaves\LeafDeploymentPackage;
 use Rhubarb\Leaf\Views\View;
+use SuperCMS\Models\Product\Category;
 use SuperCMS\Models\Product\Product;
 use SuperCMS\Models\Product\ProductVariation;
 use SuperCMS\Views\BreadcrumbTrait;
@@ -115,11 +116,31 @@ HTML;
     public function getBreadcrumbItems():array
     {
         $category = $this->model->restModel->Category;
-        return [
+
+        $breadCrumbs = [
             'Home' => '/',
-            $category->Name => $category->getPublicUrl(),
-            $this->model->restModel->Name => '',
         ];
+
+        $categories = [];
+        if ($category && $category instanceof Category) {
+            $currentCategory = $category;
+
+            $categories[$currentCategory->Name] = $currentCategory->getPublicUrl();
+            while ($currentCategory->ParentCategoryID) {
+                $currentCategory = $currentCategory->ParentCategory;
+                $categories[$currentCategory->Name] = $currentCategory->getPublicUrl();
+            }
+        }
+
+        if (!empty($categories)) {
+            foreach(array_reverse($categories, true) as $key => $value) {
+                $breadCrumbs[$key] = $value;
+            }
+        }
+
+        $breadCrumbs[$this->model->restModel->Name] = '';
+
+        return $breadCrumbs;
     }
 
     public function getDeploymentPackage()
