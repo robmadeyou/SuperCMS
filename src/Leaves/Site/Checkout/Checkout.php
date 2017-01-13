@@ -29,9 +29,14 @@ class Checkout extends Leaf
 
         $currentBasket = Basket::getCurrentBasket();
         if (!$currentBasket->getTotalQuantity()) {
-            throw new ForceResponseException(new RedirectResponse('/'));
+            $this->redirectIfNoBasket();
         }
 
         $this->model->basket = $currentBasket;
+    }
+
+    protected function redirectIfNoBasket()
+    {
+        throw new ForceResponseException(new RedirectResponse('/'));
     }
 }

@@ -66,6 +66,42 @@ input:checked + .slider:before {
 	border-radius: 50%;
 }
 
+@keyframes notificationFadeOut {
+	from {
+		opacity:1;
+	}
+	to {
+		opacity:0;
+	}
+}
+
+@-webkit-keyframes notificationFadeOut {
+	from {
+		opacity:1;
+	}
+	to {
+		opacity:0;
+	}
+}
+
+@keyframes notificationFadeIn {
+	from {
+		opacity:0;
+	}
+	to {
+		opacity:1;
+	}
+}
+
+@-webkit-keyframes notificationFadeIn {
+	from {
+		opacity:0;
+	}
+	to {
+		opacity:1;
+	}
+}
+
 /*
  * The MIT License
  * Copyright (c) 2012 Matias Meno <m@tias.me>
@@ -527,42 +563,6 @@ input:checked + .slider:before {
 	animation-fill-mode: forwards;
 }
 
-@keyframes notificationFadeOut {
-	from {
-		opacity:1;
-	}
-	to {
-		opacity:0;
-	}
-}
-
-@-webkit-keyframes notificationFadeOut {
-	from {
-		opacity:1;
-	}
-	to {
-		opacity:0;
-	}
-}
-
-@keyframes notificationFadeIn {
-	from {
-		opacity:0;
-	}
-	to {
-		opacity:1;
-	}
-}
-
-@-webkit-keyframes notificationFadeIn {
-	from {
-		opacity:0;
-	}
-	to {
-		opacity:1;
-	}
-}
-
 /* jQuery Gridly
  * Copyright 2015 Kevin Sylvestre
  * 1.2.9
@@ -588,6 +588,24 @@ input:checked + .slider:before {
 	position: relative;
 }
 
+@keyframes ajaxProgressFadeIn {
+	from {
+		opacity:0;
+	}
+	to {
+		opacity:0.5;
+	}
+}
+
+@-webkit-keyframes ajaxProgressFadeIn {
+	from {
+		opacity:0;
+	}
+	to {
+		opacity:0.5;
+	}
+}
+
 .ajax-progress::after {
 	position: absolute!important;
 	z-index: 999999!important;
@@ -603,17 +621,24 @@ input:checked + .slider:before {
 	content: ''!important;
 	max-width: 32px!important;
 	width: 100%!important;
-	animation: fa-spin 1s infinite!important;
+	animation: fa-spin 1s infinite, ajaxProgressFadeIn 0.2s !important;
 }
 
 .ajax-progress::before {
-	top:0!important;
-	right: 0!important;
-	left:0!important;
-	bottom:0!important;
+	top:-20px!important;
+	right: -20px!important;
+	left:-20px!important;
+	bottom:-20px!important;
 	position: absolute!important;
 	opacity: 0.5!important;
 	z-index: 999997!important;
-	background-color: #611d41!important;
 	content:''!important;
+	animation: ajaxProgressFadeIn 0.3s !important;
+}
+
+.gradient-line{
+	margin: 25px 0;
+	height: 1px;
+	background: black;
+	background: -webkit-gradient(linear, 0 0, 100% 0, from(white), to(white), color-stop(50%, black));
 }

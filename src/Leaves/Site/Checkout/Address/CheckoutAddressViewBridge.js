@@ -13,8 +13,14 @@ bridge.prototype.attachEvents = function () {
 		locale:'auto',
 		image: '/static/favicon/favicon-128.png',
 		token: function(token) {
-			self.raiseServerEvent('paymentMade', token, function() {
+			$('body').addClass('ajax-progress');
+			self.raiseServerEvent('paymentMade', token, function(res) {
+				if (res.success) {
+					window.location = res.url;
+				} else {
 
+				}
+				$('body').removeClass('ajax-progress');
 			});
 		}
 	});

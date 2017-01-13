@@ -2,6 +2,8 @@
 
 namespace SuperCMS\Leaves\Site\Checkout\Address;
 
+use Rhubarb\Crown\Exceptions\ForceResponseException;
+use Rhubarb\Crown\Response\RedirectResponse;
 use Stripe\Charge;
 use Stripe\Error\Card;
 use Stripe\Stripe;
@@ -57,11 +59,12 @@ class CheckoutAddress extends Checkout
         $this->model->paymentMadeEvent->attachHandler(function ($token) use ($settings, $basket) {
             Stripe::setApiKey($settings->getStripeToken());
 
+            $data = new \stdClass();
             try {
                 $charge = Charge::create([
                     'amount' => $basket->getTotalCost() * 100,
                     'currency' => 'gbp',
-                    'source' => $token->id,
+                    'sourcee' => $token->id,
                     'description' => $settings->websiteName . ' shop',
                 ]);
 
@@ -77,8 +80,15 @@ class CheckoutAddress extends Checkout
                 }
 
                 $basket->markPaid();
-            } catch (Card $e) {
+
+                $data->url = '/checkout/success/?uq=' . $order->UniqueReference;
+                $data->success = true;
+            } catch (\Exception $e) {
+                $data->success = false;
+                $data->error = 'Receiving payment failed!';
             }
+
+            return $data;
         } );
     }
 }

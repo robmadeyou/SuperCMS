@@ -42,11 +42,12 @@ class BasketPageView extends View
 
     protected function printViewContent()
     {
+        $count = $this->model->basket->BasketItems->count();
         ?>
         <div class="c-basket-outer">
-            <h1>Your Basket</h1>
+            <h1 class="c-title"><?= $count ? 'Your Basket' : 'Oh no!' ?></h1>
             <?php
-            if ($this->model->basket->BasketItems->count()) {
+            if ($count) {
                 ?>
                 <div class="row marginless c-basket-outer">
                     <div class="col-sm-9">

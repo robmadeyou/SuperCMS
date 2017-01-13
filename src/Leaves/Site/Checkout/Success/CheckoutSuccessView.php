@@ -6,6 +6,9 @@ use SuperCMS\Leaves\Site\Checkout\CheckoutView;
 
 class CheckoutSuccessView extends CheckoutView
 {
+    /** @var CheckoutSuccessModel */
+    protected $model;
+
     protected function getTitle()
     {
         return 'Success!';

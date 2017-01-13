@@ -32,6 +32,7 @@ class BasketTableView extends TableView
             /** @var BasketItem $basketProduct */
             print <<<HTML
             <div class="search-product basket-product row marginless">
+            <a href="#" class="c-remove-button js-remove-product" data-id="{$basketProduct->UniqueIdentifier}"><i class="fa fa-times-circle fa-3" aria-hidden="true"></i></a>
             <div class="col-sm-3 product-image">
                 <img src="{$basketProduct->ProductVariation->getPrimaryImage()}">
             </div>
@@ -41,9 +42,6 @@ class BasketTableView extends TableView
             </div>
             <div class="col-sm-3 product-price">
                 <div class="pull-right">
-                    <span class="c-product-action-element">
-                        <a href="#" class="js-remove-product" data-id="{$basketProduct->UniqueIdentifier}">Remove</a><br>
-                    </span>
                     <span class="c-product-action-element">
                         <label for="quantity">Quantity: </label><input data-id="{$basketProduct->UniqueIdentifier}" id="quantity" name="quantity" size="5" type="text" value="{$basketProduct->Quantity}" class="js-quantitypicker c-input-center"><br>
                     </span>

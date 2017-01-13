@@ -8,13 +8,17 @@ bridge.prototype.constructor = bridge;
 bridge.prototype.attachEvents = function () {
 
     var self = this;
-    $('.js-remove-product').click(function(){
+    $('.js-remove-product').click(function(event){
         var object = this;
         if (confirm('Are you sure you want to remove this item?')) {
+            var row = $(object.closest('.basket-product'));
+            row.fadeOut();
             self.raiseServerEvent('removeItem', $(this).data('id'), function(){
-                object.closest('.basket-product').remove();
+                row.remove();
             });
         }
+        event.preventDefault();
+        return false;
     });
 
 

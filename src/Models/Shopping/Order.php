@@ -25,6 +25,7 @@ use Rhubarb\Stem\Schema\ModelSchema;
  * @property RhubarbDateTime $DateOrdered Repository field
  * @property string $Status Repository field
  * @property-read mixed $OrderItemStatus {@link getOrderItemStatus()}
+ * @property string $UniqueReference Repository field
  */
 class Order extends Model
 {
@@ -42,7 +43,8 @@ class Order extends Model
             new StringColumn('StripeToken', 150),
             new StringColumn('ClientIP', '16'),
             new DateTimeColumn('DateOrdered'),
-            new MySqlEnumColumn('Status', self::STATUS_PENDING, [self::STATUS_PENDING, self::STATUS_IN_PROGRESS, self::STATUS_DISPATCHED])
+            new MySqlEnumColumn('Status', self::STATUS_PENDING, [self::STATUS_PENDING, self::STATUS_IN_PROGRESS, self::STATUS_DISPATCHED]),
+            new StringColumn('UniqueReference', 40)
         );
 
         $schema->labelColumnName = 'OrderID';
@@ -54,6 +56,7 @@ class Order extends Model
     {
         if ($this->isNewRecord()) {
             $this->DateOrdered = new RhubarbDateTime('now');
+            $this->UniqueReference = sha1($this->DateOrdered);
         }
     }
 
