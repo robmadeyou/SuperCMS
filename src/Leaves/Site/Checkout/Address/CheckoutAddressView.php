@@ -51,6 +51,8 @@ class CheckoutAddressView extends CheckoutView
                 );
                 ?>
             </div>
+            <div class="col-sm-6" id="js-payment-target">
+            </div>
         </div>
         <?php
     }

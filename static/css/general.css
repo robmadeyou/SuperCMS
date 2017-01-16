@@ -314,7 +314,6 @@ input:checked + .slider:before {
 	vertical-align: top;
 	margin: 16px;
 	min-height: 100px;
-	border: 1px solid blue;
 }
 .file-input .dz-preview:hover {
 	z-index: 1000; }
@@ -391,7 +390,9 @@ input:checked + .slider:before {
 	height: 120px;
 	position: relative;
 	display: block;
-	z-index: 10; }
+	z-index: 10;
+	border: 1px solid #337ab7;
+}
 .file-input .dz-preview .dz-image img {
 	display: block; }
 .file-input .dz-preview.dz-success .dz-success-mark {
@@ -555,12 +556,44 @@ input:checked + .slider:before {
 	animation-fill-mode: forwards;
 }
 
+.alert-target {
+	position: relative;
+}
+
+.alert-target > .alert-outer {
+	position: absolute;
+	top:0;
+	right:0;
+	bottom:0;
+	left:0;
+	width:100%;
+}
+
+.alert-target > .alert-outer .alert {
+	-webkit-animation-name: none !important;
+	-moz-animation-name: none !important;
+	-o-animation-name: none !important;
+	animation-name: none !important;
+}
+
 .alert {
 	animation-name: notificationFadeOut;
 	animation-delay: 5s;
 	animation-duration: 1s;
 	animation-iteration-count: 1;
 	animation-fill-mode: forwards;
+}
+
+@media screen and (max-width: 991px) {
+	.alert-outer {
+		width: 80%;
+		left: 10%;
+	}
+
+	.alert-target > .alert-outer {
+		width:100%;
+		left:0;
+	}
 }
 
 /* jQuery Gridly
@@ -625,15 +658,21 @@ input:checked + .slider:before {
 }
 
 .ajax-progress::before {
-	top:-20px!important;
-	right: -20px!important;
-	left:-20px!important;
-	bottom:-20px!important;
+	top:0px!important;
+	right: 0px!important;
+	left:0px!important;
+	bottom:0px!important;
 	position: absolute!important;
 	opacity: 0.5!important;
 	z-index: 999997!important;
 	content:''!important;
 	animation: ajaxProgressFadeIn 0.3s !important;
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1e5799+41,7db9e8+100&1+0,0+100 */
+	background: -moz-radial-gradient(center, ellipse cover,  rgba(30,87,153,1) 0%, rgba(30,87,153,0.59) 41%, rgba(125,185,232,0) 100%); /* FF3.6-15 */
+	background: -webkit-radial-gradient(center, ellipse cover,  rgba(30,87,153,1) 0%,rgba(30,87,153,0.59) 41%,rgba(125,185,232,0) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: radial-gradient(ellipse at center,  rgba(30,87,153,1) 0%,rgba(30,87,153,0.59) 41%,rgba(125,185,232,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#007db9e8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
 }
 
 .gradient-line{
@@ -641,4 +680,9 @@ input:checked + .slider:before {
 	height: 1px;
 	background: black;
 	background: -webkit-gradient(linear, 0 0, 100% 0, from(white), to(white), color-stop(50%, black));
+}
+
+.file-input .dz-preview .dz-image {
+	width:100%;
+	height:100%;
 }

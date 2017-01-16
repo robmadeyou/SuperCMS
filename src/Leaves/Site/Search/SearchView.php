@@ -32,7 +32,7 @@ class SearchView extends DaisyDefaultView
 
         $this->printBreadcrumbs();
         ?>
-        <h3>Found <strong><?=$amount?> </strong> <?= $amount == 1 ? 'item' : 'items' ?>.</h3>
+        <h3 class="c-title">Found <strong><?=$amount?> </strong> <?= $amount == 1 ? 'item' : 'items' ?>.</h3>
         <div class="row">
             <div class="col-sm-2">
                 <?php $this->printFilters() ?>

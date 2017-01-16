@@ -11,23 +11,41 @@ class NotificationPrint
 
     private $text;
     private $alertType;
+    private $targetElementId;
+
+    private $timeout = 6000;
 
     /**
      * NotificationPrint constructor.
      *
      * @param string $text
      * @param string $alertType
+     * @param string $targetElementId
      */
-    public function __construct($text = '', $alertType = self::SUCCESS)
+    public function __construct($text = '', $alertType = self::SUCCESS, $targetElementId = '')
     {
         $this->text = base64_encode(nl2br($text));
         $this->alertType = $alertType;
+        $this->targetElementId = $targetElementId;
+    }
+
+    public function setTimeout($timeout = 6000)
+    {
+        $this->timeout = $timeout;
     }
 
     function __toString()
     {
         $id = uniqid('alert-');
 
+        $timeoutText = '';
+        if ($this->timeout > 0) {
+            $timeoutText = <<<JS
+            setTimeout(function(){
+                    outer.remove();
+                }, {$this->timeout});
+JS;
+        }
         return <<<HTML
             <script type="application/javascript">
                 var outer = document.createElement('div');
@@ -39,13 +57,21 @@ class NotificationPrint
                 element.setAttribute('role', 'alert');
                 element.innerHTML = atob('{$this->text}');
                 outer.appendChild(element);
-                document.querySelector('body').appendChild(outer);
+                
+                var target = null;
+                
+                try {
+                    target = document.querySelector('#{$this->targetElementId}');
+                    target.classList.add('alert-target');
+                } catch (ex) {
+                    target = document.querySelector('body');
+                }
+                target.appendChild(outer);
                 outer.onclick = function() {
                     outer.style.display = 'none';
                 };
-                setTimeout(function(){
-                    outer.remove();
-                }, 6000);
+                
+                {$timeoutText}
             </script>
 HTML;
     }

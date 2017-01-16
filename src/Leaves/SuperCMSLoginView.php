@@ -4,6 +4,7 @@ namespace SuperCMS\Leaves;
 
 use Rhubarb\Crown\Request\Request;
 use Rhubarb\Scaffolds\Authentication\Leaves\LoginView;
+use SuperCMS\Controls\Notification\NotificationPrint;
 use SuperCMS\Settings\SuperCmsPageSettings;
 
 class SuperCMSLoginView extends LoginView
@@ -37,6 +38,8 @@ class SuperCMSLoginView extends LoginView
                 <div class="col-md-4 col-md-offset-4">
                     <section class="login-form">
                         <form method="post" action="#" role="login">
+                            <div id="js-login-error">
+                            </div>
                             <img src="/static/favicon/favicon-128.png" class="img-responsive" alt="" />
                             <div>
                               <a href="/login/register/{$redirect}">Create account</a> or <a href="#">reset password</a>
@@ -60,5 +63,11 @@ class SuperCMSLoginView extends LoginView
                 </div>
             </div>
 HTML;
+
+        if ($this->model->failed) {
+            $notification = new NotificationPrint('<b>Username</b> or <b>Password</b> is incorrect. <br>Please try again!', NotificationPrint::DANGER, 'js-login-error');
+            $notification->setTimeout(0);
+            print $notification;
+        }
     }
 }

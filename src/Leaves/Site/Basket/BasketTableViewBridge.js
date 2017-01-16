@@ -8,13 +8,16 @@ bridge.prototype.constructor = bridge;
 bridge.prototype.attachEvents = function () {
 
     var self = this;
+    var totalCostElement = $('.c-basket-total');
+
     $('.js-remove-product').click(function(event){
         var object = this;
         if (confirm('Are you sure you want to remove this item?')) {
             var row = $(object.closest('.basket-product'));
             row.fadeOut();
-            self.raiseServerEvent('removeItem', $(this).data('id'), function(){
+            self.raiseServerEvent('removeItem', $(this).data('id'), function(totalCost){
                 row.remove();
+                totalCostElement.html(totalCost);
             });
         }
         event.preventDefault();
@@ -37,7 +40,10 @@ bridge.prototype.attachEvents = function () {
                 var costSide = $(this).closest('.product-price');
                 costSide.addClass('ajax-progress');
                 self.raiseServerEvent('updateQuantity', id, amount, function(amount) {
-                    costSide.find('.product-cost').html(amount);
+
+                    costSide.find('.product-cost').html(amount.Single);
+                    totalCostElement.html(amount.Total);
+
                     update.remove();
                     costSide.removeClass('ajax-progress');
                     obj.removeClass('changed');

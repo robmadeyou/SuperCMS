@@ -7,6 +7,7 @@ use Rhubarb\Crown\Response\RedirectResponse;
 use Stripe\Charge;
 use Stripe\Error\Card;
 use Stripe\Stripe;
+use SuperCMS\Controls\Notification\NotificationPrint;
 use SuperCMS\Leaves\Site\Checkout\Checkout;
 use SuperCMS\Models\Shopping\Basket;
 use SuperCMS\Models\Shopping\Order;
@@ -64,7 +65,7 @@ class CheckoutAddress extends Checkout
                 $charge = Charge::create([
                     'amount' => $basket->getTotalCost() * 100,
                     'currency' => 'gbp',
-                    'sourcee' => $token->id,
+                    'source' => $token->id,
                     'description' => $settings->websiteName . ' shop',
                 ]);
 
@@ -86,6 +87,9 @@ class CheckoutAddress extends Checkout
             } catch (\Exception $e) {
                 $data->success = false;
                 $data->error = 'Receiving payment failed!';
+                $notification = new NotificationPrint('Receiving payment failed. Please check your details!', NotificationPrint::DANGER, 'js-payment-target');
+                $notification->setTimeout(0);
+                print $notification;
             }
 
             return $data;

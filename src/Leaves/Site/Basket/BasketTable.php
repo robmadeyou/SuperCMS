@@ -9,6 +9,7 @@ use Rhubarb\Stem\Exceptions\RecordNotFoundException;
 use SuperCMS\Controls\GlobalBasket\GlobalBasket;
 use SuperCMS\Models\Shopping\Basket;
 use SuperCMS\Models\Shopping\BasketItem;
+use SuperCMS\SuperCMS;
 
 class BasketTable extends Table
 {
@@ -39,6 +40,9 @@ class BasketTable extends Table
                 $basketItem = new BasketItem($id);
                 if ($basketItem->BasketID == Basket::getCurrentBasket()->UniqueIdentifier) {
                     $basketItem->delete();
+                    GlobalBasket::getInstance()->replace();
+
+                    return SuperCMS::$currencySymbol . number_format(Basket::getCurrentBasket()->getTotalCost(), 2);
                 } else {
                     throw new ForceResponseException(new RedirectResponse('/403/'));
                 }
@@ -49,11 +53,16 @@ class BasketTable extends Table
         $this->model->updateQuantityEvent->attachHandler(function($id, $amount) {
             try {
                 $basketItem = new BasketItem($id);
-                if ($basketItem->BasketID == Basket::getCurrentBasket()->UniqueIdentifier) {
+                $basket = Basket::getCurrentBasket();
+                if ($basketItem->BasketID == $basket->UniqueIdentifier) {
                     $basketItem->Quantity = $amount;
                     $basketItem->save();
                     GlobalBasket::getInstance()->replace();
-                    return $basketItem->getTotalCost();
+
+                    $data = new \stdClass();
+                    $data->Total = SuperCMS::$currencySymbol . number_format($basket->getTotalCost(), 2);
+                    $data->Single = $basketItem->getTotalCost();
+                    return $data;
                 } else {
                     throw new ForceResponseException(new RedirectResponse('/403/'));
                 }
