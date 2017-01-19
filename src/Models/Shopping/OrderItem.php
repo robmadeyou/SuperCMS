@@ -37,4 +37,9 @@ class OrderItem extends Model
 
         return $schema;
     }
+
+    protected function afterSave()
+    {
+        $this->Order->checkUpdateStatus();
+    }
 }

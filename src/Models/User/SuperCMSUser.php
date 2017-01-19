@@ -3,6 +3,7 @@
 namespace SuperCMS\Models\User;
 
 use Rhubarb\Scaffolds\Authentication\User;
+use Rhubarb\Stem\Schema\Columns\ForeignKeyColumn;
 use Rhubarb\Stem\Schema\Columns\IntegerColumn;
 use Rhubarb\Stem\Schema\Columns\StringColumn;
 use Rhubarb\Stem\Schema\ModelSchema;
@@ -27,6 +28,9 @@ use Rhubarb\Stem\Schema\ModelSchema;
  * @property string $Address Repository field
  * @property string $Address2 Repository field
  * @property string $PostCode Repository field
+ * @property int $PrimaryLocationID Repository field
+ * @property-read Location $PrimaryLocation Relationship
+ * @property-read Location[]|\Rhubarb\Stem\Collections\RepositoryCollection $Locations Relationship
  */
 class SuperCMSUser extends User
 {
@@ -35,9 +39,7 @@ class SuperCMSUser extends User
         $schema->addColumn(
             new IntegerColumn('RoleID'),
             new StringColumn('MiddleName', 50),
-            new StringColumn('Address', 250),
-            new StringColumn('Address2', 250),
-            new StringColumn('PostCode', 10)
+            new ForeignKeyColumn('PrimaryLocationID')
         );
     }
 

@@ -2,10 +2,7 @@
 
 namespace SuperCMS\Leaves\Site\Checkout\Address;
 
-use Rhubarb\Crown\Exceptions\ForceResponseException;
-use Rhubarb\Crown\Response\RedirectResponse;
 use Stripe\Charge;
-use Stripe\Error\Card;
 use Stripe\Stripe;
 use SuperCMS\Controls\Notification\NotificationPrint;
 use SuperCMS\Leaves\Site\Checkout\Checkout;
@@ -36,16 +33,7 @@ class CheckoutAddress extends Checkout
 
         $loggedIn = SuperCMSUser::getLoggedInUser();
 
-        $this->model->Address = $loggedIn->Address;
-        $this->model->Address2 = $loggedIn->Address2;
-        $this->model->PostCode = $loggedIn->PostCode;
-
         $this->model->email = $loggedIn->Email;
-
-        $this->model->requiredFields = [
-            'Address',
-            'Address2',
-        ];
 
         $settings = SuperCMSSettings::singleton();
         if ($settings->developmentMode) {

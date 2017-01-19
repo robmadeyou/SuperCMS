@@ -20,9 +20,11 @@ abstract class CheckoutView extends View
         parent::beforeRender();
         $this->bootstrapInputs();
 
-        foreach($this->model->requiredFields as $requiredField) {
-            if (isset($this->model->$requiredField) && $this->model->$requiredField == '') {
-                $this->leaves[$requiredField]->error = true;
+        if (isset($this->model->requiredFields)) {
+            foreach($this->model->requiredFields as $requiredField) {
+                if (isset($this->model->$requiredField) && $this->model->$requiredField == '') {
+                    $this->leaves[$requiredField]->error = true;
+                }
             }
         }
 

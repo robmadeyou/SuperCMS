@@ -15,6 +15,7 @@ use SuperCMS\Models\Shopping\Basket;
 use SuperCMS\Models\Shopping\BasketItem;
 use SuperCMS\Models\Shopping\Order;
 use SuperCMS\Models\Shopping\OrderItem;
+use SuperCMS\Models\User\Location;
 use SuperCMS\Models\User\SuperCMSUser;
 
 class SuperCMSSolutionSchema extends SolutionSchema
@@ -36,6 +37,7 @@ class SuperCMSSolutionSchema extends SolutionSchema
         $this->addModel('Order', Order::class, 3);
         $this->addModel('OrderItem', OrderItem::class, 2);
         $this->addModel('Notification', Notification::class, 2);
+        $this->addModel('Location', Location::class, 2);
     }
 
     protected function defineRelationships()
@@ -60,6 +62,7 @@ class SuperCMSSolutionSchema extends SolutionSchema
                 ],
                 'User' => [
                     'Baskets' => 'Basket.UserID',
+                    'Locations' => 'Location.UserID',
                 ],
                 'Basket' => [
                     'BasketItems' => 'BasketItem.BasketID',
@@ -78,6 +81,9 @@ class SuperCMSSolutionSchema extends SolutionSchema
                 'BasketItem' => [
                     'OrderItem' => 'OrderItem.BasketItemID',
                 ],
+                'Location' => [
+                    'User' => 'User.PrimaryLocationID:PrimaryLocation'
+                ]
             ]
         );
     }

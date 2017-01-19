@@ -31,5 +31,4 @@ class CheckoutAddressModel extends LeafModel
 
         return $properties;
     }
-
 }

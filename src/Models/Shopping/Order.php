@@ -66,4 +66,21 @@ class Order extends Model
         $left = $this->OrderItems->filter(new Not(new Equals('Status', OrderItem::STATUS_DISPATCHED)))->count();
         return $total - $left . '/' . $total;
     }
+
+    public function checkUpdateStatus()
+    {
+        $status = '';
+        foreach ($this->OrderItems as $orderItem) {
+            if (!$status) {
+                $status = $orderItem->Status;
+            }
+
+            if ($status != $orderItem->Status) {
+                return;
+            }
+        }
+
+        $this->Status = $status;
+        $this->save();
+    }
 }
