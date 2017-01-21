@@ -21,31 +21,31 @@ class LocationPickerView extends ControlView
         parent::createSubLeaves();
 
         $this->registerSubLeaf(
-            new TextBox('Recipient'),
-            new TextBox('AddressLine1'),
-            new TextBox('AddressLine2'),
-            new TextBox('Town'),
-            new TextBox('PostCode'),
-            new TextBox('PhoneNumber'),
-            $country = new DropDown('Country'),
-            $save = new HtmlButton('Save', 'Save', function() {
+            new TextBox( 'Recipient' ),
+            new TextBox( 'AddressLine1' ),
+            new TextBox( 'AddressLine2' ),
+            new TextBox( 'Town' ),
+            new TextBox( 'PostCode' ),
+            new TextBox( 'PhoneNumber' ),
+            $country = new DropDown( 'Country' ),
+            $save = new HtmlButton( 'Save', 'Save', function () {
                 $this->model->saveEvent->raise();
-            }),
-            $cancel = new HtmlButton('Cancel', 'Cancel', function() {
+            } ),
+            $cancel = new HtmlButton( 'Cancel', 'Cancel', function () {
 
-            }, true)
+            }, true )
         );
 
-        $country->setSelectionItems(['Please Select']);
+        $country->setSelectionItems( [ 'Please Select' ] );
 
         foreach ($this->leaves as $leaf) {
             if ($leaf instanceof TextBox) {
-                $leaf->addCssClassNames('form-control');
+                $leaf->addCssClassNames( 'form-control' );
             }
         }
 
-        $save->addCssClassNames('btn', 'button', 'button-checkout');
-        $cancel->addCssClassNames('btn', 'button', 'button-checkout', 'button--secondary');
+        $save->addCssClassNames( 'btn', 'button', 'button-checkout' );
+        $cancel->addCssClassNames( 'btn', 'button', 'button-checkout', 'button--secondary' );
     }
 
     protected function printViewContent()
@@ -57,16 +57,21 @@ class LocationPickerView extends ControlView
     protected function printAddressList()
     {
         print '<div class="row">';
-        foreach($this->model->user->Locations as $location) {
-            $this->printAddress($location);
+        foreach ($this->model->user->Locations as $location) {
+            $this->printAddress( $location );
         }
         print '</div>';
     }
 
     protected function printAddress(Location $location)
     {
+        $primaryLocation = $this->model->user->PrimaryLocation;
+        $selected = '';
+        if ($primaryLocation) {
+            $selected = $primaryLocation->UniqueIdentifier == $location->UniqueIdentifier ? 'selected' : '';
+        }
         print <<<HTML
-        <div class="col-md-4">
+        <div data-id="{$location->UniqueIdentifier}" class="col-md-4 js-location-item c-location-item {$selected}">
             <p>{$location->Recipient}</p>
             <p>{$location->AddressLine1}</p>
             <p>{$location->AddressLine2}</p>
@@ -74,12 +79,14 @@ class LocationPickerView extends ControlView
             <p>{$location->PostCode}</p>
             <p>{$location->Country}</p>
             <p>{$location->PhoneNumber}</p>
-            <div class="row">
-                <div class="c-md-6">
-                    <a class="js-location-edit" href="" data-id="{$location->UniqueIdentifier}" data-toggle="modal" data-target=".modal-location-edit">Edit</a>
-                </div>
-                <div class="c-md-6">
-                    <a class="js-location-delete" href="" data-id="{$location->UniqueIdentifier}">Delete</a>
+            <div class="c-location-button-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <a class="js-location-edit btn btn-primary" href="" data-id="{$location->UniqueIdentifier}" data-toggle="modal" data-target=".modal-location-edit">Edit</a>
+                    </div>
+                    <div class="col-md-6">
+                        <a class="js-location-delete btn btn-secondary" href="" data-id="{$location->UniqueIdentifier}">Delete</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -89,50 +96,49 @@ HTML;
     protected function printModal()
     {
         ?>
-        <button type="button" class="btn btn-primary js-add-location" data-toggle="modal" data-target=".modal-location-edit">Add a new Location</button>
-
         <div class="modal fade modal-location-edit" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title">Location Management</h4>
                     </div>
                     <div class="modal-body">
                         <form>
                             <div class="form-group">
                                 <label>Recipient</label>
-                                <?= $this->leaves['Recipient'] ?>
+                                <?= $this->leaves[ 'Recipient' ] ?>
                             </div>
                             <div class="form-group">
                                 <label>Address Line 1</label>
-                                <?= $this->leaves['AddressLine1'] ?>
+                                <?= $this->leaves[ 'AddressLine1' ] ?>
                             </div>
                             <div class="form-group">
                                 <label>Address Line 2</label>
-                                <?= $this->leaves['AddressLine2'] ?>
+                                <?= $this->leaves[ 'AddressLine2' ] ?>
                             </div>
                             <div class="form-group">
                                 <label>Town</label>
-                                <?= $this->leaves['Town'] ?>
+                                <?= $this->leaves[ 'Town' ] ?>
                             </div>
                             <div class="form-group">
                                 <label>Post Code</label>
-                                <?= $this->leaves['PostCode'] ?>
+                                <?= $this->leaves[ 'PostCode' ] ?>
                             </div>
                             <div class="form-group">
                                 <label>Country</label>
-                                <?= $this->leaves['Country'] ?>
+                                <?= $this->leaves[ 'Country' ] ?>
                             </div>
                             <div class="form-group">
                                 <label>Phone Number</label>
-                                <?= $this->leaves['PhoneNumber'] ?>
+                                <?= $this->leaves[ 'PhoneNumber' ] ?>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <?= $this->leaves['Cancel'] ?>
-                        <?= $this->leaves['Save'] ?>
+                        <?= $this->leaves[ 'Cancel' ] ?>
+                        <?= $this->leaves[ 'Save' ] ?>
                     </div>
                 </div>
             </div>
@@ -148,8 +154,8 @@ HTML;
     public function getDeploymentPackage()
     {
         return new LeafDeploymentPackage(
-            __DIR__ .'/../../../static/js/jquery.js',
-            __DIR__ .'/' . $this->getViewBridgeName() . '.js'
+            __DIR__ . '/../../../static/js/jquery.js',
+            __DIR__ . '/' . $this->getViewBridgeName() . '.js'
         );
     }
 }

@@ -11,7 +11,7 @@ class CheckoutAddressView extends CheckoutView
 {
     protected function getTitle()
     {
-        return 'Your Shipping address';
+        return 'Your Shipping address <button type="button" class="btn btn-primary js-add-location" data-toggle="modal" data-target=".modal-location-edit">Add a new Location</button>';
     }
 
     protected function createSubLeaves()

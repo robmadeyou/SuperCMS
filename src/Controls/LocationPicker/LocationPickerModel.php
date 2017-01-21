@@ -27,6 +27,9 @@ class LocationPickerModel extends ControlModel
     /** @var Event $deleteEvent */
     public $deleteEvent;
 
+    /** @var Event $selectLocationEvent */
+    public $selectLocationEvent;
+
     public $Country = '';
     public $PostCode = '';
 
@@ -38,6 +41,7 @@ class LocationPickerModel extends ControlModel
         $this->cancelEvent = new Event();
         $this->loadDataEvent = new Event();
         $this->deleteEvent = new Event();
+        $this->selectLocationEvent = new Event();
     }
 
     protected function getExposableModelProperties()

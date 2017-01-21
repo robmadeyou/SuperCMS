@@ -46,6 +46,14 @@ bridge.prototype.attachEvents = function () {
 
 		self.loadEditData();
 	});
+
+	$('.js-location-item').click(function() {
+		var current = $(this);
+		self.raiseServerEvent('selectLocation', current.data('id'), function() {
+			$('.js-location-item').removeClass('selected');
+			current.addClass('selected');
+		});
+	});
 };
 
 bridge.prototype.loadEditData = function() {

@@ -29,14 +29,14 @@ class LocationPicker extends Control
         parent::onModelCreated();
 
         try {
-            $this->setUser(SCmsLoginProvider::getLoggedInUser());
-        } catch (NotLoggedInException $ex) {
+            $this->setUser( SCmsLoginProvider::getLoggedInUser() );
+        } catch ( NotLoggedInException $ex ) {
         }
 
-        $this->model->saveEvent->attachHandler(function() {
+        $this->model->saveEvent->attachHandler( function () {
             $location = $this->loadLocationFromModel();
 
-            if(!$location) {
+            if (!$location) {
                 $location = new Location();
             }
 
@@ -49,9 +49,9 @@ class LocationPicker extends Control
             $location->PhoneNumber = $this->model->PhoneNumber;
             $location->UserID = $this->model->user->UniqueIdentifier;
             $location->save();
-        });
+        } );
 
-        $this->model->loadDataEvent->attachHandler(function() {
+        $this->model->loadDataEvent->attachHandler( function () {
             $location = $this->loadLocationFromModel();
 
             $data = new \stdClass();
@@ -64,35 +64,47 @@ class LocationPicker extends Control
             $data->PhoneNumber = '';
 
             if ($location) {
-                    $data = new \stdClass();
-                    $data->Recipient = $location->Recipient;
-                    $data->AddressLine1 = $location->AddressLine1;
-                    $data->AddressLine2 = $location->AddressLine2;
-                    $data->Town = $location->Town;
-                    $data->PostCode = $location->PostCode;
-                    $data->Country = $location->Country;
-                    $data->PhoneNumber = $location->PhoneNumber;
+                $data = new \stdClass();
+                $data->Recipient = $location->Recipient;
+                $data->AddressLine1 = $location->AddressLine1;
+                $data->AddressLine2 = $location->AddressLine2;
+                $data->Town = $location->Town;
+                $data->PostCode = $location->PostCode;
+                $data->Country = $location->Country;
+                $data->PhoneNumber = $location->PhoneNumber;
             }
-            return $data;
-        });
 
-        $this->model->deleteEvent->attachHandler(function() {
+            return $data;
+        } );
+
+        $this->model->deleteEvent->attachHandler( function () {
             $location = $this->loadLocationFromModel();
 
             if ($location) {
                 $location->delete();
                 $this->reRender();
             }
+        } );
+
+        $this->model->selectLocationEvent->attachHandler(function($selected) {
+            $location = $this->loadLocationFromModel($selected);
+            if ($location) {
+                $this->model->user->PrimaryLocationID = $selected;
+                $this->model->user->save();
+            }
         });
     }
 
     /**
-     * @return bool|Location
+     * @param int $locationId
+     *
+     * @return bool
      */
-    private function loadLocationFromModel()
+    private function loadLocationFromModel($locationId = 0)
     {
-        if ($this->model->selectedLocation) {
-            $locations = $this->model->user->Locations->filter(new Equals('LocationID', $this->model->selectedLocation));
+        $locationId = $locationId ? : $this->model->selectedLocation;
+        if ($locationId) {
+            $locations = $this->model->user->Locations->filter(new Equals('LocationID', $locationId));
             if ($locations->count()) {
                 return $locations[0];
             }
