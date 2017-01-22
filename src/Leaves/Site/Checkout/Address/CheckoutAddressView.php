@@ -33,13 +33,9 @@ class CheckoutAddressView extends CheckoutView
     {
         ?>
         <script src="https://checkout.stripe.com/checkout.js"></script>
-        <div class="row">
-            <div class="col-sm-6">
-                <?= $this->leaves['Locations']?>
-            </div>
-            <div class="col-sm-6" id="js-payment-target">
-            </div>
+        <div id="js-payment-target">
         </div>
+        <?= $this->leaves['Locations']?>
         <?php
     }
 
