@@ -4,6 +4,7 @@ namespace SuperCMS\Leaves;
 
 use Rhubarb\Crown\Request\Request;
 use Rhubarb\Scaffolds\Authentication\Leaves\LoginView;
+use SuperCMS\Controls\LocationPicker\LocationPicker;
 use SuperCMS\Controls\Notification\NotificationPrint;
 use SuperCMS\Settings\SuperCmsPageSettings;
 
@@ -12,6 +13,7 @@ class SuperCMSLoginView extends LoginView
     public function createSubLeaves()
     {
         parent::createSubLeaves();
+
 
         $this->leaves['username']->addCssClassNames('form-control');
         $this->leaves['password']->addCssClassNames('form-control');

@@ -2,11 +2,17 @@
 
 namespace SuperCMS\Models\User;
 
+use Rhubarb\Crown\LoginProviders\Exceptions\NotLoggedInException;
+use Rhubarb\Crown\LoginProviders\LoginProvider;
 use Rhubarb\Scaffolds\Authentication\User;
+use Rhubarb\Stem\Filters\Equals;
+use Rhubarb\Stem\Filters\OrGroup;
 use Rhubarb\Stem\Schema\Columns\ForeignKeyColumn;
 use Rhubarb\Stem\Schema\Columns\IntegerColumn;
 use Rhubarb\Stem\Schema\Columns\StringColumn;
 use Rhubarb\Stem\Schema\ModelSchema;
+use SuperCMS\LoginProviders\SCmsLoginProvider;
+use SuperCMS\Session\SuperCMSSession;
 
 /**
  *
@@ -49,5 +55,20 @@ class SuperCMSUser extends User
     public static function getLoggedInUser()
     {
         return parent::getLoggedInUser();
+    }
+
+    public static function getUserLocations()
+    {
+        $session = SuperCMSSession::singleton();
+
+        $filters = new OrGroup();
+        $filters->addFilters(new Equals('BasketID', $session->basketId));
+
+        try {
+            $filters->addFilters(new Equals('UserID', SCmsLoginProvider::getLoggedInUser()->UniqueIdentifier));
+        } catch (NotLoggedInException $ex) {
+        }
+
+        return Location::find($filters);
     }
 }

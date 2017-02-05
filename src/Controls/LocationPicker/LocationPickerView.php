@@ -8,6 +8,7 @@ use Rhubarb\Leaf\Leaves\Controls\ControlView;
 use Rhubarb\Leaf\Leaves\LeafDeploymentPackage;
 use SuperCMS\Controls\HtmlButton\HtmlButton;
 use SuperCMS\Models\User\Location;
+use SuperCMS\Models\User\SuperCMSUser;
 
 class LocationPickerView extends ControlView
 {
@@ -57,7 +58,7 @@ class LocationPickerView extends ControlView
     protected function printAddressList()
     {
         print '<div class="row">';
-        foreach ($this->model->user->Locations as $location) {
+        foreach (SuperCMSUser::getUserLocations() as $location) {
             $this->printAddress( $location );
         }
         print '</div>';
@@ -65,9 +66,12 @@ class LocationPickerView extends ControlView
 
     protected function printAddress(Location $location)
     {
-        $primaryLocation = $this->model->user->PrimaryLocation;
+        if ($this->model->user) {
+            $primaryLocation = $this->model->user->PrimaryLocation;
+        }
+
         $selected = '';
-        if ($primaryLocation) {
+        if (isset($primaryLocation) && $primaryLocation) {
             $selected = $primaryLocation->UniqueIdentifier == $location->UniqueIdentifier ? 'selected' : '';
         }
         print <<<HTML

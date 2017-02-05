@@ -5,6 +5,7 @@ namespace SuperCMS\Leaves\Site\Register;
 use Rhubarb\Crown\Settings\HtmlPageSettings;
 use Rhubarb\Leaf\Controls\Common\Text\TextBox;
 use Rhubarb\Leaf\Crud\Leaves\CrudView;
+use SuperCMS\Controls\LocationPicker\LocationPicker;
 use SuperCMS\Controls\PasswordTextBox\PasswordTextBox;
 use SuperCMS\Settings\SuperCmsPageSettings;
 use SuperCMS\Views\BootstrapViewTrait;
@@ -29,7 +30,8 @@ class RegisterView extends CrudView
             $address2 = new TextBox('Address2'),
             $postCode = new TextBox('PostCode'),
             $password = new PasswordTextBox('Password'),
-            $repeatPassword = new PasswordTextBox('PasswordRepeat')
+            $repeatPassword = new PasswordTextBox('PasswordRepeat'),
+            $locationPicker = new LocationPicker('Location')
         );
 
         $settings = SuperCmsPageSettings::singleton();
@@ -98,25 +100,8 @@ class RegisterView extends CrudView
                     </div>
                 </div>
 
-                <div class="panel panel-default">
-                    <div class="panel-heading"><h3 class="panel-title"><strong>Shipping Details</strong></h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <?= $this->leaves[ 'Address' ] ?>
-                        </div>
-                        <div class="form-group">
-                            <?= $this->leaves[ 'Address2' ] ?>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <div class="form-group">
-                                    <?= $this->leaves[ 'PostCode' ] ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?= $this->leaves['Location'] ?>
+                <button type="button" class="btn btn-primary js-add-location" data-toggle="modal" data-target=".modal-location-edit">Add a new Location</button>
                 <div class="c-register-bottom">
                     <?= $this->leaves[ 'Save' ] . $this->leaves[ 'Cancel' ] ?>
                 </div>

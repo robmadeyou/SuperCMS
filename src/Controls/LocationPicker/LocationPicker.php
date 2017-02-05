@@ -8,6 +8,8 @@ use Rhubarb\Scaffolds\Authentication\User;
 use Rhubarb\Stem\Filters\Equals;
 use SuperCMS\LoginProviders\SCmsLoginProvider;
 use SuperCMS\Models\User\Location;
+use SuperCMS\Models\User\SuperCMSUser;
+use SuperCMS\Session\SuperCMSSession;
 
 class LocationPicker extends Control
 {
@@ -47,7 +49,10 @@ class LocationPicker extends Control
             $location->PostCode = $this->model->PostCode;
             $location->Country = $this->model->Country;
             $location->PhoneNumber = $this->model->PhoneNumber;
-            $location->UserID = $this->model->user->UniqueIdentifier;
+            if ($this->model->user) {
+                $location->UserID = $this->model->user->UniqueIdentifier;
+            }
+            $location->BasketID = SuperCMSSession::singleton()->basketId;
             $location->save();
         } );
 
@@ -88,7 +93,7 @@ class LocationPicker extends Control
 
         $this->model->selectLocationEvent->attachHandler(function($selected) {
             $location = $this->loadLocationFromModel($selected);
-            if ($location) {
+            if ($location && $this->model->user) {
                 $this->model->user->PrimaryLocationID = $selected;
                 $this->model->user->save();
             }
@@ -98,13 +103,13 @@ class LocationPicker extends Control
     /**
      * @param int $locationId
      *
-     * @return bool
+     * @return bool|Location
      */
     private function loadLocationFromModel($locationId = 0)
     {
         $locationId = $locationId ? : $this->model->selectedLocation;
         if ($locationId) {
-            $locations = $this->model->user->Locations->filter(new Equals('LocationID', $locationId));
+            $locations = SuperCMSUser::getUserLocations()->filter(new Equals('LocationID', $locationId));
             if ($locations->count()) {
                 return $locations[0];
             }
