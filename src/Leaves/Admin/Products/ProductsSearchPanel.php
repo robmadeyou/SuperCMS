@@ -20,7 +20,7 @@ class ProductsSearchPanel extends SearchPanel
     {
         $name = new TextBox('Name');
 
-        $live = new Checkbox('Live', true);
+        $live = new Checkbox('Live');
         $live->setLabel('Show only live products');
 
         return [
