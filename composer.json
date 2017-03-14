@@ -16,6 +16,7 @@
         "rhubarbphp/module-leaf-table": "^1.0.3",
         "rhubarbphp/module-leaf-paging": "^1.0.3",
         "rhubarbphp/module-leaf-crud": "^1.0.3",
+        "rhubarbphp/module-patterns": "1.0.x-dev",
         "rhubarbphp/scaffold-authentication": "*",
         "rhubarbphp/scaffold-navigation-menu": "^1.0.0",
         "rhubarbphp/scaffold-communications":"dev-master",
