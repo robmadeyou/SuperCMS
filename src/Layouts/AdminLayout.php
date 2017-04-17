@@ -4,6 +4,7 @@ namespace SuperCMS\Layouts;
 
 use Rhubarb\Crown\Html\ResourceLoader;
 use Rhubarb\Crown\Request\Request;
+use SuperCMS\Models\Notification\Notification;
 
 class AdminLayout extends SuperCMSDefaultLayout
 {
@@ -178,69 +179,35 @@ class AdminLayout extends SuperCMSDefaultLayout
                             </a>
                         </li>
                     </ul>
-                    <!-- /.dropdown-tasks -->
                 </li>
-                <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-alerts">
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-comment fa-fw"></i> New Comment
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                    <span class="pull-right text-muted small">12 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-tasks fa-fw"></i> New Task
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>See All Alerts</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
+                        <?php
+                        $notifications = Notification::getUnreadNotifications();
+                        if ($notifications->count()) {
+                            foreach($notifications as $notification) {
+                                $this->printNotificationListItem(
+                                    $notification->getNotificationIcon(),
+                                    $notification->Note,
+                                    $notification->getLink(),
+                                    $notification->getTimeAgo()
+                                );
+                            }
+                        } else {
+                            ?>
+                            <li>
+                                <p class="text-center">
+                                    <strong>No new Notifications</strong>
+                                </p>
+                            </li>
+                            <?php
+                        }
+                        ?>
                     </ul>
-                    <!-- /.dropdown-alerts -->
                 </li>
-                <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -303,5 +270,20 @@ HTML;
     {
         print '</div></div>';
         parent::printTail();
+    }
+
+    protected function printNotificationListItem($icon, $message, $link, $timeAgo)
+    {
+        ?>
+        <li>
+            <a href="<?= $link ?>">
+                <div>
+                    <?= $icon ?> <?= $message ?>
+                    <span class="pull-right text-muted small"><?= $timeAgo ?></span>
+                </div>
+            </a>
+        </li>
+        <li class="divider"></li>
+        <?php
     }
 }

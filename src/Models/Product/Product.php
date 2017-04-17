@@ -78,8 +78,8 @@ class Product extends Model
     public function getDefaultImage()
     {
         $variation = $this->getDefaultProductVariation();
-        if(isset($variation->Images[0])) {
-            return $variation->getPrimaryImage();
+        if(isset($variation->Images[0]) && ($image = $variation->getPrimaryImage())) {
+            return $image;
         }
         return '/static/images/noimage.png';
     }
