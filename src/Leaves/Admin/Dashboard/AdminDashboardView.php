@@ -4,6 +4,7 @@ namespace SuperCMS\Leaves\Admin\Dashboard;
 
 use Rhubarb\Leaf\Views\View;
 use Rhubarb\Stem\Filters\Equals;
+use Rhubarb\Stem\Filters\Not;
 use SuperCMS\Models\Product\Product;
 use SuperCMS\Models\Product\ProductImage;
 use SuperCMS\Models\Product\ProductVariation;
@@ -42,11 +43,19 @@ class AdminDashboardView extends View
             );
 
             $numberOfProductsWithoutImages = Product::find()->intersectWith(
-                ProductVariation::find()->intersectWith(ProductImage::find(new Equals('ImagePath', '')), 'ProductVariationID', 'ProductVariationID'),
+                ProductVariation::find()->intersectWith(ProductImage::find(new Not(new Equals('ImagePath', ''))), 'ProductVariationID', 'ProductVariationID'),
                 'ProductID',
                 'ProductID'
             )->count();
-            print $numberOfProductsWithoutImages;
+
+            $totalProducts = Product::find()->count();
+            $this->printPanel(
+                $totalProducts - $numberOfProductsWithoutImages,
+                'Missing Images!',
+                '/admin/products/',
+                'primary',
+                'picture-o'
+            );
             ?>
         </div>
         <?php
