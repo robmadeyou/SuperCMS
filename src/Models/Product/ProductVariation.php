@@ -55,10 +55,10 @@ class ProductVariation extends Model
     public function getPrimaryImage()
     {
         $image = $this->Images->addSort('Priority');
-        if(sizeof($image)) {
+        if(sizeof($image) && $image[0]->ImagePath) {
             return $image[0]->ImagePath;
         }
-        return '';
+        return '/static/images/noimage.png';
     }
 
     public function getPublicUrl()

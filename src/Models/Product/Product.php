@@ -81,7 +81,7 @@ class Product extends Model
         if(isset($variation->Images[0]) && ($image = $variation->getPrimaryImage())) {
             return $image;
         }
-        return '/static/images/noimage.png';
+        return '';
     }
 
     public function setName($name)
