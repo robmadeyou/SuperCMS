@@ -3,6 +3,7 @@
 namespace SuperCMS\Views;
 
 use Rhubarb\Leaf\Controls\Common\Checkbox\Checkbox;
+use Rhubarb\Leaf\Controls\Common\SelectionControls\DropDown\DropDown;
 use Rhubarb\Leaf\Leaves\Controls\Control;
 use Rhubarb\Leaf\SearchPanel\Leaves\SearchPanelView;
 
@@ -27,6 +28,10 @@ class SuperCMSSearchPanelView extends SearchPanelView
             if ($control instanceof Checkbox) {
                 print '<div class="checkbox">';
                 print '<label>' . $control . ' ' .  $control->getLabel() . '</label>';
+                print '</div>';
+            } else if ($control instanceof DropDown) {
+                print '<div class="dropdown">';
+                print '<label>' . $control->getLabel() . ' ' . $control . '</label>';
                 print '</div>';
             } else {
                 $control->setPlaceholderText($control->getLabel());

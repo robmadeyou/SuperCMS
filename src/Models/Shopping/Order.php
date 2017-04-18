@@ -33,6 +33,12 @@ class Order extends Model
     const STATUS_IN_PROGRESS = 'In Progress';
     const STATUS_DISPATCHED = 'Dispatched';
 
+    const STATUS_LIST = [
+        self::STATUS_PENDING,
+        self::STATUS_IN_PROGRESS,
+        self::STATUS_DISPATCHED,
+    ];
+
     protected function createSchema()
     {
         $schema = new ModelSchema('tblOrder');
@@ -43,7 +49,7 @@ class Order extends Model
             new StringColumn('StripeToken', 150),
             new StringColumn('ClientIP', '16'),
             new DateTimeColumn('DateOrdered'),
-            new MySqlEnumColumn('Status', self::STATUS_PENDING, [self::STATUS_PENDING, self::STATUS_IN_PROGRESS, self::STATUS_DISPATCHED]),
+            new MySqlEnumColumn('Status', self::STATUS_PENDING, self::STATUS_LIST),
             new StringColumn('UniqueReference', 40)
         );
 

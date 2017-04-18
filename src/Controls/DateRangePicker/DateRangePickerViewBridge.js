@@ -1,11 +1,11 @@
-var dropDown = function (leafPath) {
+var date = function (leafPath) {
 	window.rhubarb.viewBridgeClasses.ViewBridge.apply(this, arguments);
 };
 
-dropDown.prototype = new window.rhubarb.viewBridgeClasses.ViewBridge();
-dropDown.prototype.constructor = dropDown;
+date.prototype = new window.rhubarb.viewBridgeClasses.ViewBridge();
+date.prototype.constructor = date;
 
-dropDown.prototype.attachEvents = function () {
+date.prototype.attachEvents = function () {
 	var self = this;
 
 	$('#' + this.leafPath + ' input').daterangepicker(
@@ -19,4 +19,4 @@ dropDown.prototype.attachEvents = function () {
 	);
 };
 
-window.rhubarb.viewBridgeClasses.DateRangePickerViewBridge = dropDown;
+window.rhubarb.viewBridgeClasses.DateRangePickerViewBridge = date;

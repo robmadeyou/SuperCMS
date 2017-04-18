@@ -19,8 +19,22 @@ class OrdersCollectionView extends SuperCMSCollectionView
         parent::createSubLeaves();
 
         $this->registerSubLeaf(
-            $orders = new Table(Order::find()->addSort('DateOrdered'), 50, 'OrdersTable')
+            $orders = new Table(Order::find()->addSort('DateOrdered'), 50, 'OrdersTable'),
+            $searchPanel = new OrdersSearchPanel('Search')
         );
+
+        $orders->getRowCssClassesEvent->attachHandler(function($model) {
+            switch ($model->Status) {
+                case Order::STATUS_PENDING:
+                    return ['active'];
+                case Order::STATUS_IN_PROGRESS:
+                    return ['warning'];
+                case Order::STATUS_DISPATCHED:
+                    return ['success'];
+                default:
+                    return [];
+            }
+        });
 
         $orders->addCssClassNames('table', 'table-striped', 'table-bordered', 'table-hover');
 
@@ -29,8 +43,16 @@ class OrdersCollectionView extends SuperCMSCollectionView
             'Total Cost' => SuperCMS::$currencySymbol . '{Basket.TotalCost}',
             'Progress' => '{OrderItemStatus}',
             'Status',
+            'Date Ordered' => 'DateOrdered',
             '' => '<a href="{UniqueIdentifier}/">View</a>',
         ];
+
+        $orders->bindEventsWith($searchPanel);
+    }
+
+    protected function printSearchPanel()
+    {
+        print $this->leaves['Search'];
     }
 
     public function printBody()

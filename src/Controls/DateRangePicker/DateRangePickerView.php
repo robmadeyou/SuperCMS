@@ -31,7 +31,7 @@ class DateRangePickerView extends DateView
     protected function printViewContent()
     {
         ?>
-            <input type="<?=$this->htmlTypeAttribute;?>" <?=$this->getNameValueClassAndAttributeString();?> class="form-control"/>
+            <input type="daterange" <?=$this->getNameValueClassAndAttributeString();?> class="form-control"/>
         <?php
     }
 
