@@ -30,7 +30,7 @@ class SuperCMSSearchPanelView extends SearchPanelView
                 print '<label>' . $control . ' ' .  $control->getLabel() . '</label>';
                 print '</div>';
             } else if ($control instanceof DropDown) {
-                print '<div class="dropdown">';
+                print '<div class="form-group">';
                 print '<label>' . $control->getLabel() . ' ' . $control . '</label>';
                 print '</div>';
             } else {
