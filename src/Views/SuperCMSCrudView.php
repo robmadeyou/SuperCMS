@@ -25,8 +25,7 @@ abstract class SuperCMSCrudView extends CrudView
     {
         ?>
         <div>
-
-            <div class="row">
+            <div class="row u-margin-bottom">
                 <div class="col-md-2">
                         <?php $this->printLeftButtons() ?>
                 </div>
@@ -43,7 +42,9 @@ abstract class SuperCMSCrudView extends CrudView
                     <?= $this->getTitle() ?>
                 </div>
                 <div class="panel-body">
-                    <?php $this->printBody() ?>
+                    <div class="form-body">
+                        <?php $this->printBody() ?>
+                    </div>
                 </div>
             </div>
             <div class="row">

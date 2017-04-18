@@ -30,7 +30,6 @@ class AdminLayout extends SuperCMSDefaultLayout
                 '/admin/orders/' => '<i class="fa fa-flag" aria-hidden="true"></i> Orders',
                 '/admin/products/' => '<i class="fa fa-shopping-basket" aria-hidden="true"></i> Products',
                 '/admin/categories/' => '<i class="fa fa-folder-open-o" aria-hidden="true"></i> Categories',
-                '/admin/shipping-types/' => '<i class="fa fa-truck" aria-hidden="true"></i> Shipping Types',
                 '/admin/coupons/' => '<i class="fa fa-ticket" aria-hidden="true"></i> Coupons',
                 '/admin/settings/' => '<i class="fa fa-gear fa-fw"></i> Settings',
             ]

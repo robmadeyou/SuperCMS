@@ -72,4 +72,9 @@ class HierarchyView extends SuperCMSCrudView
             __DIR__ . '/' . $this->getViewBridgeName() . '.js'
         );
     }
+
+    protected function printLeftButtons()
+    {
+        print '<a href="../" class="btn btn-default"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back</a>';
+    }
 }

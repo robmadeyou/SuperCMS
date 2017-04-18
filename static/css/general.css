@@ -668,9 +668,7 @@ input:checked + .slider:before {
 	content:''!important;
 	animation: ajaxProgressFadeIn 0.3s !important;
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1e5799+41,7db9e8+100&1+0,0+100 */
-	background: -moz-radial-gradient(center, ellipse cover,  rgba(30,87,153,1) 0%, rgba(30,87,153,0.59) 41%, rgba(125,185,232,0) 100%); /* FF3.6-15 */
-	background: -webkit-radial-gradient(center, ellipse cover,  rgba(30,87,153,1) 0%,rgba(30,87,153,0.59) 41%,rgba(125,185,232,0) 100%); /* Chrome10-25,Safari5.1-6 */
-	background: radial-gradient(ellipse at center,  rgba(30,87,153,1) 0%,rgba(30,87,153,0.59) 41%,rgba(125,185,232,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	background: rgba(251, 255, 246, 0.86);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#007db9e8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 
 }
@@ -685,4 +683,19 @@ input:checked + .slider:before {
 .file-input .dz-preview .dz-image {
 	width:100%;
 	height:100%;
+}
+
+.u-margin-bottom {
+	margin-bottom: 8px;
+}
+
+.c-search-panel .form-inline > div {
+	margin-right: 8px;
+	margin-bottom: 8px!important;
+}
+
+.c-search-panel {
+	margin-top: -20px;
+	padding-top: 8px;
+	border-bottom:#eee 1px solid;
 }

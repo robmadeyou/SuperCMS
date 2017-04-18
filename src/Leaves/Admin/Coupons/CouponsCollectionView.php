@@ -8,11 +8,18 @@ use SuperCMS\Views\SuperCMSCollectionView;
 
 class CouponsCollectionView extends SuperCMSCollectionView
 {
+    protected function printTitle()
+    {
+        print 'Coupons';
+    }
+
     protected function createSubLeaves()
     {
         $this->registerSubLeaf(
             $table = new Table(Coupon::find(), 20, 'CouponTable')
         );
+
+        $table->setNoDataHtml('No coupons created yet.');
 
         $table->addCssClassNames('table', 'table-striped', 'table-bordered', 'table-hover');
         $table->addCssClassNames('table table-striped');
@@ -32,6 +39,6 @@ class CouponsCollectionView extends SuperCMSCollectionView
 
     protected function printRightButtons()
     {
-        print '<a href="add/" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Add a Coupon</a>';
+        print '<a href="add/" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Add a Coupon</a>';
     }
 }

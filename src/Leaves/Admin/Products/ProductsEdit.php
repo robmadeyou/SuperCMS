@@ -53,7 +53,7 @@ class ProductsEdit extends CrudLeaf
             $variation->delete();
 
             $this->setSelectedVariation($this->model->restModel->getDefaultProductVariation());
-            $this->model->reRenderEvent->raise();
+            $this->reRender();
         });
 
         return $model;
@@ -107,8 +107,6 @@ class ProductsEdit extends CrudLeaf
      */
     private function saveVariation(ProductVariation $variation)
     {
-        print new NotificationPrint('Testing!');
-
         $variation->Name = $this->model->VariationName;
         $variation->Price = $this->model->Price;
         $variation->AmountAvailable = $this->model->AmountAvailable;

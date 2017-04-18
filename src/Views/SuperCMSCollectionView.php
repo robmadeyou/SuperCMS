@@ -11,6 +11,15 @@ abstract class SuperCMSCollectionView extends View
     protected function printViewContent()
     {
         ?>
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="pull-right">
+                    <?php $this->printRightButtons() ?>
+                </div>
+                <h1 class="page-header"><?php $this->printTitle(); ?></h1>
+            </div>
+        </div>
         <div>
             <?php $this->getTopFunctionBar() ?>
             <?php $this->printBody() ?>
@@ -22,17 +31,16 @@ abstract class SuperCMSCollectionView extends View
     {
         ?>
         <div class="row">
-            <div class="col-md-2">
-                <?php $this->printLeftButtons() ?>
-            </div>
-            <div class="col-md-7">
+            <div class="col-lg-12">
                 <?php $this->printSearchPanel() ?>
-            </div>
-            <div class="col-md-3 c-admin-right-buttons">
-                <?php $this->printRightButtons() ?>
             </div>
         </div>
         <?php
+    }
+
+    protected function printTitle()
+    {
+        print '';
     }
 
     protected function printSearchPanel()
@@ -40,10 +48,6 @@ abstract class SuperCMSCollectionView extends View
     }
 
     protected function printRightButtons()
-    {
-    }
-
-    protected function printLeftButtons()
     {
     }
 

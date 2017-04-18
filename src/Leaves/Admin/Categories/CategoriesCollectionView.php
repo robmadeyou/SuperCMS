@@ -8,6 +8,11 @@ use SuperCMS\Views\SuperCMSCollectionView;
 
 class CategoriesCollectionView extends SuperCMSCollectionView
 {
+    protected function printTitle()
+    {
+        print 'Categories';
+    }
+
     protected function createSubLeaves()
     {
         parent::createSubLeaves();

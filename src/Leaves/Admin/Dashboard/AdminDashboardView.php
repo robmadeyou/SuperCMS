@@ -21,7 +21,6 @@ class AdminDashboardView extends View
             </div>
             <!-- /.col-lg-12 -->
         </div>
-        <!-- /.row -->
         <div class="row">
             <?php
             $numberOfOrdersPending = Order::find(new Equals('Status', Order::STATUS_PENDING))->count();

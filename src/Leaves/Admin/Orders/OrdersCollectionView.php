@@ -9,6 +9,11 @@ use SuperCMS\Views\SuperCMSCollectionView;
 
 class OrdersCollectionView extends SuperCMSCollectionView
 {
+    protected function printTitle()
+    {
+        print 'Orders';
+    }
+
     protected function createSubLeaves()
     {
         parent::createSubLeaves();

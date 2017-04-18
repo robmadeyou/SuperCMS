@@ -77,11 +77,7 @@ class Product extends Model
 
     public function getDefaultImage()
     {
-        $variation = $this->getDefaultProductVariation();
-        if(isset($variation->Images[0]) && ($image = $variation->getPrimaryImage())) {
-            return $image;
-        }
-        return '';
+        return $this->getDefaultProductVariation()->getPrimaryImage();
     }
 
     public function setName($name)

@@ -9,6 +9,11 @@ use SuperCMS\Views\SuperCMSCollectionView;
 
 class ProductsCollectionView extends SuperCMSCollectionView
 {
+    protected function printTitle()
+    {
+        print 'Products';
+    }
+
     protected function createSubLeaves()
     {
         parent::createSubLeaves();
@@ -20,10 +25,11 @@ class ProductsCollectionView extends SuperCMSCollectionView
 
         $table->addCssClassNames('table', 'table-striped', 'table-bordered', 'table-hover');
         $table->columns = [
-            'Name',
+            '' => '<img src="{DefaultImage}" width="64" height="64"/>',
+            'Product Name' => 'Name',
+            'Category' => '<a href="/admin/categories/{CategoryID}/">{Category.Name}</a>',
             'Live',
-            'Category.Name',
-            '' => '<a href="{ProductID}/edit/" class="btn btn-default"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>',
+            ' ' => '<a href="{ProductID}/edit/" class="btn btn-default"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>',
         ];
 
         $search->bindEventsWith($table);
@@ -41,6 +47,6 @@ class ProductsCollectionView extends SuperCMSCollectionView
 
     protected function printRightButtons()
     {
-        print '<a href="add/" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Add a Product</a>';
+        print '<a href="add/" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Add a Product</a>';
     }
 }

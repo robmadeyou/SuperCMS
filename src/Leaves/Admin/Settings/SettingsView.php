@@ -19,7 +19,7 @@ class SettingsView extends SuperCMSCrudView
             new TextBox('StripeTestPublish'),
             new TextBox('StripeLiveSecret'),
             new TextBox('StripeLivePublish'),
-            new ToggleSwitch('DeveloperMode'),
+            new Checkbox('DeveloperMode'),
             new TextBox('WebsiteName')
         );
 

@@ -45,4 +45,10 @@ class CategoriesItemView extends SuperCMSCrudView
             'Parent Category' => 'ParentCategoryID',
         ]);
     }
+
+    protected function printLeftButtons()
+    {
+        $url = $this->model->restModel->isNewRecord() ? '../' : '../../' ;
+        print '<a href="' . $url . '" class="btn btn-default"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back</a>';
+    }
 }

@@ -2,6 +2,8 @@
 
 namespace SuperCMS\Leaves\Admin\Categories\Hierarchy;
 
+use Rhubarb\Crown\Exceptions\ForceResponseException;
+use Rhubarb\Crown\Response\RedirectResponse;
 use Rhubarb\Leaf\Leaves\Leaf;
 use SuperCMS\Controls\Notification\NotificationPrint;
 use SuperCMS\Models\Product\Category;
@@ -48,7 +50,11 @@ class Hierarchy extends Leaf
             };
 
             $saveChild($statuses);
-            print new NotificationPrint('Succesfully updated Category Hierarchy', NotificationPrint::SUCCESS);
+            print new NotificationPrint('Successfully updated Category Hierarchy', NotificationPrint::SUCCESS);
+        });
+
+        $this->model->cancelPressedEvent->attachHandler(function() {
+            throw new ForceResponseException(new RedirectResponse('../'));
         });
     }
 }

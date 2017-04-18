@@ -10,27 +10,29 @@ bridge.prototype.attachEvents = function () {
 	var self = this;
 
 	$('.product-variation-tab').click(function(event) {
-		var lastSelected = $('.product-list-tabs.active a').data('id');
-		changeTab($(this).parent());
+		$(this).closest('.form-body').addClass('ajax-progress');
+		if (!event.target.classList.contains('fa')) {
+			var lastSelected = $('.product-list-tabs.active a').data('id');
+			changeTab($(this).parent());
 
-		self.raiseServerEvent('ChangeProductVariation', lastSelected, $(this).data('id'));
-		event.preventDefault();
-		return false;
+			self.raiseServerEvent('ChangeProductVariation', lastSelected, $(this).data('id'));
+			event.preventDefault();
+			return false;
+		} else {
+			if (confirm('Are you sure you want to remove this variation?')) {
+				self.raiseServerEvent('VariationDelete', $(this).data('id'));
+			}
+			event.preventDefault();
+			event.stopPropagation();
+			return false;
+		}
+
 	});
 
 	$('#tab-add-button').click(function(){
 		var lastSelected = $('.product-list-tabs.active a').data('id');
 
 		self.raiseServerEvent('AddNewProduct', lastSelected);
-	});
-
-	$('#' + this.leafPath + ' .delete-variation').click(function(event){
-		if (confirm('Are you sure you want to remove this variation?')) {
-			self.raiseServerEvent('VariationDelete', $(this).parent().data('id'));
-		}
-		event.preventDefault();
-		event.stopPropagation();
-		return false;
 	});
 
 	function changeTab(tab) {
@@ -40,7 +42,7 @@ bridge.prototype.attachEvents = function () {
 	}
 
 	$('#' + this.leafPath + '_VariationName').keyup(function(){
-		firstTab.find('a').html($(this).val());
+		firstTab.find('a').html($(this).val() + '<span class="delete-variation"><i class="fa fa-times fa-1x" aria-hidden="true"></i></span>');
 	});
 };
 

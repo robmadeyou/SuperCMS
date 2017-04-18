@@ -25,6 +25,22 @@ body.event-processing .loading-overlay {
     width:100%;
 }
 
+.login-page .c-login-title h1 {
+    margin-top: 200px;
+    text-align: center;
+    font-size: 5vw;
+    color: white;
+    text-shadow: 2px 2px #000000;
+}
+
+.login-page .c-login-title h2 {
+    font-size: 3.5vw;
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px #000000;
+    margin-bottom: 28px;
+}
+
 .c-admin-right-buttons > a {
     width:49%;
     margin-bottom: 2px;

@@ -97,8 +97,7 @@ class ProductsEditView extends SuperCMSCrudView
                 print '<li role="presentation" class="' . $class . ' product-list-tabs" ><a href="#" class="product-variation-tab" data-id="' . $variation->UniqueIdentifier . '">' . $variation->Name . '  <span class="delete-variation"><i class="fa fa-times fa-1x" aria-hidden="true"></i></span></a></li>';
             }
             ?>
-            <li role="presentation" class="product-list-tabs" id="tab-add-button"><p>&nbsp;&nbsp;<span
-                        class="glyphicon glyphicon-plus"></span></p></li>
+            <li role="presentation" class="product-list-tabs" id="tab-add-button"><p>&nbsp;&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></span></p></li>
         </ul>
         <form>
             <div class="form-group">
@@ -137,7 +136,7 @@ class ProductsEditView extends SuperCMSCrudView
 
     protected function printLeftButtons()
     {
-        print '<a href="../../" class="btn btn-default"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back</a>';
+        print '<a href="../../" class="btn btn-default"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back</a>';
     }
 
     protected function printRightButtons()

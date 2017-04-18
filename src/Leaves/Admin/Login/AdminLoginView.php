@@ -3,6 +3,7 @@
 namespace SuperCMS\Leaves\Admin\Login;
 
 use Rhubarb\Scaffolds\Authentication\Leaves\LoginView;
+use SuperCMS\Settings\SuperCMSSettings;
 
 class AdminLoginView extends LoginView
 {
@@ -17,8 +18,14 @@ class AdminLoginView extends LoginView
 
     public function printViewContent()
     {
+        $settings = SuperCMSSettings::singleton();
+
         print <<<HTML
         <div class="container">
+        <div class="c-login-title">
+            <h1>{$settings->websiteName}</h1>
+            <h2>Admin panel</h2>
+        </div>
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
