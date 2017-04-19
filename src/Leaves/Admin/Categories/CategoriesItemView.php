@@ -4,6 +4,8 @@ namespace SuperCMS\Leaves\Admin\Categories;
 
 use Rhubarb\Crown\Exceptions\ForceResponseException;
 use Rhubarb\Crown\Response\RedirectResponse;
+use Rhubarb\Leaf\Controls\Common\FileUpload\SimpleFileUpload;
+use Rhubarb\Leaf\Controls\Common\FileUpload\UploadedFileDetails;
 use SuperCMS\Controls\Category\CategoryDropdown;
 use SuperCMS\Controls\Dropzone\Dropzone;
 use SuperCMS\Controls\Dropzone\DropzoneUploadedFileDetails;
@@ -17,17 +19,13 @@ class CategoriesItemView extends SuperCMSCrudView
 
         $this->registerSubLeaf(
             'Name',
-            $dropzone = new Dropzone('Image'),
+            $upload = new SimpleFileUpload('Image'),
             new CategoryDropdown('ParentCategoryID')
         );
 
-        $dropzone->fileUploadedEvent->attachHandler(function($fileDetails) {
-            $this->model->restModel->uploadImage($fileDetails);
+        $upload->fileUploadedEvent->attachHandler(function(UploadedFileDetails $data) {
+            $this->model->restModel->uploadImage($data, true);
         });
-
-        if ($this->model->restModel->Image) {
-            $dropzone->setUploadedFiles([new DropzoneUploadedFileDetails($this->model->restModel->Name, $this->model->restModel->Image)]);
-        }
 
         $this->bootstrapInputs();
     }
@@ -41,7 +39,7 @@ class CategoriesItemView extends SuperCMSCrudView
 
         $this->printFieldset('', [
             'Name',
-            'Image',
+            'Image' . ($this->model->restModel->Image ? '<br><img width="200px" height="200px" src="' . $this->model->restModel->Image . '">' : '') => 'Image',
             'Parent Category' => 'ParentCategoryID',
         ]);
     }
