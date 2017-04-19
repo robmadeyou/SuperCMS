@@ -7,6 +7,7 @@ use Rhubarb\Crown\Response\RedirectResponse;
 use Rhubarb\Stem\Exceptions\RecordNotFoundException;
 use Rhubarb\Stem\Filters\AndGroup;
 use Rhubarb\Stem\Filters\Equals;
+use Rhubarb\Stem\Filters\OneOf;
 use SuperCMS\Models\Product\Product;
 
 class ProductUrlHandler extends CategoryUrlHandler
@@ -19,7 +20,14 @@ class ProductUrlHandler extends CategoryUrlHandler
         if (isset($parts[1]) && $parts[1] == 'product') {
             if (isset($parts[2]) && $parts[2] != '') {
                 try {
-                    $this->product = Product::findFirst(new AndGroup([new Equals('SeoSafeName', $parts[2]), new Equals('CategoryID', $this->getCategoryFromUrl()->UniqueIdentifier)]));
+                    $this->product = Product::findFirst(
+                        new AndGroup(
+                            [
+                                new Equals('SeoSafeName', $parts[2]),
+                                new OneOf('CategoryID', $this->getCategoryFromUrl()->getParentCategoryIDs())
+                            ]
+                        )
+                    );
                     return parent::generateResponse($request, 'product/' . $parts[2]);
                 } catch (RecordNotFoundException $ex) {
                     throw new ForceResponseException(new RedirectResponse('/404/'));

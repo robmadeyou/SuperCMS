@@ -38,7 +38,9 @@ class SearchView extends View
             <div class="col-sm-10 search-input">
                 <i class="fa fa-search" aria-hidden="true"></i>
                 <?= $this->leaves['Query']; ?>
-                <ul class="search-response"></ul>
+                <div class="c-result-section">
+                    <ul class="search-response"></ul>
+                </div>
             </div>
             <div class="col-sm-2">
                 <?= $this->leaves['Search']; ?>

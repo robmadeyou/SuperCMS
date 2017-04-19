@@ -32,17 +32,31 @@ class SearchLeaf extends Leaf
                 ]
             );
 
-            $products = Product::find($filters);
-            $productsReturn = [];
-            foreach($products as $product) {
-                $p = new \stdClass();
-                $p->Name = $product->Name;
-                $p->Href = $product->getPublicUrl();
+            $links = [];
+            $categories = Category::find(new Contains('Name', $query))->setRange(0,10);
+            $products = Product::find($filters)->setRange(0,40);
 
-                $productsReturn[] = $p;
+            foreach($categories as $category) {
+                /** @var Category $category */
+                $p = new \stdClass();
+                $p->Name = $category->Name;
+                $p->Thumbnail = $category->getThumbnailUrl();
+                $p->Href = $category->getPublicUrl();
+
+                $links[] = $p;
             }
 
-            return $productsReturn;
+            foreach($products as $product) {
+                /** @var Product $product */
+                $p = new \stdClass();
+                $p->Name = $product->Name;
+                $p->Thumbnail = $product->getDefaultThumbnail();
+                $p->Href = $product->getPublicUrl();
+
+                $links[] = $p;
+            }
+
+            return $links;
         });
 
         return $model;

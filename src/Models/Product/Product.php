@@ -80,6 +80,11 @@ class Product extends Model
         return $this->getDefaultProductVariation()->getPrimaryImage();
     }
 
+    public function getDefaultThumbnail()
+    {
+        return $this->getDefaultImage();
+    }
+
     public function setName($name)
     {
         $this->modelData['Name'] = $name;
@@ -149,7 +154,14 @@ class Product extends Model
         $clean_name = strtr($clean_name, ['Þ' => 'TH', 'þ' => 'th', '�?' => 'DH', 'ð' => 'dh', 'ß' => 'ss', 'Œ' => 'OE', 'œ' => 'oe', 'Æ' => 'AE', 'æ' => 'ae', 'µ' => 'u']);
         $clean_name = preg_replace(['/\s/', '/\.[\.]+/', '/[^\w_\.\-]/'], ['-', '-', '-'], $clean_name);
         $clean_name = preg_replace('/\-+/', '-', $clean_name);
-        $this->SeoSafeName = $clean_name;
+
+        $plus = "";
+        $name = $clean_name . $plus;
+        while (self::find(new Equals('SeoSafeName', $name))->count() != 0) {
+            $name = $clean_name . $plus++;
+        }
+
+        $this->SeoSafeName = $name;
     }
 
     protected function afterSave()
@@ -168,6 +180,6 @@ class Product extends Model
 
     public static function find(Filter ...$filters)
     {
-        return parent::find(new AndGroup([new Equals('Visible', true), new AndGroup($filters)]));
+        return parent::find(new AndGroup(array_merge([new Equals('Visible', true)], $filters)));
     }
 }

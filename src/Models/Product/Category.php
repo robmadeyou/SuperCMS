@@ -169,9 +169,27 @@ class Category extends Model
         return Product::find(new OneOf('CategoryID', $categoryIds));
     }
 
+    public function getParentCategoryIDs()
+    {
+        $categories = [];
+        $categories[] = $this->UniqueIdentifier;
+        $currentCategory = $this;
+        while ($currentCategory->ParentCategoryID) {
+            $currentCategory = $currentCategory->ParentCategory;
+            $categories[] = $currentCategory->UniqueIdentifier;
+        }
+
+        return $categories;
+    }
+
     public function getPublicUrl()
     {
         return '/category/' . $this->SeoSafeName . '/';
+    }
+
+    public function getThumbnailUrl()
+    {
+        return $this->Image;
     }
 
     public static function getCategoryFromUrl()

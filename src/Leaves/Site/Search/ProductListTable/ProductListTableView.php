@@ -41,7 +41,7 @@ class ProductListTableView extends TableView
                 </div>
                 <div class="col-sm-3 product-price">
                         <p class="product-cost pull-right">&pound{$product->getDefaultProductVariation()->Price}</p>
-                        <a href="{$product->getPublicUrl()}" class="button pull-right c-full-mobile">View</a>
+                        <a href="{$product->getPublicUrl()}" class="button pull-right c-full-mobile go">View</a>
                 </div>
             </div>
 HTML;
@@ -52,5 +52,15 @@ HTML;
         $this->leaves["EventPager"]->printWithIndex("bottom");
     }
 
+    protected function getViewBridgeName()
+    {
+        return 'ProductListTableViewBridge';
+    }
 
+    public function getDeploymentPackage()
+    {
+        $package = parent::getDeploymentPackage();
+        $package->resourcesToDeploy[] = __DIR__ . '/ProductListTableViewBridge.js';
+        return $package;
+    }
 }

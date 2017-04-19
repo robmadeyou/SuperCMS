@@ -19,13 +19,13 @@ bridge.prototype.attachEvents = function () {
     };
 
     input.onclick = function(event) {
-        document.querySelector('.search-response').style.display = 'block';
+        document.querySelector('.c-result-section').style.display = 'block';
         event.stopPropagation();
         return false;
     };
 
     document.onclick = function() {
-        document.querySelector('.search-response').style.display = 'none';
+        document.querySelector('.c-result-section').style.display = 'none';
     };
 };
 
@@ -33,7 +33,8 @@ bridge.prototype.queryProducts = function(query) {
     this.raiseServerEvent('search', query, function(products){
         var text = '';
         for (var i = 0; i < products.length; i++) {
-            text += '<a href="' + products[i].Href + '"><li>' + products[i].Name  + '</li>' + '</a>';
+            var image = products[i].Thumbnail ? '<img src="' + products[i].Thumbnail + '">' : '';
+            text += '<a href="' + products[i].Href + '"><li>' + image + '<span>' + products[i].Name  + '</span></li>' + '</a>';
         }
         document.querySelector('.search-response').innerHTML = text;
     });
