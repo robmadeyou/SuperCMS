@@ -55,7 +55,6 @@ class OrdersItemView extends SuperCMSCrudView
 
     protected function printLeftButtons()
     {
-        $url = $this->model->restModel->isNewRecord() ? '../' : '../../' ;
-        print '<a href="' . $url . '" class="btn btn-default"><i class="fa fa-arrow-circle-left"></i> Back</a>';
+        print '<a href="../" class="btn btn-default"><i class="fa fa-arrow-circle-left"></i> Back</a>';
     }
 }

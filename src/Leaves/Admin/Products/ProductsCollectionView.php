@@ -29,7 +29,7 @@ class ProductsCollectionView extends SuperCMSCollectionView
             'Product Name' => 'Name',
             'Category' => '<a href="/admin/categories/{CategoryID}/">{Category.Name}</a>',
             'Live',
-            ' ' => '<a href="{ProductID}/edit/" class="btn btn-default"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>',
+            ' ' => '<a href="{ProductID}/edit/" class="btn btn-default go"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>',
         ];
 
         $search->bindEventsWith($table);

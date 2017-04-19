@@ -64,7 +64,7 @@ use SuperCMS\UrlHandlers\AdminCrudUrlHandler;
 use SuperCMS\UrlHandlers\CategoryUrlHandler;
 use SuperCMS\UrlHandlers\ProductUrlHandler;
 use SuperCMS\Views\SuperCMSEventPagerView;
-use SuperCMS\Views\SuperCMSTable;
+use SuperCMS\Views\SuperCMSTableView;
 
 /**
  * Class SuperCMS
@@ -105,7 +105,7 @@ class SuperCMS extends Module
 
         $this->container->registerClass(LoginView::class, SuperCMSLoginView::class);
         $this->container->registerClass(EventPagerView::class, SuperCMSEventPagerView::class);
-        $this->container->registerClass(TableView::class, SuperCMSTable::class);
+        $this->container->registerClass(TableView::class, SuperCMSTableView::class);
     }
 
     protected function registerUrlHandlers()

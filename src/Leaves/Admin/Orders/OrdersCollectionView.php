@@ -44,10 +44,11 @@ class OrdersCollectionView extends SuperCMSCollectionView
             'Progress' => '{OrderItemStatus}',
             'Status',
             'Date Ordered' => 'DateOrdered',
-            '' => '<a href="{UniqueIdentifier}/">View</a>',
+            '' => '<a class="go" href="{UniqueIdentifier}/">View</a>',
         ];
 
         $orders->bindEventsWith($searchPanel);
+        $this->bootstrapInputs();
     }
 
     protected function printSearchPanel()

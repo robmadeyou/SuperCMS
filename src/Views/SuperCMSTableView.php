@@ -7,7 +7,7 @@ use Rhubarb\Leaf\Table\Leaves\Columns\Template;
 use Rhubarb\Leaf\Table\Leaves\TableView;
 use Rhubarb\Stem\Decorators\DataDecorator;
 
-class SuperCMSTable extends TableView
+class SuperCMSTableView extends TableView
 {
     public function printViewContent()
     {
@@ -34,7 +34,7 @@ class SuperCMSTable extends TableView
         }
 
         ?>
-        <div class='list'>
+        <div class='list table-responsive'>
             <table<?= $tableClasses; ?>>
                 <thead>
                 <tr>
@@ -156,5 +156,17 @@ class SuperCMSTable extends TableView
         if ($this->model->repeatPagerAtBottom) {
             $this->leaves["EventPager"]->printWithIndex("bottom");
         }
+    }
+
+    protected function getViewBridgeName()
+    {
+        return "SuperCMSTableViewBridge";
+    }
+
+    public function getDeploymentPackage()
+    {
+        $package = parent::getDeploymentPackage();
+        $package->resourcesToDeploy[] = __DIR__ . '/SuperCMSTableViewBridge.js';
+        return $package;
     }
 }

@@ -28,7 +28,7 @@ class CategoriesCollectionView extends SuperCMSCollectionView
             ' ' => '<img width="64" height="64" src="{Image}">',
             'Name',
             'Parent Category' => 'ParentCategory.Name',
-            '' => '<a href="{CategoryID}/edit/" class="btn btn-default">Edit</a>'
+            '' => '<a href="{CategoryID}/edit/" class="btn btn-default go">Edit</a>'
         ];
     }
 

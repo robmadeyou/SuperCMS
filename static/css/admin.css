@@ -102,3 +102,7 @@ body.event-processing .loading-overlay {
     -o-transform: scale(1);
     transform: scale(1);
 }
+
+.table-responsive tbody tr:hover {
+    cursor: pointer;
+}
