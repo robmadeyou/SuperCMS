@@ -7,11 +7,12 @@ use Rhubarb\Crown\Request\Request;
 use Rhubarb\Crown\Response\RedirectResponse;
 use Rhubarb\Leaf\Crud\Leaves\CrudLeaf;
 use Rhubarb\Stem\Exceptions\ModelConsistencyValidationException;
+use SuperCMS\Models\User\Location;
 use SuperCMS\Models\User\SuperCMSUser;
 
 class Register extends CrudLeaf
 {
-    /** @var ReM */
+    /** @var RegisterModel */
     protected $model;
 
     protected function getViewClass()
@@ -41,10 +42,18 @@ class Register extends CrudLeaf
             $obj->setNewPassword($this->model->PasswordRepeat);
             $obj->Username = $obj->Email;
 
+            $locations = SuperCMSUser::getUserLocations();
+
             try {
                 $obj = parent::saveRestModel();
             } catch (ModelConsistencyValidationException $ex) {
 
+            }
+
+            foreach ($locations as $location) {
+                /** @var Location $location */
+                $location->UserID = $obj->UniqueIdentifier;
+                $location->save();
             }
 
             return $obj;

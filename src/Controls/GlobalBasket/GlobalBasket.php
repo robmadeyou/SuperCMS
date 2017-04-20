@@ -6,6 +6,7 @@ use Rhubarb\Stem\Aggregates\Sum;
 use Rhubarb\Stem\Exceptions\RecordNotFoundException;
 use SuperCMS\Models\Shopping\Basket;
 use SuperCMS\Session\SuperCMSSession;
+use SuperCMS\Settings\SuperCMSSettings;
 
 class GlobalBasket
 {
@@ -18,14 +19,8 @@ class GlobalBasket
 
     public function __construct()
     {
-        $session = SuperCMSSession::singleton();
-        try {
-            $this->basket = new Basket($session->basketId);
-        } catch (RecordNotFoundException $ex) {
-            $this->basket = new Basket();
-        }
-
         self::$instance = $this;
+        $this->reLoadBasket();
     }
 
     public function getOnlyHTML()
@@ -51,12 +46,7 @@ HTML;
 
     public function reLoadBasket()
     {
-        $session = SuperCMSSession::singleton();
-        try {
-            $this->basket = new Basket($session->basketId);
-        } catch (RecordNotFoundException $ex) {
-            $this->basket = new Basket();
-        }
+        $this->basket = Basket::getCurrentBasket();
     }
 
     public function replace()

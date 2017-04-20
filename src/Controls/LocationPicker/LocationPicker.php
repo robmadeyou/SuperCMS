@@ -6,7 +6,9 @@ use Rhubarb\Crown\LoginProviders\Exceptions\NotLoggedInException;
 use Rhubarb\Leaf\Leaves\Controls\Control;
 use Rhubarb\Scaffolds\Authentication\User;
 use Rhubarb\Stem\Filters\Equals;
+use SuperCMS\Controls\GlobalBasket\GlobalBasket;
 use SuperCMS\LoginProviders\SCmsLoginProvider;
+use SuperCMS\Models\Shopping\Basket;
 use SuperCMS\Models\User\Location;
 use SuperCMS\Models\User\SuperCMSUser;
 use SuperCMS\Session\SuperCMSSession;
@@ -52,7 +54,7 @@ class LocationPicker extends Control
             if ($this->model->user) {
                 $location->UserID = $this->model->user->UniqueIdentifier;
             }
-            $location->BasketID = SuperCMSSession::singleton()->basketId;
+            $location->BasketID = Basket::getCurrentBasket()->UniqueIdentifier;
             $location->save();
         } );
 

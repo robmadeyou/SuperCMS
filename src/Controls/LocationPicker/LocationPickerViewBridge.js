@@ -14,6 +14,7 @@ bridge.prototype.attachEvents = function () {
 	this.PostCode = this.findChildViewBridge('PostCode');
 	this.Country = this.findChildViewBridge('Country');
 	this.PhoneNumber = this.findChildViewBridge('PhoneNumber');
+	this.cancel = this.findChildViewBridge('Cancel');
 	this.modal = $('.modal-location-edit');
 
 	$('.js-location-edit').click(function(){
@@ -54,6 +55,10 @@ bridge.prototype.attachEvents = function () {
 			current.addClass('selected');
 		});
 	});
+
+	this.cancel.viewNode.onclick = function() {
+		self.modal.find('.close').click();
+	}
 };
 
 bridge.prototype.loadEditData = function() {

@@ -28,7 +28,7 @@ class LocationPickerView extends ControlView
             new TextBox( 'Town' ),
             new TextBox( 'PostCode' ),
             new TextBox( 'PhoneNumber' ),
-            $country = new DropDown( 'Country' ),
+            $country = new TextBox('Country'),
             $save = new HtmlButton( 'Save', 'Save', function () {
                 $this->model->saveEvent->raise();
             } ),
@@ -37,7 +37,6 @@ class LocationPickerView extends ControlView
             }, true )
         );
 
-        $country->setSelectionItems( [ 'Please Select' ] );
 
         foreach ($this->leaves as $leaf) {
             if ($leaf instanceof TextBox) {
@@ -75,7 +74,7 @@ class LocationPickerView extends ControlView
             $selected = $primaryLocation->UniqueIdentifier == $location->UniqueIdentifier ? 'selected' : '';
         }
         print <<<HTML
-        <div class="col-md-2">
+        <div class="col-sm-4">
             <div data-id="{$location->UniqueIdentifier}" class="js-location-item c-location-item {$selected}">
                 <p>{$location->Recipient}</p>
                 <p>{$location->AddressLine1}</p>
@@ -87,10 +86,10 @@ class LocationPickerView extends ControlView
                 <div class="c-location-button-group">
                     <div class="row">
                         <div class="col-xs-6">
-                            <a class="js-location-edit btn btn-primary" href="" data-id="{$location->UniqueIdentifier}" data-toggle="modal" data-target=".modal-location-edit">Edit</a>
+                            <a class="js-location-edit btn btn-primary pull-right" href="" data-id="{$location->UniqueIdentifier}" data-toggle="modal" data-target=".modal-location-edit">Edit</a>
                         </div>
                         <div class="col-xs-6">
-                            <a class="js-location-delete btn btn-danger" href="" data-id="{$location->UniqueIdentifier}">Delete</a>
+                            <a class="js-location-delete btn btn-danger pull-left" href="" data-id="{$location->UniqueIdentifier}">Delete</a>
                         </div>
                     </div>
                 </div>
