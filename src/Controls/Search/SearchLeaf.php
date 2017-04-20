@@ -21,9 +21,6 @@ class SearchLeaf extends Leaf
     {
         $model = new SearchModel();
 
-        $session = SuperCMSSession::singleton();
-        $model->Query = $session->searchQuery;
-
         $model->searchEvent->attachHandler(function($query) {
             $filters = new AndGroup(
                 [

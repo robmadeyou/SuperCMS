@@ -40,8 +40,14 @@ class ProductListTableView extends TableView
                     <p class="c-description">{$product->Description}</p>
                 </div>
                 <div class="col-sm-3 product-price">
-                        <p class="product-cost pull-right">&pound{$product->getDefaultProductVariation()->Price}</p>
-                        <a href="{$product->getPublicUrl()}" class="button pull-right c-full-mobile go">View</a>
+                    <div class="c-view-container">
+                        <div>
+                            <p class="product-cost pull-right">&pound{$product->getDefaultProductVariation()->Price}</p>
+                        </div>
+                        <div>
+                            <a href="{$product->getPublicUrl()}" class="button c-full-mobile go"><span>View</span><i class="fa fa-search" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
                 </div>
             </div>
 HTML;

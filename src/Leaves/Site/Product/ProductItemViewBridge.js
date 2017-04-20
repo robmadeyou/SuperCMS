@@ -8,7 +8,9 @@ bridge.prototype.constructor = bridge;
 bridge.prototype.attachEvents = function () {
 	var self = this;
 	$('.product-image-view').magnificPopup({
-		type: 'image'
+		type: 'image',
+		fixedContentPos: true,
+		fixedBgPos: true
 	});
 
 

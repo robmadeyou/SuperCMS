@@ -3,6 +3,7 @@
 namespace SuperCMS\Leaves\Site\Search;
 
 use Daisys\Views\DaisyDefaultView;
+use Rhubarb\Crown\Settings\HtmlPageSettings;
 use SuperCMS\Leaves\Site\Search\ProductListTable\ProductListTable;
 use SuperCMS\Models\Product\Category;
 use SuperCMS\Session\SuperCMSSession;
@@ -17,10 +18,12 @@ class SearchView extends DaisyDefaultView
 
     protected function createSubLeaves()
     {
+        $settings = HtmlPageSettings::singleton();
+        $settings->pageTitle = 'Searching for Products';
         parent::createSubLeaves();
 
         $this->registerSubLeaf(
-            new ProductListTable($this->model->getProductCollection(), 20, 'ProductList')
+            new ProductListTable($this->model->getProductCollection(), 50, 'ProductList')
         );
     }
 
@@ -34,10 +37,7 @@ class SearchView extends DaisyDefaultView
         ?>
         <h3 class="c-title">Found <strong><?=$amount?> </strong> <?= $amount == 1 ? 'item' : 'items' ?>.</h3>
         <div class="row">
-            <div class="col-sm-2">
-                <?php $this->printFilters() ?>
-            </div>
-            <div class="col-sm-10">
+            <div class="col-sm-12">
                 <?php $this->printProducts()?>
             </div>
         </div>
@@ -46,8 +46,6 @@ class SearchView extends DaisyDefaultView
 
     function getBreadcrumbItems():array
     {
-        $session = SuperCMSSession::singleton();
-
         $breadCrumbs = [
             'Home' => '/'
         ];
@@ -67,10 +65,6 @@ class SearchView extends DaisyDefaultView
             foreach(array_reverse($categories, true) as $key => $value) {
                 $breadCrumbs[$key] = $value;
             }
-        }
-
-        if ($session->searchQuery) {
-            $breadCrumbs['Search: ' . $session->searchQuery] = '';
         }
 
         return $breadCrumbs;

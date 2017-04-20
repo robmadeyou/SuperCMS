@@ -16,7 +16,7 @@ class SearchView extends View
     {
         $this->registerSubLeaf(
             $input = new TextBox('Query'),
-            $submit = new HtmlButton('Search', 'Search  <i class="fa fa-search" aria-hidden="true"></i>', function() {
+            $submit = new HtmlButton('Search', '<span>Search</span>  <i class="fa fa-search" aria-hidden="true"></i>', function() {
                 $session = SuperCMSSession::singleton();
                 $session->searchQuery = $this->model->Query;
                 $session->storeSession();
@@ -27,7 +27,7 @@ class SearchView extends View
         $input->addHtmlAttribute('autocomplete', 'off');
 
         $input->setPlaceholderText('Search for products');
-        $submit->addCssClassNames('button search-button');
+        $submit->addCssClassNames('button', 'button-icon-mobile', 'button--stretch');
     }
 
     protected function printViewContent()
@@ -35,14 +35,20 @@ class SearchView extends View
         ?>
 
         <div class="row search-group">
-            <div class="col-sm-10 search-input">
-                <i class="fa fa-search" aria-hidden="true"></i>
-                <?= $this->leaves['Query']; ?>
+            <div class="col-xs-10 search-input">
+                <div class="search-input-group">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    <?= $this->leaves['Query']; ?>
+                </div>
                 <div class="c-result-section">
-                    <ul class="search-response"></ul>
+                    <div class="c-suggested-items">
+                    </div>
+                    <div class="c-result-section-inner">
+                        <ul class="search-response"></ul>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-2">
+            <div class="col-xs-2">
                 <?= $this->leaves['Search']; ?>
             </div>
         </div>

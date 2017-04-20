@@ -26,7 +26,7 @@ class ProductItemView extends View
             new DropDown()
         );
 
-        $addToBasket->addCssClassNames('c-add-to-basket', 'button');
+        $addToBasket->addCssClassNames('c-add-to-basket', 'button', 'c-full-mobile');
     }
 
     protected function printViewContent()
