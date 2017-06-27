@@ -31,7 +31,7 @@ class DefaultLayout extends SuperCMSDefaultLayout
                         $this->printTopBanner();
                     ?>
                     <div class="category-list">
-                        <? $this->printCategoryMenu() ?>
+                        <?php $this->printCategoryMenu() ?>
                     </div>
                     <div id="content">
         <?php
@@ -50,7 +50,7 @@ class DefaultLayout extends SuperCMSDefaultLayout
             ?>
             <div id="top-banner">
                 <div class="top-banner-bottom-buttons">
-                    <? $this->printBannerButtons() ?>
+                    <?php $this->printBannerButtons() ?>
                 </div>
             </div>
             <?php
