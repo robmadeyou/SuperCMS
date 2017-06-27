@@ -34,6 +34,7 @@ use Rhubarb\Stem\Schema\Columns\StringColumn;
  * @property string $SeoSafeName Repository field
  * @property-read mixed $DefaultImage {@link getDefaultImage()}
  * @property-read mixed $PublicUrl {@link getPublicUrl()}
+ * @property-read mixed $DefaultThumbnail {@link getDefaultThumbnail()}
  */
 class Product extends Model
 {

@@ -9,11 +9,6 @@ use SuperCMS\Leaves\Site\Checkout\CheckoutView;
 
 class CheckoutAddressView extends CheckoutView
 {
-    protected function getTitle()
-    {
-        return 'Your Shipping address <button type="button" class="btn btn-primary js-add-location" data-toggle="modal" data-target=".modal-location-edit">Add a new Location</button>';
-    }
-
     protected function createSubLeaves()
     {
         parent::createSubLeaves();
@@ -29,9 +24,15 @@ class CheckoutAddressView extends CheckoutView
         $nextButton->addHtmlAttribute('style', 'display:none;');
     }
 
+    protected function getTitle()
+    {
+        return 'Your Shipping address';
+    }
+
     protected function printBody()
     {
         ?>
+        <button type="button" class="btn btn-primary js-add-location" data-toggle="modal" data-target=".modal-location-edit"><i class="fa fa-plus" aria-hidden="true"></i> Add a new Location</button>
         <script src="https://checkout.stripe.com/checkout.js"></script>
         <div id="js-payment-target">
         </div>

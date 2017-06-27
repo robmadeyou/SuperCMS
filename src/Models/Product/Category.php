@@ -32,6 +32,8 @@ use Rhubarb\Stem\Schema\Columns\StringColumn;
  * @property-read Category[]|\Rhubarb\Stem\Collections\RepositoryCollection $ChildCategories Relationship
  * @property-read Category $ParentCategory Relationship
  * @property-read mixed $PublicUrl {@link getPublicUrl()}
+ * @property-read mixed $ParentCategoryIDs {@link getParentCategoryIDs()}
+ * @property-read mixed $ThumbnailUrl {@link getThumbnailUrl()}
  */
 class Category extends Model
 {

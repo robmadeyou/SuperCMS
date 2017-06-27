@@ -10,7 +10,7 @@ use SuperCMS\Views\SearchPanelTrait;
 abstract class CheckoutView extends View
 {
     use BootstrapViewTrait;
-    use SearchPanelTrait;
+    //use SearchPanelTrait;
 
     /** @var CheckoutModel */
     protected $model;
@@ -28,7 +28,7 @@ abstract class CheckoutView extends View
             }
         }
 
-        $this->createSearchPanel();
+        //$this->createSearchPanel();
 
         $htmlSettings = HtmlPageSettings::singleton();
         $htmlSettings->pageTitle = 'Checkout: your basket';
@@ -36,7 +36,7 @@ abstract class CheckoutView extends View
 
     protected function printViewContent()
     {
-        $this->printSearchPanel();
+        //$this->printSearchPanel();
         ?>
         <div class="c-checkout-body">
             <h1 class="c-title"><?= $this->getTitle() ?></h1>

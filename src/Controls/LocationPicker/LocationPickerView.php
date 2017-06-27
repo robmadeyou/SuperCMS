@@ -74,24 +74,23 @@ class LocationPickerView extends ControlView
             $selected = $primaryLocation->UniqueIdentifier == $location->UniqueIdentifier ? 'selected' : '';
         }
         print <<<HTML
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div data-id="{$location->UniqueIdentifier}" class="js-location-item c-location-item {$selected}">
-                <p>{$location->Recipient}</p>
-                <p>{$location->AddressLine1}</p>
-                <p>{$location->AddressLine2}</p>
-                <p>{$location->Town}</p>
-                <p>{$location->PostCode}</p>
-                <p>{$location->Country}</p>
-                <p>{$location->PhoneNumber}</p>
+                <div class="c-location-value-group">
+                    <p>{$location->Recipient}</p>
+                    <p>{$location->AddressLine1}</p>
+                    <p>{$location->AddressLine2}</p>
+                    <p>{$location->Town}</p>
+                    <p>{$location->PostCode}</p>
+                    <p>{$location->Country}</p>
+                    <p>{$location->PhoneNumber}</p>
+                </div>
                 <div class="c-location-button-group">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <a class="js-location-edit btn btn-primary pull-right" href="" data-id="{$location->UniqueIdentifier}" data-toggle="modal" data-target=".modal-location-edit">Edit</a>
-                        </div>
-                        <div class="col-xs-6">
-                            <a class="js-location-delete btn btn-danger pull-left" href="" data-id="{$location->UniqueIdentifier}">Delete</a>
-                        </div>
+                    <div class="c-location-deliver-to-outer">
+                        <a class="js-select-location-item c-location-deliver-to-btn btn button" href="">Use this Address</a>
                     </div>
+                    <a class="js-location-edit btn button button-checkout button--secondary" href="" data-id="{$location->UniqueIdentifier}" data-toggle="modal" data-target=".modal-location-edit">Edit</a>
+                    <a class="js-location-delete btn button button-checkout button--secondary" href="" data-id="{$location->UniqueIdentifier}">Delete</a>
                 </div>
             </div>
         </div>
@@ -102,7 +101,7 @@ HTML;
     {
         ?>
         <div class="modal fade modal-location-edit" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-            <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-dialog modal-md" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span

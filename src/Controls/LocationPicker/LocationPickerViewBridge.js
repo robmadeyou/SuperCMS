@@ -48,8 +48,9 @@ bridge.prototype.attachEvents = function () {
 		self.loadEditData();
 	});
 
-	$('.js-location-item').click(function() {
-		var current = $(this);
+	$('.js-select-location-item').click(function(event) {
+		event.preventDefault();
+		var current = $(this).closest('.js-location-item');
 		self.raiseServerEvent('selectLocation', current.data('id'), function() {
 			$('.js-location-item').removeClass('selected');
 			current.addClass('selected');
