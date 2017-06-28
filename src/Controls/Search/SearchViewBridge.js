@@ -17,6 +17,7 @@ bridge.prototype.attachEvents = function () {
     input.onkeyup = function () {
         clearTimeout(searchTimeout);
         searchTimeout = setTimeout(function(){
+            searchResults.style.display = 'block';
             self.queryProducts(input.value)
         }, 400);
     };
@@ -28,21 +29,18 @@ bridge.prototype.attachEvents = function () {
     };
 
     input.onclick = function(event) {
-        searchResults.style.display = 'block';
+        if (input.value) {
+            searchResults.style.display = 'block';
+        }
         event.stopPropagation();
         return false;
     };
 
     input.onblur = function(event) {
-        if (event.relatedTarget.tagName != 'A') {
+        if (!event.relatedTarget || event.relatedTarget.tagName != 'A') {
             searchResults.style.display = 'none';
         }
     };
-
-    if (input.value) {
-        self.queryProducts(input.value);
-        suggestedItems.style.display = 'none';
-    }
 };
 
 bridge.prototype.queryProducts = function(query) {
