@@ -7,7 +7,6 @@ bridge.prototype.constructor = bridge;
 
 bridge.prototype.attachEvents = function () {
 	var self = this;
-	this.Recipient = this.findChildViewBridge('Recipient');
 	this.AddressLine1 = this.findChildViewBridge('AddressLine1');
 	this.AddressLine2 = this.findChildViewBridge('AddressLine2');
 	this.Town = this.findChildViewBridge('Town');
@@ -15,6 +14,7 @@ bridge.prototype.attachEvents = function () {
 	this.Country = this.findChildViewBridge('Country');
 	this.PhoneNumber = this.findChildViewBridge('PhoneNumber');
 	this.cancel = this.findChildViewBridge('Cancel');
+	this.save = this.findChildViewBridge('Save');
 	this.modal = $('.modal-location-edit');
 
 	$('.js-location-edit').click(function(){
@@ -57,9 +57,17 @@ bridge.prototype.attachEvents = function () {
 		});
 	});
 
-	this.cancel.viewNode.onclick = function() {
-		self.modal.find('.close').click();
-	}
+	this.cancel.viewNode.onclick = this.closeModal;
+
+	this.save.attachClientEventHandler('OnButtonPressed', function(){
+		self.viewNode.classList.add('ajax-progress');
+		self.closeModal();
+	});
+
+	this.save.attachClientEventHandler('ButtonPressCompleted', function(){
+		self.viewNode.classList.remove('ajax-progress');
+
+	});
 };
 
 bridge.prototype.loadEditData = function() {
@@ -69,7 +77,6 @@ bridge.prototype.loadEditData = function() {
 	modal.addClass('ajax-progress');
 	this.raiseServerEvent('loadData', function(data) {
 		if (data) {
-			self.Recipient.setValue(data.Recipient);
 			self.AddressLine1.setValue(data.AddressLine1);
 			self.AddressLine2.setValue(data.AddressLine2);
 			self.Town.setValue(data.Town);
@@ -79,6 +86,10 @@ bridge.prototype.loadEditData = function() {
 		}
 		modal.removeClass('ajax-progress');
 	});
+};
+
+bridge.prototype.closeModal = function() {
+	$('.modal-location-edit').modal('hide');
 };
 
 window.rhubarb.viewBridgeClasses.LocationPickerViewBridge = bridge;

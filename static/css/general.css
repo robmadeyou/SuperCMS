@@ -668,7 +668,7 @@ input:checked + .slider:before {
 	content:''!important;
 	animation: ajaxProgressFadeIn 0.3s !important;
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1e5799+41,7db9e8+100&1+0,0+100 */
-	background: rgba(251, 255, 246, 0.86);
+	background: rgba(251, 255, 246, 0.56);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#007db9e8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 
 }

@@ -5,7 +5,6 @@ namespace SuperCMS\Leaves\Site\Register;
 use Rhubarb\Crown\Settings\HtmlPageSettings;
 use Rhubarb\Leaf\Controls\Common\Text\TextBox;
 use Rhubarb\Leaf\Crud\Leaves\CrudView;
-use SuperCMS\Controls\LocationPicker\LocationPicker;
 use SuperCMS\Controls\PasswordTextBox\PasswordTextBox;
 use SuperCMS\Settings\SuperCmsPageSettings;
 use SuperCMS\Views\BootstrapViewTrait;
@@ -30,8 +29,7 @@ class RegisterView extends CrudView
             $address2 = new TextBox('Address2'),
             $postCode = new TextBox('PostCode'),
             $password = new PasswordTextBox('Password'),
-            $repeatPassword = new PasswordTextBox('PasswordRepeat'),
-            $locationPicker = new LocationPicker('Location')
+            $repeatPassword = new PasswordTextBox('PasswordRepeat')
         );
 
         $settings = SuperCmsPageSettings::singleton();
@@ -100,8 +98,6 @@ class RegisterView extends CrudView
                     </div>
                 </div>
 
-                <?= $this->leaves['Location'] ?>
-                <button type="button" class="btn btn-primary js-add-location" data-toggle="modal" data-target=".modal-location-edit">Add a new Location</button>
                 <div class="c-register-bottom">
                     <?= $this->leaves[ 'Save' ] . $this->leaves[ 'Cancel' ] ?>
                 </div>

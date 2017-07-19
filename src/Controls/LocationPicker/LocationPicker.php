@@ -44,7 +44,6 @@ class LocationPicker extends Control
                 $location = new Location();
             }
 
-            $location->Recipient = $this->model->Recipient;
             $location->AddressLine1 = $this->model->AddressLine1;
             $location->AddressLine2 = $this->model->AddressLine2;
             $location->Town = $this->model->Town;
@@ -56,13 +55,14 @@ class LocationPicker extends Control
             }
             $location->BasketID = Basket::getCurrentBasket()->UniqueIdentifier;
             $location->save();
+
+            $this->reRender();
         } );
 
         $this->model->loadDataEvent->attachHandler( function () {
             $location = $this->loadLocationFromModel();
 
             $data = new \stdClass();
-            $data->Recipient = '';
             $data->AddressLine1 = '';
             $data->AddressLine2 = '';
             $data->Town = '';
@@ -72,7 +72,6 @@ class LocationPicker extends Control
 
             if ($location) {
                 $data = new \stdClass();
-                $data->Recipient = $location->Recipient;
                 $data->AddressLine1 = $location->AddressLine1;
                 $data->AddressLine2 = $location->AddressLine2;
                 $data->Town = $location->Town;

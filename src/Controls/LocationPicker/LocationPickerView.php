@@ -7,6 +7,7 @@ use Rhubarb\Leaf\Controls\Common\Text\TextBox;
 use Rhubarb\Leaf\Leaves\Controls\ControlView;
 use Rhubarb\Leaf\Leaves\LeafDeploymentPackage;
 use SuperCMS\Controls\HtmlButton\HtmlButton;
+use SuperCMS\Models\Shopping\Basket;
 use SuperCMS\Models\User\Location;
 use SuperCMS\Models\User\SuperCMSUser;
 
@@ -22,7 +23,6 @@ class LocationPickerView extends ControlView
         parent::createSubLeaves();
 
         $this->registerSubLeaf(
-            new TextBox( 'Recipient' ),
             new TextBox( 'AddressLine1' ),
             new TextBox( 'AddressLine2' ),
             new TextBox( 'Town' ),
@@ -31,12 +31,13 @@ class LocationPickerView extends ControlView
             $country = new TextBox('Country'),
             $save = new HtmlButton( 'Save', 'Save', function () {
                 $this->model->saveEvent->raise();
-            } ),
+            }, true),
             $cancel = new HtmlButton( 'Cancel', 'Cancel', function () {
-
             }, true )
         );
 
+        $save->setButtonType('submit');
+        $cancel->setButtonType('button');
 
         foreach ($this->leaves as $leaf) {
             if ($leaf instanceof TextBox) {
@@ -65,9 +66,7 @@ class LocationPickerView extends ControlView
 
     protected function printAddress(Location $location)
     {
-        if ($this->model->user) {
-            $primaryLocation = $this->model->user->PrimaryLocation;
-        }
+        $primaryLocation = SuperCMSUser::getUserDefaultLocation();
 
         $selected = '';
         if (isset($primaryLocation) && $primaryLocation) {
@@ -77,7 +76,6 @@ class LocationPickerView extends ControlView
         <div class="col-sm-3">
             <div data-id="{$location->UniqueIdentifier}" class="js-location-item c-location-item {$selected}">
                 <div class="c-location-value-group">
-                    <p>{$location->Recipient}</p>
                     <p>{$location->AddressLine1}</p>
                     <p>{$location->AddressLine2}</p>
                     <p>{$location->Town}</p>
@@ -106,14 +104,10 @@ HTML;
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Location Management</h4>
+                        <h4 class="modal-title">Manage a location</h4>
                     </div>
                     <div class="modal-body">
                         <form>
-                            <div class="form-group">
-                                <label>Recipient</label>
-                                <?= $this->leaves[ 'Recipient' ] ?>
-                            </div>
                             <div class="form-group">
                                 <label>Address Line 1</label>
                                 <?= $this->leaves[ 'AddressLine1' ] ?>

@@ -71,4 +71,37 @@ class SuperCMSUser extends User
 
         return Location::find($filters);
     }
+
+    /**
+     * First tries to load a location from the user, setting primary location if one isn't set
+     * And then attempts to load from basket.
+     * @return mixed|null|Location
+     */
+    public static function getUserDefaultLocation()
+    {
+        try {
+            $user = self::getLoggedInUser();
+            if ($user->PrimaryLocation) {
+                return $user->PrimaryLocation;
+            }
+
+            if ($user->Locations && $user->Locations->count()) {
+                $user->PrimaryLocationID = $user->Locations[0]->UniqueIdentifier;
+                $user->save();
+                return $user->PrimaryLocation;
+            }
+        } catch (NotLoggedInException $ex) {
+        }
+
+        $basket = Basket::getCurrentBasket();
+        if ($basket->Locations && $basket->Locations->count()) {
+            if (isset($user)) {
+                $user->PrimaryLocationID = $basket->Locations[0];
+                $user->save();
+                return $user->PrimaryLocation;
+            }
+            return $basket->Locations[0];
+        }
+        return null;
+    }
 }

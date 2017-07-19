@@ -16,7 +16,7 @@ class HtmlButtonView extends ButtonView
 
         ?>
         <button leaf-name="<?= $this->model->leafName; ?>"
-                type="submit"
+                type="<?= $this->model->type ?>"
                 name="<?= $this->model->leafPath; ?>"
                 id="<?= $this->model->leafPath; ?>"
                 value="<?= htmlentities($this->model->text) ?>" <?= $classes . $otherAttributes . $confirmAttribute . $xhrAttribute; ?>><?= $this->model->text ?></button>

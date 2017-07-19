@@ -50,12 +50,6 @@ class Register extends CrudLeaf
 
             }
 
-            foreach ($locations as $location) {
-                /** @var Location $location */
-                $location->UserID = $obj->UniqueIdentifier;
-                $location->save();
-            }
-
             return $obj;
         }
     }

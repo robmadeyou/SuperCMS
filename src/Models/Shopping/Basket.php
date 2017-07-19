@@ -31,6 +31,7 @@ use SuperCMS\Session\SuperCMSSession;
  * @property-read mixed                                                       $TotalCost {@link getTotalCost()}
  * @property-read Order                                                       $Order Relationship
  * @property-read mixed                                                       $TotalQuantity {@link getTotalQuantity()}
+ * @property-read \SuperCMS\Models\User\Location[]|\Rhubarb\Stem\Collections\RepositoryCollection $Locations Relationship
  */
 class Basket extends Model
 {

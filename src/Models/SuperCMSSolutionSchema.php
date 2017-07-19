@@ -66,6 +66,7 @@ class SuperCMSSolutionSchema extends SolutionSchema
                 ],
                 'Basket' => [
                     'BasketItems' => 'BasketItem.BasketID',
+                    'Locations' => 'Location.BasketID',
                 ],
                 'Order' => [
                     'OrderItems' => 'OrderItem.OrderID',

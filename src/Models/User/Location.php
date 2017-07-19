@@ -22,6 +22,7 @@ use Rhubarb\Stem\Schema\ModelSchema;
  * @property string $PhoneNumber Repository field
  * @property string $Country Repository field
  * @property int $BasketID Repository field
+ * @property-read \SuperCMS\Models\Shopping\Basket $Basket Relationship
  */
 class Location extends Model
 {
@@ -32,7 +33,6 @@ class Location extends Model
             new AutoIncrementColumn('LocationID'),
             new ForeignKeyColumn('UserID'),
             new ForeignKeyColumn('BasketID'),
-            new StringColumn('Recipient', 50),
             new StringColumn('AddressLine1', 50),
             new StringColumn('AddressLine2', 50),
             new StringColumn('Town', 50),
