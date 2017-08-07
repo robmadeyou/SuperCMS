@@ -5,9 +5,10 @@ namespace SuperCMS\Leaves\Site\Register;
 use Rhubarb\Crown\Exceptions\ForceResponseException;
 use Rhubarb\Crown\Request\Request;
 use Rhubarb\Crown\Response\RedirectResponse;
+use Rhubarb\Crown\Sendables\Email\EmailProvider;
 use Rhubarb\Leaf\Crud\Leaves\CrudLeaf;
 use Rhubarb\Stem\Exceptions\ModelConsistencyValidationException;
-use SuperCMS\Models\User\Location;
+use SuperCMS\Email\RegisterEmail;
 use SuperCMS\Models\User\SuperCMSUser;
 
 class Register extends CrudLeaf
@@ -42,16 +43,19 @@ class Register extends CrudLeaf
             $obj->setNewPassword($this->model->PasswordRepeat);
             $obj->Username = $obj->Email;
 
-            $locations = SuperCMSUser::getUserLocations();
-
             try {
                 $obj = parent::saveRestModel();
-            } catch (ModelConsistencyValidationException $ex) {
 
+                $email = new RegisterEmail();
+                $email->addRecipientByEmail($obj->Email);
+                EmailProvider::selectProviderAndSend($email);
+            } catch (ModelConsistencyValidationException $ex) {
             }
 
             return $obj;
         }
+
+        return null;
     }
 
     protected function redirectAfterSave()

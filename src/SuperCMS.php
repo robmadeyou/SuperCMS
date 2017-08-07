@@ -8,6 +8,7 @@ use Rhubarb\Crown\Encryption\Sha512HashProvider;
 use Rhubarb\Crown\Layout\LayoutModule;
 use Rhubarb\Crown\LoginProviders\LoginProvider;
 use Rhubarb\Crown\Module;
+use Rhubarb\Crown\Sendables\Email\EmailProvider;
 use Rhubarb\Crown\String\StringTools;
 use Rhubarb\Crown\UrlHandlers\ClassMappedUrlHandler;
 use Rhubarb\Crown\UrlHandlers\StaticResourceUrlHandler;
@@ -21,6 +22,7 @@ use Rhubarb\Scaffolds\Authentication\Leaves\Login;
 use Rhubarb\Scaffolds\Authentication\Leaves\LoginView;
 use Rhubarb\Scaffolds\Authentication\Settings\ProtectedUrl;
 use Rhubarb\Scaffolds\Communications\CommunicationsModule;
+use Rhubarb\Scaffolds\Communications\EmailProviders\CommunicationEmailProvider;
 use Rhubarb\Stem\Custard\SeedDemoDataCommand;
 use Rhubarb\Stem\Repositories\MySql\MySql;
 use Rhubarb\Stem\Repositories\Repository;
@@ -28,6 +30,7 @@ use Rhubarb\Stem\Schema\SolutionSchema;
 use Rhubarb\Stem\StemModule;
 use SuperCMS\Controls\GlobalBasket\GlobalBasket;
 use SuperCMS\Custard\ApplicationDemoDataSeeder;
+use SuperCMS\Email\Providers\SEmailProvider;
 use SuperCMS\Layouts\DefaultLayout;
 use SuperCMS\Leaves\Admin\AdminIndex;
 use SuperCMS\Leaves\Admin\Categories\CategoriesCollection;
@@ -96,14 +99,18 @@ class SuperCMS extends Module
     {
         parent::initialise();
 
+        //Register the models
         Repository::setDefaultRepositoryClassName(MySql::class);
-
         SolutionSchema::registerSchema('CmsDatabase', SuperCMSSolutionSchema::class);
 
+        //Login / Register set up
         LoginProvider::setProviderClassName(SCmsLoginProvider::class);
-
         HashProvider::setProviderClassName(Sha512HashProvider::class);
 
+        //Setting up Custom Email Provider
+        EmailProvider::setProviderClassName(SEmailProvider::class);
+
+        //Overwriting views to use custom classes
         $this->container->registerClass(LoginView::class, SuperCMSLoginView::class);
         $this->container->registerClass(EventPagerView::class, SuperCMSEventPagerView::class);
         $this->container->registerClass(TableView::class, SuperCMSTableView::class);
