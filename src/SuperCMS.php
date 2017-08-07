@@ -20,6 +20,7 @@ use Rhubarb\Scaffolds\Authentication\AuthenticationModule;
 use Rhubarb\Scaffolds\Authentication\Leaves\Login;
 use Rhubarb\Scaffolds\Authentication\Leaves\LoginView;
 use Rhubarb\Scaffolds\Authentication\Settings\ProtectedUrl;
+use Rhubarb\Scaffolds\Communications\CommunicationsModule;
 use Rhubarb\Stem\Custard\SeedDemoDataCommand;
 use Rhubarb\Stem\Repositories\MySql\MySql;
 use Rhubarb\Stem\Repositories\Repository;
@@ -177,7 +178,8 @@ class SuperCMS extends Module
             new StemModule(),
             $auth,
             new LeafModule(),
-            new ApplicationSettingModule()
+            new ApplicationSettingModule(),
+            new CommunicationsModule(),
         ];
     }
 
