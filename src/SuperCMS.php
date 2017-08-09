@@ -28,6 +28,7 @@ use Rhubarb\Stem\Repositories\MySql\MySql;
 use Rhubarb\Stem\Repositories\Repository;
 use Rhubarb\Stem\Schema\SolutionSchema;
 use Rhubarb\Stem\StemModule;
+use Rojr\Scaffold\Email\Templates\EmailTemplateModule;
 use SuperCMS\Controls\GlobalBasket\GlobalBasket;
 use SuperCMS\Custard\ApplicationDemoDataSeeder;
 use SuperCMS\Email\Providers\SEmailProvider;
@@ -187,6 +188,7 @@ class SuperCMS extends Module
             new LeafModule(),
             new ApplicationSettingModule(),
             new CommunicationsModule(),
+            new EmailTemplateModule(),
         ];
     }
 
