@@ -28,6 +28,6 @@
         "twbs/bootstrap": "^3.3",
         "stripe/stripe-php": "*",
         "vakata/jstree": "*",
-        "rojr/scaffold-email-templates": "*"
+        "rojr/scaffold-email-templates": "*@dev"
     }
 }
