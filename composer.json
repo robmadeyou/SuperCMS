@@ -27,6 +27,7 @@
         "rhubarbphp/custard-sassc": "^1.0.0",
         "twbs/bootstrap": "^3.3",
         "stripe/stripe-php": "*",
-        "vakata/jstree": "*"
+        "vakata/jstree": "*",
+        "rojr/scaffold-email-templates": "*"
     }
 }
