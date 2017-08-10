@@ -2,12 +2,20 @@
 
 namespace SuperCMS\Email;
 
-class RegisterEmail extends SBaseEmail
+use Rojr\Scaffold\Email\Templates\Emails\TemplatedEmail;
+
+class RegisterEmail extends TemplatedEmail
 {
-    public function getHtml()
+    public static function getDefaultHtml()
     {
         return <<<HTML
-Thanks for registering.
+Thank you very much for registering!
 HTML;
+
+    }
+
+    public static function isBase()
+    {
+        return false;
     }
 }

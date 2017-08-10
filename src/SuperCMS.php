@@ -28,10 +28,14 @@ use Rhubarb\Stem\Repositories\MySql\MySql;
 use Rhubarb\Stem\Repositories\Repository;
 use Rhubarb\Stem\Schema\SolutionSchema;
 use Rhubarb\Stem\StemModule;
+use Rojr\Scaffold\Email\Templates\Emails\BaseTemplatedEmail;
 use Rojr\Scaffold\Email\Templates\EmailTemplateModule;
+use Rojr\Scaffold\Email\Templates\Models\EmailTemplate;
 use SuperCMS\Controls\GlobalBasket\GlobalBasket;
 use SuperCMS\Custard\ApplicationDemoDataSeeder;
 use SuperCMS\Email\Providers\SEmailProvider;
+use SuperCMS\Email\RegisterEmail;
+use SuperCMS\Email\SBaseEmail;
 use SuperCMS\Layouts\DefaultLayout;
 use SuperCMS\Leaves\Admin\AdminIndex;
 use SuperCMS\Leaves\Admin\Categories\CategoriesCollection;
@@ -110,6 +114,10 @@ class SuperCMS extends Module
 
         //Setting up Custom Email Provider
         EmailProvider::setProviderClassName(SEmailProvider::class);
+
+        //Registering Email Templates
+        EmailTemplateModule::registerEmailTemplate(RegisterEmail::class);
+        EmailTemplateModule::replaceEmailTemplate(BaseTemplatedEmail::class, SBaseEmail::class);
 
         //Overwriting views to use custom classes
         $this->container->registerClass(LoginView::class, SuperCMSLoginView::class);
