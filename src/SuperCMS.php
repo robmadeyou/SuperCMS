@@ -127,9 +127,6 @@ class SuperCMS extends Module
         } catch (\Exception $ex) {
         }
 
-        $staticResources = new StaticResourceUrlHandler(__DIR__ . '/../static/');
-        $staticResources->setPriority('100');
-
         $register = new ClassMappedUrlHandler(Register::class);
         $register->setPriority(1301);
 
@@ -160,7 +157,6 @@ class SuperCMS extends Module
                     '404/' => new ClassMappedUrlHandler(Error404::class),
                     '403/' => new ClassMappedUrlHandler(Error403::class)
                 ]),
-                '/files/' => $staticResources,
                 '/login/register/' => $register,
             ]
         );
