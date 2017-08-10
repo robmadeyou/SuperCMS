@@ -35,6 +35,13 @@ class DateRangePickerView extends DateView
         <?php
     }
 
+    protected function getAdditionalResourceUrls()
+    {
+        $urls = parent::getAdditionalResourceUrls();
+        $urls[] = '/files/css/daterangepicker.min.css';
+        return $urls;
+    }
+
     protected function getViewBridgeName()
     {
         return 'DateRangePickerViewBridge';
