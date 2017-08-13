@@ -1,13 +1,14 @@
 {
     "name": "rojr/super-cms",
     "license": "Apache 2.0",
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "SuperCMS\\": "src/"
         }
     },
     "require": {
-        "rhubarbphp/rhubarb": "^1.3.14",
+        "rhubarbphp/rhubarb": "^1.3.14@dev",
         "rhubarbphp/module-stem": "^1.3.14",
         "rhubarbphp/module-leaf": "^1.1.10",
         "rhubarbphp/module-leaf-common-controls": "^1.0.14",
