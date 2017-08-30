@@ -2,6 +2,7 @@
 
 namespace SuperCMS\Leaves\Site\Product;
 
+use Rhubarb\Crown\Html\ResourceLoader;
 use Rhubarb\Crown\Settings\HtmlPageSettings;
 use Rhubarb\Leaf\Controls\Common\Buttons\Button;
 use Rhubarb\Leaf\Controls\Common\SelectionControls\DropDown\DropDown;
@@ -27,6 +28,13 @@ class ProductItemView extends View
         );
 
         $addToBasket->addCssClassNames('c-add-to-basket', 'button', 'c-full-mobile');
+    }
+
+    protected function getAdditionalResourceUrls()
+    {
+        return [
+            '/files/js/magnific.min.js',
+        ];
     }
 
     protected function printViewContent()
@@ -146,11 +154,7 @@ HTML;
     public function getDeploymentPackage()
     {
         $package = new LeafDeploymentPackage();
-
-        $package->resourcesToDeploy[] = __DIR__ . '/../../../../static/js/jquery.js';
-        $package->resourcesToDeploy[] = __DIR__ . '/../../../../static/js/magnific.min.js';
         $package->resourcesToDeploy[] = __DIR__ . '/' . $this->getViewBridgeName() . '.js';
-
         return $package;
     }
 

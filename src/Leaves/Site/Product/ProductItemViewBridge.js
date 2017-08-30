@@ -7,12 +7,6 @@ bridge.prototype.constructor = bridge;
 
 bridge.prototype.attachEvents = function () {
 	var self = this;
-	$('.product-image-view').magnificPopup({
-		type: 'image',
-		fixedContentPos: true,
-		fixedBgPos: true
-	});
-
 
 	$('.variation-container').click(function (event){
 		self.changeVariation($(this));
