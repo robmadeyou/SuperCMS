@@ -18,7 +18,7 @@ bridge.prototype.attachEvents = function () {
 				for(var i = 0; i < files.length; i++) {
 					files[i].imageSrc = $(this.files[i].previewElement).find('img').attr('src');
 				}
-				self.raiseServerEvent('FilesUploaded', path);
+				self.raiseServerEvent('fileUploadedEvent', path);
 			})
 		},
 		previewTemplate: self.viewNode.querySelector('.dz-template').innerHTML

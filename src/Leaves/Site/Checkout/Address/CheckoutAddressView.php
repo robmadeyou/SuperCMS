@@ -38,7 +38,7 @@ class CheckoutAddressView extends CheckoutView
 
     protected function printStepButtons()
     {
-        print '<a href="/checkout/summary/" class="btn btn-default">Back</a> ' . $this->leaves['Next'];
+        print '<a href="/basket/" class="btn btn-default">Back</a> ' . $this->leaves['Next'];
     }
 
     public function getDeploymentPackage()

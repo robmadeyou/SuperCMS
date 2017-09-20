@@ -159,7 +159,6 @@ class SuperCMS extends Module
                     'search/' => new ClassMappedUrlHandler(SearchLeaf::class),
                     'basket/' => new ClassMappedUrlHandler(BasketPage::class),
                     'checkout/' => new ClassMappedUrlHandler(Checkout::class, [
-                        'summary/' => new ClassMappedUrlHandler(CheckoutSummary::class),
                         'address/' => new ClassMappedUrlHandler(CheckoutAddress::class),
                         'payment/' => new ClassMappedUrlHandler(CheckoutPayment::class),
                         'success/' => new ClassMappedUrlHandler(CheckoutSuccess::class),

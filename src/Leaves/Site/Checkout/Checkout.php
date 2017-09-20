@@ -14,7 +14,7 @@ class Checkout extends Leaf
 
     protected function getViewClass()
     {
-        throw new ForceResponseException(new RedirectResponse('/checkout/summary/'));
+        throw new ForceResponseException(new RedirectResponse('/checkout/address/'));
     }
 
     protected function createModel()

@@ -7,9 +7,10 @@ bridge.prototype.constructor = bridge;
 
 bridge.prototype.attachEvents = function () {
 	var self = this;
+	var variationDropdown = this.findChildViewBridge('Variations');
 
-	$('.variation-container').click(function (event){
-		self.changeVariation($(this));
+	$(variationDropdown.viewNode).change(function (event){
+		self.changeVariation(variationDropdown.getValue());
 		event.preventDefault();
 		return false;
 	});
@@ -26,22 +27,20 @@ bridge.prototype.attachEvents = function () {
 	});
 };
 
-bridge.prototype.changeVariation = function(selectedObject) {
-	var id = selectedObject.data('id');
-
-	$(this.viewNode).find('.variation-container').removeClass('selected');
-	selectedObject.addClass('selected');
-
+bridge.prototype.changeVariation = function(id) {
 	this.model.selectedVariationId = id;
+	this.saveState();
 
 	this.raiseServerEvent('changeSelectedVariation', id, function(values) {
 		var image = $('.c-main-product-image');
 		var imageLink = image.closest('a');
 		var name = $('.c-product-variation-title');
+		var desc = $('.c-product-variation-desc');
 
 		image.attr('src', values.MainImage);
 		imageLink.attr('href', values.LargeImage);
 		name.html(values.Name);
+		desc.html(desc);
 	});
 };
 

@@ -62,7 +62,7 @@ class Dropzone extends SimpleFileUpload
         }
 
         if ($request->post('_leafEventName') == 'FilesUploaded') {
-            $this->model->FilesUploadedEvent->raise(json_decode($request->post('_leafEventArguments')[ 0 ]));
+            $this->model->fileUploadedEvent->raise(json_decode($request->post('_leafEventArguments')[ 0 ]));
         }
 
         if ($request->post('_leafEventName') == 'deleteImage') {
@@ -90,7 +90,7 @@ class Dropzone extends SimpleFileUpload
             $model->postUrl = $req->urlPath;
         }
 
-        $model->FilesUploadedEvent->attachHandler(function ($path) {
+        $model->fileUploadedEvent->attachHandler(function ($path) {
             preg_match('/variation=[0-9]+/', $path, $matches);
             if (isset($matches[0])) {
                 $id = str_replace('variation=', '', $matches[0]);

@@ -2,7 +2,6 @@
 
 namespace SuperCMS\Leaves\Site\Product;
 
-use Rhubarb\Crown\Html\ResourceLoader;
 use Rhubarb\Crown\Settings\HtmlPageSettings;
 use Rhubarb\Leaf\Controls\Common\Buttons\Button;
 use Rhubarb\Leaf\Controls\Common\SelectionControls\DropDown\DropDown;
@@ -10,6 +9,7 @@ use Rhubarb\Leaf\Leaves\LeafDeploymentPackage;
 use Rhubarb\Leaf\Views\View;
 use SuperCMS\Models\Product\Category;
 use SuperCMS\Models\Product\Product;
+use SuperCMS\Models\Product\ProductImage;
 use SuperCMS\Models\Product\ProductVariation;
 use SuperCMS\Views\BreadcrumbTrait;
 
@@ -24,17 +24,18 @@ class ProductItemView extends View
     {
         $this->registerSubLeaf(
             $addToBasket = new Button('AddToBasket', 'Add To Basket'),
-            new DropDown()
+            $variations = new DropDown('Variations')
         );
 
-        $addToBasket->addCssClassNames('c-add-to-basket', 'button', 'c-full-mobile');
-    }
+        $selectableVariations = [];
+        foreach ($this->model->restModel->Variations as $variation) {
+            $selectableVariations[] = [$variation->UniqueIdentifier, $variation->Name];
+        }
 
-    protected function getAdditionalResourceUrls()
-    {
-        return [
-            '/files/js/magnific.min.js',
-        ];
+        $variations->setSelectionItems($selectableVariations);
+        $variations->setSelectedItems($this->model->selectedVariationId);
+
+        $addToBasket->addCssClassNames('c-add-to-basket', 'button', 'c-full-mobile');
     }
 
     protected function printViewContent()
@@ -56,6 +57,9 @@ class ProductItemView extends View
                 </div>
                 <div class="c-product-description">
                     <?php $this->printProductDescription($product); ?>
+                </div>
+                <div>
+                    <?= $this->leaves['Variations'] ?>
                 </div>
                 <div class="c-product-add-to-cart">
                     <?php $this->printAddToCartButton($product) ?>
@@ -79,33 +83,36 @@ class ProductItemView extends View
             <a href="<?= $imagePath ?>" class="product-image-view"><img class="c-main-product-image" src="<?= $imagePath ?>"></a>
         </div>
         <?php
-        $this->printProductVariations();
+        $this->printProductThumbnailImages($this->model->selectedVariation);
     }
 
-    protected function printProductVariations()
+    protected function printProductThumbnailImages(ProductVariation $productVariation)
     {
         print '<div>';
-        foreach ($this->model->restModel->Variations as $variation) {
-            $this->printProductVariation($variation);
+        $selected = true;
+        foreach ($productVariation->Images->addSort('Priority') as $image) {
+            $this->printProductThumbnailImage($image, $selected);
+            $selected = false;
         }
         print '</div>';
     }
 
-    protected function printProductVariation(ProductVariation $variation)
+    protected function printProductThumbnailImage(ProductImage $image, $selected)
     {
-        $imagePath = $variation->getPrimaryImage();
+        $imagePath = $image->ImagePath;
         if (!$imagePath) {
             return;
         }
 
-        $selectedVariationClass = '';
-        if ($this->model->selectedVariation->UniqueIdentifier == $variation->UniqueIdentifier) {
-            $selectedVariationClass = 'selected';
+        if ($selected) {
+            $selectedClass = 'selected';
+        } else {
+            $selectedClass = '';
         }
 
-        $imageName = $variation->Name;
+        $imageName = $image->ProductVariation->Name;
         print <<<HTML
-        <div class="variation-container {$selectedVariationClass}" data-id="{$variation->UniqueIdentifier}">
+        <div class="variation-container {$selectedClass}" data-id="{$image->UniqueIdentifier}">
             <a href="#" ><img class="variation-thumbnail" title="{$imageName}" src="{$imagePath}" alt="{$imageName}"/></a>
         </div>
 HTML;
@@ -119,6 +126,8 @@ HTML;
     protected function printProductDescription(Product $product)
     {
         print $product->Description;
+        print '<br/>';
+        print $this->model->selectedVariation->Description;
     }
 
     public function getBreadcrumbItems():array

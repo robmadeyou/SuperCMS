@@ -9,7 +9,7 @@ class SuperCMSDefaultLayout extends BaseLayout
 {
     public function __construct()
     {
-        ResourceLoader::loadResource("https://code.jquery.com/jquery-2.2.4.min.js");
+        ResourceLoader::loadResource("/files/js/jquery.js");
         ResourceLoader::loadResource("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js");
         ResourceLoader::loadResource("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css");
         ResourceLoader::loadResource("/files/css/general.css");

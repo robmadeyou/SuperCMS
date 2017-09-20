@@ -37,6 +37,7 @@ class ProductItem extends ModelBoundLeaf
             $class->LargeImage = $variation->getPrimaryImage();
             $class->Name = $variation->Name;
             $class->Cost = $variation->Price;
+            $class->Desc = $variation->Description;
             $class->AmountAvailable = $variation->AmountAvailable;
 
             return $class;

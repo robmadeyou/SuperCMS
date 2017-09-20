@@ -15,7 +15,7 @@ class ChosenDropdownView extends DropDownView
     {
         $package = parent::getDeploymentPackage();
         $package->resourcesToDeploy[] = __DIR__ . '/../../../../static/js/jquery.js';
-        $package->resourcesToDeploy[] = __DIR__ . '/../../../../static/chosen/chosen.jquery.min.js';
+        $package->resourcesToDeploy[] = APPLICATION_ROOT_DIR . '/components/chosen/js/chosen.jquery.min.js';
         $package->resourcesToDeploy[] = __DIR__ . '/' . $this->getViewBridgeName() . '.js';
         return $package;
     }

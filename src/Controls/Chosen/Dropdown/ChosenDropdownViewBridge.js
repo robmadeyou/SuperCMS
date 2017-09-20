@@ -6,16 +6,16 @@ dropDown.prototype = new window.rhubarb.viewBridgeClasses.DropDownViewBridge();
 dropDown.prototype.constructor = dropDown;
 
 dropDown.prototype.attachEvents = function () {
-	$('#' + this.leafPath).chosen();
+    $('#' + this.leafPath).chosen();
 
-	resizeChosen();
-	jQuery(window).on('resize', resizeChosen);
+    resizeChosen();
+    jQuery(window).on('resize', resizeChosen);
 
-	function resizeChosen() {
-		$(".chosen-container").each(function() {
-			$(this).attr('style', 'width: 100%');
-		});
-	}
+    function resizeChosen() {
+        $(".chosen-container").each(function() {
+            $(this).attr('style', 'width: 100%');
+        });
+    }
 };
 
 selectionControl.prototype.getValue = function () {

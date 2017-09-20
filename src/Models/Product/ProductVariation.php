@@ -30,23 +30,27 @@ use Rhubarb\Stem\Schema\Columns\StringColumn;
  * @property-read \SuperCMS\Models\Shopping\BasketItem[]|\Rhubarb\Stem\Collections\RepositoryCollection $BasketItems Relationship
  * @property-read mixed $PrimaryImage {@link getPrimaryImage()}
  * @property-read mixed $PublicUrl {@link getPublicUrl()}
+ * @property string $SeoSafeName Repository field
  */
 class ProductVariation extends Model
 {
+    use SetUniqueNameTrait;
+
     protected function createSchema()
     {
         $model = new MySqlModelSchema('tblProductVariation');
 
         $model->addColumn(
             new AutoIncrementColumn('ProductVariationID'),
-            new StringColumn('Name', 50),
+            new StringColumn('Name', 255),
             new ForeignKeyColumn('ProductID'),
             new IntegerColumn('AmountAvailable'),
             new IntegerColumn('Quantity'),
             new MySqlMediumTextColumn('Description'),
             new JsonColumn('Properties'),
             new MoneyColumn('Price'),
-            new IntegerColumn('Quantity')
+            new IntegerColumn('Quantity'),
+            new StringColumn('SeoSafeName', 255)
         );
 
         return $model;
