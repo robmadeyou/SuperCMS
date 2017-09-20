@@ -23,6 +23,7 @@ bridge.prototype.attachEvents = function () {
         self.model.selectedLocation = current.data('id');
         self.saveState();
 
+        self.setTitle('Editing a Location');
         self.loadEditData();
     });
 
@@ -45,6 +46,7 @@ bridge.prototype.attachEvents = function () {
         self.model.selectedLocation = 0;
         self.saveState();
 
+        self.setTitle('Add a new Location');
         self.loadEditData();
     });
 
@@ -91,6 +93,10 @@ bridge.prototype.loadEditData = function() {
     });
 };
 
+bridge.prototype.setTitle = function(title) {
+    this.modal.find('.modal-title').html(title);
+};
+
 bridge.prototype.validate = function() {
     var fieldsToValidate = [
         'AddressLine1',
@@ -112,8 +118,17 @@ bridge.prototype.validate = function() {
     return success;
 };
 
-bridge.prototype.closeModal = function() {
+bridge.prototype.closeModal = function(event) {
     $('.modal-location-edit').modal('hide');
+
+    if (event) {
+        event.preventDefault();
+        return false;
+    }
+};
+
+bridge.prototype.getNumberOfLocations = function() {
+    return this.model.numberOfLocations;
 };
 
 window.rhubarb.viewBridgeClasses.LocationPickerViewBridge = bridge;

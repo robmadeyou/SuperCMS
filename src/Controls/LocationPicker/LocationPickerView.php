@@ -96,7 +96,7 @@ HTML;
     protected function printModal()
     {
         ?>
-        <div class="modal fade modal-location-edit" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal fade modal-location-edit" tabindex="-1" role="dialog" aria-labelledby="Location Picker Modal">
             <div class="modal-dialog modal-md" role="document">
                 <div class="modal-content">
                     <div class="modal-header">

@@ -20,8 +20,7 @@ class CheckoutAddressView extends CheckoutView
             new LocationPicker('Locations')
         );
 
-        $nextButton->addCssClassNames('button', 'button-checkout');
-        $nextButton->addHtmlAttribute('style', 'display:none;');
+        $nextButton->addCssClassNames('btn', 'button', 'button-checkout');
     }
 
     protected function getTitle()
@@ -33,16 +32,13 @@ class CheckoutAddressView extends CheckoutView
     {
         ?>
         <button type="button" class="btn btn-primary js-add-location" data-toggle="modal" data-target=".modal-location-edit"><i class="fa fa-plus" aria-hidden="true"></i> Add a new Location</button>
-        <script src="https://checkout.stripe.com/checkout.js"></script>
-        <div id="js-payment-target">
-        </div>
         <?= $this->leaves['Locations']?>
         <?php
     }
 
     protected function printStepButtons()
     {
-        print '<a href="/" class="btn btn-default">Cancel</a> <input type="button" class=" btn button button-checkout" id="stripe-payment" value="Next: Payment">' . $this->leaves['Next'];
+        print '<a href="/checkout/summary/" class="btn btn-default">Back</a> ' . $this->leaves['Next'];
     }
 
     public function getDeploymentPackage()

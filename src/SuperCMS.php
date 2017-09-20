@@ -54,6 +54,7 @@ use SuperCMS\Leaves\Site\Basket\BasketPage;
 use SuperCMS\Leaves\Site\Category\CategoryCollection;
 use SuperCMS\Leaves\Site\Checkout\Address\CheckoutAddress;
 use SuperCMS\Leaves\Site\Checkout\Checkout;
+use SuperCMS\Leaves\Site\Checkout\Payment\CheckoutPayment;
 use SuperCMS\Leaves\Site\Checkout\Success\CheckoutSuccess;
 use SuperCMS\Leaves\Site\Checkout\Summary\CheckoutSummary;
 use SuperCMS\Leaves\Site\Product\ProductCollection;
@@ -160,6 +161,7 @@ class SuperCMS extends Module
                     'checkout/' => new ClassMappedUrlHandler(Checkout::class, [
                         'summary/' => new ClassMappedUrlHandler(CheckoutSummary::class),
                         'address/' => new ClassMappedUrlHandler(CheckoutAddress::class),
+                        'payment/' => new ClassMappedUrlHandler(CheckoutPayment::class),
                         'success/' => new ClassMappedUrlHandler(CheckoutSuccess::class),
                     ]),
                     '404/' => new ClassMappedUrlHandler(Error404::class),

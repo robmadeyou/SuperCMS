@@ -15,6 +15,8 @@ class LocationPickerModel extends ControlModel
 
     public $selectedLocation;
 
+    public $numberOfLocations = '';
+
     /** @var Event $saveEvent */
     public $saveEvent;
 
@@ -48,6 +50,7 @@ class LocationPickerModel extends ControlModel
     {
         $properties = parent::getExposableModelProperties();
         $properties[] = 'selectedLocation';
+        $properties[] = 'numberOfLocations';
         return $properties;
     }
 }

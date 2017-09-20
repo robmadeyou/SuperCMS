@@ -118,8 +118,9 @@ class LocationPicker extends Control
         return false;
     }
 
-    public function setUser(User $user)
+    public function setUser(SuperCMSUser $user)
     {
         $this->model->user = $user;
+        $this->model->numberOfLocations = $user->Locations->count();
     }
 }
