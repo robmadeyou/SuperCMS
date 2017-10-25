@@ -36,6 +36,10 @@ class ProductItemView extends View
         $variations->setSelectedItems($this->model->selectedVariationId);
 
         $addToBasket->addCssClassNames('c-add-to-basket', 'button', 'c-full-mobile');
+
+        $this->model->getImagesHTMLEvent->attachHandler(function(ProductVariation $variation) {
+            return $this->getVariationThumbnails($variation);
+        });
     }
 
     protected function printViewContent()
@@ -83,25 +87,25 @@ class ProductItemView extends View
             <a href="<?= $imagePath ?>" class="product-image-view"><img class="c-main-product-image" src="<?= $imagePath ?>"></a>
         </div>
         <?php
-        $this->printProductThumbnailImages($this->model->selectedVariation);
+        print $this->getVariationThumbnails($this->model->selectedVariation);
     }
 
-    protected function printProductThumbnailImages(ProductVariation $productVariation)
+    protected function getVariationThumbnails(ProductVariation $productVariation)
     {
-        print '<div>';
+        $html = '<div id="thumbnail-container">';
         $selected = true;
         foreach ($productVariation->Images->addSort('Priority') as $image) {
-            $this->printProductThumbnailImage($image, $selected);
+            $html .= $this->getThumbnail($image, $selected);
             $selected = false;
         }
-        print '</div>';
+        return $html . '</div>';
     }
 
-    protected function printProductThumbnailImage(ProductImage $image, $selected)
+    protected function getThumbnail(ProductImage $image, $selected)
     {
         $imagePath = $image->ImagePath;
         if (!$imagePath) {
-            return;
+            return '';
         }
 
         if ($selected) {
@@ -111,9 +115,9 @@ class ProductItemView extends View
         }
 
         $imageName = $image->ProductVariation->Name;
-        print <<<HTML
-        <div class="variation-container {$selectedClass}" data-id="{$image->UniqueIdentifier}">
-            <a href="#" ><img class="variation-thumbnail" title="{$imageName}" src="{$imagePath}" alt="{$imageName}"/></a>
+        return <<<HTML
+        <div class="variation-container {$selectedClass} js-thubmnail" data-id="{$image->UniqueIdentifier}">
+            <a class="js-thubmnail-link"><img class="c-variation-thumbnail" title="{$imageName}" src="{$imagePath}" alt="{$imageName}"/></a>
         </div>
 HTML;
     }

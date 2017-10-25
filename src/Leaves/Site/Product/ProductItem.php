@@ -39,6 +39,7 @@ class ProductItem extends ModelBoundLeaf
             $class->Cost = $variation->Price;
             $class->Desc = $variation->Description;
             $class->AmountAvailable = $variation->AmountAvailable;
+            $class->ImagesHTML = $this->model->getImagesHTMLEvent->raise($variation);
 
             return $class;
         });

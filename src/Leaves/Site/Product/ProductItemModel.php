@@ -24,12 +24,15 @@ class ProductItemModel extends ModelBoundModel
 
     public $selectedVariationId;
 
+    public $getImagesHTMLEvent;
+
     public function __construct()
     {
         parent::__construct();
 
         $this->addToCartEvent = new Event();
         $this->changeSelectedVariationEvent = new Event();
+        $this->getImagesHTMLEvent = new Event();
     }
 
     protected function getExposableModelProperties()
