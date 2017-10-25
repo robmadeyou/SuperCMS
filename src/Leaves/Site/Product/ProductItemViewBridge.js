@@ -37,6 +37,9 @@ rhubarb.vb.create('ProductItemViewBridge', function () {
             this.model.selectedVariationId = id;
             this.saveState();
 
+            var parent = $(this.viewNode);
+            parent.addClass('ajax-progress');
+
             this.raiseServerEvent('changeSelectedVariation', id, function(values) {
                 var name = $('.c-product-variation-title');
                 var desc = $('.c-product-variation-desc');
@@ -45,7 +48,11 @@ rhubarb.vb.create('ProductItemViewBridge', function () {
                 desc.html(desc);
 
                 self.changeHeadImage(values.MainImage);
-                self.thumbnailContainer.replaceWith(values.ImagesHTML);
+                var container = $(values.ImagesHTML);
+                self.thumbnailContainer.replaceWith(container);
+                self.thumbnailContainer = container;
+
+                parent.removeClass('ajax-progress');
             });
         },
         selectThumbnail:function(thumbnail) {
