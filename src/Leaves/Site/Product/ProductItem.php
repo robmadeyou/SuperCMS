@@ -3,7 +3,6 @@
 namespace SuperCMS\Leaves\Site\Product;
 
 use Rhubarb\Leaf\Crud\Leaves\ModelBoundLeaf;
-use Rhubarb\Leaf\Crud\Leaves\ModelBoundModel;
 use SuperCMS\Controls\Notification\NotificationPrint;
 use SuperCMS\Models\Product\ProductVariation;
 use SuperCMS\Models\Shopping\Basket;

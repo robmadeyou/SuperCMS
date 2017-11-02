@@ -2,7 +2,6 @@
 
 namespace SuperCMS\Leaves\Site\Product;
 
-
 use Rhubarb\Crown\Events\Event;
 use Rhubarb\Leaf\Crud\Leaves\ModelBoundModel;
 use SuperCMS\Models\Product\Product;
@@ -37,11 +36,10 @@ class ProductItemModel extends ModelBoundModel
 
     protected function getExposableModelProperties()
     {
-        return array_merge(
-            parent::getExposableModelProperties(),
-            [
-                'selectedVariationId'
-            ]
-        );
+        $properties = parent::getExposableModelProperties();
+
+        $properties[] = 'selectedVariationId';
+
+        return $properties;
     }
 }
