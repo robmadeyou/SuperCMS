@@ -11,8 +11,9 @@ class AdminLayout extends SuperCMSDefaultLayout
     public function __construct()
     {
         parent::__construct();
-        ResourceLoader::loadResource('/files/css/admin.css');
         ResourceLoader::loadResource('/files/css/admin-strapped.css');
+        ResourceLoader::loadResource('/files/css/admin.css');
+
     }
 
     protected function printHead()
@@ -36,10 +37,12 @@ class AdminLayout extends SuperCMSDefaultLayout
 
         $settings = SuperCMSSettings::singleton();
 
+        //todo: make admin href be dependant on the database
         ?>
         <div id="wrapper">
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-top-content">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -47,7 +50,7 @@ class AdminLayout extends SuperCMSDefaultLayout
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><?= $settings->websiteName ?> admin</a>
+                <a class="navbar-brand" href="/admin/"><?= $settings->websiteName ?> admin</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -97,6 +100,7 @@ class AdminLayout extends SuperCMSDefaultLayout
                 </li>
                 <!-- /.dropdown -->
             </ul>
+            </div>
             <!-- /.navbar-top-links -->
 
             <div class="navbar-default sidebar" role="navigation">

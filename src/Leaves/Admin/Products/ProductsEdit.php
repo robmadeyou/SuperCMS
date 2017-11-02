@@ -25,9 +25,14 @@ class ProductsEdit extends CrudLeaf
 
     protected function createModel()
     {
-        $model = new ProductsEditModel();
+        return new ProductsEditModel();
+    }
 
-        $model->ChangeProductVariationEvent->attachHandler(function($lastId, $id) {
+    protected function onModelCreated()
+    {
+        parent::onModelCreated();
+
+        $this->model->ChangeProductVariationEvent->attachHandler(function($lastId, $id) {
             try {
                 $this->saveVariation(new ProductVariation($lastId));
                 $this->setSelectedVariation(new ProductVariation($id));
@@ -35,7 +40,7 @@ class ProductsEdit extends CrudLeaf
             } catch (RecordNotFoundException $ex) {}
         });
 
-        $model->AddNewProductEvent->attachHandler(function($lastId) {
+        $this->model->AddNewProductEvent->attachHandler(function($lastId) {
             try
             {
                 $this->saveVariation(new ProductVariation($lastId));
@@ -48,15 +53,13 @@ class ProductsEdit extends CrudLeaf
             $this->reRender();
         });
 
-        $model->VariationDeleteEvent->attachHandler(function($id) {
+        $this->model->VariationDeleteEvent->attachHandler(function($id) {
             $variation = new ProductVariation($id);
             $variation->delete();
 
             $this->setSelectedVariation($this->model->restModel->getDefaultProductVariation());
             $this->reRender();
         });
-
-        return $model;
     }
 
     protected function redirectAfterCancel()

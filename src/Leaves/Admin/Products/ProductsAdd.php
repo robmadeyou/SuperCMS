@@ -7,15 +7,14 @@ use Rhubarb\Crown\Response\RedirectResponse;
 
 class ProductsAdd extends ProductsEdit
 {
-    protected function createModel()
-    {
-        $model = new ProductsAddModel();
-        return $model;
-    }
-
     protected function getViewClass()
     {
         return ProductsAddView::class;
+    }
+
+    protected function createModel()
+    {
+        return new ProductsAddModel();
     }
 
     protected function redirectAfterCancel()

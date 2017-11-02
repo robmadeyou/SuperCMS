@@ -51,13 +51,16 @@ body.event-processing .loading-overlay {
         position: absolute!important;
         margin: 0 0 0 0!important;
         top: 0;
-        left: 250px;
+        left: 150px;
         right:0;
         bottom:100px;
         width:auto;
         height: 100%;
         overflow-y: scroll;
         padding: 80px 30px 0 30px!important;
+        z-index: 55;
+        box-shadow: -5px -5px 4px rgba(0, 0, 0, 0.42);
+        border-left:none;
     }
 
     .c-admin-right-buttons > a {
@@ -105,4 +108,40 @@ body.event-processing .loading-overlay {
 
 .table-responsive tbody tr:hover {
     cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .sidebar {
+        z-index: unset;
+        position: absolute;
+        width: 150px;
+        margin-top: 51px;
+    }
+}
+
+.nav>li>a {
+    z-index:40;
+}
+
+.sidebar ul li a.active {
+    background-color: #FFFFFF;
+    border: 1px solid rgb(52, 122, 182);
+    border-right:none;
+    z-index: 100;
+}
+
+.navbar-static-top {
+    z-index: unset;
+    border-width: 0 0 1px;
+}
+
+.navbar .navbar-top-content {
+    position: absolute;
+    z-index:60;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    border: 1px solid #e7e7e7;
+    background-color: #FFFFFF
 }
