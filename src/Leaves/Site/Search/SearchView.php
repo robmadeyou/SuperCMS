@@ -2,16 +2,17 @@
 
 namespace SuperCMS\Leaves\Site\Search;
 
-use Daisys\Views\DaisyDefaultView;
 use Rhubarb\Crown\Settings\HtmlPageSettings;
+use Rhubarb\Leaf\Views\View;
 use SuperCMS\Leaves\Site\Search\ProductListTable\ProductListTable;
 use SuperCMS\Models\Product\Category;
-use SuperCMS\Session\SuperCMSSession;
 use SuperCMS\Views\BreadcrumbTrait;
+use SuperCMS\Views\SearchPanelTrait;
 
-class SearchView extends DaisyDefaultView
+class SearchView extends View
 {
     use BreadcrumbTrait;
+    use SearchPanelTrait;
 
     /** @var SearchModel */
     protected $model;
@@ -25,11 +26,13 @@ class SearchView extends DaisyDefaultView
         $this->registerSubLeaf(
             new ProductListTable($this->model->getProductCollection(), 50, 'ProductList')
         );
+
+        $this->createSearchPanel();
     }
 
     protected function printViewContent()
     {
-        parent::printViewContent();
+        $this->printSearchPanel();
 
         $amount = $this->model->getProductCollection()->count();
 

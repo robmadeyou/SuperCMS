@@ -23,6 +23,7 @@ class SuperCMSSearchPanelView extends SearchPanelView
         print '<div class="c-search-panel">
                 <div class="form-inline">';
 
+
         foreach ($this->model->searchControls as $control) {
             /** @var Control $control */
             if ($control instanceof Checkbox) {

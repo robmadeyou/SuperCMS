@@ -6,8 +6,6 @@ use Rhubarb\Leaf\Controls\Common\Buttons\Button;
 use Rhubarb\Leaf\Controls\Common\Checkbox\Checkbox;
 use Rhubarb\Leaf\Controls\Common\SelectionControls\DropDown\DropDown;
 use Rhubarb\Leaf\Controls\Common\Text\TextBox;
-use Rhubarb\Leaf\Leaves\Leaf;
-use Rhubarb\Leaf\Table\Leaves\Table;
 
 trait BootstrapViewTrait
 {
