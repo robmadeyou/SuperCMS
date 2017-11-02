@@ -115,11 +115,23 @@ body.event-processing .loading-overlay {
         z-index: unset;
         position: absolute;
         width: 150px;
-        margin-top: 51px;
+        margin-top: 61px;
     }
 
     .nav>li>a {
         z-index:40;
+        -webkit-transition: background-color 0.2s;
+        -moz-transition: background-color 0.2s;
+        -ms-transition: background-color 0.2s;
+        -o-transition: background-color 0.2s;
+        transition: background-color 0.2s;
+    }
+
+    .sidebar ul li {
+        border-bottom: 1px solid black;
+    }
+    .sidebar ul li>a {
+        background-color: #cddfe8;
     }
 
     .sidebar ul li a.active {
