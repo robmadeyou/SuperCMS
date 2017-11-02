@@ -26,12 +26,12 @@ abstract class SuperCMSCrudView extends CrudView
         ?>
         <div>
             <div class="row u-margin-bottom">
-                <div class="col-md-2">
+                <div class="col-xs-2">
                         <?php $this->printLeftButtons() ?>
                 </div>
-                <div class="col-md-8">
+                <div class="col-xs-8">
                 </div>
-                <div class="col-md-2">
+                <div class="col-xs-2">
                     <div class="pull-right">
                         <?php $this->printRightButtons() ?>
                     </div>
