@@ -81,6 +81,7 @@ class ProductsEditView extends SuperCMSCrudView
                 'Description',
                 'ShippingTypes',
                 'Properties',
+                'CategoryID',
             ]
         );
         ?>
@@ -98,10 +99,6 @@ class ProductsEditView extends SuperCMSCrudView
             <div class="form-group">
                 <label>Name</label>
                 <?= $this->leaves[ 'VariationName' ] ?>
-            </div>
-            <div class="form-group">
-                <label>Category</label>
-                <?= $this->leaves[ 'CategoryID' ] ?>
             </div>
             <div class="row">
                 <div class="col-md-6">

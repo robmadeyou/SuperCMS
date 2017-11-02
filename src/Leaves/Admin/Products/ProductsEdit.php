@@ -7,7 +7,6 @@ use Rhubarb\Crown\Response\RedirectResponse;
 use Rhubarb\Leaf\Crud\Leaves\CrudLeaf;
 use Rhubarb\Stem\Exceptions\RecordNotFoundException;
 use Rhubarb\Stem\Models\Model;
-use SuperCMS\Controls\Notification\NotificationPrint;
 use SuperCMS\Models\Product\Product;
 use SuperCMS\Models\Product\ProductVariation;
 
