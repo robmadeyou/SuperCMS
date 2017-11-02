@@ -13,8 +13,6 @@ class CategoryItem extends SearchLeaf
 
     protected function createModel()
     {
-        $model = new CategoryItemModel();
-
-        return $model;
+        return new CategoryItemModel();
     }
 }

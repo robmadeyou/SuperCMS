@@ -13,7 +13,6 @@ class  SearchLeaf extends ModelBoundLeaf
 
     protected function createModel()
     {
-        $model = new SearchModel();
-        return $model;
+        return new SearchModel();
     }
 }
