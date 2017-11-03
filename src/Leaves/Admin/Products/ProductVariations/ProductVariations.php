@@ -33,5 +33,17 @@ class ProductVariations extends Leaf
     protected function onModelCreated()
     {
         $this->model->product = $this->product;
+
+        if (!$this->model->selectedVariationId) {
+            $this->model->selectedVariationId = $this->model->getVariations()[0]->UniqueIdentifier;
+        }
+
+        $this->model->changeVariationEvent->attachHandler(function($oldId, $newId) {
+            $data = new \stdClass();
+
+
+
+            return $data;
+        });
     }
 }
