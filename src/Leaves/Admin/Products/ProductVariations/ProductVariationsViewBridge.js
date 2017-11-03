@@ -3,7 +3,7 @@ scms.create('ProductVariationsViewBridge', function(){
         attachEvents:function () {
             var self = this;
 
-            $(this.viewNode, '.product-variation-tab').click(function(event) {
+            $('.product-variation-tab', this.viewNode).click(function(event) {
                 if (!event.target.classList.contains('fa')) {
                     self.changeTab($(this).parent());
                 } else {
@@ -16,7 +16,7 @@ scms.create('ProductVariationsViewBridge', function(){
         },
 
         changeTab:function(tab){
-            var lastSelected = $('.product-list-tabs.active a');
+            var lastSelected = $('.product-list-tabs.active');
 
             this.raiseProgressiveServerEvent('changeVariation', lastSelected.data('id'), tab.data('id'));
 
