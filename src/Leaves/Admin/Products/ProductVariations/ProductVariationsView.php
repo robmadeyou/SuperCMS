@@ -3,7 +3,6 @@
 namespace SuperCMS\Leaves\Admin\Products\ProductVariations;
 
 use Rhubarb\Leaf\Controls\Common\Text\TextBox;
-use Rhubarb\Leaf\Leaves\LeafDeploymentPackage;
 use Rhubarb\Leaf\Views\View;
 use Rhubarb\Stem\Filters\Equals;
 use SuperCMS\Controls\Dropzone\Dropzone;
