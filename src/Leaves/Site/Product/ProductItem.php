@@ -25,16 +25,16 @@ class ProductItem extends ModelBoundLeaf
 
     protected function onModelCreated()
     {
-        $model = parent::onModelCreated();
+        parent::onModelCreated();
 
         $this->model->selectedVariation = $this->model->restModel->getDefaultProductVariation();
 
-        $model->addToCartEvent->attachHandler(function() {
+        $this->model->addToCartEvent->attachHandler(function() {
             Basket::addVariationToBasket($this->getSelectedVariation());
             print new NotificationPrint('Item: <strong>' . $this->getSelectedVariation()->Name . '</strong> successfully added to basket <a href="/basket/">Click here to view your basket</a>');
         });
 
-        $model->changeSelectedVariationEvent->attachHandler(function($id) {
+        $this->model->changeSelectedVariationEvent->attachHandler(function($id) {
             $this->setSelectedVariation(new ProductVariation($id));
             $variation = $this->model->selectedVariation;
 
@@ -49,8 +49,6 @@ class ProductItem extends ModelBoundLeaf
 
             return $class;
         });
-
-        return $model;
     }
 
     public function setSelectedVariation(ProductVariation $variation)
