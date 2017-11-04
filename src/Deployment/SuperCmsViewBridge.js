@@ -12,7 +12,7 @@ var scms = rhubarb.vb.create('SuperCmsViewBridge', function() {
 
             function success() {
                 if (successCallback) {
-                    successCallback.apply(this);
+                    successCallback.apply(this, arguments);
                 }
 
                 self.removeLoaderClass();
@@ -20,7 +20,7 @@ var scms = rhubarb.vb.create('SuperCmsViewBridge', function() {
 
             function failure() {
                 if (failureCallback) {
-                    failureCallback.apply(this);
+                    failureCallback.apply(this, arguments);
                 }
                 self.removeLoaderClass();
             }
@@ -69,4 +69,3 @@ scms.create = function(name, ini, parent) {
 
     rhubarb.vb.create(name, ini, parent);
 };
-
