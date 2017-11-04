@@ -20,7 +20,14 @@ class ProductItem extends ModelBoundLeaf
 
     protected function createModel()
     {
-        $model = new ProductItemModel();
+        return new ProductItemModel();
+    }
+
+    protected function onModelCreated()
+    {
+        $model = parent::onModelCreated();
+
+        $this->model->selectedVariation = $this->model->restModel->getDefaultProductVariation();
 
         $model->addToCartEvent->attachHandler(function() {
             Basket::addVariationToBasket($this->getSelectedVariation());
@@ -42,15 +49,6 @@ class ProductItem extends ModelBoundLeaf
 
             return $class;
         });
-
-        return $model;
-    }
-
-    protected function onModelCreated()
-    {
-        $model = parent::onModelCreated();
-
-        $this->model->selectedVariation = $this->model->restModel->getDefaultProductVariation();
 
         return $model;
     }
