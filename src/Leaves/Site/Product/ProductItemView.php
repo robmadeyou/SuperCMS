@@ -7,6 +7,7 @@ use Rhubarb\Leaf\Controls\Common\Buttons\Button;
 use Rhubarb\Leaf\Controls\Common\SelectionControls\DropDown\DropDown;
 use Rhubarb\Leaf\Leaves\LeafDeploymentPackage;
 use Rhubarb\Leaf\Views\View;
+use SuperCMS\Deployment\SuperCmsDeploymentPackage;
 use SuperCMS\Models\Product\Category;
 use SuperCMS\Models\Product\Product;
 use SuperCMS\Models\Product\ProductImage;
@@ -166,9 +167,7 @@ HTML;
 
     public function getDeploymentPackage()
     {
-        $package = new LeafDeploymentPackage();
-        $package->resourcesToDeploy[] = __DIR__ . '/' . $this->getViewBridgeName() . '.js';
-        return $package;
+        return new SuperCmsDeploymentPackage(__DIR__ . '/ProductItemViewBridge.js');
     }
 
     protected function getViewBridgeName()

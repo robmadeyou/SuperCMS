@@ -1,4 +1,4 @@
-rhubarb.vb.create('ProductItemViewBridge', function () {
+scms.create('ProductItemViewBridge', function () {
     return {
         mainProductImage:null,
         thumbnailContainer:null,
@@ -24,10 +24,7 @@ rhubarb.vb.create('ProductItemViewBridge', function () {
 
             $(addToBasket.viewNode).click(function (event) {
                 var parent = $(this).closest('div');
-                parent.addClass('ajax-progress');
-                self.raiseServerEvent('addToCart', function () {
-                    parent.removeClass('ajax-progress');
-                });
+                self.raiseProgressiveServerEvent('addToCart');
                 event.preventDefault();
             });
         },
@@ -37,10 +34,7 @@ rhubarb.vb.create('ProductItemViewBridge', function () {
             this.model.selectedVariationId = id;
             this.saveState();
 
-            var parent = $(this.viewNode);
-            parent.addClass('ajax-progress');
-
-            this.raiseServerEvent('changeSelectedVariation', id, function(values) {
+            this.raiseProgressiveServerEvent('changeSelectedVariation', id, function(values) {
                 var name = $('.c-product-variation-title');
                 var desc = $('.c-product-variation-desc');
 
@@ -51,8 +45,6 @@ rhubarb.vb.create('ProductItemViewBridge', function () {
                 var container = $(values.ImagesHTML);
                 self.thumbnailContainer.replaceWith(container);
                 self.thumbnailContainer = container;
-
-                parent.removeClass('ajax-progress');
             });
         },
         selectThumbnail:function(thumbnail) {
