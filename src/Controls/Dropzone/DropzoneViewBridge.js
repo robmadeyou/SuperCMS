@@ -1,114 +1,108 @@
-var bridge = function (leafPath) {
-	window.rhubarb.viewBridgeClasses.ViewBridge.apply(this, arguments);
-};
+scms.create('DropzoneViewBridge', function(){
+	return {
+        attachEvents:function() {
+            var self = this;
+            var timeout;
+            var path = $('.dropzone-post-url').val();
+            var dz = new window.Dropzone("div#" + this.leafPath + ' div', {
+                url:path,
+                parallelUploads: 100,
+                init: function() {
+                    this.on('queuecomplete', function(file) {
+                        var files = this.files;
+                        for(var i = 0; i < files.length; i++) {
+                            files[i].imageSrc = $(this.files[i].previewElement).find('img').attr('src');
+                        }
+                        self.raiseProgressiveServerEvent('fileUploadedEvent', path);
+                    })
+                },
+                previewTemplate: self.viewNode.querySelector('.dz-template').innerHTML
+            });
 
-bridge.prototype = new window.rhubarb.viewBridgeClasses.ViewBridge();
-bridge.prototype.constructor = bridge;
+            dz.on("addedfile", function(file) {
+                refreshGridly();
+            });
 
-bridge.prototype.attachEvents = function () {
-	var self = this;
-	var timeout;
-	var path = $('.dropzone-post-url').val();
-	var dz = new window.Dropzone("div#" + this.leafPath + ' div', {
-		url:path,
-		parallelUploads: 100,
-		init: function() {
-			this.on('queuecomplete', function(file) {
-				var files = this.files;
-				for(var i = 0; i < files.length; i++) {
-					files[i].imageSrc = $(this.files[i].previewElement).find('img').attr('src');
-				}
-				self.raiseServerEvent('fileUploadedEvent', path);
-			})
-		},
-		previewTemplate: self.viewNode.querySelector('.dz-template').innerHTML
-	});
+            $('.dz-close-button').click(function() {
+                var image = $(this).parent().find('.dz-image img').attr('src');
+                var element = $(this);
+                self.raiseProgressiveServerEvent('deleteImage', image, function() {
+                    element.parent().remove();
+                });
+            });
 
-	dz.on("addedfile", function(file) {
-		refreshGridly();
-	});
+            var gridly = $.extend(true, {}, getGridlySettings(), {
+                callbacks: {
+                    reordered: reorderImages
+                }
+            });
 
-	$('.dz-close-button').click(function() {
-		var image = $(this).parent().find('.dz-image img').attr('src');
-		var element = $(this);
-		self.raiseServerEvent('deleteImage', image, function() {
-			element.parent().remove();
-		});
-	});
+            $('#' + this.leafPath + ' .gridly .brick').width(gridly.base).height(gridly.base);
 
-	var gridly = $.extend(true, {}, getGridlySettings(), {
-		callbacks: {
-			reordered: reorderImages
-		}
-	});
+            $('#' + this.leafPath + ' .gridly').gridly(gridly);
 
-	$('#' + this.leafPath + ' .gridly .brick').width(gridly.base).height(gridly.base);
+            function refreshGridly() {
+                $('#' + self.leafPath + ' .gridly').gridly('refresh', getGridlySettings());
+            }
 
-	$('#' + this.leafPath + ' .gridly').gridly(gridly);
+            function getGridlySettings() {
+                var gridWidth = $('.gridly').width();
+                var columns = Math.round(gridWidth / 140);
+                var base = Math.round((gridWidth - (20 * columns)) / columns);
+                return {
+                    base: base,
+                    gutter: 20,
+                    columns: columns
+                };
+            }
 
-	function refreshGridly() {
-		$('#' + self.leafPath + ' .gridly').gridly('refresh', getGridlySettings());
-	}
+            function reorderImages(order, a, b) {
+                var imageList = [];
+                order.each(function(){
+                    imageList.push($(this).data('id'));
+                });
+                self.raiseProgressiveServerEvent('imageReorder', imageList);
+            }
 
-	function getGridlySettings() {
-		var gridWidth = $('.gridly').width();
-		var columns = Math.round(gridWidth / 140);
-		var base = Math.round((gridWidth - (20 * columns)) / columns);
-		return {
-			base: base,
-			gutter: 20,
-			columns: columns
-		};
-	}
+            $(window).resize(function(){
+                // buffer execution by 50ms
+                // this way we dont do multiple resizes
+                // if user keeps resizing browser window
+                clearTimeout(timeout);
+                timeout = setTimeout(refreshGridly, 50);
+            });
+            refreshGridly();
+        },
+		findEventHost:function(){
+            var selfNode = document.getElementById(this.leafPath);
 
-	function reorderImages(order, a, b) {
-		var imageList = [];
-		order.each(function(){
-			imageList.push($(this).data('id'));
-		});
-		self.raiseServerEvent('imageReorder', imageList);
-	}
+            while (selfNode) {
+                var testNode = selfNode;
 
-	$(window).resize(function(){
-		// buffer execution by 50ms
-		// this way we dont do multiple resizes
-		// if user keeps resizing browser window
-		clearTimeout(timeout);
-		timeout = setTimeout(refreshGridly, 50);
-	});
-	refreshGridly();
-};
+                selfNode = selfNode.parentNode;
 
-bridge.prototype.findEventHost = function () {
-	var selfNode = document.getElementById(this.leafPath);
+                var className = ( testNode.className ) ? testNode.className : "";
 
-	while (selfNode) {
-		var testNode = selfNode;
+                if (className.indexOf("event-host") == 0 || className.indexOf("event-host") > 0) {
+                    if (!testNode.viewBridge) {
+                        if (!testNode.id) {
+                            testNode.id = "event-host";
+                        }
 
-		selfNode = selfNode.parentNode;
+                        new window.ViewBridge(testNode.id);
 
-		var className = ( testNode.className ) ? testNode.className : "";
+                        if ((testNode.className.indexOf("event-host") == 0 || testNode.className.indexOf("event-host") > 0) && testNode.viewBridge != undefined) {
+                            testNode.viewBridge.host = true;
+                        }
+                    }
+                }
 
-		if (className.indexOf("event-host") == 0 || className.indexOf("event-host") > 0) {
-			if (!testNode.viewBridge) {
-				if (!testNode.id) {
-					testNode.id = "event-host";
-				}
+                if (testNode.viewBridge && testNode.viewBridge.host && testNode.className.indexOf("configured") == -1) {
+                    return testNode.viewBridge;
+                }
+            }
 
-				new window.ViewBridge(testNode.id);
-
-				if ((testNode.className.indexOf("event-host") == 0 || testNode.className.indexOf("event-host") > 0) && testNode.viewBridge != undefined) {
-					testNode.viewBridge.host = true;
-				}
-			}
-		}
-
-		if (testNode.viewBridge && testNode.viewBridge.host && testNode.className.indexOf("configured") == -1) {
-			return testNode.viewBridge;
+            return false;
 		}
 	}
-
-	return false;
-};
-
-window.rhubarb.viewBridgeClasses.DropzoneViewBridge = bridge;
+});

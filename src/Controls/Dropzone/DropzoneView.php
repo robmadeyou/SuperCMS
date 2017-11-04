@@ -3,6 +3,7 @@
 namespace SuperCMS\Controls\Dropzone;
 
 use Rhubarb\Leaf\Controls\Common\FileUpload\SimpleFileUploadView;
+use SuperCMS\Deployment\SuperCmsDeploymentPackage;
 
 class DropzoneView extends SimpleFileUploadView
 {
@@ -104,7 +105,7 @@ HTML;
 
     public function getDeploymentPackage()
     {
-        $package = parent::getDeploymentPackage();
+        $package = new SuperCmsDeploymentPackage();
 
         $package->resourcesToDeploy[] = __DIR__ . '/../../../static/js/jquery.js';
         $package->resourcesToDeploy[] = __DIR__ . '/../../../static/js/dropzone.min.js';
