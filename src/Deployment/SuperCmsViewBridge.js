@@ -14,13 +14,11 @@ var scms = rhubarb.vb.create('SuperCmsViewBridge', function() {
                 if (successCallback) {
                     successCallback.apply(this);
                 }
-                debugger;
 
                 self.removeLoaderClass();
             }
 
             function failure() {
-                debugger;
                 if (failureCallback) {
                     failureCallback.apply(this);
                 }
