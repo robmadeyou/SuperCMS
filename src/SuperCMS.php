@@ -8,10 +8,11 @@ use Rhubarb\Crown\Encryption\Sha512HashProvider;
 use Rhubarb\Crown\Layout\LayoutModule;
 use Rhubarb\Crown\LoginProviders\LoginProvider;
 use Rhubarb\Crown\Module;
+use Rhubarb\Crown\Request\Request;
+use Rhubarb\Crown\Request\WebRequest;
 use Rhubarb\Crown\Sendables\Email\EmailProvider;
 use Rhubarb\Crown\String\StringTools;
 use Rhubarb\Crown\UrlHandlers\ClassMappedUrlHandler;
-use Rhubarb\Crown\UrlHandlers\StaticResourceUrlHandler;
 use Rhubarb\Leaf\LeafModule;
 use Rhubarb\Leaf\Paging\Leaves\EventPagerView;
 use Rhubarb\Leaf\Table\Leaves\TableView;
@@ -22,7 +23,6 @@ use Rhubarb\Scaffolds\Authentication\Leaves\Login;
 use Rhubarb\Scaffolds\Authentication\Leaves\LoginView;
 use Rhubarb\Scaffolds\Authentication\Settings\ProtectedUrl;
 use Rhubarb\Scaffolds\Communications\CommunicationsModule;
-use Rhubarb\Scaffolds\Communications\EmailProviders\CommunicationEmailProvider;
 use Rhubarb\Stem\Custard\SeedDemoDataCommand;
 use Rhubarb\Stem\Repositories\MySql\MySql;
 use Rhubarb\Stem\Repositories\Repository;
@@ -30,7 +30,6 @@ use Rhubarb\Stem\Schema\SolutionSchema;
 use Rhubarb\Stem\StemModule;
 use Rojr\Scaffold\Email\Templates\Emails\BaseTemplatedEmail;
 use Rojr\Scaffold\Email\Templates\EmailTemplateModule;
-use Rojr\Scaffold\Email\Templates\Models\EmailTemplate;
 use SuperCMS\Controls\GlobalBasket\GlobalBasket;
 use SuperCMS\Custard\ApplicationDemoDataSeeder;
 use SuperCMS\Email\Providers\SEmailProvider;
@@ -56,7 +55,6 @@ use SuperCMS\Leaves\Site\Checkout\Address\CheckoutAddress;
 use SuperCMS\Leaves\Site\Checkout\Checkout;
 use SuperCMS\Leaves\Site\Checkout\Payment\CheckoutPayment;
 use SuperCMS\Leaves\Site\Checkout\Success\CheckoutSuccess;
-use SuperCMS\Leaves\Site\Checkout\Summary\CheckoutSummary;
 use SuperCMS\Leaves\Site\Product\ProductCollection;
 use SuperCMS\Leaves\Site\Register\Register;
 use SuperCMS\Leaves\Site\Search\SearchLeaf;
@@ -128,12 +126,13 @@ class SuperCMS extends Module
 
     protected function registerUrlHandlers()
     {
-
         parent::registerUrlHandlers();
 
-        try {
-            new $this->basketClass();
-        } catch (\Exception $ex) {
+        if (Request::current() instanceof WebRequest) {
+            try {
+                new $this->basketClass();
+            } catch (\Exception $ex) {
+            }
         }
 
         $register = new ClassMappedUrlHandler(Register::class);
