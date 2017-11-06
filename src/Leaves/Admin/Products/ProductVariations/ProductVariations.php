@@ -3,6 +3,8 @@
 namespace SuperCMS\Leaves\Admin\Products\ProductVariations;
 
 use Rhubarb\Leaf\Leaves\Leaf;
+use Rhubarb\Stem\Exceptions\RecordNotFoundException;
+use Rhubarb\Stem\Filters\Equals;
 use SuperCMS\Models\Product\Product;
 
 class ProductVariations extends Leaf
@@ -35,15 +37,22 @@ class ProductVariations extends Leaf
         $this->model->product = $this->product;
 
         if (!$this->model->selectedVariationId) {
-            $this->model->selectedVariationId = $this->model->getVariations()[0]->UniqueIdentifier;
+            $this->model->selectedVariationId = $this->model->getVariations()[ 0 ]->UniqueIdentifier;
         }
 
-        $this->model->changeVariationEvent->attachHandler(function($oldId, $newId) {
+        $this->model->changeVariationEvent->attachHandler(function ($oldId, $newId) {
             $data = new \stdClass();
 
 
-
             return $data;
+        });
+
+        $this->model->deleteVariationEvent->attachHandler(function ($id) {
+            $variations = $this->model->getVariations()->filter(new Equals('ProductVariationID', $id));
+
+            if ($variations->count()) {
+                $variations[0]->delete();
+            }
         });
     }
 }

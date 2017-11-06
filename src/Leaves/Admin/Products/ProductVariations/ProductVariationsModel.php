@@ -16,12 +16,15 @@ class ProductVariationsModel extends LeafModel
 
     /** @var Event $changeVariationEvent */
     public $changeVariationEvent = null;
+    /** @var Event $deleteVariationEvent */
+    public $deleteVariationEvent = null;
 
     public function __construct()
     {
         parent::__construct();
 
         $this->changeVariationEvent = new Event();
+        $this->deleteVariationEvent = new Event();
     }
 
     public function getVariations()
