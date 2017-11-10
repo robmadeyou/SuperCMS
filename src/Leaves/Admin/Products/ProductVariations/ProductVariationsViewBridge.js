@@ -6,6 +6,10 @@ scms.create('ProductVariationsViewBridge', function(){
 
             this.firstTab = $('.nav-bar-tabs-first');
 
+            $('#' + this.leafPath + '_VariationName').keyup(function(){
+                self.firstTab.find('a').html($(this).val() + '<span class="delete-variation"><i class="fa fa-times fa-1x" aria-hidden="true"></i></span>');
+            });
+
             $('.product-variation-tab', this.viewNode).click(function(event) {
                 if (!event.target.classList.contains('fa')) {
                     self.changeTab($(this).parent());
