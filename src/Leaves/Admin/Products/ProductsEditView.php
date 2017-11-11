@@ -53,20 +53,28 @@ class ProductsEditView extends SuperCMSCrudView
         $settings = HtmlPageSettings::singleton();
         $settings->pageTitle = 'Editing Product';
 
-        $this->printFieldset(
-            '',
-            [
-                'Name',
-                'Description',
-                'ShippingTypes',
-                'Properties',
-                'CategoryID',
-            ]
-        );
         ?>
-        <div class="input-group-breaker"></div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <?php
+                $this->layoutItemsWithContainer(
+                    'General Information',
+                    [
+                        'Name',
+                        'Description',
+                        'ShippingTypes',
+                        'Properties',
+                        'CategoryID',
+                    ]
+                );
+                ?>
+            </div>
+            <div class="col-sm-6">
+                <?= $this->leaves['Variations']; ?>
+            </div>
+        </div>
         <?php
-        print $this->leaves['Variations'];
     }
 
     protected function printLeftButtons()
