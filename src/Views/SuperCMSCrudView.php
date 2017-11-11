@@ -37,7 +37,7 @@ abstract class SuperCMSCrudView extends CrudView
                     </div>
                 </div>
             </div>
-            <div class="panel panel-primary">
+            <div class="panel">
                 <div class="panel-heading">
                     <?= $this->getTitle() ?>
                 </div>
