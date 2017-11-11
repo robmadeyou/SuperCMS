@@ -4,22 +4,22 @@ namespace SuperCMS\Layouts;
 
 use Rhubarb\Crown\Html\ResourceLoader;
 use Rhubarb\Crown\Request\Request;
-use SuperCMS\Models\Notification\Notification;use SuperCMS\Settings\SuperCMSSettings;
+use SuperCMS\Models\Notification\Notification;
+use SuperCMS\Settings\SuperCMSSettings;
 
 class AdminLayout extends SuperCMSDefaultLayout
 {
     public function __construct()
     {
         parent::__construct();
+
         ResourceLoader::loadResource('/files/css/admin-strapped.css');
         ResourceLoader::loadResource('/files/css/admin.css');
-
     }
 
     protected function printHead()
     {
         parent::printHead();
-        print '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />';
     }
 
     protected function printPageHeading()

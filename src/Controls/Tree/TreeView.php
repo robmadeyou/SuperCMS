@@ -43,6 +43,13 @@ HTML;
         return $html;
     }
 
+    protected function getAdditionalResourceUrls()
+    {
+        return [
+            'https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css'
+        ];
+    }
+
     protected function getViewBridgeName()
     {
         return 'TreeViewBridge';
