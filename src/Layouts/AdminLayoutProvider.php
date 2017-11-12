@@ -5,6 +5,9 @@ namespace SuperCMS\Layouts;
 use Rhubarb\Crown\LoginProviders\UrlHandlers\ValidateLoginUrlHandler;
 use Rhubarb\Crown\String\StringTools;
 use Rhubarb\Leaf\LayoutProviders\LayoutProvider;
+use Rhubarb\Leaf\Leaves\Controls\Control;
+use SuperCMS\Controls\Dropzone\Dropzone;
+use SuperCMS\Controls\KeyValue\KeyValue;
 
 class AdminLayoutProvider extends LayoutProvider
 {
@@ -70,6 +73,13 @@ class AdminLayoutProvider extends LayoutProvider
 
         if (is_string($value)) {
             $control = $this->generateValue($value);
+            if ($control instanceof Control) {
+                if ($control instanceof Dropzone) {
+                } else if ($control instanceof KeyValue) {
+                } else {
+                    $control->addCssClassNames('form-control');
+                }
+            }
         } else {
             $control = $value;
         }
