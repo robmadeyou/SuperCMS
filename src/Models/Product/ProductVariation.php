@@ -56,6 +56,15 @@ class ProductVariation extends Model
         return $model;
     }
 
+    protected function beforeSave()
+    {
+        if ($this->isNewRecord()) {
+            if (!$this->Name) {
+                $this->Name = 'Unnamed Variation';
+            }
+        }
+    }
+
     public function getPrimaryImage()
     {
         $image = $this->Images->addSort('Priority');
