@@ -6,7 +6,7 @@ scms.create('ProductVariationsViewBridge', function(){
 
             this.firstTab = $('.nav-bar-tabs-first');
 
-            $('#' + this.leafPath + '_VariationName').keyup(function(){
+            $('#' + this.leafPath + '_Name').keyup(function(){
                 self.firstTab.find('a').html($(this).val() + '<span class="delete-variation"><i class="fa fa-times fa-1x" aria-hidden="true"></i></span>');
             });
 
