@@ -157,3 +157,31 @@ body.event-processing .loading-overlay {
         background-color: #FFFFFF
     }
 }
+
+.key-value-group {
+    clear: both;
+}
+
+.keyValueControl {
+    margin-bottom: 8px;
+}
+
+.keyValueControl:after {
+    display: table;
+    content: '';
+    clear: both;
+}
+
+.keyValueControl input {
+    float: left;
+    width: 40%;
+    margin-right: 16px;
+}
+
+.keyValueControl a {
+    float: left;
+    width:15%;
+}
+
+#addTrigger {
+}

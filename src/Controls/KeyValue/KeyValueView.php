@@ -63,10 +63,10 @@ class KeyValueView extends ControlView
     {
         $inputClass = implode(' ', $this->model->inputClasses);
         print '<div class="keyValueControl">
-                <input class="' . $inputClass . '" id="' . $this->model->leafPath . '_key[' . $key . ']" name="' . $this->model->leafPath . '_key[' . $key . ']" type="text" value="' . htmlentities($key) . '">
-                <input class="' . $inputClass . '" id="' . $this->model->leafPath . '_value[' . $key . ']" name="' . $this->model->leafPath . '_value[' . $key . ']" type="text" value="' . htmlentities($value) . '">';
+                <input placeholder="Key" class="' . $inputClass . '" id="' . $this->model->leafPath . '_key[' . $key . ']" name="' . $this->model->leafPath . '_key[' . $key . ']" type="text" value="' . htmlentities($key) . '">
+                <input placeholder="Value" class="' . $inputClass . '" id="' . $this->model->leafPath . '_value[' . $key . ']" name="' . $this->model->leafPath . '_value[' . $key . ']" type="text" value="' . htmlentities($value) . '">';
         $this->printRemoveButton();
-        print '<br></div>';
+        print '</div>';
     }
 
     protected function getViewBridgeName()
