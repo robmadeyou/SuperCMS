@@ -12,6 +12,7 @@ use Rhubarb\Stem\Schema\Columns\IntegerColumn;
 use Rhubarb\Stem\Schema\Columns\JsonColumn;
 use Rhubarb\Stem\Schema\Columns\MoneyColumn;
 use Rhubarb\Stem\Schema\Columns\StringColumn;
+use SuperCMS\Exceptions\Models\Products\ProductMustHaveVariationException;
 
 
 /**
@@ -77,5 +78,15 @@ class ProductVariation extends Model
     public function getPublicUrl()
     {
         return $this->Product->getPublicUrl() . '?v=' . $this->UniqueIdentifier;
+    }
+
+    public function delete()
+    {
+        if (!$this->isNewRecord()) {
+            if ($this->Product->Variations->count() == 1) {
+                throw new ProductMustHaveVariationException();
+            }
+        }
+        parent::delete();
     }
 }

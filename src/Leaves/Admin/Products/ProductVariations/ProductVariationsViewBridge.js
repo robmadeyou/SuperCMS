@@ -16,9 +16,10 @@ scms.create('ProductVariationsViewBridge', function(){
                 } else {
                     if (confirm('Are you sure you want to remove this variation?')) {
                         var tab = $(this);
-                        self.raiseServerEvent('deleteVariation', tab.data('id'), function() {
-                            self.deleteVariation(tab);
-                            debugger;
+                        self.raiseServerEvent('deleteVariation', tab.data('id'), function(response) {
+                            if (response.success) {
+                                self.deleteVariation(tab);
+                            }
                         });
                     }
                 }

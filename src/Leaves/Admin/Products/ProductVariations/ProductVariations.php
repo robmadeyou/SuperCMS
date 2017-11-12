@@ -4,6 +4,9 @@ namespace SuperCMS\Leaves\Admin\Products\ProductVariations;
 
 use Rhubarb\Leaf\Leaves\Leaf;
 use Rhubarb\Stem\Filters\Equals;
+use SuperCMS\Controls\Notification\NotificationPrint;
+use SuperCMS\Exceptions\Models\Products\ProductMustHaveVariationException;
+use SuperCMS\Exceptions\Models\SuperCMSModelException;
 use SuperCMS\Models\Product\Product;
 
 class ProductVariations extends Leaf
@@ -47,11 +50,21 @@ class ProductVariations extends Leaf
         });
 
         $this->model->deleteVariationEvent->attachHandler(function ($id) {
+            $response = new \stdClass();
+            $response->success = false;
+
             $variations = $this->model->getVariations()->filter(new Equals('ProductVariationID', $id));
 
             if ($variations->count()) {
-                $variations[0]->delete();
+                try {
+                    $variations[0]->delete();
+                    $response->success = true;
+                } catch (SuperCMSModelException $ex) {
+                    print new NotificationPrint('Unable to delete Variation: ' . $ex->getPublicMessage(), NotificationPrint::DANGER);
+                }
             }
+
+            return $response;
         });
     }
 }
