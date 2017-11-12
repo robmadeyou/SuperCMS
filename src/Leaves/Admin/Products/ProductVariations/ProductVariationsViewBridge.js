@@ -39,6 +39,7 @@ scms.create('ProductVariationsViewBridge', function(){
             lastSelected.removeClass('active');
             tab.addClass('active');
         },
+
         deleteVariation:function(tab) {
             tab.remove();
             this.changeTab(this.firstTab);

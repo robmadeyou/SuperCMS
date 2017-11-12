@@ -3,7 +3,6 @@
 namespace SuperCMS\Leaves\Admin\Products\ProductVariations;
 
 use Rhubarb\Leaf\Leaves\Leaf;
-use Rhubarb\Stem\Exceptions\RecordNotFoundException;
 use Rhubarb\Stem\Filters\Equals;
 use SuperCMS\Models\Product\Product;
 
