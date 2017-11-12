@@ -64,8 +64,8 @@ class AdminLayoutProvider extends LayoutProvider
         $helpText = '';
 
         if (is_array($value)) {
-            $helpText = $value[ 0 ];
-            $value = $value[ 1 ];
+            $helpText = $value[0];
+            $value = $value[1];
         }
 
         if (is_string($value)) {
