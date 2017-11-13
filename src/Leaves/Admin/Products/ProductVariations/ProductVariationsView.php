@@ -57,12 +57,14 @@ class ProductVariationsView extends View
     {
         ?>
         <ul class="nav nav-pills">
+            <div class="js-tabs-list nav nav-pills">
             <?php
             foreach ($this->model->getVariations() as $variation) {
                 $class = ( $variation->UniqueIdentifier == $this->model->selectedVariationId ? 'active nav-bar-tabs-first' : '' );
                 print '<li role="presentation" class="' . $class . ' product-list-tabs" ><a class="product-variation-tab" data-id="' . $variation->UniqueIdentifier . '">' . $variation->Name . '  <span class="delete-variation"><i class="fa fa-times fa-1x" aria-hidden="true"></i></span></a></li>';
             }
             ?>
+            </div>
             <li role="presentation" class="product-list-tabs" id="tab-add-button"><p>&nbsp;&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></span></p></li>
         </ul>
         <?php

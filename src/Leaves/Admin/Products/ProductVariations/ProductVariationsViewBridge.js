@@ -10,7 +10,7 @@ scms.create('ProductVariationsViewBridge', function(){
                 self.firstTab.find('a').html($(this).val() + '<span class="delete-variation"><i class="fa fa-times fa-1x" aria-hidden="true"></i></span>');
             });
 
-            $('.product-variation-tab', this.viewNode).click(function(event) {
+            $(this.viewNode).on('click', '.product-variation-tab', function(event) {
                 if (!event.target.classList.contains('fa')) {
                     self.changeTab($(this).parent());
                 } else {
@@ -30,6 +30,16 @@ scms.create('ProductVariationsViewBridge', function(){
 
                 self.raiseServerEvent('AddNewProduct', lastSelected);
             });
+
+            $('#tab-add-button').click(function(){
+                self.addVariation();
+            });
+        },
+
+        addVariation:function() {
+            var variationHTML = '<li role="presentation" class="product-list-tabs"><a class="product-variation-tab" data-id="2">Unnamed Variation<span class="delete-variation"><i class="fa fa-times fa-1x" aria-hidden="true"></i></span></a></li>';
+
+            $(this.viewNode).find('.js-tabs-list').append(variationHTML);
         },
 
         changeTab:function(tab){

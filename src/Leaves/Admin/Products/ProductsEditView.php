@@ -65,7 +65,7 @@ class ProductsEditView extends SuperCMSCrudView
                         'Description',
                         'ShippingTypes',
                         'Properties',
-                        'CategoryID',
+                        'Category' => 'CategoryID',
                     ]
                 );
                 ?>

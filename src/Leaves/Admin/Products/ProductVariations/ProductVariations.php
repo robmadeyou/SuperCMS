@@ -42,10 +42,29 @@ class ProductVariations extends Leaf
             $this->model->selectedVariationId = $this->model->getVariations()[ 0 ]->UniqueIdentifier;
         }
 
+        $this->model->saveVariationEvent->attachHandler(function() {
+            $variation = $this->model->getCurrentVariation();
+
+            $variation->Name = $this->model->Name;
+            $variation->Price = $this->model->Price;
+            $variation->AmountAvailable = $this->model->AmountAvailable;
+            $variation->Description = $this->model->Description;
+
+            $variation->save();
+        });
+
         $this->model->changeVariationEvent->attachHandler(function ($oldId, $newId) {
+            $this->model->saveVariationEvent->raise();
+
+            $this->model->selectedVariationId = $newId;
+
+            $newVariation = $this->model->getCurrentVariation();
+
             $data = new \stdClass();
-
-
+            $data->Name = $newVariation->Name;
+            $data->Price = $newVariation->Price;
+            $data->AmountAvailable = $newVariation->AmountAvailable;
+            $data->Description = $newVariation->Description;
             return $data;
         });
 
