@@ -3,6 +3,7 @@
 namespace SuperCMS\Leaves\Admin\Products;
 
 use Rhubarb\Crown\Settings\HtmlPageSettings;
+use Rhubarb\Leaf\Controls\Common\SelectionControls\MultiSelect\MultiSelect;
 use Rhubarb\Leaf\Controls\Common\Text\TextBox;
 use Rhubarb\Leaf\Leaves\LeafDeploymentPackage;
 use Rhubarb\Stem\Filters\Equals;
@@ -34,7 +35,7 @@ class ProductsEditView extends SuperCMSCrudView
             new TextBox('Name'),
             new HtmlEditor('Description'),
             new CategoryDropdown('CategoryID'),
-            $relatedProducts = new ChosenMultiSelect('RelatedProductIDs'),
+            $relatedProducts = new MultiSelect('RelatedProductIDs'),
             $properties = new KeyValue('Properties'),
             new ShippingMultiSelection('ShippingTypes'),
             $toggleSwitch = new ToggleSwitch('Live'),
