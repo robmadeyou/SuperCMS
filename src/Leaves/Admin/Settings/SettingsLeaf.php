@@ -29,26 +29,30 @@ class SettingsLeaf extends Leaf
 
         $settings = SuperCMSSettings::singleton();
 
-        $this->model->savePressedEvent->attachHandler(function () use ($settings) {
-            $settings->stripeLiveSecret = $this->model->StripeLiveSecret;
-            $settings->stripeTestSecret = $this->model->StripeTestSecret;
-            $settings->stripeLivePublish = $this->model->StripeLivePublish;
-            $settings->stripeTestPublish = $this->model->StripeTestPublish;
-            $settings->websiteName = $this->model->WebsiteName;
-            $settings->developmentMode = $this->model->DeveloperMode;
-            $settings->enableStripePayment = $this->model->EnableStripePayment;
+        $values = [
+            'stripeLiveSecret',
+            'stripeTestSecret',
+            'stripeLivePublish',
+            'stripeTestPublish',
+            'websiteName',
+            'developmentMode',
+            'enableStripePayment',
+            'blogSubdomain',
+            'enableBlog',
+        ];
+
+        $this->model->savePressedEvent->attachHandler(function () use ($settings, $values) {
+            foreach ($values as $value) {
+                $settings->{$value} = $this->model->{$value};
+            }
         });
 
         $this->model->cancelPressedEvent->attachHandler(function () {
             throw new ForceResponseException(new RedirectResponse('/admin/dashboard/'));
         });
 
-        $this->model->StripeLiveSecret = $settings->stripeLiveSecret;
-        $this->model->StripeTestSecret = $settings->stripeTestSecret;
-        $this->model->StripeLivePublish = $settings->stripeLivePublish;
-        $this->model->StripeTestPublish = $settings->stripeTestPublish;
-        $this->model->DeveloperMode = $settings->developmentMode;
-        $this->model->WebsiteName = $settings->websiteName;
-        $this->model->EnableStripePayment = $settings->enableStripePayment;
+        foreach ($values as $value) {
+            $this->model->{$value} = $settings->{$value};
+        }
     }
 }

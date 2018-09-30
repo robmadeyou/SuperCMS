@@ -42,6 +42,8 @@ use SuperCMS\Session\SuperCMSSession;
  */
 class SuperCMSUser extends User
 {
+    const VERSION = 1;
+
     protected function extendSchema(ModelSchema $schema)
     {
         $schema->addColumn(

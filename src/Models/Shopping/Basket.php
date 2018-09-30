@@ -36,6 +36,8 @@ use SuperCMS\Session\SuperCMSSession;
 class Basket extends Model
 {
 
+    const VERSION = 1;
+
     const STATUS_NEW = 'New';
     const STATUS_COMPLETED = 'Completed';
 

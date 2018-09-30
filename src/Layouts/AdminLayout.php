@@ -13,7 +13,6 @@ class AdminLayout extends SuperCMSDefaultLayout
     {
         parent::__construct();
 
-        ResourceLoader::loadResource('/files/css/admin-strapped.css');
         ResourceLoader::loadResource('/files/css/admin.css');
     }
 
@@ -24,18 +23,23 @@ class AdminLayout extends SuperCMSDefaultLayout
 
     protected function printPageHeading()
     {
+        $settings = SuperCMSSettings::singleton();
+
         $sideNavs = [
             [
-                '/admin/dashboard/' => '<i class="fa fa-dashboard fa-fw"></i> Dashboard',
-                '/admin/orders/' => '<i class="fa fa-flag" aria-hidden="true"></i> Orders',
-                '/admin/products/' => '<i class="fa fa-shopping-basket" aria-hidden="true"></i> Products',
-                '/admin/categories/' => '<i class="fa fa-folder-open-o" aria-hidden="true"></i> Categories',
-                '/admin/coupons/' => '<i class="fa fa-ticket" aria-hidden="true"></i> Coupons',
-                '/admin/settings/' => '<i class="fa fa-gear fa-fw"></i> Settings',
+                '/admin/dashboard/' => '<i class="fa fa-dashboard fa-fw"></i> <span>Dashboard</span>',
+                '/admin/orders/' => '<i class="fa fa-flag" aria-hidden="true"></i> <span>Orders</span>',
+                '/admin/products/' => '<i class="fa fa-shopping-basket" aria-hidden="true"></i> <span>Products</span>',
+                '/admin/categories/' => '<i class="fa fa-folder-open-o" aria-hidden="true"></i> <span>Categories</span>',
+                '/admin/coupons/' => '<i class="fa fa-ticket" aria-hidden="true"></i> <span>Vouchers</span>',
             ]
         ];
 
-        $settings = SuperCMSSettings::singleton();
+        if ($settings->enableBlog) {
+            $sideNavs[0]['/admin/blog/'] = '<i class="fa fa-book" aria-hidden="true"></i> <span>Blog</span>';
+        }
+
+        $sideNavs[0]['/admin/settings/'] = '<i class="fa fa-gear fa-fw"></i> <span>Settings</span>';
 
         //todo: make admin href be dependant on the database
         ?>
@@ -115,7 +119,7 @@ class AdminLayout extends SuperCMSDefaultLayout
                                     $class = 'class="active"';
                                 }
                                 print <<<HTML
-                                    <li><a href="$url" $class>$name</a></li>
+                                    <li $class><a href="$url">$name</a></li>
 HTML;
                             }
                         }

@@ -20,6 +20,8 @@ use Rhubarb\Stem\Schema\Columns\StringColumn;
  */
 class ProductImage extends Model
 {
+    const VERSION = 1;
+
     protected function createSchema()
     {
         $model = new MySqlModelSchema('tblProductImage');

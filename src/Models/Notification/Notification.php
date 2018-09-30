@@ -29,6 +29,8 @@ use Rhubarb\Stem\Schema\ModelSchema;
  */
 class Notification extends Model
 {
+    const VERSION = 1;
+
     const CATEGORY_ORDER = 'Order';
     const CATEGORY_NOTE = 'Note';
     const CATEGORY_COMMENT = 'Comment';

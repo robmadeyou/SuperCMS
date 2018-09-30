@@ -26,6 +26,8 @@ use Rhubarb\Stem\Schema\ModelSchema;
  */
 class Location extends Model
 {
+    const VERSION = 1;
+
     protected function createSchema()
     {
         $schema = new ModelSchema('tblLocation');

@@ -20,6 +20,8 @@ use Rhubarb\Stem\Schema\ModelSchema;
  */
 class OrderItem extends Model
 {
+    const VERSION = 1;
+
     const STATUS_PENDING = 'Pending';
     const STATUS_IN_PROGRESS = 'In Progress';
     const STATUS_DISPATCHED = 'Dispatched';

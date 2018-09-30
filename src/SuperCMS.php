@@ -37,6 +37,7 @@ use SuperCMS\Email\RegisterEmail;
 use SuperCMS\Email\SBaseEmail;
 use SuperCMS\Layouts\DefaultLayout;
 use SuperCMS\Leaves\Admin\AdminIndex;
+use SuperCMS\Leaves\Admin\BlogPosts\BlogPostsCollection;
 use SuperCMS\Leaves\Admin\Categories\CategoriesCollection;
 use SuperCMS\Leaves\Admin\Categories\Hierarchy\Hierarchy;
 use SuperCMS\Leaves\Admin\Coupons\CouponsCollection;
@@ -46,6 +47,7 @@ use SuperCMS\Leaves\Admin\Orders\OrdersCollection;
 use SuperCMS\Leaves\Admin\Products\ProductsCollection;
 use SuperCMS\Leaves\Admin\Settings\SettingsLeaf;
 use SuperCMS\Leaves\Admin\ShippingType\ShippingTypeCollection;
+use SuperCMS\Leaves\Blog\BlogIndexPage;
 use SuperCMS\Leaves\Errors\Error403;
 use SuperCMS\Leaves\Errors\Error404;
 use SuperCMS\Leaves\Index;
@@ -61,12 +63,14 @@ use SuperCMS\Leaves\Site\Search\SearchLeaf;
 use SuperCMS\Leaves\SuperCMSLoginView;
 use SuperCMS\LoginProviders\AdminLoginProvider;
 use SuperCMS\LoginProviders\SCmsLoginProvider;
+use SuperCMS\Models\Blog\BlogPost;
 use SuperCMS\Models\Coupon\Coupon;
 use SuperCMS\Models\Product\Category;
 use SuperCMS\Models\Product\Product;
 use SuperCMS\Models\Shopping\Order;
-use SuperCMS\Models\SuperCMSSolutionSchema;
+use SuperCMS\Models\SCMSSolutionSchema;
 use SuperCMS\Models\Shipping\ShippingType;
+use SuperCMS\Settings\SuperCMSSettings;
 use SuperCMS\UrlHandlers\AdminClassMappedUrlHandler;
 use SuperCMS\UrlHandlers\AdminCrudUrlHandler;
 use SuperCMS\UrlHandlers\CategoryUrlHandler;
@@ -105,7 +109,7 @@ class SuperCMS extends Module
 
         //Register the models
         Repository::setDefaultRepositoryClassName(MySql::class);
-        SolutionSchema::registerSchema('CmsDatabase', SuperCMSSolutionSchema::class);
+        SolutionSchema::registerSchema('CmsDatabase', SCMSSolutionSchema::class);
 
         //Login / Register set up
         LoginProvider::setProviderClassName(SCmsLoginProvider::class);
@@ -128,43 +132,73 @@ class SuperCMS extends Module
     {
         parent::registerUrlHandlers();
 
-        if (Request::current() instanceof WebRequest) {
+        $request = Request::current();
+
+        if ($request instanceof WebRequest) {
             try {
                 new $this->basketClass();
             } catch (\Exception $ex) {
             }
         }
 
+        $settings = SuperCMSSettings::singleton();
+
         $register = new ClassMappedUrlHandler(Register::class);
         $register->setPriority(1301);
 
+        $urlHandlers = [
+            'admin/' => new AdminClassMappedUrlHandler(AdminIndex::class, [
+                'dashboard/' => new AdminClassMappedUrlHandler(AdminDashboard::class),
+                'products/' => new AdminCrudUrlHandler(Product::class, StringTools::getNamespaceFromClass(ProductsCollection::class)),
+                'categories/' => new AdminCrudUrlHandler(Category::class, StringTools::getNamespaceFromClass(CategoriesCollection::class), [], [
+                    'hierarchy/' => new AdminClassMappedUrlHandler(Hierarchy::class),
+                ]),
+                'shipping-types/' => new AdminCrudUrlHandler(ShippingType::class, StringTools::getNamespaceFromClass(ShippingTypeCollection::class)),
+                'coupons/' => new AdminCrudUrlHandler(Coupon::class, StringTools::getNamespaceFromClass(CouponsCollection::class)),
+                'settings/' => new AdminClassMappedUrlHandler(SettingsLeaf::class),
+                'orders/' => new AdminCrudUrlHandler(Order::class, StringTools::getNamespaceFromClass(OrdersCollection::class)),
+                'blog/' => new AdminCrudUrlHandler(BlogPost::class, StringTools::getNamespaceFromClass(BlogPostsCollection::class)),
+            ]),
+            '404/' => new ClassMappedUrlHandler(Error404::class),
+            '403/' => new ClassMappedUrlHandler(Error403::class)
+        ];
+
+        $isBlog = false;
+
+        if ($settings->enableBlog) {
+            $url = $request->host;
+
+            if (strpos($url, '.') !== null) {
+                $parts = explode('.', $url);
+                $isBlog = $parts[0] == $settings->blogSubdomain;
+            }
+        }
+
+        if ($isBlog) {
+            $urlHandlers += [
+            ];
+
+            $indexClass = BlogIndexPage::class;
+        } else {
+            $indexClass = Index::class;
+
+            $urlHandlers += [
+                'category/' => new CategoryUrlHandler(Category::class, StringTools::getNamespaceFromClass(CategoryCollection::class), [], [
+                    'product/' => new ProductUrlHandler(Product::class, StringTools::getNamespaceFromClass(ProductCollection::class))
+                ]),
+                'search/' => new ClassMappedUrlHandler(SearchLeaf::class),
+                'basket/' => new ClassMappedUrlHandler(BasketPage::class),
+                'checkout/' => new ClassMappedUrlHandler(Checkout::class, [
+                    'address/' => new ClassMappedUrlHandler(CheckoutAddress::class),
+                    'payment/' => new ClassMappedUrlHandler(CheckoutPayment::class),
+                    'success/' => new ClassMappedUrlHandler(CheckoutSuccess::class),
+                ]),
+            ];
+        }
+
         $this->addUrlHandlers(
             [
-                "/" => new ClassMappedUrlHandler(Index::class, [
-                    'admin/' => new AdminClassMappedUrlHandler(AdminIndex::class, [
-                        'dashboard/' => new AdminClassMappedUrlHandler(AdminDashboard::class),
-                        'products/' => new AdminCrudUrlHandler(Product::class, StringTools::getNamespaceFromClass(ProductsCollection::class)),
-                        'categories/' => new AdminCrudUrlHandler(Category::class, StringTools::getNamespaceFromClass(CategoriesCollection::class), [], [
-                            'hierarchy/' => new AdminClassMappedUrlHandler(Hierarchy::class),
-                        ]),
-                        'shipping-types/' => new AdminCrudUrlHandler(ShippingType::class, StringTools::getNamespaceFromClass(ShippingTypeCollection::class)),
-                        'coupons/' => new AdminCrudUrlHandler(Coupon::class, StringTools::getNamespaceFromClass(CouponsCollection::class)),
-                        'settings/' => new AdminClassMappedUrlHandler(SettingsLeaf::class),
-                        'orders/' => new AdminCrudUrlHandler(Order::class, StringTools::getNamespaceFromClass(OrdersCollection::class)),
-                    ]),
-                    'category/' => new CategoryUrlHandler(Category::class, StringTools::getNamespaceFromClass(CategoryCollection::class), [], [
-                        'product/' => new ProductUrlHandler(Product::class, StringTools::getNamespaceFromClass(ProductCollection::class))
-                    ]),
-                    'search/' => new ClassMappedUrlHandler(SearchLeaf::class),
-                    'basket/' => new ClassMappedUrlHandler(BasketPage::class),
-                    'checkout/' => new ClassMappedUrlHandler(Checkout::class, [
-                        'address/' => new ClassMappedUrlHandler(CheckoutAddress::class),
-                        'payment/' => new ClassMappedUrlHandler(CheckoutPayment::class),
-                        'success/' => new ClassMappedUrlHandler(CheckoutSuccess::class),
-                    ]),
-                    '404/' => new ClassMappedUrlHandler(Error404::class),
-                    '403/' => new ClassMappedUrlHandler(Error403::class)
-                ]),
+                "/" => new ClassMappedUrlHandler($indexClass, $urlHandlers),
                 '/login/register/' => $register,
             ]
         );

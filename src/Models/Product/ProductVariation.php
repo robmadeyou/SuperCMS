@@ -37,6 +37,8 @@ class ProductVariation extends Model
 {
     use SetUniqueNameTrait;
 
+    const VERSION = 1;
+
     protected function createSchema()
     {
         $model = new MySqlModelSchema('tblProductVariation');

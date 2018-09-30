@@ -1,0 +1,95 @@
+.list {
+  .c-blog-post {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+
+    > .c-blog-post--individual {
+      min-width: 250px;
+      flex-grow: 1;
+      height: 248px;
+      background-color: white;
+      border: 1px solid $lightMainColour;
+      overflow: hidden;
+      margin-bottom: $basePadding * 2;
+      margin-right: $basePadding * 2;
+
+      z-index: 10;
+
+      box-shadow: 1px 1px 5px 1px #3a3a3a17;
+
+      @include transition(box-shadow 0.2s, transform 0.2s, border 0.2s);
+
+      &:hover {
+        border: 1px solid $mainColour;
+        box-shadow: 4px 4px 5px 1px #3a3a3a47;
+        @include translate(-4px, -4px);
+      }
+
+      .blog-content {
+        position: relative;
+
+        width: 100%;
+        height: 100%;
+
+        .link {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          top: 0;
+          cursor: pointer;
+
+          a {
+            display: inline-block;
+            width:100%;
+            height:100%;
+            cursor: pointer;
+
+
+            &:link {
+              text-decoration: inherit;
+              color: inherit;
+            }
+
+            &:visited{
+              text-decoration: inherit;
+              color: inherit;
+            }
+          }
+        }
+
+        .blog-content--inner {
+          padding: $basePadding;
+          position: absolute;
+          left: 50%;
+          @include translate(-50%, 0);
+        }
+
+        .blog-content--title {
+          position: absolute;
+          left: 0;
+          top: 0;
+          max-width: 300px;
+          text-wrap: normal;
+          font-size: 2.4rem;
+          padding: $basePadding;
+          z-index: 15;
+          background-color: $lightMainColour;
+          color: white;
+          text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.36);
+        }
+
+        .blog-content--date {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          padding: $basePadding;
+          background-color: $lightMainColour;
+          color: white;
+          text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.36);
+        }
+      }
+    }
+  }
+}

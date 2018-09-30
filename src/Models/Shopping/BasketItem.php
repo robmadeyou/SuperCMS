@@ -23,6 +23,8 @@ use SuperCMS\SuperCMS;
  */
 class BasketItem extends Model
 {
+    const VERSION = 1;
+
     protected function createSchema()
     {
         $schema = new ModelSchema('tblBasketItem');

@@ -14,13 +14,15 @@ class SettingsView extends SuperCMSCrudView
         parent::createSubLeaves();
 
         $this->registerSubLeaf(
-            new Checkbox('EnableStripePayment'),
-            new TextBox('StripeTestSecret'),
-            new TextBox('StripeTestPublish'),
-            new TextBox('StripeLiveSecret'),
-            new TextBox('StripeLivePublish'),
-            new Checkbox('DeveloperMode'),
-            new TextBox('WebsiteName')
+            new Checkbox('enableStripePayment'),
+            new TextBox('stripeTestSecret'),
+            new TextBox('stripeTestPublish'),
+            new TextBox('stripeLiveSecret'),
+            new TextBox('stripeLivePublish'),
+            new Checkbox('developmentMode'),
+            new TextBox('websiteName'),
+            new Checkbox('enableBlog'),
+            new TextBox('blogSubdomain')
         );
 
         $this->bootstrapInputs();
@@ -30,13 +32,15 @@ class SettingsView extends SuperCMSCrudView
     {
         $this->printFieldset('',
             [
-                'Developer Mode' => 'DeveloperMode',
-                'Website Name' => 'WebsiteName',
-                'Enable Stripe Payment' => 'EnableStripePayment',
-                'Stripe Test Secret' => 'StripeTestSecret',
-                'Stripe Test Publishable Key' => 'StripeTestPublish',
-                'Stripe Live Secret' => 'StripeLiveSecret',
-                'Stripe Live Publishable Key' => 'StripeLivePublish'
+                'Developer Mode' => 'developmentMode',
+                'Website Name' => 'websiteName',
+                'Enable Stripe Payment' => 'enableStripePayment',
+                'Stripe Test Secret' => 'stripeTestSecret',
+                'Stripe Test Publishable Key' => 'stripeTestPublish',
+                'Stripe Live Secret' => 'stripeLiveSecret',
+                'Stripe Live Publishable Key' => 'stripeLivePublish',
+                'Enable Blog' => 'enableBlog',
+                'Blog Subdomain' => 'blogSubdomain',
             ]);
     }
 

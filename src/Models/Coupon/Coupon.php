@@ -21,6 +21,8 @@ use Rhubarb\Stem\Schema\Columns\StringColumn;
  */
 class Coupon extends Model
 {
+    const VERSION = 1;
+
     protected function createSchema()
     {
         $schema = new MySqlModelSchema('tblCoupon');

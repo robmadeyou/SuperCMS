@@ -40,6 +40,8 @@ class Product extends Model
 {
     use SetUniqueNameTrait;
 
+    const VERSION = 1;
+
     protected function createSchema()
     {
         $schema = new MySqlModelSchema('tblProduct');

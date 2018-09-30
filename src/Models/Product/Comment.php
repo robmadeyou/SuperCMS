@@ -23,6 +23,8 @@ use Rhubarb\Stem\Schema\Columns\ForeignKeyColumn;
  */
 class Comment extends Model
 {
+    const VERSION = 1;
+
     protected function createSchema()
     {
         $model = new MySqlModelSchema('tblComment');

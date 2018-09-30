@@ -22,6 +22,8 @@ use Rhubarb\Stem\Schema\Columns\StringColumn;
  */
 class ShippingType extends Model
 {
+    const VERSION = 1;
+
     protected function createSchema()
     {
         $schema = new MySqlModelSchema('tblShippingType');

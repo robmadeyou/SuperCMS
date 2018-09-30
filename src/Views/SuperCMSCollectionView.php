@@ -11,15 +11,6 @@ abstract class SuperCMSCollectionView extends View
     protected function printViewContent()
     {
         ?>
-        <div class="row">
-
-            <div class="col-lg-12">
-                <div class="pull-right">
-                    <?php $this->printRightButtons() ?>
-                </div>
-                <h1 class="page-header"><?php $this->printTitle(); ?></h1>
-            </div>
-        </div>
         <div>
             <?php $this->getTopFunctionBar() ?>
             <?php $this->printBody() ?>

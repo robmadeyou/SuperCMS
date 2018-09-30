@@ -16,6 +16,8 @@ use Rhubarb\Scaffolds\ApplicationSettings\Settings\ApplicationSettings;
  * @property string  $stripeTestPublish
  * @property string  $websiteName
  * @property boolean $enableStripePayment
+ * @property boolean $enableBlog
+ * @property string  $blogSubdomain
  */
 class SuperCMSSettings extends ApplicationSettings
 {
