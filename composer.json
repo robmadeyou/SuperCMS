@@ -1,6 +1,6 @@
 {
     "name": "rojr/super-cms",
-    "license": "Apache 2.0",
+    "license": "Apache-2.0",
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
