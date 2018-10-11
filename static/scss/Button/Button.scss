@@ -1,0 +1,37 @@
+.c-button {
+  padding: $basePadding;
+  margin: $basePadding;
+  font-weight: bold;
+  display: inline-block;
+
+  @include box-shadow(3px 3px 1px rgba(0, 0, 0, 0.32));
+  @include transition(box-shadow 0.2s, transform 0.2s);
+
+  &:hover {
+    @include box-shadow(4px 4px 5px 1px rgba(0, 0, 0, 0.42));
+    @include translate(-1px, -1px);
+  }
+
+  &:active {
+    @include translate(2px, 2px);
+    @include box-shadow(1px 1px 1px rgba(0, 0, 0, .32s));
+
+  }
+
+
+  &.--square {
+
+  }
+
+  &.mc-red {
+    background-color: $red;
+    color: $textSecondaryColor;
+  }
+
+  &.mc-green {
+    background-color: $green;
+    color: $textSecondaryColor;
+
+    border: 1px solid lighten($green, 5);
+  }
+}

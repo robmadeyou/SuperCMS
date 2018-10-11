@@ -9,7 +9,7 @@
       flex-grow: 1;
       height: 248px;
       background-color: white;
-      border: 1px solid $lightMainColour;
+      border: 1px solid $lightPrimaryColour;
       overflow: hidden;
       margin-bottom: $basePadding * 2;
       margin-right: $basePadding * 2;
@@ -21,7 +21,7 @@
       @include transition(box-shadow 0.2s, transform 0.2s, border 0.2s);
 
       &:hover {
-        border: 1px solid $mainColour;
+        border: 1px solid $primaryColour;
         box-shadow: 4px 4px 5px 1px #3a3a3a47;
         @include translate(-4px, -4px);
       }
@@ -75,7 +75,7 @@
           font-size: 2.4rem;
           padding: $basePadding;
           z-index: 15;
-          background-color: $lightMainColour;
+          background-color: $secondaryColour;
           color: white;
           text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.36);
         }
@@ -85,7 +85,7 @@
           right: 0;
           bottom: 0;
           padding: $basePadding;
-          background-color: $lightMainColour;
+          background-color: $secondaryColour;
           color: white;
           text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.36);
         }

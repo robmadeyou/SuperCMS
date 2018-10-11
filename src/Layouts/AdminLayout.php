@@ -5,7 +5,7 @@ namespace SuperCMS\Layouts;
 use Rhubarb\Crown\Html\ResourceLoader;
 use Rhubarb\Crown\Request\Request;
 use SuperCMS\Models\Notification\Notification;
-use SuperCMS\Settings\SuperCMSSettings;
+use SuperCMS\Settings\AdminSuperCMSPageSettings;use SuperCMS\Settings\SuperCmsPageSettings;use SuperCMS\Settings\SuperCMSSettings;
 
 class AdminLayout extends SuperCMSDefaultLayout
 {
@@ -16,14 +16,10 @@ class AdminLayout extends SuperCMSDefaultLayout
         ResourceLoader::loadResource('/files/css/admin.css');
     }
 
-    protected function printHead()
-    {
-        parent::printHead();
-    }
-
     protected function printPageHeading()
     {
         $settings = SuperCMSSettings::singleton();
+        $htmlPageSettings = AdminSuperCMSPageSettings::singleton();
 
         $sideNavs = [
             [
@@ -54,7 +50,13 @@ class AdminLayout extends SuperCMSDefaultLayout
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/admin/"><?= $settings->websiteName ?> admin</a>
+                <?php
+                if ($htmlPageSettings->requiresAddButton) {
+                    print "<a href='{$htmlPageSettings->addButtonLink}' class='c-button mc-green --square'><i class='fa fa-plus fa-fw'></i></a>";
+                }
+                ?>
+                <a class="navbar-brand" href="/admin/"><?= $htmlPageSettings->pageTitle ?></a>
+                <?= $htmlPageSettings->getActionButtonsHTML() ?>
             </div>
             <!-- /.navbar-header -->
 

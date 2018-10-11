@@ -15,14 +15,14 @@ class SuperCMSSearchPanelView extends SearchPanelView
     {
         parent::createSubLeaves();
 
+        $this->leaves['Search']->addCssClassNames('c-button mc-green');
+
         $this->bootstrapInputs();
     }
 
     protected function printViewContent()
     {
-        print '<div class="c-search-panel">
-                <div class="form-inline">';
-
+        print '<div class="c-admin-search">';
 
         foreach ($this->model->searchControls as $control) {
             /** @var Control $control */
@@ -44,7 +44,6 @@ class SuperCMSSearchPanelView extends SearchPanelView
         }
 
         print '<span class="pull-right">' . $this->leaves["Search"] . '</span>';
-        print '</div>
-             </div>';
+        print '</div>';
     }
 }

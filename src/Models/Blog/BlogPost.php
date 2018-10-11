@@ -12,6 +12,7 @@ use Rhubarb\Stem\Schema\Columns\ForeignKeyColumn;
 use Rhubarb\Stem\Schema\Columns\LongStringColumn;
 use Rhubarb\Stem\Schema\Columns\StringColumn;
 use Rhubarb\Stem\Schema\ModelSchema;
+use SuperCMS\LoginProviders\AdminLoginProvider;
 use SuperCMS\LoginProviders\SCmsLoginProvider;
 
 /**
@@ -49,7 +50,7 @@ class BlogPost extends Model
         if ($this->isNewRecord()) {
             $this->CreatedAt = new RhubarbDateTime('now');
             try {
-                $this->CreatedByID = SCmsLoginProvider::getLoggedInUser()->UniqueIdentifier;
+                $this->CreatedByID = AdminLoginProvider::getLoggedInUser()->UniqueIdentifier;
             } catch (NotLoggedInException $ex) {
                 Log::createEntry(Log::WARNING_LEVEL, 'Blog post [' . $this->UniqueIdentifier. '] created without a logged in user');
             }

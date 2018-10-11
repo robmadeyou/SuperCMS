@@ -8,7 +8,7 @@ use SuperCMS\Views\SuperCMSCollectionView;
 
 class CouponsCollectionView extends SuperCMSCollectionView
 {
-    protected function printTitle()
+    protected function getTitle()
     {
         print 'Coupons';
     }

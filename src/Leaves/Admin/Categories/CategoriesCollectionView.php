@@ -8,9 +8,9 @@ use SuperCMS\Views\SuperCMSCollectionView;
 
 class CategoriesCollectionView extends SuperCMSCollectionView
 {
-    protected function printTitle()
+    protected function getTitle()
     {
-        print 'Categories';
+        return 'Categories';
     }
 
     protected function createSubLeaves()

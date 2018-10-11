@@ -9,9 +9,21 @@ use SuperCMS\Models\Product\Product;
 use SuperCMS\Models\Product\ProductImage;
 use SuperCMS\Models\Product\ProductVariation;
 use SuperCMS\Models\Shopping\Order;
+use SuperCMS\Settings\AdminSuperCMSPageSettings;
+use SuperCMS\Settings\SuperCMSSettings;
 
 class AdminDashboardView extends View
 {
+    protected function createSubLeaves()
+    {
+        parent::createSubLeaves();
+
+        $settings = AdminSuperCMSPageSettings::singleton();
+        $siteSettings = SuperCMSSettings::singleton();
+
+        $settings->pageTitle = $siteSettings->websiteName . ' Dashboard';
+    }
+
     protected function printViewContent()
     {
         ?>

@@ -9,9 +9,9 @@ use SuperCMS\Views\SuperCMSCollectionView;
 
 class OrdersCollectionView extends SuperCMSCollectionView
 {
-    protected function printTitle()
+    protected function getTitle()
     {
-        print 'Orders';
+        return 'Orders';
     }
 
     protected function createSubLeaves()

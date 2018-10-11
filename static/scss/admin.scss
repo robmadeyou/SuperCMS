@@ -1,8 +1,15 @@
 $basePadding: 8px;
 
 //Background Colours
-$mainColour: #0b242c;
-$lightMainColour: lighten($mainColour, 5%);
+$primaryColour: #00263c;
+$lightPrimaryColour: lighten($primaryColour, 2%);
+
+$secondaryColour: #3c1600;
+
+$backgroundColour: darken($primaryColour, 1%);
+
+$red: #8d0000;
+$green: #13b022;
 
 //Text Colors
 $textMainColor: black;
@@ -36,6 +43,12 @@ $textSecondaryColor: #cdffc9;
   transition:         $transition;
 }
 
+@mixin box-shadow($shadow...) {
+  -webkit-box-shadow: $shadow;
+  -moz-box-shadow: $shadow;
+  box-shadow: $shadow;
+}
+
 @import "https://fonts.googleapis.com/css?family=Lato";
 
 body, h1, h2, h3, h4, h5, span, b, p, a {
@@ -53,12 +66,16 @@ body.event-processing .loading-overlay {
   z-index: 999;
 }
 
+.navbar-default {
+  background-color: $primaryColour;
+}
+
 .product-list-tabs {
   cursor: pointer;
 }
 
 .login-page {
-  background-color: $mainColour;
+  background-color: $primaryColour;
   height: 100%;
   width: 100%;
   .c-login-title {
@@ -109,7 +126,7 @@ body.event-processing .loading-overlay {
 }
 
 .active.pager-item {
-  border: 1px solid #337ab7;
+  border: 1px solid $lightPrimaryColour;
   font-weight: bold;
   margin-right: 1px;
   z-index: 999;
@@ -138,10 +155,9 @@ body.event-processing .loading-overlay {
     position: absolute;
     width: 70px;
     top: 0;
-    padding-top: 61px;
     margin-top: 0!important;
     height: 100vh;
-    background-color: $mainColour;
+    background-color: $primaryColour;
   }
   .nav > li > a {
     z-index: 40;
@@ -158,13 +174,17 @@ body.event-processing .loading-overlay {
   .sidebar ul li {
     text-align: center;
     height: 70px;
-    background-color: $lightMainColour;
+    background-color: $lightPrimaryColour;
     margin-top: 0;
-    margin-bottom: 1px;
+    border-right: 2px solid lighten($primaryColour, 10%);
+
+    &:hover .fa {
+      @include scale(1.2);
+    }
 
     &.active {
-      background-color: lighten($mainColour, 20%);
-      border: 1px solid $mainColour;
+      border: 2px solid lighten($primaryColour, 10%);
+      background-color: $backgroundColour;
       border-right: none;
 
       -webkit-border-top-left-radius: 2px;
@@ -184,6 +204,7 @@ body.event-processing .loading-overlay {
 
       .fa {
         display: block;
+        @include transition(transform, 0.05s);
       }
 
       span {
@@ -205,11 +226,10 @@ body.event-processing .loading-overlay {
     position: absolute;
     z-index: 60;
     top: 0;
-    left: 0;
+    left: 70px;
     right: 0;
     bottom: 0;
-    border: 1px solid $lightMainColour;
-    background-color: $mainColour;
+    background-color: $primaryColour;
   }
 }
 
@@ -245,10 +265,6 @@ body.event-processing .loading-overlay {
   list-style: none;
 }
 
-body {
-  background-color: #f8f8f8;
-}
-
 #wrapper {
   width: 100%;
 }
@@ -256,7 +272,8 @@ body {
 #page-wrapper {
   padding: 0 15px;
   min-height: 568px;
-  background-color: #fff;
+  background-color: $backgroundColour;
+  overflow-y: auto;
 }
 
 @media (min-width: 768px) {
@@ -264,7 +281,7 @@ body {
     position: inherit;
     margin: 0 0 0 70px;
     padding: 0 30px;
-    border-left: 2px solid $mainColour;
+    border-left: 2px solid $primaryColour;
   }
 }
 
@@ -709,3 +726,4 @@ table.dataTable thead {
 }
 
 @import "Table/Table";
+@import "Button/Button";
