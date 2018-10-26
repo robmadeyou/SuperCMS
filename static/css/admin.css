@@ -97,7 +97,7 @@ body.event-processing .loading-overlay {
     top: 0;
     margin-top: 0 !important;
     height: 100vh;
-    background-color: #00263c; }
+    overflow: hidden; }
   .nav > li > a {
     z-index: 40;
     -webkit-transition: background-color 0.2s;
@@ -130,6 +130,8 @@ body.event-processing .loading-overlay {
       border-top-left-radius: 2px;
       border-bottom-left-radius: 2px;
       z-index: 100; }
+    .sidebar ul li.filler {
+      height: 100%; }
     .sidebar ul li > a {
       text-align: center;
       font-size: 2rem;
@@ -621,6 +623,9 @@ table.dataTable thead .sorting:after {
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.36); }
 
 .c-button {
+  -webkit-border-radius: 1px;
+  -moz-border-radius: 1px;
+  border-radius: 1px;
   padding: 8px;
   margin: 8px;
   font-weight: bold;
@@ -657,3 +662,28 @@ table.dataTable thead .sorting:after {
     background-color: #13b022;
     color: #cdffc9;
     border: 1px solid #15c726; }
+
+.c-dropdown {
+  border-radius: 1px;
+  border: 1px solid #00466f;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 16px;
+  margin: 4px 0;
+  padding: 0 8px 0 8px;
+  user-select: none;
+  cursor: pointer;
+  text-overflow: ellipsis;
+  outline: none;
+  background: transparent;
+  color: #cdffc9;
+  appearance: none;
+  height: 40px; }
+
+.c-textbox {
+  height: 40px;
+  border: 2px solid #00466f;
+  font-size: 14px;
+  padding-left: 8px;
+  background-color: #00263c;
+  color: #cdffc9; }

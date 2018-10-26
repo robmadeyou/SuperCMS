@@ -18,6 +18,8 @@ class OrdersCollectionView extends SuperCMSCollectionView
     {
         parent::createSubLeaves();
 
+        $this->htmlSettings->requiresAddButton = false;
+
         $this->registerSubLeaf(
             $orders = new Table(Order::find()->addSort('DateOrdered'), 50, 'OrdersTable'),
             $searchPanel = new OrdersSearchPanel('Search')

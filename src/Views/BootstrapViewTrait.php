@@ -24,6 +24,11 @@ trait BootstrapViewTrait
             foreach ($items as $label => $item) {
                 $label = !is_numeric($label) ? $label : $item;
                 $itemObject = $this->leaves[ $item ];
+
+                if ($itemObject instanceof TextBox) {
+                    $itemObject->addCssClassNames('c-textbox');
+                }
+
                 $form = <<<HTML
                     <div class="form-group">
                         <label>{$label}</label>

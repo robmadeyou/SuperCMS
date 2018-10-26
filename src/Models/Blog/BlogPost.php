@@ -9,11 +9,11 @@ use Rhubarb\Stem\Models\Model;
 use Rhubarb\Stem\Schema\Columns\AutoIncrementColumn;
 use Rhubarb\Stem\Schema\Columns\DateTimeColumn;
 use Rhubarb\Stem\Schema\Columns\ForeignKeyColumn;
+use Rhubarb\Stem\Schema\Columns\IntegerColumn;
 use Rhubarb\Stem\Schema\Columns\LongStringColumn;
 use Rhubarb\Stem\Schema\Columns\StringColumn;
 use Rhubarb\Stem\Schema\ModelSchema;
 use SuperCMS\LoginProviders\AdminLoginProvider;
-use SuperCMS\LoginProviders\SCmsLoginProvider;
 
 /**
  *
@@ -28,7 +28,7 @@ use SuperCMS\LoginProviders\SCmsLoginProvider;
  */
 class BlogPost extends Model
 {
-    const VERSION = 3;
+    const VERSION = 4;
 
     protected function createSchema()
     {
@@ -39,7 +39,9 @@ class BlogPost extends Model
             new StringColumn('Title', 100),
             new LongStringColumn('Content'),
             new ForeignKeyColumn('CreatedByID'),
-            new DateTimeColumn('CreatedAt')
+            new DateTimeColumn('CreatedAt'),
+            new StringColumn('CoverPhotoSrc', 250),
+            new IntegerColumn('Weight', 1)
         );
 
         return $schema;

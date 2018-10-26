@@ -126,6 +126,7 @@ HTML;
                             }
                         }
                         ?>
+                        <li class="filler"></li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

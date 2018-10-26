@@ -175,7 +175,7 @@ class SuperCMS extends Module
         }
 
         if ($isBlog) {
-            $urlHandlers += [
+            $urlHandlers += [//todo
             ];
 
             $indexClass = BlogIndexPage::class;

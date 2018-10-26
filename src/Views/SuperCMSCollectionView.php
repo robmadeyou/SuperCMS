@@ -9,6 +9,7 @@ abstract class SuperCMSCollectionView extends CrudView
 {
     use BootstrapViewTrait;
 
+    /** @var AdminSuperCMSPageSettings $htmlSettings */
     protected $htmlSettings;
 
     protected function createSubLeaves()

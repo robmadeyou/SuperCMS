@@ -1,0 +1,8 @@
+.c-textbox {
+  height: $inputStandardHeight;
+  border: 2px solid lighten($primaryColour, 10%);
+  font-size: 14px;
+  padding-left: $basePadding;
+  background-color: $primaryColour;
+  color: $textSecondaryColor;
+}

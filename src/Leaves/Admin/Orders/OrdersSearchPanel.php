@@ -20,6 +20,7 @@ class OrdersSearchPanel extends SearchPanel
     {
         $status = new DropDown('Status');
 
+        $status->addCssClassNames('c-dropdown');
         $status->setSelectionItems(array_merge([['', 'Please Select']], Order::STATUS_LIST));
         $status->setLabel('Order Status');
 

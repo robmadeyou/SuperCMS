@@ -1,4 +1,8 @@
+@import "mixins";
+
 $basePadding: 8px;
+
+$inputStandardHeight: 40px;
 
 //Background Colours
 $primaryColour: #00263c;
@@ -14,40 +18,6 @@ $green: #13b022;
 //Text Colors
 $textMainColor: black;
 $textSecondaryColor: #cdffc9;
-
-@mixin transform($transforms) {
-  -moz-transform: $transforms;
-  -o-transform: $transforms;
-  -ms-transform: $transforms;
-  -webkit-transform: $transforms;
-  transform: $transforms;
-}
-// rotate
-@mixin rotate ($deg) {
-  @include transform(rotate(#{$deg}deg));
-}
-
-// scale
-@mixin scale($scale) {
-  @include transform(scale($scale));
-}
-// translate
-@mixin translate ($x, $y) {
-  @include transform(translate($x, $y));
-}
-
-@mixin transition($transition...) {
-  -moz-transition:    $transition;
-  -o-transition:      $transition;
-  -webkit-transition: $transition;
-  transition:         $transition;
-}
-
-@mixin box-shadow($shadow...) {
-  -webkit-box-shadow: $shadow;
-  -moz-box-shadow: $shadow;
-  box-shadow: $shadow;
-}
 
 @import "https://fonts.googleapis.com/css?family=Lato";
 
@@ -157,7 +127,7 @@ body.event-processing .loading-overlay {
     top: 0;
     margin-top: 0!important;
     height: 100vh;
-    background-color: $primaryColour;
+    overflow: hidden;
   }
   .nav > li > a {
     z-index: 40;
@@ -194,6 +164,10 @@ body.event-processing .loading-overlay {
       border-top-left-radius: 2px;
       border-bottom-left-radius: 2px;
       z-index: 100;
+    }
+
+    &.filler {
+      height: 100%;
     }
 
     > a {
@@ -726,4 +700,7 @@ table.dataTable thead {
 }
 
 @import "Table/Table";
-@import "Button/Button";
+
+@import "Inputs/Button";
+@import "Inputs/Dropdown";
+@import "Inputs/Textbox";
