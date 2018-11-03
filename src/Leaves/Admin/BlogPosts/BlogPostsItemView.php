@@ -3,8 +3,8 @@
 namespace SuperCMS\Leaves\Admin\BlogPosts;
 
 use Rhubarb\Leaf\Controls\Common\Text\TextBox;
-use Rhubarb\Leaf\Leaves\LeafDeploymentPackage;
 use SuperCMS\Controls\HtmlEditor\HtmlEditor;
+use SuperCMS\Deployment\SuperCmsDeploymentPackage;
 use SuperCMS\Views\SuperCMSCrudView;
 
 class BlogPostsItemView extends SuperCMSCrudView
@@ -20,23 +20,21 @@ class BlogPostsItemView extends SuperCMSCrudView
             new TextBox('Title'),
             new HtmlEditor('Content')
         );
-
-        $this->bootstrapInputs();
     }
 
     protected function printBody()
     {
-        $this->printFieldset('Adding a new blog post',
+        $this->layoutItemsWithContainer('',
             [
-                'Title',
-                'Content'
+                'Title' => 'Title',
+                'Main Content' => 'Content'
             ]
         );
     }
 
     public function getDeploymentPackage()
     {
-        return new LeafDeploymentPackage(__DIR__ . '/BlogPostsItemViewBridge.js');
+        return new SuperCmsDeploymentPackage(__DIR__ . '/BlogPostsItemViewBridge.js');
     }
 
     protected function getViewBridgeName()

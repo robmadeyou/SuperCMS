@@ -3,18 +3,18 @@
 namespace SuperCMS\Leaves\Files;
 
 use Rhubarb\Crown\Request\Request;
-use Rhubarb\Crown\Response\GeneratesResponseInterface;
+use Rhubarb\Crown\UrlHandlers\UrlHandler;
 
-abstract class FilesResponse implements GeneratesResponseInterface
+abstract class FilesResponse extends UrlHandler
 {
-    public function generateResponse($request = null)
+    public function generateResponseForRequest($request = null)
     {
         header('Content-type: ' . $this->getFileType());
         header('Content-Disposition: inline; filename="' . $this->getFilename() . '"');
 
         $file = $this->getFileLocation();
         if(file_exists($file)) {
-            fpassthru(fopen($this->getFileLocation(), 'r'));
+            fpassthru(fopen($file, 'r'));
         }
         exit;
     }

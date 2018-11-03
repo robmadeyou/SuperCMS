@@ -1,3 +1,6 @@
+@import "../variables";
+@import "../mixins";
+
 .c-button {
   -webkit-border-radius: 1px;
   -moz-border-radius: 1px;
@@ -7,6 +10,10 @@
   margin: $basePadding;
   font-weight: bold;
   display: inline-block;
+
+  border: none;
+
+  text-align: center;
 
   @include box-shadow(3px 3px 1px rgba(0, 0, 0, 0.32));
   @include transition(box-shadow 0.2s, transform 0.2s);
@@ -22,7 +29,11 @@
   }
 
   &.--square {
+    min-width: 30px;
+  }
 
+  &.--wide {
+    width: 80px;
   }
 
   &.mc-red {
@@ -33,7 +44,10 @@
   &.mc-green {
     background-color: $green;
     color: $textSecondaryColor;
+  }
 
-    border: 1px solid lighten($green, 5);
+  &.mc-white {
+    background-color: $white;
+    color: $lightPrimaryColour;
   }
 }

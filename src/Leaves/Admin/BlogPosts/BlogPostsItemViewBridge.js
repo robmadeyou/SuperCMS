@@ -1,7 +1,7 @@
-rhubarb.vb.create('BlogPostsItemViewBridge', function() {
+scms.create('BlogPostsItemViewBridge', function() {
     return {
         attachEvents:function() {
 
         }
     };
-})
+});

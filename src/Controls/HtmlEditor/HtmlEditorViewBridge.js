@@ -19,8 +19,8 @@ bridge.prototype.attachEvents = function () {
             ],
             browser_spellcheck: true,
             contextmenu: false,
-            images_upload_url: 'postAcceptor.php',
-            images_upload_base_path: '/some/basepath',
+            images_upload_url: '/upload/image/',
+            images_upload_base_path: '/',
             images_upload_credentials: true
         });
 };

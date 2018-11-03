@@ -25,6 +25,8 @@ use SuperCMS\LoginProviders\AdminLoginProvider;
  * @property RhubarbDateTime $CreatedAt Repository field
  * @property-read \Rhubarb\Scaffolds\Authentication\User $CreatedBy Relationship
  * @property-read BlogPostTag[]|\Rhubarb\Stem\Collections\RepositoryCollection $Tags Relationship
+ * @property string $CoverPhotoSrc Repository field
+ * @property int $Weight Repository field
  */
 class BlogPost extends Model
 {
@@ -43,6 +45,8 @@ class BlogPost extends Model
             new StringColumn('CoverPhotoSrc', 250),
             new IntegerColumn('Weight', 1)
         );
+
+        $schema->labelColumnName = 'Title';
 
         return $schema;
     }

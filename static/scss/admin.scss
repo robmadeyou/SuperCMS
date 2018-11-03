@@ -1,23 +1,5 @@
 @import "mixins";
-
-$basePadding: 8px;
-
-$inputStandardHeight: 40px;
-
-//Background Colours
-$primaryColour: #00263c;
-$lightPrimaryColour: lighten($primaryColour, 2%);
-
-$secondaryColour: #3c1600;
-
-$backgroundColour: darken($primaryColour, 1%);
-
-$red: #8d0000;
-$green: #13b022;
-
-//Text Colors
-$textMainColor: black;
-$textSecondaryColor: #cdffc9;
+@import "variables";
 
 @import "https://fonts.googleapis.com/css?family=Lato";
 
@@ -697,6 +679,18 @@ table.dataTable thead {
       }
     }
   }
+}
+
+.c-menu-action-buttons {
+
+}
+
+.--pull-right {
+  float: right;
+}
+
+.--pull-left {
+  float:left;
 }
 
 @import "Table/Table";

@@ -7,6 +7,7 @@ use Rhubarb\Stem\Schema\SolutionSchema;
 use SuperCMS\Models\Blog\BlogPost;
 use SuperCMS\Models\Blog\BlogPostTag;
 use SuperCMS\Models\Coupon\Coupon;
+use SuperCMS\Models\Image\Image;
 use SuperCMS\Models\Notification\Notification;
 use SuperCMS\Models\Product\Category;
 use SuperCMS\Models\Product\Comment;
@@ -44,12 +45,12 @@ class SCMSSolutionSchema extends SolutionSchema
             Location::class,
             BlogPost::class,
             BlogPostTag::class,
+            Image::class,
         ];
 
         foreach($models as $model) {
             $this->addModel(StringTools::getShortClassNameFromNamespace($model), $model, $model::VERSION);
         }
-
     }
 
     protected function defineRelationships()

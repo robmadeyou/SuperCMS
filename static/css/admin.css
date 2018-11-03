@@ -543,6 +543,12 @@ table.dataTable thead .sorting:after {
     border-right-width: 14px;
     border-left-width: 0; } }
 
+.--pull-right {
+  float: right; }
+
+.--pull-left {
+  float: left; }
+
 .list .c-blog-post {
   width: 100%;
   display: flex;
@@ -580,7 +586,8 @@ table.dataTable thead .sorting:after {
         right: 0;
         bottom: 0;
         top: 0;
-        cursor: pointer; }
+        cursor: pointer;
+        z-index: 200; }
         .list .c-blog-post > .c-blog-post--individual .blog-content .link a {
           display: inline-block;
           width: 100%;
@@ -630,6 +637,8 @@ table.dataTable thead .sorting:after {
   margin: 8px;
   font-weight: bold;
   display: inline-block;
+  border: none;
+  text-align: center;
   -webkit-box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.32);
   -moz-box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.32);
   box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.32);
@@ -655,13 +664,19 @@ table.dataTable thead .sorting:after {
     -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.32);
     -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.32);
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.32); }
+  .c-button.--square {
+    min-width: 30px; }
+  .c-button.--wide {
+    width: 80px; }
   .c-button.mc-red {
     background-color: #8d0000;
     color: #cdffc9; }
   .c-button.mc-green {
     background-color: #13b022;
-    color: #cdffc9;
-    border: 1px solid #15c726; }
+    color: #cdffc9; }
+  .c-button.mc-white {
+    background-color: #dae0d1;
+    color: #002c46; }
 
 .c-dropdown {
   border-radius: 1px;
@@ -682,8 +697,19 @@ table.dataTable thead .sorting:after {
 
 .c-textbox {
   height: 40px;
-  border: 2px solid #00466f;
+  border: 1px solid rgba(0, 70, 111, 0.4);
   font-size: 14px;
   padding-left: 8px;
   background-color: #00263c;
-  color: #cdffc9; }
+  color: #cdffc9;
+  width: 100%;
+  -moz-transition: border 0.2s;
+  -o-transition: border 0.2s;
+  -webkit-transition: border 0.2s;
+  transition: border 0.2s; }
+  .c-textbox:focus {
+    border: 2px solid #00466f;
+    outline: none; }
+
+.mce-edit-area {
+  min-height: 300px; }

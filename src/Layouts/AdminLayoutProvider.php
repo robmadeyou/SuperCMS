@@ -2,8 +2,8 @@
 
 namespace SuperCMS\Layouts;
 
-use Rhubarb\Crown\LoginProviders\UrlHandlers\ValidateLoginUrlHandler;
 use Rhubarb\Crown\String\StringTools;
+use Rhubarb\Leaf\Controls\Common\Text\TextBox;
 use Rhubarb\Leaf\LayoutProviders\LayoutProvider;
 use Rhubarb\Leaf\Leaves\Controls\Control;
 use SuperCMS\Controls\Dropzone\Dropzone;
@@ -14,22 +14,18 @@ class AdminLayoutProvider extends LayoutProvider
     public function printItemsWithContainer($containerTitle, ...$items)
     {
         ?>
-        <div class="panel panel-primary">
-            <?php $this->printContainerTitle($containerTitle) ?>
-            <div class="panel-body">
-                <?php
-                foreach ($items as $key => $item) {
-                    if (is_array($item)) {
-                        foreach ($item as $subKey => $subItem) {
-                            $this->printValueWithLabel($subItem, $this->getNameForValue($subKey, $subItem));
-                        }
-                    } else {
-                        $this->printValueWithLabel($item, $this->getNameForValue($key, $items));
-                    }
+        <?php $this->printContainerTitle($containerTitle) ?>
+        <?php
+        foreach ($items as $key => $item) {
+            if (is_array($item)) {
+                foreach ($item as $subKey => $subItem) {
+                    $this->printValueWithLabel($subItem, $this->getNameForValue($subKey, $subItem));
                 }
-                ?>
-            </div>
-        </div>
+            } else {
+                $this->printValueWithLabel($item, $this->getNameForValue($key, $items));
+            }
+        }
+        ?>
         <?php
     }
 
@@ -49,6 +45,9 @@ class AdminLayoutProvider extends LayoutProvider
 
     public function printLabelValuePairs($pairs)
     {
+        foreach ($pairs as $name => $pair) {
+            $this->printValueWithLabel($pair, $name);
+        }
     }
 
     public function printValueWithLabel($value, $label)
@@ -76,6 +75,8 @@ class AdminLayoutProvider extends LayoutProvider
             if ($control instanceof Control) {
                 if ($control instanceof Dropzone) {
                 } else if ($control instanceof KeyValue) {
+                } else if ($control instanceof TextBox) {
+                    $control->addCssClassNames('c-textbox');
                 } else {
                     $control->addCssClassNames('form-control');
                 }

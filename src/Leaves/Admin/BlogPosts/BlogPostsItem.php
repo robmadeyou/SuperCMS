@@ -2,6 +2,8 @@
 
 namespace SuperCMS\Leaves\Admin\BlogPosts;
 
+use Rhubarb\Crown\Exceptions\ForceResponseException;
+use Rhubarb\Crown\Response\RedirectResponse;
 use Rhubarb\Leaf\Crud\Leaves\CrudLeaf;
 
 class BlogPostsItem extends CrudLeaf
@@ -17,5 +19,13 @@ class BlogPostsItem extends CrudLeaf
     protected function createModel()
     {
         return new BlogPostsItemModel();
+    }
+
+    /**
+     * @throws ForceResponseException
+     */
+    protected function redirectAfterSave()
+    {
+        throw new ForceResponseException(new RedirectResponse('../'));
     }
 }

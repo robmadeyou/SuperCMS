@@ -13,6 +13,7 @@ use Rhubarb\Crown\Request\WebRequest;
 use Rhubarb\Crown\Sendables\Email\EmailProvider;
 use Rhubarb\Crown\String\StringTools;
 use Rhubarb\Crown\UrlHandlers\ClassMappedUrlHandler;
+use Rhubarb\Crown\UrlHandlers\StaticResourceUrlHandler;
 use Rhubarb\Leaf\LeafModule;
 use Rhubarb\Leaf\Paging\Leaves\EventPagerView;
 use Rhubarb\Leaf\Table\Leaves\TableView;
@@ -50,6 +51,8 @@ use SuperCMS\Leaves\Admin\ShippingType\ShippingTypeCollection;
 use SuperCMS\Leaves\Blog\BlogIndexPage;
 use SuperCMS\Leaves\Errors\Error403;
 use SuperCMS\Leaves\Errors\Error404;
+use SuperCMS\Leaves\Files\ImageResponse;
+use SuperCMS\Leaves\Files\Upload\ImageUpload;
 use SuperCMS\Leaves\Index;
 use SuperCMS\Leaves\Site\Basket\BasketPage;
 use SuperCMS\Leaves\Site\Category\CategoryCollection;
@@ -159,6 +162,8 @@ class SuperCMS extends Module
                 'orders/' => new AdminCrudUrlHandler(Order::class, StringTools::getNamespaceFromClass(OrdersCollection::class)),
                 'blog/' => new AdminCrudUrlHandler(BlogPost::class, StringTools::getNamespaceFromClass(BlogPostsCollection::class)),
             ]),
+            'image/' => new ImageResponse(),
+            'upload/image' => new ClassMappedUrlHandler(ImageUpload::class),
             '404/' => new ClassMappedUrlHandler(Error404::class),
             '403/' => new ClassMappedUrlHandler(Error403::class)
         ];

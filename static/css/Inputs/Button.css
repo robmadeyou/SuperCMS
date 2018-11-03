@@ -1,0 +1,48 @@
+.c-button {
+  -webkit-border-radius: 1px;
+  -moz-border-radius: 1px;
+  border-radius: 1px;
+  padding: 8px;
+  margin: 8px;
+  font-weight: bold;
+  display: inline-block;
+  border: none;
+  text-align: center;
+  -webkit-box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.32);
+  -moz-box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.32);
+  box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.32);
+  -moz-transition: box-shadow 0.2s, transform 0.2s;
+  -o-transition: box-shadow 0.2s, transform 0.2s;
+  -webkit-transition: box-shadow 0.2s, transform 0.2s;
+  transition: box-shadow 0.2s, transform 0.2s; }
+  .c-button:hover {
+    -webkit-box-shadow: 4px 4px 5px 1px rgba(0, 0, 0, 0.42);
+    -moz-box-shadow: 4px 4px 5px 1px rgba(0, 0, 0, 0.42);
+    box-shadow: 4px 4px 5px 1px rgba(0, 0, 0, 0.42);
+    -moz-transform: translate(-1px, -1px);
+    -o-transform: translate(-1px, -1px);
+    -ms-transform: translate(-1px, -1px);
+    -webkit-transform: translate(-1px, -1px);
+    transform: translate(-1px, -1px); }
+  .c-button:active {
+    -moz-transform: translate(2px, 2px);
+    -o-transform: translate(2px, 2px);
+    -ms-transform: translate(2px, 2px);
+    -webkit-transform: translate(2px, 2px);
+    transform: translate(2px, 2px);
+    -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.32);
+    -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.32);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.32); }
+  .c-button.--square {
+    min-width: 30px; }
+  .c-button.--wide {
+    width: 80px; }
+  .c-button.mc-red {
+    background-color: #8d0000;
+    color: #cdffc9; }
+  .c-button.mc-green {
+    background-color: #13b022;
+    color: #cdffc9; }
+  .c-button.mc-white {
+    background-color: #dae0d1;
+    color: #002c46; }

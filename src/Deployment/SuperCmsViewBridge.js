@@ -1,6 +1,25 @@
-var scms = rhubarb.vb.create('SuperCmsViewBridge', function() {
+var scms = rhubarb.vb.create('SuperCmsViewBridge', function () {
+    document.addEventListener('click', function (event) {
+        if (event.target.classList.contains('js-clickthrough-link')) {
+            var action = event.target.getAttribute('forButton');
+
+            if (action) {
+                var triggerButton = document.getElementById(action);
+
+                if (triggerButton) {
+                    triggerButton.click();
+                }
+            }
+
+            event.stopPropagation();
+            event.preventDefault();
+
+            return false;
+        }
+    });
+
     return {
-        raiseProgressiveServerEvent:function(eventName) {
+        raiseProgressiveServerEvent: function (eventName) {
             var self = this;
 
             this.addLoaderClass();
@@ -51,7 +70,7 @@ var scms = rhubarb.vb.create('SuperCmsViewBridge', function() {
 
             this.raiseServerEvent.apply(this, copy);
         },
-        findEventHost:function(){
+        findEventHost: function () {
             var selfNode = document.getElementById(this.leafPath);
 
             while (selfNode) {
@@ -59,7 +78,7 @@ var scms = rhubarb.vb.create('SuperCmsViewBridge', function() {
 
                 selfNode = selfNode.parentNode;
 
-                var className = ( testNode.className ) ? testNode.className : "";
+                var className = (testNode.className) ? testNode.className : "";
 
                 if (className.indexOf("event-host") == 0 || className.indexOf("event-host") > 0) {
                     if (!testNode.viewBridge) {
@@ -82,12 +101,12 @@ var scms = rhubarb.vb.create('SuperCmsViewBridge', function() {
 
             return false;
         },
-        addLoaderClass:function(target) {
+        addLoaderClass: function (target) {
             target = target || $(this.viewNode);
 
             target.addClass('ajax-progress');
         },
-        removeLoaderClass:function(target) {
+        removeLoaderClass: function (target) {
             target = target || $(this.viewNode);
 
             target.removeClass('ajax-progress');
@@ -95,7 +114,7 @@ var scms = rhubarb.vb.create('SuperCmsViewBridge', function() {
     };
 });
 
-scms.create = function(name, ini, parent) {
+scms.create = function (name, ini, parent) {
     parent = parent || scms;
 
     rhubarb.vb.create(name, ini, parent);
