@@ -4,6 +4,7 @@ namespace SuperCMS\Models\Image;
 
 use Rhubarb\Stem\Filters\Equals;
 use Rhubarb\Stem\Models\Model;
+use Rhubarb\Stem\Repositories\MySql\Schema\Columns\MySqlMediumTextColumn;
 use Rhubarb\Stem\Repositories\MySql\Schema\MySqlIndex;
 use Rhubarb\Stem\Schema\Columns\AutoIncrementColumn;
 use Rhubarb\Stem\Schema\Columns\JsonColumn;
@@ -25,7 +26,7 @@ use Rhubarb\Stem\Schema\ModelSchema;
  */
 class Image extends Model
 {
-    const VERSION = 2;
+    const VERSION = 3;
 
     protected function createSchema()
     {
@@ -33,9 +34,9 @@ class Image extends Model
 
         $schema->addColumn(
             new AutoIncrementColumn('ImageID'),
-            new StringColumn('OriginalName', 500),
-            new StringColumn('UniqueName', 300),
-            new StringColumn('Src', 300),
+            new StringColumn('OriginalName', 194),
+            new MySqlMediumTextColumn('UniqueName'),
+            new StringColumn('Src', 194),
             new JsonColumn('Sizes')
         );
 
