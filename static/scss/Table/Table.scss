@@ -63,7 +63,12 @@
         .blog-content--inner {
           padding: $basePadding;
           position: absolute;
-          left: 50%;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+
+          background-position: center;
           @include translate(-50%, 0);
         }
 
