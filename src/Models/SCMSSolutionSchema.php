@@ -48,7 +48,7 @@ class SCMSSolutionSchema extends SolutionSchema
             Image::class,
         ];
 
-        foreach($models as $model) {
+        foreach ($models as $model) {
             $this->addModel(StringTools::getShortClassNameFromNamespace($model), $model, $model::VERSION);
         }
     }
@@ -87,7 +87,10 @@ class SCMSSolutionSchema extends SolutionSchema
                 ],
                 'BlogPost' => [
                     'Tags' => 'BlogPostTag.BlogPostID'
-                ]
+                ],
+                'Image' => [
+                    'BlogPosts' => 'BlogPost.CoverImageID:CoverImage'
+                ],
             ]
         );
 

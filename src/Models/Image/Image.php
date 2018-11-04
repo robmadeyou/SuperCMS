@@ -11,11 +11,17 @@ use Rhubarb\Stem\Schema\Columns\StringColumn;
 use Rhubarb\Stem\Schema\ModelSchema;
 
 /**
+ *
+ *
  * @property int $ImageID Repository field
  * @property string $UniqueName Repository field
  * @property string $Src Repository field
  * @property \stdClass $Sizes Repository field
  * @property-read mixed $OriginalUrl {@link getOriginalUrl()}
+ * @property string $OriginalName Repository field
+ * @property-read \SuperCMS\Models\Blog\BlogPost[]|\Rhubarb\Stem\Collections\RepositoryCollection $BlogPosts Relationship
+ * @property-read mixed $ResizedImagePath
+ * @property-read mixed $ImageUrl {@link getImageUrl()}
  */
 class Image extends Model
 {
@@ -78,14 +84,16 @@ class Image extends Model
         }
     }
 
-    public function getResizedImagePath($width, $height) {
-        //TODO
+    public function getResizedImagePath($width, $height)
+    {
+        //TODO!!!!!! Resize images properly and not like a lazy boy
+        return $this->Src;
     }
 
     public function getImageUrl($width = null, $height = null)
     {
         if ($width && $height) {
-            return "/image/$this->UniqueName/$width/$height" ;
+            return "/image/$this->UniqueName/$width/$height";
         }
 
         return '/image/' . $this->UniqueName;
@@ -103,8 +111,13 @@ class Image extends Model
 
     public static function createImageFromFileDate($data)
     {
+        return self::createImageFromNameAndPath($data['name'], $data['tmp_name']);
+    }
+
+    public static function createImageFromNameAndPath($name, $path)
+    {
         $image = new self();
-        $image->OriginalName = $data['name'];
+        $image->OriginalName = $name;
         $image->save();
 
         //TODO make this nice and optimizationalytional
@@ -113,7 +126,7 @@ class Image extends Model
         }
 
         $target = $dir . 'o';
-        rename($data['tmp_name'], $target);
+        rename($path, $target);
 
         $image->Src = $target;
         $image->save();

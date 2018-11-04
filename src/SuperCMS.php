@@ -170,7 +170,7 @@ class SuperCMS extends Module
 
         $isBlog = false;
 
-        if ($settings->enableBlog) {
+        if ($settings->enableBlog && $request instanceof WebRequest) {
             $url = $request->host;
 
             if (strpos($url, '.') !== null) {

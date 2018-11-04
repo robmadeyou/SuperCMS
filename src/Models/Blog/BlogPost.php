@@ -27,10 +27,12 @@ use SuperCMS\LoginProviders\AdminLoginProvider;
  * @property-read BlogPostTag[]|\Rhubarb\Stem\Collections\RepositoryCollection $Tags Relationship
  * @property string $CoverPhotoSrc Repository field
  * @property int $Weight Repository field
+ * @property int $CoverImageID Repository field
+ * @property-read \SuperCMS\Models\Image\Image $CoverImage Relationship
  */
 class BlogPost extends Model
 {
-    const VERSION = 4;
+    const VERSION = 6;
 
     protected function createSchema()
     {
@@ -42,7 +44,7 @@ class BlogPost extends Model
             new LongStringColumn('Content'),
             new ForeignKeyColumn('CreatedByID'),
             new DateTimeColumn('CreatedAt'),
-            new StringColumn('CoverPhotoSrc', 250),
+            new ForeignKeyColumn('CoverImageID'),
             new IntegerColumn('Weight', 1)
         );
 

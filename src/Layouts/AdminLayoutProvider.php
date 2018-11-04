@@ -78,7 +78,6 @@ class AdminLayoutProvider extends LayoutProvider
                 } else if ($control instanceof TextBox) {
                     $control->addCssClassNames('c-textbox');
                 } else {
-                    $control->addCssClassNames('form-control');
                 }
             }
         } else {

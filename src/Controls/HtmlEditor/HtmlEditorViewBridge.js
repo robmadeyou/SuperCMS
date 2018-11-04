@@ -21,7 +21,10 @@ bridge.prototype.attachEvents = function () {
             contextmenu: false,
             images_upload_url: '/upload/image/',
             images_upload_base_path: '/',
-            images_upload_credentials: true
+            images_upload_credentials: true,
+            height: 400,
+            themes: 'modern',
+            mobile: { theme: 'mobile' }
         });
 };
 

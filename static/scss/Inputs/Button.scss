@@ -1,6 +1,8 @@
 @import "../variables";
 @import "../mixins";
 
+@import "./common";
+
 .c-button {
   -webkit-border-radius: 1px;
   -moz-border-radius: 1px;

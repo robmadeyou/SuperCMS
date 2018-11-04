@@ -1,0 +1,75 @@
+.c-image-uploader {
+  border: 1px solid #002c46; }
+  .c-image-uploader > img {
+    max-width: 200px;
+    max-height: 200px;
+    height: auto;
+    width: auto;
+    align-content: center;
+    text-align: center;
+    margin: 8px;
+    margin-bottom: 0; }
+
+.upload {
+  position: relative;
+  display: block;
+  overflow: hidden; }
+  .upload input[type=file] {
+    position: absolute;
+    top: 100%;
+    margin-top: -44px;
+    z-index: 1;
+    height: 44px;
+    width: 100%;
+    opacity: 0; }
+    .upload input[type=file]:not(.empty):valid + label:before {
+      background: #3c1600;
+      content: attr(data-remove-text); }
+    .upload input[type=file]:invalid + label:after,
+    .upload input[type=file].empty + label:after {
+      content: attr(data-drag-text); }
+  .upload label {
+    margin: 0;
+    padding: 0;
+    display: unset;
+    font-weight: unset; }
+    .upload label:before, .upload label:after {
+      display: block;
+      box-sizing: border-box;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap; }
+    .upload label:before {
+      position: absolute;
+      padding: 0 20px;
+      left: 0;
+      width: 120px;
+      height: 46px;
+      top: 54px;
+      z-index: 2;
+      margin-top: -44px;
+      line-height: 44px;
+      background: #002c46;
+      color: #cdffc9;
+      text-align: center;
+      content: attr(data-select-text);
+      cursor: pointer;
+      border: 1px solid rgba(0, 70, 111, 0.4);
+      -moz-transition: background-color 0.2s;
+      -o-transition: background-color 0.2s;
+      -webkit-transition: background-color 0.2s;
+      transition: background-color 0.2s; }
+    .upload label:after {
+      position: relative;
+      width: 100%;
+      top: 100%;
+      margin-top: 10px;
+      padding: 10px 10px 10px 140px;
+      line-height: 24px;
+      min-height: 44px;
+      color: #cdffc9;
+      content: attr(data-input-value);
+      background-color: #00263c;
+      border: 1px solid rgba(0, 70, 111, 0.4); }
+    .upload label:hover:before {
+      background: #00263c; }

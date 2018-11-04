@@ -1,6 +1,5 @@
 .c-textbox {
   height: 40px;
-  border: 1px solid rgba(0, 70, 111, 0.4);
   font-size: 14px;
   padding-left: 8px;
   background-color: #00263c;
@@ -9,10 +8,8 @@
   -moz-transition: border 0.2s;
   -o-transition: border 0.2s;
   -webkit-transition: border 0.2s;
-  transition: border 0.2s; }
+  transition: border 0.2s;
+  border: 1px solid rgba(0, 70, 111, 0.4); }
   .c-textbox:focus {
     border: 2px solid #00466f;
     outline: none; }
-
-.mce-edit-area {
-  min-height: 300px; }

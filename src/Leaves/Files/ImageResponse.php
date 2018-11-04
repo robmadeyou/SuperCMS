@@ -48,7 +48,7 @@ class ImageResponse extends FilesResponse
         $image = Image::fromUniqueName($parts[1]);
 
         if ($numOfParts >= 4) {
-            if (is_int($parts[2]) && is_int($parts[3])) {
+            if (is_numeric($parts[2]) && is_numeric($parts[3])) {
                 return $image->getResizedImagePath($parts[2], $parts[3]);
             }
         } else {

@@ -1,0 +1,105 @@
+@import "../variables";
+@import "../mixins";
+
+@import "common";
+
+.c-image-uploader {
+
+  border: 1px solid $lightPrimaryColour;
+
+  > img {
+    max-width:200px;
+    max-height: 200px;
+    height: auto;
+    width: auto;
+    align-content: center;
+    text-align: center;
+
+    margin: $basePadding;
+    margin-bottom: 0;
+  }
+}
+
+.upload {
+  position: relative;
+  display: block;
+  overflow: hidden;
+
+
+  input[type=file] {
+    position: absolute;
+    top: 100%;
+    margin-top: -44px;
+    z-index: 1;
+    height: 44px;
+    width: 100%;
+    opacity: 0;
+
+    &:not(.empty):valid + label:before {
+      background: $secondaryColour;
+      content: attr(data-remove-text);
+    }
+
+    &:invalid + label:after,
+    &.empty + label:after {
+      content: attr(data-drag-text);
+    }
+  }
+
+  label {
+    margin: 0;
+    padding: 0;
+    display: unset;
+    font-weight: unset;
+
+    &:before, &:after {
+      display: block;
+      box-sizing: border-box;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    &:before {
+      position: absolute;
+      padding: 0 20px;
+      left: 0;
+      width: 120px;
+      height: 46px;
+      top: 54px;
+      z-index: 2;
+      margin-top: -44px;
+      line-height: 44px;
+      background: $lightPrimaryColour;
+      color: $textSecondaryColor;
+      text-align: center;
+      content: attr(data-select-text);
+      cursor: pointer;
+
+      @include border();
+      @include transition(background-color $baseTransitionTime);
+    }
+
+    &:after {
+      position: relative;
+      width: 100%;
+      top: 100%;
+      margin-top: 10px;
+      padding: 10px 10px 10px 140px;
+      line-height: 24px;
+      min-height: 44px;
+      color: $textSecondaryColor;
+      content: attr(data-input-value);
+
+      background-color: $primaryColour;
+
+      @include border();
+    }
+
+    &:hover {
+      &:before {
+        background: darken($lightPrimaryColour, 2%);
+      }
+    }
+  }
+}

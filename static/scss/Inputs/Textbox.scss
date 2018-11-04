@@ -1,9 +1,10 @@
 @import "../variables";
 @import "../mixins";
 
+@import "./common";
+
 .c-textbox {
   height: $inputStandardHeight;
-  border: 1px solid rgba(lighten($primaryColour, 10%), 0.4);
   font-size: 14px;
   padding-left: $basePadding;
   background-color: $primaryColour;
@@ -11,13 +12,10 @@
   width: 100%;
 
   @include transition(border ($baseTransitionTime));
+  @include border();
 
   &:focus {
     border: 2px solid lighten($primaryColour, 10%);
     outline: none;
   }
-}
-
-.mce-edit-area {
-  min-height: 300px;
 }

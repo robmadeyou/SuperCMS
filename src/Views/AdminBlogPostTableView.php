@@ -53,14 +53,15 @@ class AdminBlogPostTableView extends TableView
     public function printRow(BlogPost $post)
     {
         $createdBy = ($post->CreatedBy ? $post->CreatedBy->getFullName() : 'Unknown');
+        $image = $post->CoverImage ? $post->CoverImage->getImageUrl() : '';
+
         print <<<HTML
 <div class="c-blog-post--individual --compact">
     <div class="blog-content">
         <div class="blog-content--title">
             {$post->Title}
         </div>
-        <div class="blog-content--inner">
-            {$post->Content}
+        <div class="blog-content--inner" style="background-image: url('{$image}')">
         </div>
         <div class="blog-content--date">
             {$post->CreatedAt->format('d/m/Y H:i')} By {$createdBy}
