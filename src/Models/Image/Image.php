@@ -26,7 +26,7 @@ use Rhubarb\Stem\Schema\ModelSchema;
  */
 class Image extends Model
 {
-    const VERSION = 3;
+    const VERSION = 4;
 
     protected function createSchema()
     {
@@ -34,8 +34,8 @@ class Image extends Model
 
         $schema->addColumn(
             new AutoIncrementColumn('ImageID'),
-            new StringColumn('OriginalName', 194),
-            new MySqlMediumTextColumn('UniqueName'),
+            new MySqlMediumTextColumn('OriginalName'),
+            new StringColumn('UniqueName',194),
             new StringColumn('Src', 194),
             new JsonColumn('Sizes')
         );
