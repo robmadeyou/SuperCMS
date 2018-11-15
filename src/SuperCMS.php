@@ -13,7 +13,7 @@ use Rhubarb\Crown\Request\WebRequest;
 use Rhubarb\Crown\Sendables\Email\EmailProvider;
 use Rhubarb\Crown\String\StringTools;
 use Rhubarb\Crown\UrlHandlers\ClassMappedUrlHandler;
-use Rhubarb\Crown\UrlHandlers\StaticResourceUrlHandler;
+use Rhubarb\Leaf\Crud\UrlHandlers\CrudUrlHandler;
 use Rhubarb\Leaf\LeafModule;
 use Rhubarb\Leaf\Paging\Leaves\EventPagerView;
 use Rhubarb\Leaf\Table\Leaves\TableView;
@@ -49,6 +49,7 @@ use SuperCMS\Leaves\Admin\Products\ProductsCollection;
 use SuperCMS\Leaves\Admin\Settings\SettingsLeaf;
 use SuperCMS\Leaves\Admin\ShippingType\ShippingTypeCollection;
 use SuperCMS\Leaves\Blog\BlogIndexPage;
+use SuperCMS\Leaves\Blog\BlogItem;
 use SuperCMS\Leaves\Errors\Error403;
 use SuperCMS\Leaves\Errors\Error404;
 use SuperCMS\Leaves\Files\ImageResponse;
@@ -180,7 +181,8 @@ class SuperCMS extends Module
         }
 
         if ($isBlog) {
-            $urlHandlers += [//todo
+            $urlHandlers += [
+                'posts/' => new CrudUrlHandler(BlogPost::class, StringTools::getNamespaceFromClass(BlogItem::class))
             ];
 
             $indexClass = BlogIndexPage::class;

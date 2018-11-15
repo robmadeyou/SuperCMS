@@ -35,8 +35,8 @@ class Image extends Model
         $schema->addColumn(
             new AutoIncrementColumn('ImageID'),
             new MySqlMediumTextColumn('OriginalName'),
-            new StringColumn('UniqueName',194),
-            new StringColumn('Src', 194),
+            new StringColumn('UniqueName',190),
+            new StringColumn('Src', 190),
             new JsonColumn('Sizes')
         );
 

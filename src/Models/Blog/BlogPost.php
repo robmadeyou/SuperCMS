@@ -64,4 +64,11 @@ class BlogPost extends Model
             }
         }
     }
+
+    public function getPostUrl()
+    {
+        //TODO write a URL handler for SEOiness
+        $safeName = urlencode($this->Title);
+        return "/posts/{$this->UniqueIdentifier}/{$safeName}/";
+    }
 }

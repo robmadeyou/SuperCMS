@@ -2,7 +2,6 @@
 
 namespace SuperCMS\Leaves\Admin\BlogPosts;
 
-use Rhubarb\Leaf\Controls\Common\FileUpload\SimpleFileUpload;
 use Rhubarb\Leaf\Controls\Common\Text\TextBox;
 use SuperCMS\Controls\FancyHtmlUpload\FancyHtmlUpload;
 use SuperCMS\Controls\HtmlEditor\HtmlEditor;

@@ -2,10 +2,10 @@
 
 namespace SuperCMS\Leaves\Blog;
 
-use Rhubarb\Leaf\Leaves\Leaf;
+use Rhubarb\Leaf\Crud\Leaves\ModelBoundLeaf;
 use Rhubarb\Leaf\Leaves\LeafModel;
 
-class BlogIndexPage extends Leaf
+class BlogIndexPage extends ModelBoundLeaf
 {
 
     protected function getViewClass()

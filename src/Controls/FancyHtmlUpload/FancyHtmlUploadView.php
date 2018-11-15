@@ -24,7 +24,7 @@ class FancyHtmlUploadView extends SimpleFileUploadView
                    leaf-name="<?= $this->model->leafName ?>"<?= $accepts . $this->model->getHtmlAttributes() . $this->model->getClassAttribute() ?>/>
 
             <label for="<?= $this->model->leafPath ?>" data-input-value="" data-select-text="Select file" data-remove-text="Remove file"
-                   data-drag-text="Drag file here...">
+                   data-drag-text="...or drag file here">
             </label>
         </div>
 
